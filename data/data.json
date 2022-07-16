@@ -1,0 +1,28 @@
+{
+  "menu": [
+    {
+      "name": "Home",
+      "link": "/"
+    },
+    {
+      "name": "Experience",
+      "link": "/experience"
+    },
+    {
+      "name": "Skill",
+      "link": "/skill"
+    },
+    {
+      "name": "Portfolio",
+      "link": "/portfolio"
+    },
+    {
+      "name": "Education",
+      "link": "/education"
+    },
+    {
+      "name": "Blog",
+      "link": "https://blog.suryawiguna.com/"
+    }
+  ]
+}
