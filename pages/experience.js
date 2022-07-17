@@ -19,8 +19,8 @@ export default function Experience({ data }) {
                 } ml-4`}
               >
                 <div
-                  className={`absolute w-3 h-3 bg-gray-${
-                    item.year.includes("now") ? "900" : "400"
+                  className={`absolute w-3 h-3 ${
+                    item.year.includes("now") ? "bg-gray-900" : "bg-gray-400"
                   } rounded-full mt-2 -left-1.5 border border-white`}
                 />
                 <time className="mb-1 text-xs font-normal leading-none text-gray-400 dark:text-gray-500">
