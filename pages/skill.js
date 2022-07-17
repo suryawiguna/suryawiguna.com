@@ -12,6 +12,7 @@ export default function Skill({ data }) {
               <div className="relative min-h-[60px]">
                 <Image
                   src={item.image}
+                  alt={item.name}
                   layout="fill"
                   objectFit="contain"
                   placeholder="blur"

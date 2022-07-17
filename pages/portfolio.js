@@ -13,6 +13,7 @@ export default function Portfolio({ data }) {
               href={image.link}
               className="relative drop-shadow-md scale-100 hover:scale-105 min-h-[160px]"
               target="_blank"
+              rel="noreferrer"
             >
               <Image
                 src={image.src}
