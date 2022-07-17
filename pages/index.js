@@ -10,7 +10,7 @@ export default function Index({ data, posts }) {
     if (posts) {
       setPosts(posts);
     }
-  });
+  }, [posts]);
 
   return (
     <Layout title={home.title}>
