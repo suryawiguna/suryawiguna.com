@@ -1,12 +1,9 @@
-import Head from "next/head";
+import Layout from "../components/layout";
 
 export default function Experience({ data }) {
   const { experience } = data;
   return (
-    <>
-      <Head>
-        <title>{experience.title} - Surya Wiguna</title>
-      </Head>
+    <Layout title={experience.title}>
       <div className="flex flex-col gap-8">
         <h1 className="font-bold text-3xl">{experience.title}</h1>
         <ol className="relative border-l border-gray-300">
@@ -19,9 +16,9 @@ export default function Experience({ data }) {
                 } ml-4`}
               >
                 <div
-                  className={`absolute w-3 h-3 ${
-                    item.year.includes("now") ? "bg-gray-900" : "bg-gray-400"
-                  } rounded-full mt-2 -left-1.5 border border-white`}
+                  className={`absolute w-5 h-5 ${
+                    item.year.includes("now") ? "bg-gray-900" : "bg-gray-300"
+                  } rounded-full mt-1 -left-2.5 border-4 border-white`}
                 />
                 <time className="mb-1 text-xs font-normal leading-none text-gray-400 dark:text-gray-500">
                   {item.year}
@@ -35,7 +32,7 @@ export default function Experience({ data }) {
           })}
         </ol>
       </div>
-    </>
+    </Layout>
   );
 }
 

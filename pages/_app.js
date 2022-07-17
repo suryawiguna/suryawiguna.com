@@ -1,6 +1,5 @@
 import "../styles/global.css";
 import Head from "next/head";
-import Layout from "/components/layout";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -8,9 +7,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <link rel="shortcut icon" href="/images/favicon.png" />
       </Head>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <Component {...pageProps} />
     </>
   );
 }

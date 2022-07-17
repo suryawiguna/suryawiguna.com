@@ -1,13 +1,10 @@
 import Image from "next/image";
-import Head from "next/head";
+import Layout from "../components/layout";
 
 export default function Index({ data }) {
   const { home } = data;
   return (
-    <>
-      <Head>
-        <title>{home.title} - Surya Wiguna</title>
-      </Head>
+    <Layout title={home.title}>
       <div className="flex flex-col items-start gap-6">
         <h1 className="font-bold text-3xl">{home.title}</h1>
         <Image
@@ -56,7 +53,7 @@ export default function Index({ data }) {
           })}
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
 

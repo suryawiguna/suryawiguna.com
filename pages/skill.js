@@ -1,13 +1,10 @@
 import Image from "next/image";
-import Head from "next/head";
+import Layout from "../components/layout";
 
 export default function Skill({ data }) {
   const { skill } = data;
   return (
-    <>
-      <Head>
-        <title>{skill.title} - Surya Wiguna</title>
-      </Head>
+    <Layout title={skill.title}>
       <div className="flex flex-col items-center sm:items-start gap-8">
         <h1 className="font-bold text-3xl self-start">{skill.title}</h1>
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-12 md:gap-20">
@@ -30,7 +27,7 @@ export default function Skill({ data }) {
           })}
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
 

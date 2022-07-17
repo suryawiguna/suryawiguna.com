@@ -121,16 +121,32 @@
     "title": "Portfolio",
     "images": [
       {
-        "src": "/images/portfolios/uidesign/tropicalkidsbali.jpeg",
+        "src": "/images/portfolios/web/tropicalentertainmentbali.jpeg",
         "link": "https://tropicalentertainmentbali.com/"
       },
       {
-        "src": "/images/portfolios/uidesign/cover_gear.jpeg",
-        "link": "https://www.behance.net/gallery/111585541/Landing-Page-concept-for-Gear-by-BWA"
+        "src": "/images/portfolios/web/tropicalkidsbali.jpeg",
+        "link": "https://tropicalentertainmentbali.com/swim"
       },
       {
-        "src": "/images/portfolios/uidesign/holiplace.jpeg",
-        "link": "https://www.behance.net/gallery/107067625/Holiplace-Web-Design"
+        "src": "/images/portfolios/web/geopark.jpeg",
+        "link": "https://geopark.netlify.app/"
+      },
+      {
+        "src": "/images/portfolios/web/virtualtour360puragelap.jpeg",
+        "link": "https://virtualtour360puragelap.com/jelajah-virtual"
+      },
+      {
+        "src": "/images/portfolios/web/gastrip.jpg",
+        "link": "https://gastrip.netlify.app/"
+      },
+      {
+        "src": "/images/portfolios/web/icarrythemeverywhere.jpeg",
+        "link": "https://www.icarrythemeverywhere.com/gallery/"
+      },
+      {
+        "src": "/images/portfolios/uidesign/geopark_cover.jpeg",
+        "link": "https://www.behance.net/gallery/82942741/Batur-Global-Geopark-Website-Concept"
       },
       {
         "src": "/images/portfolios/uidesign/blogx.jpeg",
@@ -141,32 +157,78 @@
         "link": "https://www.behance.net/gallery/83639655/Fruito-Web"
       },
       {
+        "src": "/images/portfolios/uidesign/cover_gear.jpeg",
+        "link": "https://www.behance.net/gallery/111585541/Landing-Page-concept-for-Gear-by-BWA"
+      },
+      {
+        "src": "/images/portfolios/uidesign/holiplace.jpeg",
+        "link": "https://www.behance.net/gallery/107067625/Holiplace-Web-Design"
+      },
+      {
         "src": "/images/portfolios/uidesign/gastrip.jpeg",
         "link": "https://www.behance.net/gallery/102575355/GasTrip-Web-Design"
       },
       {
-        "src": "/images/portfolios/uidesign/geopark_cover.jpeg",
-        "link": "https://www.behance.net/gallery/82942741/Batur-Global-Geopark-Website-Concept"
-      },
-      {
-        "src": "/images/portfolios/programming/gastrip2.jpeg",
-        "link": "https://gastrip.netlify.app/"
-      },
-      {
-        "src": "/images/portfolios/programming/football-pwa.jpeg",
+        "src": "/images/portfolios/web/football-pwa.jpeg",
         "link": "https://premiere-league-app-100.firebaseapp.com/"
       },
       {
-        "src": "/images/portfolios/programming/saksi.jpeg",
+        "src": "/images/portfolios/web/saksi.jpeg",
         "link": "https://gitlab.com/suryawigunaa/saksi"
       },
       {
-        "src": "/images/portfolios/programming/geopark.jpeg",
-        "link": "https://geopark.netlify.app/"
+        "src": "/images/portfolios/web/mbx.png",
+        "link": "https://gitlab.com/suryawigunaa/mbx"
+      }
+    ]
+  },
+  "education": {
+    "title": "Education & Course",
+    "histories": [
+      {
+        "year": "2021",
+        "name": "Fullstack JavaScript Developer Course (BuildWithAngga.com)",
+        "description": "Graduated",
+        "link": "https://buildwithangga.com/talent/suryawigunaa/full-stack-javascript-developer-website-travel"
       },
       {
-        "src": "/images/portfolios/programming/mbx.png",
-        "link": "https://gitlab.com/suryawigunaa/mbx"
+        "year": "2021",
+        "name": "UI Design to WordPress Development Course (BuildWithAngga.com)",
+        "description": "Graduated",
+        "link": "https://buildwithangga.com/talent/suryawigunaa/wordpress-dan-uiux-design"
+      },
+      {
+        "year": "2021",
+        "name": "Cloud Practitioner Essentials - Belajar Dasar AWS Cloud (Dicoding.com)",
+        "description": "Graduated",
+        "link": "https://www.dicoding.com/certificates/4EXG66351ZRL"
+      },
+      {
+        "year": "2015 - 2019",
+        "name": "Institute Technology and Business STIKOM Bali",
+        "description": "Bachelor of Information System"
+      },
+      {
+        "year": "2019",
+        "name": "Kelas Membangun Progressive Web Apps (Dicoding.com)",
+        "description": "Graduated",
+        "link": "https://www.dicoding.com/certificates/81P216D3JZOY"
+      },
+      {
+        "year": "2019",
+        "name": "Fullstack Web Developer Course (BuildWithAngga.com)",
+        "description": "Graduated",
+        "link": "https://buildwithangga.com/talent/suryawigunaa/full-stack-web-developer"
+      },
+      {
+        "year": "2018",
+        "name": "Mobile Web Specialist by Google Developers Kejar",
+        "description": "Participant"
+      },
+      {
+        "year": "2017",
+        "name": "Indonesia Android Kejar - Beginner",
+        "description": "Member"
       }
     ]
   }

@@ -1,22 +1,19 @@
 import Image from "next/image";
-import Head from "next/head";
+import Layout from "../components/layout";
 
 export default function Portfolio({ data }) {
   const { portfolio } = data;
   return (
-    <>
-      <Head>
-        <title>{portfolio.title} - Surya Wiguna</title>
-      </Head>
+    <Layout title={portfolio.title}>
       <div className="flex flex-col gap-8">
         <h1 className="font-bold text-3xl">{portfolio.title}</h1>
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
           {portfolio.images.map((image, key) => {
             return (
               <a
                 key={key}
                 href={image.link}
-                className="relative drop-shadow-md scale-100 hover:scale-105 min-h-[160px]"
+                className="relative drop-shadow-md scale-100 hover:scale-105 min-h-[80px] sm:min-h-[120px]"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -35,7 +32,7 @@ export default function Portfolio({ data }) {
           })}
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
 
