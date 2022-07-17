@@ -12,8 +12,7 @@ export default function Index({ data }) {
         className="rounded-full"
       />
       <p className="text-lg leading-relaxed">
-        I'm designing and developing website to help everyone. Kindly reach me
-        on{" "}
+        I'm designing and developing website to help people. Kindly reach me on{" "}
         <a href="mailto:hi@suryawiguna.com" className="underline font-bold">
           Email
         </a>{" "}
@@ -32,13 +31,15 @@ export default function Index({ data }) {
             <a
               key={key}
               href={work.link}
-              className="drop-shadow hover:drop-shadow-lg"
+              className="scale-100 hover:scale-105 drop-shadow-md"
               target="_blank"
             >
               <Image
                 src={work.img}
                 width={284}
                 height={180}
+                placeholder="blur"
+                blurDataURL={work.img}
                 className="rounded-lg"
               />
             </a>
@@ -49,7 +50,7 @@ export default function Index({ data }) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   const data = require("/data/data.json");
 
   return {

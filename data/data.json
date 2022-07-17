@@ -12,5 +12,162 @@
         "img": "/images/portfolios/web/tropicalkidsbali.jpg"
       }
     ]
+  },
+  "experience": {
+    "title": "Experience",
+    "histories": [
+      {
+        "year": "2021 - now",
+        "title": "Web Developer",
+        "description": "igloocompany"
+      },
+      {
+        "year": "2020 - 2021",
+        "title": "Software Quality Assurance",
+        "description": "igloocompany"
+      },
+      {
+        "year": "2020 - 2021",
+        "title": "Backend Developer (Node.js & Laravel)",
+        "description": "PT. Bina Taruna Wiratama"
+      },
+      {
+        "year": "2019 - now",
+        "title": "Web Developer",
+        "description": "Freelance"
+      },
+      {
+        "year": "2019 - 2020",
+        "title": "Web Developer (Laravel)",
+        "description": "Ganeca Digital"
+      },
+      {
+        "year": "2019 - 2020",
+        "title": "IT Officer",
+        "description": "KSU Sedana Graha"
+      },
+      {
+        "year": "2018",
+        "title": "Internship as Web Developer at local agency",
+        "description": "Developing web application using Laravel to recording witnesses data for the election of a Balinese governor from one of the parties"
+      },
+      {
+        "year": "2016 - 2020",
+        "title": "Founder, Graphic Designer",
+        "description": "SWG Creative"
+      },
+      {
+        "year": "2016 - 2017",
+        "title": "Chairman",
+        "description": "Student activity units Programming of STIKOM Bali (UKM PROGRESS)"
+      },
+      {
+        "year": "2015 - 2016",
+        "title": "Vice Chairman 2",
+        "description": "Student activity units Programming of STIKOM Bali (UKM PROGRESS)"
+      }
+    ]
+  },
+  "skill": {
+    "title": "Skill",
+    "items": [
+      {
+        "image": "/images/nextjs.png",
+        "name": "Next.js"
+      },
+      {
+        "image": "/images/react.png",
+        "name": "React.js"
+      },
+      {
+        "image": "/images/nodejs.png",
+        "name": "Node.js"
+      },
+      {
+        "image": "/images/vuejs.png",
+        "name": "Vue.js"
+      },
+      {
+        "image": "/images/js.png",
+        "name": "JavaScript"
+      },
+      {
+        "image": "/images/wordpress.png",
+        "name": "WordPress"
+      },
+      {
+        "image": "/images/laravel.png",
+        "name": "Laravel"
+      },
+      {
+        "image": "/images/php.svg",
+        "name": "PHP"
+      },
+      {
+        "image": "/images/figma.png",
+        "name": "Figma"
+      },
+      {
+        "image": "/images/tailwindcss.svg",
+        "name": "TailwindCSS"
+      },
+      {
+        "image": "/images/bootstrap.jpg",
+        "name": "Bootstrap"
+      }
+    ]
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "images": [
+      {
+        "src": "/images/portfolios/uidesign/tropicalkidsbali.jpeg",
+        "link": "https://tropicalentertainmentbali.com/"
+      },
+      {
+        "src": "/images/portfolios/uidesign/cover_gear.jpeg",
+        "link": "https://www.behance.net/gallery/111585541/Landing-Page-concept-for-Gear-by-BWA"
+      },
+      {
+        "src": "/images/portfolios/uidesign/holiplace.jpeg",
+        "link": "https://www.behance.net/gallery/107067625/Holiplace-Web-Design"
+      },
+      {
+        "src": "/images/portfolios/uidesign/blogx.jpeg",
+        "link": "https://www.behance.net/gallery/119993475/BlogX-Minimalist-Blog-Design"
+      },
+      {
+        "src": "/images/portfolios/uidesign/cover.jpeg",
+        "link": "https://www.behance.net/gallery/83639655/Fruito-Web"
+      },
+      {
+        "src": "/images/portfolios/uidesign/gastrip.jpeg",
+        "link": "https://www.behance.net/gallery/102575355/GasTrip-Web-Design"
+      },
+      {
+        "src": "/images/portfolios/uidesign/geopark_cover.jpeg",
+        "link": "https://www.behance.net/gallery/82942741/Batur-Global-Geopark-Website-Concept"
+      },
+      {
+        "src": "/images/portfolios/programming/gastrip2.jpeg",
+        "link": "https://gastrip.netlify.app/"
+      },
+      {
+        "src": "/images/portfolios/programming/football-pwa.jpeg",
+        "link": "https://premiere-league-app-100.firebaseapp.com/"
+      },
+      {
+        "src": "/images/portfolios/programming/saksi.jpeg",
+        "link": "https://gitlab.com/suryawigunaa/saksi"
+      },
+      {
+        "src": "/images/portfolios/programming/geopark.jpeg",
+        "link": "https://geopark.netlify.app/"
+      },
+      {
+        "src": "/images/portfolios/programming/mbx.png",
+        "link": "https://gitlab.com/suryawigunaa/mbx"
+      }
+    ]
   }
 }
