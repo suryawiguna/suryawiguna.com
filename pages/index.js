@@ -13,7 +13,8 @@ export default function Index({ data }) {
         className="rounded-full"
       />
       <p className="text-lg leading-relaxed">
-        I'm designing and developing website to help people. Kindly reach me on{" "}
+        I&apos;m designing and developing website to help people. Kindly reach
+        me on{" "}
         <a href="mailto:hi@suryawiguna.com" className="underline font-bold">
           Email
         </a>{" "}
@@ -34,6 +35,7 @@ export default function Index({ data }) {
               href={work.link}
               className="scale-100 hover:scale-105 drop-shadow-md"
               target="_blank"
+              rel="noreferrer"
             >
               <Image
                 src={work.img}
