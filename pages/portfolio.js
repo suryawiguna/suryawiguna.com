@@ -17,6 +17,7 @@ export default function Portfolio({ data }) {
             >
               <Image
                 src={image.src}
+                alt=""
                 layout="fill"
                 objectFit="cover"
                 objectPosition="start"

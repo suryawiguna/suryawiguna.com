@@ -7,6 +7,7 @@ export default function Index({ data }) {
       <h1 className="font-bold text-3xl">{home.title}</h1>
       <Image
         src={home.profile_img}
+        alt=""
         width={120}
         height={120}
         className="rounded-full"
@@ -38,7 +39,7 @@ export default function Index({ data }) {
                 src={work.img}
                 width={284}
                 height={180}
-                alt={""}
+                alt=""
                 placeholder="blur"
                 blurDataURL={work.img}
                 className="rounded-lg"
