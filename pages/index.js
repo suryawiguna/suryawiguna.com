@@ -21,6 +21,8 @@ export default function Index({ data, posts }) {
           alt=""
           width={120}
           height={120}
+          placeholder="blur"
+          blurDataURL={home.profile_img}
           className="rounded-full"
         />
         <p className="text-lg leading-relaxed">
@@ -82,6 +84,10 @@ export default function Index({ data, posts }) {
                         width={180}
                         height={120}
                         alt=""
+                        placeholder="blur"
+                        blurDataURL={
+                          post._embedded["wp:featuredmedia"]["0"].source_url
+                        }
                         className="grow"
                       />
                       <div className="pt-5 md:pt-0 md:pl-5 flex-1">
