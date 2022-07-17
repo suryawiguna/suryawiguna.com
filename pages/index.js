@@ -38,6 +38,7 @@ export default function Index({ data }) {
                 src={work.img}
                 width={284}
                 height={180}
+                alt={work.link}
                 placeholder="blur"
                 blurDataURL={work.img}
                 className="rounded-lg"
