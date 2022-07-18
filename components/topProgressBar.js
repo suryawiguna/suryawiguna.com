@@ -16,7 +16,7 @@ function load() {
 
   timer = setTimeout(function () {
     NProgress.start();
-  }, delay); // only show progress bar if it takes longer than the delay
+  }, delay);
 }
 
 function stop() {
