@@ -42,8 +42,8 @@ export default function Index({ data, posts }) {
             LinkedIn
           </a>
         </p>
-        <div className="mt-12 flex flex-col gap-6">
-          <h2 className="text-lg font-semibold">Recent Works</h2>
+        <div className="mt-8 flex flex-col gap-6">
+          <h2 className="text-lg font-bold">Recent Works</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             {home.recent_works.map((work, key) => {
               return (
@@ -68,8 +68,8 @@ export default function Index({ data, posts }) {
             })}
           </div>
         </div>
-        <div className="mt-12 flex flex-col gap-6">
-          <h2 className="text-lg font-semibold">Recent Blog Posts</h2>
+        <div className="mt-8 flex flex-col gap-6">
+          <h2 className="text-lg font-bold">Recent Blog Posts</h2>
           <div className="flex flex-col gap-8">
             {blogPosts &&
               blogPosts.map((post, key) => {
@@ -100,7 +100,7 @@ export default function Index({ data, posts }) {
                       </div>
                       <div className="pt-0 pl-5 flex-1">
                         <h5
-                          className="text-gray-900 font-bold mb-1"
+                          className="text-gray-900 font-semibold mb-1"
                           dangerouslySetInnerHTML={{
                             __html: post.title.rendered,
                           }}

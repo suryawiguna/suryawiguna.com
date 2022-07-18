@@ -19,7 +19,7 @@ export default function Education({ data }) {
                 } ml-4`}
               >
                 <div
-                  className={`absolute w-5 h-5 bg-gray-400 rounded-full mt-1 -left-2.5 border-4 border-white`}
+                  className={`absolute w-5 h-5 bg-gray-300 rounded-full mt-1 -left-2.5 border-4 border-white`}
                 />
                 <time className="mb-1 text-xs font-normal leading-none text-gray-400 dark:text-gray-500">
                   {item.year}
