@@ -44,7 +44,7 @@ export default function Index({ data, posts }) {
         </p>
         <div className="mt-12 flex flex-col gap-6">
           <h2 className="text-lg font-semibold">Recent Works</h2>
-          <div className="flex gap-5">
+          <div className="flex gap-6">
             {home.recent_works.map((work, key) => {
               return (
                 <a
@@ -70,7 +70,7 @@ export default function Index({ data, posts }) {
         </div>
         <div className="mt-12 flex flex-col gap-6">
           <h2 className="text-lg font-semibold">Recent Blog Posts</h2>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-8">
             {blogPosts &&
               blogPosts.map((post, key) => {
                 return (
@@ -81,21 +81,26 @@ export default function Index({ data, posts }) {
                     rel="noreferrer"
                     className="scale-100 hover:scale-105"
                   >
-                    <div className="rounded-lg flex flex-col sm:flex-row items-start">
-                      <Image
-                        src={post._embedded["wp:featuredmedia"]["0"].source_url}
-                        width={180}
-                        height={120}
-                        alt=""
-                        placeholder="blur"
-                        blurDataURL={
-                          post._embedded["wp:featuredmedia"]["0"].source_url
-                        }
-                        className="grow"
-                      />
-                      <div className="pt-5 md:pt-0 md:pl-5 flex-1">
+                    <div className="rounded-lg flex items-start">
+                      <div className="relative min-h-[70px] min-w-[70px] md:min-w-[120px]">
+                        <Image
+                          src={
+                            post._embedded["wp:featuredmedia"]["0"].source_url
+                          }
+                          layout="fill"
+                          objectFit="contain"
+                          objectPosition="center"
+                          alt=""
+                          placeholder="blur"
+                          blurDataURL={
+                            post._embedded["wp:featuredmedia"]["0"].source_url
+                          }
+                          className="shrink"
+                        />
+                      </div>
+                      <div className="pt-0 pl-5 flex-1">
                         <h5
-                          className="text-gray-900 font-bold text-xl tracking-tight mb-2"
+                          className="text-gray-900 font-bold md:text-lg tracking-tight mb-2"
                           dangerouslySetInnerHTML={{
                             __html: post.title.rendered,
                           }}
@@ -105,7 +110,7 @@ export default function Index({ data, posts }) {
                             dangerouslySetInnerHTML={{
                               __html: post.excerpt.rendered,
                             }}
-                            className="text-gray-500 line-clamp-2"
+                            className="text-gray-500 text-sm md:text-md line-clamp-2"
                           />
                         </div>
                       </div>

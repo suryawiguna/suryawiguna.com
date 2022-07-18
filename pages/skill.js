@@ -10,7 +10,7 @@ export default function Skill({ data }) {
       </Head>
       <div className="flex flex-col items-center sm:items-start gap-8">
         <h1 className="font-bold text-3xl self-start">{skill.title}</h1>
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-12 md:gap-20">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-14 md:gap-20">
           {skill.items.map((item, key) => {
             return (
               <div key={key} className="flex flex-col gap-2">
