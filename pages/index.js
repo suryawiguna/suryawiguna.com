@@ -28,7 +28,7 @@ export default function Index({ data, posts }) {
           blurDataURL={home.profile_img}
           className="rounded-full"
         />
-        <p className="text-lg leading-relaxed">
+        <p className="leading-relaxed">
           I&apos;m designing and developing website to help people. Kindly reach
           me on{" "}
           <a href="mailto:hi@suryawiguna.com" className="underline font-bold">
@@ -44,7 +44,7 @@ export default function Index({ data, posts }) {
         </p>
         <div className="mt-12 flex flex-col gap-6">
           <h2 className="text-lg font-semibold">Recent Works</h2>
-          <div className="flex gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             {home.recent_works.map((work, key) => {
               return (
                 <a
@@ -100,7 +100,7 @@ export default function Index({ data, posts }) {
                       </div>
                       <div className="pt-0 pl-5 flex-1">
                         <h5
-                          className="text-gray-900 font-bold md:text-lg tracking-tight mb-2"
+                          className="text-gray-900 font-bold mb-1"
                           dangerouslySetInnerHTML={{
                             __html: post.title.rendered,
                           }}
@@ -110,7 +110,7 @@ export default function Index({ data, posts }) {
                             dangerouslySetInnerHTML={{
                               __html: post.excerpt.rendered,
                             }}
-                            className="text-gray-500 text-sm md:text-md line-clamp-2"
+                            className="text-gray-500 text-sm line-clamp-2 leading-relaxed"
                           />
                         </div>
                       </div>

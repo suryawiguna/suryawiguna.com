@@ -13,7 +13,7 @@ export default function Navigation() {
           return (
             <Link key={menu} href={menu.link} passHref>
               <a
-                className={`flex hover:font-bold py-4 px-5 text-sm md:text-md sm:p-2 ${
+                className={`flex hover:font-bold py-4 px-5 sm:p-2 ${
                   router.pathname.replace(`/`, "") == menu.name.toLowerCase() ||
                   (menu.name == "Home" && router.pathname == "/")
                     ? " font-bold"

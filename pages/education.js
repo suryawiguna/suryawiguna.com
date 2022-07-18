@@ -25,7 +25,7 @@ export default function Education({ data }) {
                   {item.year}
                 </time>
                 <a href={item.link} target="_blank" rel="noreferrer">
-                  <h3 className="text-lg font-semibold">{item.name}</h3>
+                  <h3 className="text-base font-semibold">{item.name}</h3>
                 </a>
                 <p className="mb-4 text-sm font-normal text-gray-600">
                   {item.description}

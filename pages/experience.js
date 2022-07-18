@@ -26,7 +26,7 @@ export default function Experience({ data }) {
                 <time className="mb-1 text-xs font-normal leading-none text-gray-400 dark:text-gray-500">
                   {item.year}
                 </time>
-                <h3 className="text-lg font-semibold">{item.title}</h3>
+                <h3 className="text-base font-semibold">{item.title}</h3>
                 <p className="mb-4 text-sm font-normal text-gray-600">
                   {item.description}
                 </p>

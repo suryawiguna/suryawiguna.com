@@ -10,7 +10,7 @@ export default function Skill({ data }) {
       </Head>
       <div className="flex flex-col items-center sm:items-start gap-8">
         <h1 className="font-bold text-3xl self-start">{skill.title}</h1>
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-14 md:gap-20">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-16 md:gap-20">
           {skill.items.map((item, key) => {
             return (
               <div key={key} className="flex flex-col gap-2">
@@ -24,7 +24,7 @@ export default function Skill({ data }) {
                     blurDataURL={item.image}
                   />
                 </div>
-                <h3 className="text-center self-center text-md">{item.name}</h3>
+                <h3 className="text-center self-center text-sm md:text-base">{item.name}</h3>
               </div>
             );
           })}
