@@ -1,26 +1,32 @@
 [
   {
     "name": "Home",
-    "link": "/"
+    "link": "/",
+    "emoji": "🏠"
   },
   {
     "name": "Experience",
-    "link": "/experience"
+    "link": "/experience",
+    "emoji": "👨‍💻"
   },
   {
     "name": "Skill",
-    "link": "/skill"
+    "link": "/skill",
+    "emoji": "🛠"
   },
   {
     "name": "Portfolio",
-    "link": "/portfolio"
+    "link": "/portfolio",
+    "emoji": "📚"
   },
   {
     "name": "Education",
-    "link": "/education"
+    "link": "/education",
+    "emoji": "👨‍🏫"
   },
   {
     "name": "Blog",
-    "link": "https://blog.suryawiguna.com/"
+    "link": "https://blog.suryawiguna.com/",
+    "emoji": "📝"
   }
 ]

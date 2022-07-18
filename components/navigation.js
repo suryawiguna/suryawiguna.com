@@ -13,13 +13,14 @@ export default function Navigation() {
           return (
             <Link key={menu} href={menu.link} passHref>
               <a
-                className={`hover:font-bold hover:underline py-4 px-7 sm:p-2 underline-offset-4 decoration-2${
+                className={`flex hover:font-bold py-4 px-5 text-sm md:text-md sm:p-2 ${
                   router.pathname.replace(`/`, "") == menu.name.toLowerCase() ||
                   (menu.name == "Home" && router.pathname == "/")
-                    ? " font-bold underline"
+                    ? " font-bold"
                     : ""
                 }`}
               >
+                <span className="mr-2">{menu.emoji}</span>
                 {menu.name}
               </a>
             </Link>

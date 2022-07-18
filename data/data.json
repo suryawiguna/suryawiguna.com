@@ -10,6 +10,10 @@
       {
         "link": "https://tropicalentertainmentbali.com/swim",
         "img": "/images/portfolios/web/tropicalkidsbali.jpeg"
+      },
+      {
+        "link": "https://virtualtour360puragelap.com/jelajah-virtual",
+        "img": "/images/portfolios/web/virtualtour360puragelap.jpeg"
       }
     ]
   },
@@ -129,12 +133,12 @@
         "link": "https://tropicalentertainmentbali.com/swim"
       },
       {
-        "src": "/images/portfolios/web/geopark.jpeg",
-        "link": "https://geopark.netlify.app/"
-      },
-      {
         "src": "/images/portfolios/web/virtualtour360puragelap.jpeg",
         "link": "https://virtualtour360puragelap.com/jelajah-virtual"
+      },
+      {
+        "src": "/images/portfolios/web/geopark.jpeg",
+        "link": "https://geopark.netlify.app/"
       },
       {
         "src": "/images/portfolios/web/gastrip.jpg",
