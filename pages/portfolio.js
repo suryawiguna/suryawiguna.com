@@ -10,7 +10,7 @@ export default function Portfolio({ data }) {
       </Head>
       <div className="flex flex-col gap-8">
         <h1 className="font-bold text-3xl">{portfolio.title}</h1>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
           {portfolio.images.map((image, key) => {
             return (
               <a
