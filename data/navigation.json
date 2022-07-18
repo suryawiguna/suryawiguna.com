@@ -28,5 +28,10 @@
     "name": "Blog",
     "link": "https://blog.suryawiguna.com/",
     "emoji": "📝"
+  },
+  {
+    "name": "Link",
+    "link": "/link",
+    "emoji": "🔗"
   }
 ]
