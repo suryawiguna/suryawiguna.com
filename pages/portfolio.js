@@ -1,10 +1,13 @@
+import Head from "next/head";
 import Image from "next/image";
-import Layout from "../components/layout";
 
 export default function Portfolio({ data }) {
   const { portfolio } = data;
   return (
-    <Layout title={portfolio.title}>
+    <>
+      <Head>
+        <title>{`${portfolio.title} - Surya Wiguna`}</title>
+      </Head>
       <div className="flex flex-col gap-8">
         <h1 className="font-bold text-3xl">{portfolio.title}</h1>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
@@ -32,7 +35,7 @@ export default function Portfolio({ data }) {
           })}
         </div>
       </div>
-    </Layout>
+    </>
   );
 }
 

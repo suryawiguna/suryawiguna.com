@@ -1,9 +1,12 @@
-import Layout from "../components/layout";
+import Head from "next/head";
 
 export default function Experience({ data }) {
   const { experience } = data;
   return (
-    <Layout title={experience.title}>
+    <>
+      <Head>
+        <title>{`${experience.title} - Surya Wiguna`}</title>
+      </Head>
       <div className="flex flex-col gap-8">
         <h1 className="font-bold text-3xl">{experience.title}</h1>
         <ol className="relative border-l border-gray-300">
@@ -32,7 +35,7 @@ export default function Experience({ data }) {
           })}
         </ol>
       </div>
-    </Layout>
+    </>
   );
 }
 

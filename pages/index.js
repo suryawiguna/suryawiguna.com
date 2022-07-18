@@ -1,6 +1,6 @@
+import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Layout from "../components/layout";
 
 export default function Index({ data, posts }) {
   const { home } = data;
@@ -13,7 +13,10 @@ export default function Index({ data, posts }) {
   }, [posts]);
 
   return (
-    <Layout title={home.title}>
+    <>
+      <Head>
+        <title>{`${home.title} - Surya Wiguna`}</title>
+      </Head>
       <div className="flex flex-col items-start gap-6">
         <h1 className="font-bold text-3xl">{home.title}</h1>
         <Image
@@ -113,7 +116,7 @@ export default function Index({ data, posts }) {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 }
 
