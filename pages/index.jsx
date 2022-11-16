@@ -1,51 +1,51 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getStoryblokApi } from "@storyblok/react"
+import Layout from "../components/layout";
+import SbEditable from "storyblok-react";
+import * as components from "../components/home";
 
-export default function Index({ data, posts }) {
-  const { home } = data;
+export default function Index({ data, navigation, posts }) {
   const [blogPosts, setPosts] = useState();
-
   useEffect(() => {
     if (posts) {
       setPosts(posts);
     }
   }, [posts]);
+  let {story} = data;
 
   return (
-    <>
+    <Layout navigation={navigation}>
       <Head>
-        <title>{`${home.title} - Surya Wiguna`}</title>
+        <title>{`${data.story.name} - Surya Wiguna`}</title>
       </Head>
       <div className="flex flex-col items-start gap-6">
-        <h1 className="font-bold text-3xl">{home.title}</h1>
-        <Image
-          src={home.profile_img}
-          alt=""
-          width={120}
-          height={120}
-          placeholder="blur"
-          blurDataURL={home.profile_img}
-          className="rounded-full"
-        />
-        <p className="leading-relaxed">
-          I&apos;m designing and developing website to help people. Kindly reach
-          me on{" "}
-          <a href="mailto:hi@suryawiguna.com" className="underline font-bold">
-            Email
-          </a>{" "}
-          or{" "}
-          <a
-            href="https://www.linkedin.com/in/suryawigunaa"
-            className="underline font-bold"
-          >
-            LinkedIn
-          </a>
-        </p>
+        <h1 className="font-bold text-3xl">{story.content.title}</h1>
+
+
+        {story.content.body.map((blok) => {
+          if (typeof components[blok.component] !== "undefined") {
+            const Component = components[blok.component];
+            return (
+              <SbEditable key={blok._uid} content={blok}>
+                <Component blok={blok} />
+              </SbEditable>
+            );
+          }
+          return (
+            <p key={blok._uid}>
+              The component <strong>{blok.component}</strong> has not been created
+              yet.
+            </p>
+          );
+        })}
+
+
         <div className="mt-8 flex flex-col gap-6">
           <h2 className="text-lg font-bold">Recent Works</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-            {home.recent_works.map((work, key) => {
+            {/* {home.recent_works.map((work, key) => {
               return (
                 <a
                   key={key}
@@ -65,7 +65,7 @@ export default function Index({ data, posts }) {
                   />
                 </a>
               );
-            })}
+            })} */}
           </div>
         </div>
         <div className="mt-8 flex flex-col gap-6">
@@ -121,12 +121,21 @@ export default function Index({ data, posts }) {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
 
 export async function getStaticProps() {
-  const data = require("/data/data.json");
+  const storyblokApi = getStoryblokApi();
+  let { data } = await storyblokApi.get(`cdn/stories/home`, {
+    version: "published", 
+  });
+
+  let navigation = await storyblokApi.get(`cdn/stories/navigation`, {
+    version: "published",
+  });
+
+  // const data = require("/data/data.json");
   const res = await fetch(
     "https://blog.suryawiguna.com/wp-json/wp/v2/posts?_embed"
   );
@@ -146,6 +155,7 @@ export async function getStaticProps() {
   return {
     props: {
       data: data,
+      navigation: navigation.data.story.content,
       posts: recentPosts,
     },
   };
