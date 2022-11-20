@@ -1,3 +1,4 @@
 import RichText from "./global/richText";
+import DynamicComponent from "./global/dynamicComponent";
 
-export { RichText };
+export { RichText, DynamicComponent };

@@ -2,6 +2,7 @@ import "../styles/global.css";
 import "../styles/nprogress.css";
 import Head from "next/head";
 import dynamic from "next/dynamic";
+import "boxicons/css/boxicons.min.css";
 
 import * as ga from "../lib/ga";
 import { useEffect } from "react";
@@ -10,10 +11,10 @@ import { useRouter } from "next/router";
 import { storyblokInit, apiPlugin } from "@storyblok/react";
 
 const token = process.env.STORYBLOK_ACCESS_TOKEN;
- 
+
 storyblokInit({
   accessToken: token,
-  use: [apiPlugin]
+  use: [apiPlugin],
 });
 
 const TopProgressBar = dynamic(
@@ -46,7 +47,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="shortcut icon" href="/images/favicon.png" />
       </Head>
       <TopProgressBar />
-        <Component {...pageProps} />
+      <Component {...pageProps} />
     </>
   );
 }
