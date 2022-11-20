@@ -88,10 +88,6 @@
         "name": "Node.js"
       },
       {
-        "image": "/images/vuejs.png",
-        "name": "Vue.js"
-      },
-      {
         "image": "/images/js.png",
         "name": "JavaScript"
       },

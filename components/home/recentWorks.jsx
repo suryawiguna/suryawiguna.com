@@ -11,7 +11,7 @@ export default function RecentWorks({ blok }) {
             <Link key={key} href={work.link.url} passHref>
               <a
                 href=""
-                className="opacity-80 hover:opacity-100"
+                className="drop-shadow-lg opacity-80 hover:opacity-100"
                 target="_blank"
                 rel="noreferrer"
               >

@@ -1,10 +1,12 @@
 import Head from "next/head";
 import Image from "next/image";
+import Layout from "../components/layout";
+import { getNavigation } from "../lib/api";
 
-export default function Link({ data }) {
+export default function Link({ data, navigation }) {
   const { link } = data;
   return (
-    <>
+    <Layout navigation={navigation}>
       <Head>
         <title>{`${link.title} - Surya Wiguna`}</title>
       </Head>
@@ -29,35 +31,37 @@ export default function Link({ data }) {
                 href={link.link}
                 target="_blank"
                 rel="noreferrer"
-                className="bg-white py-3 px-5 flex items-center gap-2 rounded-full border border-black scale-100 hover:scale-105 active:scale-105 max-w-md"
+                className="bg-gray-100 hover:bg-gray-200 py-3 px-5 flex items-center gap-2 rounded-full max-w-md"
               >
-                <>
+                <span className="flex justify-center items-center gap-2">
                   <Image
                     src={link.image}
                     alt=""
-                    width={24}
-                    height={24}
+                    width={18}
+                    height={18}
                     placeholder="blur"
                     blurDataURL={link.image}
                     className="w-[24px] h-[24px]"
                   />
                   <span className="flex-1">{link.text}</span>
-                </>
+                </span>
               </a>
             );
           })}
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
 
 export async function getStaticProps() {
   const data = require("/data/data.json");
+  const navigation = (await getNavigation()) || [];
 
   return {
     props: {
       data: data,
+      navigation: navigation,
     },
   };
 }

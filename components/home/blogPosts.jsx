@@ -14,7 +14,7 @@ export default function BlogPosts({ blok }) {
                 href=""
                 target="_blank"
                 rel="noreferrer"
-                className="bg-gray-100 hover:bg-gray-200 rounded-lg p-4 menu"
+                className="bg-gray-100 hover:bg-gray-200 rounded-lg p-4"
               >
                 <div className="rounded-lg flex items-stretch">
                   <div className="relative min-h-[100px] min-w-[120px]">
@@ -48,7 +48,7 @@ export default function BlogPosts({ blok }) {
         <Link href="" passHref>
           <a
             href=""
-            className="flex justify-center text-gray-500 menu rounded-lg p-4 bg-gray-100 hover:bg-gray-200 "
+            className="flex justify-center text-gray-500 rounded-lg p-4 bg-gray-100 hover:bg-gray-200 "
           >
             Baca artikel lain
             <i className="bx bx-right-arrow-alt text-2xl" />
