@@ -1,3 +1,3 @@
-import experiences from "./experience/experiences";
+import histories from "./experience/histories";
 
-export { experiences };
+export { histories };

@@ -1,11 +1,11 @@
-export default function Experiences({ blok }) {
+export default function Histories({ blok }) {
   return (
     <ol className="relative border-l border-gray-300">
-      {blok.experiences.map((item, key) => {
+      {blok.histories.map((item, key) => {
         return (
           <li
             key={key}
-            className={`${key < blok.experiences.length - 1 && "mb-12"} ml-4`}
+            className={`${key < blok.histories.length - 1 && "mb-12"} ml-4`}
           >
             <div
               className={`absolute w-5 h-5 ${
