@@ -26,14 +26,11 @@ export default function Education({ data, navigation }) {
                 <time className="mb-1 text-xs font-normal leading-none text-gray-400 dark:text-gray-500">
                   {item.year}
                 </time>
-                <a
-                  href={item.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center"
-                >
-                  <h3 className="text-lg font-semibold mr-2">{item.name}</h3>
-                  {item.link && <i className="bx bx-link-external" />}
+                <a href={item.link} target="_blank" rel="noreferrer">
+                  <h3 className="text-lg font-semibold mr-2">
+                    {item.name}
+                    {item.link && <i className="bx bx-link-external ml-1" />}
+                  </h3>
                 </a>
                 <p className="mb-4 text-sm font-normal text-gray-600">
                   {item.description}
