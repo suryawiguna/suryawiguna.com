@@ -2,6 +2,7 @@ export default function Histories({ blok }) {
   return (
     <ol className="relative border-l border-gray-300">
       {blok.histories.map((item, key) => {
+        console.log(item.link?.url);
         return (
           <li
             key={key}
@@ -13,12 +14,18 @@ export default function Histories({ blok }) {
             <time className="mb-1 text-xs font-normal leading-none text-gray-400 dark:text-gray-500">
               {item.periode}
             </time>
-            <a href={item.link} target="_blank" rel="noreferrer">
-              <h3 className="text-lg font-semibold mr-2">
-                {item.title}
-                {item.link && <i className="bx bx-link-external ml-1" />}
-              </h3>
-            </a>
+            {item.link !== undefined ? (
+              <a href={item.link.url} target="_blank" rel="noreferrer">
+                <h3 className="text-lg font-semibold mr-2">
+                  {item.title}
+                  <i className="bx bx-link-external ml-1" />
+                </h3>
+              </a>
+            ) : (
+              <div>
+                <h3 className="text-lg font-semibold mr-2">{item.title}</h3>
+              </div>
+            )}
             <p className="mb-4 text-sm font-normal text-gray-600">
               {item.description}
             </p>
