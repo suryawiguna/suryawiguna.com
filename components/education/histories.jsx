@@ -2,7 +2,6 @@ export default function Histories({ blok }) {
   return (
     <ol className="relative border-l border-gray-300">
       {blok.histories.map((item, key) => {
-        console.log(item.link?.url);
         return (
           <li
             key={key}
