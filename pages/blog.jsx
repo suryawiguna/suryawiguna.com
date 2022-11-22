@@ -1,14 +1,22 @@
-import Image from "next/image";
+import Head from "next/head";
+import Layout from "../components/layout";
+import * as components from "../components/home";
+import { getAllPosts, getHome, getNavigation } from "../lib/api";
+import { DynamicComponent, RichText } from "../components/global";
 import Link from "next/link";
-import { RichText } from "../global";
+import Image from "next/image";
 
-export default function BlogPosts({ blok }) {
+export default function Index({ posts, navigation }) {
   return (
-    <div className="mt-8 flex flex-col gap-6">
-      <h2 className="text-xl font-bold">Recent Blog Posts</h2>
-      <div className="flex flex-col max-w-2xl gap-4">
-        {blok.posts.map((post) => {
-          return (
+    <Layout navigation={navigation}>
+      <Head>
+        <title>Blog - Surya Wiguna</title>
+      </Head>
+      <div className="flex flex-col items-start gap-6">
+        <h1 className="font-bold text-3xl">Blog</h1>
+        {/* <DynamicComponent bloks={data.body} components={components} /> */}
+        <div className="flex flex-col max-w-2xl gap-4">
+          {posts.map((post) => (
             <Link key={post._uid} href={post.full_slug} passHref>
               <a
                 href=""
@@ -43,18 +51,22 @@ export default function BlogPosts({ blok }) {
                 </div>
               </a>
             </Link>
-          );
-        })}
-        <Link href="/blog" passHref>
-          <a
-            href=""
-            className="flex justify-center text-gray-500 rounded-lg p-4 bg-gray-100 hover:bg-gray-200 "
-          >
-            Baca artikel lain
-            <i className="bx bx-right-arrow-alt text-2xl" />
-          </a>
-        </Link>
+          ))}
+        </div>
       </div>
-    </div>
+    </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const posts = (await getAllPosts()) || [];
+  const navigation = (await getNavigation()) || [];
+
+  return {
+    props: {
+      posts: posts,
+      navigation: navigation,
+    },
+    revalidate: 360,
+  };
 }
