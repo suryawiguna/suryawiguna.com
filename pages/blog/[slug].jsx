@@ -10,6 +10,7 @@ import {
 } from "../../lib/api";
 import moment from "moment";
 import Link from "next/link";
+import { GoogleAdsenseContainer } from "../../components/ads";
 
 const Post = ({ post, featuredPosts, navigation }) => {
   return (
@@ -35,6 +36,7 @@ const Post = ({ post, featuredPosts, navigation }) => {
             />
           </div>
           <RichText data={post.content.content} />
+          <GoogleAdsenseContainer />
           <Link href="/blog" passHref>
             <a
               href=""

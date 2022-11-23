@@ -6,8 +6,6 @@ import {
 } from "storyblok-rich-text-react-renderer";
 
 export default function RichText({ data, className }) {
-  // document is the rich text object you receive from Storyblok,
-  // in the form { type: "doc", content: [ ... ] }
   return (
     <div className={`prose ${className}`}>
       {render(data, {
