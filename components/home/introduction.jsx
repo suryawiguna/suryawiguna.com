@@ -21,7 +21,7 @@ export default function introduction({ blok }) {
         width={120}
         height={120}
         placeholder="blur"
-        blurDataURL={blok.image.filename}
+        blurDataURL={`${blok.image.filename}/m/40x40`}
         className="rounded-full"
       />
 

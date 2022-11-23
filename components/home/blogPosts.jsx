@@ -24,7 +24,7 @@ export default function BlogPosts({ blok }) {
                       objectFit="cover"
                       objectPosition="center"
                       placeholder="blur"
-                      blurDataURL={`https:${post.content.featured_image.filename}`}
+                      blurDataURL={`https:${post.content.featured_image.filename}/m/40x40`}
                       className="shrink rounded-lg"
                     />
                   </div>
