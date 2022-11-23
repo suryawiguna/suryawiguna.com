@@ -4,6 +4,7 @@ import { getAllPosts, getNavigation } from "../lib/api";
 import { RichText } from "../components/global";
 import Link from "next/link";
 import Image from "next/image";
+import moment from "moment";
 
 export default function Index({ posts, navigation }) {
   return (
@@ -19,8 +20,6 @@ export default function Index({ posts, navigation }) {
               <Link key={post._uid} href={post.full_slug} passHref>
                 <a
                   href=""
-                  target="_blank"
-                  rel="noreferrer"
                   className="bg-gray-100 hover:bg-gray-200 rounded-2xl p-5"
                 >
                   <div className="rounded-lg flex flex-col items-stretch">
@@ -47,6 +46,9 @@ export default function Index({ posts, navigation }) {
                         />
                       </div>
                     </div>
+                    <small className="text-gray-400 mt-5 text-xs self-end">
+                      {moment(post.first_published_at).format("MMMM DD, YYYY")}
+                    </small>
                   </div>
                 </a>
               </Link>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { RichText } from "../global";
+import moment from "moment";
 
 export default function BlogPosts({ blok }) {
   return (
@@ -12,8 +13,6 @@ export default function BlogPosts({ blok }) {
             <Link key={post._uid} href={post.full_slug} passHref>
               <a
                 href=""
-                target="_blank"
-                rel="noreferrer"
                 className="bg-gray-100 hover:bg-gray-200 rounded-2xl p-5"
               >
                 <div className="rounded-lg flex flex-col items-stretch">
@@ -40,6 +39,9 @@ export default function BlogPosts({ blok }) {
                       />
                     </div>
                   </div>
+                  <small className="text-gray-400 mt-5 text-xs self-end">
+                    {moment(post.first_published_at).format("MMMM DD, YYYY")}
+                  </small>
                 </div>
               </a>
             </Link>
