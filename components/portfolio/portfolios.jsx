@@ -8,7 +8,7 @@ export default function Portfolios({ blok }) {
           <a
             key={key}
             href={item.link.url}
-            className="relative drop-shadow-lg opacity-80 hover:opacity-100 min-h-[160px]"
+            className="relative drop-shadow opacity-80 hover:opacity-100 min-h-[160px]"
             target="_blank"
             rel="noreferrer"
           >
