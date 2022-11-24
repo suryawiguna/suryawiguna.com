@@ -28,8 +28,8 @@ const Post = ({ data, post, featuredPosts, navigation }) => {
 
   return (
     <Layout data={data} navigation={navigation}>
-      <div className="flex flex-col lg:flex-row gap-10">
-        <div className="flex flex-col items-start gap-6">
+      <div className="flex flex-col xl:flex-row gap-10">
+        <div className="w-full flex flex-col items-start gap-6">
           <div>
             <h1 className="font-bold text-3xl">{post.name}</h1>
             <small className="text-gray-500">
@@ -80,9 +80,12 @@ const Post = ({ data, post, featuredPosts, navigation }) => {
             </a>
           </Link>
         </div>
-        <div className="sticky top-4 lg:max-w-[280px] flex flex-col gap-10 p-5 rounded-xl h-fit bg-gray-100">
+        <div className="sticky top-4 xl:max-w-[280px] flex flex-col gap-10 h-fit ">
           <div className="flex flex-col gap-2">
-            <h3 className="text-xl font-bold px-2">🙌🏼 Share This</h3>
+            <h3 className="text-xl font-bold px-2 flex gap-2">
+              <span>🙌🏼</span>
+              Share this
+            </h3>
             <div className="ml-2">
               {showShare ? (
                 <InlineShareButtons
@@ -134,15 +137,18 @@ const Post = ({ data, post, featuredPosts, navigation }) => {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <h3 className="text-xl font-bold px-2">📋 More articles</h3>
+            <h3 className="text-xl font-bold px-2 flex gap-2">
+              <span>📋</span>
+              More articles
+            </h3>
             <div className="flex flex-col gap-1">
               {featuredPosts.map((post, key) => (
                 <Link key={key} href={post.slug} passHref>
                   <a
                     href=""
-                    className="flex items-start gap-2 hover:bg-gray-200 p-1 px-3 rounded-xl"
+                    className="flex items-start gap-4 hover:bg-gray-200 p-3  rounded-xl"
                   >
-                    <div className="w-96 h-16 relative mt-1">
+                    <div className="w-36 lg:w-24 xl:w-60 h-16 relative mt-1">
                       <Image
                         alt=""
                         src={post.content.featured_image.filename}

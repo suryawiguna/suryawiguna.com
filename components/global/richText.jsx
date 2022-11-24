@@ -7,7 +7,7 @@ import {
 
 export default function RichText({ data, className }) {
   return (
-    <div className={`prose ${className} w-full`}>
+    <div className={`prose w-full ${className ? className : ""} `}>
       {render(data, {
         markResolvers: {
           [MARK_BOLD]: (children) => <strong>{children}</strong>,
