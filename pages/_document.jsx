@@ -25,7 +25,8 @@ export default class MyDocument extends Document {
           {/* Google Ads */}
           <script
             async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8562944824984533"
+            crossorigin="anonymous"
           ></script>
         </Head>
         <body>
