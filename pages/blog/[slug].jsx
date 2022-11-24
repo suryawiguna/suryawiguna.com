@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Image from "next/image";
 import { RichText } from "../../components/global";
 import Layout from "../../components/layout";
@@ -14,12 +13,9 @@ import Link from "next/link";
 import { InlineShareButtons, InlineReactionButtons } from "sharethis-reactjs";
 import DisqusComments from "../../components/disqusComment";
 
-const Post = ({ post, featuredPosts, navigation }) => {
+const Post = ({ data, post, featuredPosts, navigation }) => {
   return (
-    <Layout navigation={navigation}>
-      <Head>
-        <title>{`${post.name} - Blog - Surya Wiguna`}</title>
-      </Head>
+    <Layout data={data} navigation={navigation}>
       <div className="flex flex-col lg:flex-row gap-10">
         <div className="flex flex-col items-start gap-6">
           <div>
@@ -153,9 +149,22 @@ export const getStaticProps = async ({ params }) => {
   const post = await getPost(params.slug);
   const navigation = (await getNavigation()) || [];
   const featuredPosts = (await getFeaturedPosts()) || [];
+  const data = {
+    title: `${post.name} - Blog`,
+    seo: {
+      title: `${post.name} - Blog`,
+      description: post.content.excerpt.content[0].content[0].text,
+      og_image: `https:${post.content.featured_image.filename}`,
+    },
+  };
 
   return {
-    props: { post: post, featuredPosts: featuredPosts, navigation: navigation },
+    props: {
+      data: data,
+      post: post,
+      featuredPosts: featuredPosts,
+      navigation: navigation,
+    },
     revalidate: 360,
   };
 };
