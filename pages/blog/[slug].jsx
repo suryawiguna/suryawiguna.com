@@ -154,6 +154,7 @@ export const getStaticProps = async ({ params }) => {
 
   return {
     props: { post: post, featuredPosts: featuredPosts, navigation: navigation },
+    revalidate: 360,
   };
 };
 
