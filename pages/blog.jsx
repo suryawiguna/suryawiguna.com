@@ -21,13 +21,13 @@ export default function Index({ data, posts, navigation }) {
                   <div className="rounded-lg flex flex-col items-stretch">
                     <div className="relative min-h-[120px] min-w-[140px] sm:min-h-[140px] sm:min-w-[180px]">
                       <Image
-                        src={`https:${post.content.featured_image.filename}`}
+                        src={post.content.featured_image.filename}
                         alt=""
                         layout="fill"
                         objectFit="cover"
                         objectPosition="center"
                         placeholder="blur"
-                        blurDataURL={`https:${post.content.featured_image.filename}/m/40x40`}
+                        blurDataURL={`${post.content.featured_image.filename}/m/40x40`}
                         className="shrink rounded-lg"
                       />
                     </div>

@@ -27,9 +27,9 @@ const Post = ({ data, post, featuredPosts, navigation }) => {
           <div className="w-full h-80 relative">
             <Image
               alt=""
-              src={`https:${post.content.featured_image.filename}`}
+              src={post.content.featured_image.filename}
               placeholder="blur"
-              blurDataURL={`https:${post.content.featured_image.filename}/m/40x40`}
+              blurDataURL={`${post.content.featured_image.filename}/m/40x40`}
               layout="fill"
               objectFit="cover"
             />
@@ -107,9 +107,9 @@ const Post = ({ data, post, featuredPosts, navigation }) => {
                     <div className="w-96 h-16 relative mt-1">
                       <Image
                         alt=""
-                        src={`https:${post.content.featured_image.filename}`}
+                        src={post.content.featured_image.filename}
                         placeholder="blur"
-                        blurDataURL={`https:${post.content.featured_image.filename}/m/40x40`}
+                        blurDataURL={`${post.content.featured_image.filename}/m/40x40`}
                         layout="fill"
                         objectFit="cover"
                         className="rounded-lg"
@@ -154,7 +154,7 @@ export const getStaticProps = async ({ params }) => {
     seo: {
       title: `${post.name} - Blog`,
       description: post.content.excerpt.content[0].content[0].text,
-      og_image: `https:${post.content.featured_image.filename}`,
+      og_image: post.content.featured_image.filename,
     },
   };
 
