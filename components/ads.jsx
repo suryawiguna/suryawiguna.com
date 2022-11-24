@@ -12,7 +12,7 @@ export function GoogleAdsenseContainer() {
         className="adsbygoogle"
         style={{ display: "block" }}
         data-ad-client="ca-pub-8562944824984533"
-        data-ad-slot="8123192866"
+        data-ad-slot="5983640257"
         data-full-width-responsive="true"
       ></ins>
     </div>
