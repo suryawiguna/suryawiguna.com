@@ -30,6 +30,7 @@ const Post = ({ post, featuredPosts, navigation }) => {
           </div>
           <div className="w-full h-80 relative">
             <Image
+              alt=""
               src={`https:${post.content.featured_image.filename}`}
               placeholder="blur"
               blurDataURL={`https:${post.content.featured_image.filename}/m/40x40`}
@@ -109,6 +110,7 @@ const Post = ({ post, featuredPosts, navigation }) => {
                   >
                     <div className="w-96 h-16 relative mt-1">
                       <Image
+                        alt=""
                         src={`https:${post.content.featured_image.filename}`}
                         placeholder="blur"
                         blurDataURL={`https:${post.content.featured_image.filename}/m/40x40`}
