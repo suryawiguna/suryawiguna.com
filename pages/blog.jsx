@@ -67,6 +67,6 @@ export async function getStaticProps() {
       posts: posts,
       navigation: navigation,
     },
-    revalidate: 360,
+    revalidate: 10,
   };
 }

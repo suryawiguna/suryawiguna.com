@@ -209,7 +209,7 @@ export const getStaticProps = async ({ params }) => {
       featuredPosts: featuredPosts,
       navigation: navigation,
     },
-    revalidate: 360,
+    revalidate: 10,
   };
 };
 

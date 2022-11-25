@@ -23,5 +23,6 @@ export async function getStaticProps() {
       data: data,
       navigation: navigation,
     },
+    revalidate: 10,
   };
 }
