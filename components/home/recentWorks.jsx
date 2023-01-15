@@ -6,7 +6,7 @@ export default function RecentWorks({ blok }) {
       <h2 className="text-xl font-bold">{blok.title}</h2>
       <div className="grid grid-cols sm:grid-cols-2 md:grid-cols-3 gap-6">
         {blok.items.map((work, key) => {
-          return <WorkCard work={work} />;
+          return <WorkCard key={key} work={work} />;
         })}
       </div>
     </div>

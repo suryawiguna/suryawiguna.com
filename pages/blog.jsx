@@ -13,9 +13,9 @@ export default function Index({ data, posts, navigation }) {
       <div className="flex flex-col items-start gap-6">
         <h1 className="font-bold text-3xl">Blog</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {posts.map((post) => {
+          {posts.map((post, key) => {
             return (
-              <PostCard post={post}/>
+              <PostCard key={key} post={post}/>
             );
           })}
         </div>

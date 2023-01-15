@@ -6,8 +6,8 @@ export default function BlogPosts({ blok }) {
     <div className="mt-8 flex flex-col gap-6">
       <h2 className="text-xl font-bold">Recent Blog Posts</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {blok.posts.map((post) => {
-          return <PostCard post={post} />;
+        {blok.posts.map((post, key) => {
+          return <PostCard key={key} post={post} />;
         })}
       </div>
       <Link href="/blog" passHref>
