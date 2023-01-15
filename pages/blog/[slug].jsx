@@ -146,7 +146,7 @@ const Post = ({ data, post, featuredPosts, navigation }) => {
                 <Link key={key} href={post.slug} passHref>
                   <a
                     href=""
-                    className="flex items-start gap-4 hover:bg-gray-200 p-3  rounded-xl"
+                    className="flex items-start gap-4 hover:bg-gray-100 p-3  rounded-xl"
                   >
                     <div className="w-36 lg:w-24 xl:w-60 h-16 relative mt-1">
                       <Image
