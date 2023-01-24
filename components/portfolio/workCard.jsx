@@ -5,17 +5,14 @@ import styled from "styled-components";
 const WorkLink = styled.a`
   span {
     border-radius: 1rem;
-    img {
-      transition: 0.3s all ease-in-out;
-      transform: scale(1);
-    }
   }
 
   &:hover {
     span {
-      img {
-        transform: scale(1.1);
-      }
+      transform: translateY(-4px);
+      transition: 0.1s all ease-in-out;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+        rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     }
   }
 `;
