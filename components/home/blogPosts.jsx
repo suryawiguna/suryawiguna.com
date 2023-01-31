@@ -15,7 +15,7 @@ export default function BlogPosts({ blok }) {
           href=""
           className="flex justify-center text-gray-500 rounded-2xl p-4 bg-gray-100 hover:bg-gray-200 "
         >
-          Baca artikel lain
+          Go to blog
           <i className="bx bx-right-arrow-alt text-2xl" />
         </a>
       </Link>

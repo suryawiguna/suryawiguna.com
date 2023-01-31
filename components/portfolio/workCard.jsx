@@ -20,11 +20,13 @@ const WorkLink = styled.a`
 export default function WorkCard({ work }) {
   return (
     <Link key={work._uid} href={work.link.url} passHref>
-      <WorkLink href="" target="_blank" rel="noreferrer">
+      <WorkLink href="" target="_blank" rel="noreferrer" className="relative h-32">
         <Image
           src={work.image.filename}
           width={284}
           height={180}
+          layout="fill"
+          objectFit="cover"
           alt=""
           placeholder="blur"
           blurDataURL={`${work.image.filename}/m/40x40`}
