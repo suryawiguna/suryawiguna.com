@@ -19,6 +19,7 @@
     "nprogress": "^0.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-syntax-highlighter": "^15.5.0",
     "sharethis-reactjs": "^1.6.0",
     "storyblok-js-client": "^5.0.7",
     "storyblok-react": "^0.1.2",

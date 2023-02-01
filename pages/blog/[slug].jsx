@@ -74,9 +74,10 @@ const Post = ({ data, post, featuredPosts, navigation }) => {
           <Link href="/blog" passHref>
             <a
               href=""
-              className="p-4 px-6 mt-8 text-sm rounded-full bg-gray-100 hover:bg-gray-200"
+              className="p-4 px-6 flex gap-1 align-middle mt-8 text-sm rounded-full bg-gray-200 hover:bg-gray-100"
             >
-              ⏎ Kembali ke blog
+              <i className="bx bx-left-arrow-alt text-xl" />
+              Back
             </a>
           </Link>
         </div>
