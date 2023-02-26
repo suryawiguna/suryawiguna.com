@@ -7,10 +7,10 @@ export default function Navigation({ navigation }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="w-full z-10 md:w-4/12 lg:w-3/12 xl:w-2/12 p-0 lg:p-4 md:h-screen fixed bottom-0 md:sticky md:top-0 bg-white">
+    <nav className="w-full z-10 md:w-4/12 lg:w-3/12 xl:w-2/12 p-0 lg:p-4 md:h-screen fixed bottom-0 md:sticky md:top-0 bg-white drop-shadow-2xl md:drop-shadow-none">
       <div
-        className={`bg-gray-50 md:hidden transition-all px-4 py-3${
-          menuOpen ? " block translate-y-0" : " translate-y-full hidden"
+        className={`md:hidden transition-all px-4 py-3${
+          menuOpen ? " block" : " hidden"
         }`}
       >
         {navigation.menu.map((menu) => {
