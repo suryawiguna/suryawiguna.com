@@ -9,9 +9,7 @@ import {
 } from "../../lib/api";
 import moment from "moment";
 import Link from "next/link";
-// import { GoogleAdsenseContainer } from "../../components/ads";
-import { InlineShareButtons, InlineReactionButtons } from "sharethis-reactjs";
-import DisqusComments from "../../components/disqusComment";
+import { InlineShareButtons } from "sharethis-reactjs";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 

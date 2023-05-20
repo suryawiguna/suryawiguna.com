@@ -15,7 +15,7 @@ export default function WorkCard({ work }) {
         href=""
         target="_blank"
         rel="noreferrer"
-        className="relative h-32"
+        className="relative h-32 hover:translate-y-[-1px]"
       >
         <Image
           src={work.image.filename}
@@ -26,7 +26,6 @@ export default function WorkCard({ work }) {
           alt=""
           placeholder="blur"
           blurDataURL={`${work.image.filename}/m/40x40`}
-          className="opacity-75 hover:opacity-100"
         />
       </WorkLink>
     </Link>

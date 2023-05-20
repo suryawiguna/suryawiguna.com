@@ -7,6 +7,7 @@ export default function Navigation({ navigation }) {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  console.log(theme);
 
   return (
     <nav className="w-full z-10 md:w-4/12 lg:w-3/12 xl:w-2/12 p-0 lg:p-4 md:h-screen fixed top-0 md:sticky bg-white drop-shadow-sm md:drop-shadow-none dark:bg-zinc-900 dark:text-gray-300">
@@ -61,8 +62,8 @@ export default function Navigation({ navigation }) {
               <div className="block h-8 w-14 rounded-full bg-zinc-200 dark:bg-zinc-600"></div>
               <div
                 className={`dot absolute ${
-                  theme == "dark" ? "right" : "left"
-                }-1 top-1 flex h-6 w-6 items-center justify-center rounded-full ${
+                  theme == "dark" ? "right-1" : "left-1"
+                } top-1 flex h-6 w-6 items-center justify-center rounded-full ${
                   theme == "dark" ? "bg-slate-800" : "bg-zinc-100"
                 } transition`}
               >

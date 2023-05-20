@@ -48,7 +48,12 @@ function MyApp({ Component, pageProps }) {
         <link rel="shortcut icon" href="/images/favicon.png" />
       </Head>
       <TopProgressBar />
-      <Component {...pageProps} />
+      <div
+        className="dark:bg-zinc-900
+      "
+      >
+        <Component {...pageProps} />
+      </div>
     </ThemeProvider>
   );
 }
