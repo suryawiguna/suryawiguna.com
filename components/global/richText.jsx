@@ -10,7 +10,11 @@ import oneDark from "react-syntax-highlighter/dist/cjs/styles/prism/one-dark";
 
 export default function RichText({ data, className }) {
   return (
-    <div className={`prose w-full ${className ? className : ""} `}>
+    <div
+      className={`prose prose-zinc dark:prose-invert w-full ${
+        className ? className : ""
+      } `}
+    >
       {render(data, {
         markResolvers: {
           [MARK_BOLD]: (children) => <strong>{children}</strong>,

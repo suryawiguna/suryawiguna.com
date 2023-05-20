@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { storyblokInit, apiPlugin } from "@storyblok/react";
+import { ThemeProvider } from "next-themes";
 
 const token = process.env.STORYBLOK_ACCESS_TOKEN;
 
@@ -42,13 +43,13 @@ function MyApp({ Component, pageProps }) {
   }, [router.events]);
 
   return (
-    <>
+    <ThemeProvider attribute="class">
       <Head>
         <link rel="shortcut icon" href="/images/favicon.png" />
       </Head>
       <TopProgressBar />
       <Component {...pageProps} />
-    </>
+    </ThemeProvider>
   );
 }
 

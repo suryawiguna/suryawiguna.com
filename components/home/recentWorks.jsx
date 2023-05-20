@@ -1,17 +1,5 @@
 import WorkCard from "../portfolio/workCard";
 import Link from "next/link";
-import styled from "styled-components";
-
-const WorkLink = styled.a`
-  border-radius: 1rem;
-
-  &:hover {
-    transform: translateY(-4px);
-    transition: 0.1s all ease-in-out;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-      rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-  }
-`;
 
 export default function RecentWorks({ blok }) {
   return (
@@ -22,14 +10,14 @@ export default function RecentWorks({ blok }) {
           return <WorkCard key={key} work={work} />;
         })}
         <Link href="/portfolio" passHref>
-          <WorkLink
+          <a
             href=""
             rel="noreferrer"
-            className="relative h-32 self-center bg-gray-100 flex justify-center items-center text-gray-500"
+            className="relative h-32 self-center rounded-2xl bg-zinc-100 dark:bg-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-700 flex justify-center items-center text-zinc-500"
           >
             See more
             <i className="bx bx-right-arrow-alt text-2xl" />
-          </WorkLink>
+          </a>
         </Link>
       </div>
     </div>

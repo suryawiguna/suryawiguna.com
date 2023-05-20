@@ -11,7 +11,7 @@ export default function Links({ blok }) {
             href={link.link.url}
             target="_blank"
             rel="noreferrer"
-            className="bg-gray-100 hover:bg-gray-200 py-3 px-5 flex items-center gap-2 rounded-full max-w-md"
+            className="bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-600 dark:hover:bg-zinc-700 py-3 px-5 flex items-center gap-2 rounded-full max-w-md"
           >
             <span className="flex justify-center items-center gap-2">
               <Image

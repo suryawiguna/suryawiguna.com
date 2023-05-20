@@ -5,13 +5,6 @@ import moment from "moment";
 import styled from "styled-components";
 
 const PostLink = styled.a`
-  &:hover {
-    transform: translateY(-4px);
-    transition: 0.1s all ease-in-out;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-      rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-  }
-
   span {
     border-radius: 1rem 1rem 0 0;
     img {
@@ -24,7 +17,10 @@ const PostLink = styled.a`
 export default function PostCard({ post }) {
   return (
     <Link key={post._uid} href={post.full_slug} passHref>
-      <PostLink href="" className="bg-gray-100 rounded-2xl">
+      <PostLink
+        href=""
+        className="bg-zinc-100 dark:bg-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-700 rounded-2xl"
+      >
         <div className="rounded-lg flex flex-col items-stretch">
           <div className="relative min-h-[120px] min-w-[140px] sm:min-h-[140px] sm:min-w-[180px]">
             <Image
@@ -39,16 +35,14 @@ export default function PostCard({ post }) {
             />
           </div>
           <div className="pt-3 flex-1 p-5">
-            <h5 className="text-gray-900 text-xl font-semibold mb-1">
-              {post.name}
-            </h5>
+            <h5 className="text-xl font-semibold mb-1">{post.name}</h5>
             <div>
               <RichText
-                className="text-gray-600 text-sm line-clamp-3 leading-relaxed"
+                className="text-sm line-clamp-3 leading-relaxed"
                 data={post.content.excerpt}
               />
             </div>
-            <small className="text-gray-400 text-xs self-end">
+            <small className="text-xs self-end font-light">
               {moment(post.first_published_at).format("MMMM DD, YYYY")}
             </small>
           </div>

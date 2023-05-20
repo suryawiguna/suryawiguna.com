@@ -47,34 +47,10 @@ const Post = ({ data, post, featuredPosts, navigation }) => {
             />
           </div>
           <RichText data={post.content.content} />
-          {/* <GoogleAdsenseContainer />  */}
-          <InlineReactionButtons
-            config={{
-              alignment: "center", // alignment of buttons (left, center, right)
-              enabled: true, // show/hide buttons (true, false)
-              language: "en", // which language to use (see LANGUAGES)
-              min_count: 0, // hide react counts less than min_count (INTEGER)
-              padding: 12, // padding within buttons (INTEGER)
-              reactions: [
-                // which reactions to include (see REACTIONS)
-                "slight_smile",
-                "heart_eyes",
-                "laughing",
-                "astonished",
-                // "sob",
-                // "rage",
-              ],
-              size: 32, // the size of each button (INTEGER)
-              spacing: 8, // the spacing between buttons (INTEGER)
-            }}
-          />
-          <div className="w-full h-fit">
-            <DisqusComments post={post} />
-          </div>
           <Link href="/blog" passHref>
             <a
               href=""
-              className="p-4 px-6 flex gap-1 align-middle mt-8 text-sm rounded-full bg-gray-200 hover:bg-gray-100"
+              className="p-4 px-6 flex gap-1 align-middle mt-8 text-sm rounded-full bg-zinc-200 hover:bg-zinc-100 dark:bg-zinc-600 dark:hover:bg-zinc-700"
             >
               <i className="bx bx-left-arrow-alt text-xl" />
               Back
@@ -140,14 +116,14 @@ const Post = ({ data, post, featuredPosts, navigation }) => {
           <div className="flex flex-col gap-2">
             <h3 className="text-xl font-bold px-2 flex gap-2">
               <span>📋</span>
-              More articles
+              Other post
             </h3>
             <div className="flex flex-col gap-1">
               {featuredPosts.map((post, key) => (
                 <Link key={key} href={post.slug} passHref>
                   <a
                     href=""
-                    className="flex items-start gap-4 hover:bg-gray-100 p-3  rounded-xl"
+                    className="flex items-start gap-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 p-3  rounded-xl"
                   >
                     <div className="w-36 lg:w-24 xl:w-60 h-16 relative mt-1">
                       <Image
@@ -160,8 +136,8 @@ const Post = ({ data, post, featuredPosts, navigation }) => {
                         className="rounded-lg"
                       />
                     </div>
-                    <div className="flex flex-col gap-0">
-                      <h3 className="text-sm leading-tight font-semibold">
+                    <div className="flex flex-col gap-1">
+                      <h3 className="text-md leading-tight font-bold">
                         {post.name}
                       </h3>
                       <RichText
