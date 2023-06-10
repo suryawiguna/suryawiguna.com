@@ -7,7 +7,6 @@ export default function Navigation({ navigation }) {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
-  console.log(theme);
 
   return (
     <nav className="w-full z-10 md:w-4/12 lg:w-3/12 xl:w-2/12 p-0 lg:p-4 md:h-screen fixed top-0 md:sticky bg-white drop-shadow-sm md:drop-shadow-none dark:bg-zinc-900 dark:text-gray-300">
