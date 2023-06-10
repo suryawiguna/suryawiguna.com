@@ -8,7 +8,7 @@ export default function WorkCard({ work }) {
         href=""
         target="_blank"
         rel="noreferrer"
-        className="relative h-32 hover:scale-95 transition-transform"
+        className="relative h-32 hover:scale-[0.98] transition-transform"
       >
         <Image
           src={work.image.filename}

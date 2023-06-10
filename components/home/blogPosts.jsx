@@ -13,7 +13,7 @@ export default function BlogPosts({ blok }) {
       <Link href="/blog" passHref>
         <a
           href=""
-          className="flex justify-center text-gray-500 rounded-2xl p-4 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-700 hover:scale-95 transition-transform dark:text-zinc-300  "
+          className="flex justify-center text-gray-500 rounded-2xl p-4 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-700 hover:scale-[0.98] transition-transform dark:text-zinc-300  "
         >
           Go to blog
           <i className="bx bx-right-arrow-alt text-2xl" />
