@@ -1,33 +1,25 @@
 import Link from "next/link";
 import Image from "next/image";
-import styled from "styled-components";
-
-const WorkLink = styled.a`
-  span {
-    border-radius: 1rem;
-  }
-`;
 
 export default function WorkCard({ work }) {
   return (
     <Link key={work._uid} href={work.link.url} passHref>
-      <WorkLink
+      <a
         href=""
         target="_blank"
         rel="noreferrer"
-        className="relative h-32 hover:translate-y-[-1px]"
+        className="relative h-32 hover:scale-95 transition-transform"
       >
         <Image
           src={work.image.filename}
-          width={284}
-          height={180}
           layout="fill"
           objectFit="cover"
           alt=""
           placeholder="blur"
           blurDataURL={`${work.image.filename}/m/40x40`}
+          className="rounded-2xl"
         />
-      </WorkLink>
+      </a>
     </Link>
   );
 }

@@ -13,7 +13,7 @@ export default function RecentWorks({ blok }) {
           <a
             href=""
             rel="noreferrer"
-            className="relative h-32 self-center rounded-2xl bg-zinc-100 dark:bg-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-700 flex justify-center items-center text-zinc-500"
+            className="relative h-32 self-center rounded-2xl bg-zinc-100 dark:bg-zinc-700 dark:text-zinc-300 hover:scale-95 transition-transform flex justify-center items-center text-zinc-500"
           >
             See more
             <i className="bx bx-right-arrow-alt text-2xl" />

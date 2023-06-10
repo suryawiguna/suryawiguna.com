@@ -48,7 +48,7 @@ const Post = ({ data, post, featuredPosts, navigation }) => {
           <Link href="/blog" passHref>
             <a
               href=""
-              className="p-4 px-6 flex gap-1 align-middle mt-8 text-sm rounded-full bg-zinc-200 hover:bg-zinc-100 dark:bg-zinc-600 dark:hover:bg-zinc-700"
+              className="p-4 px-6 flex gap-1 align-middle mt-8 text-sm rounded-full bg-zinc-200 hover:bg-zinc-100 dark:bg-zinc-700  "
             >
               <i className="bx bx-left-arrow-alt text-xl" />
               Back
@@ -121,7 +121,7 @@ const Post = ({ data, post, featuredPosts, navigation }) => {
                 <Link key={key} href={post.slug} passHref>
                   <a
                     href=""
-                    className="flex items-start gap-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 p-3  rounded-xl"
+                    className="flex items-start gap-4 hover:bg-zinc-100   p-3  rounded-xl"
                   >
                     <div className="w-36 lg:w-24 xl:w-60 h-16 relative mt-1">
                       <Image

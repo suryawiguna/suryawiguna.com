@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { RichText } from "../global";
 
 export default function Links({ blok }) {
   return (
@@ -11,7 +10,7 @@ export default function Links({ blok }) {
             href={link.link.url}
             target="_blank"
             rel="noreferrer"
-            className="bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-600 dark:hover:bg-zinc-700 py-3 px-5 flex items-center gap-2 rounded-full max-w-md"
+            className="bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-700 hover:scale-95 transition-transform  py-3 px-5 flex items-center gap-2 rounded-full max-w-md"
           >
             <span className="flex justify-center items-center gap-2">
               <Image
