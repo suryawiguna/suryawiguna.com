@@ -11,7 +11,11 @@ export default function DarkModeToggle() {
   }, []);
 
   if (!mounted) {
-    return null;
+    return (
+      <div className="animate-pulse flex">
+        <div className="bg-zinc-100 dark:bg-zinc-700 rounded-full h-8 w-14 mx-3 md:m-5"></div>
+      </div>
+    );
   }
 
   return (
