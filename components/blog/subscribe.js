@@ -96,7 +96,7 @@ export default function SubscribeForm() {
       <div className="text-xs text-zinc-500 dark:text-zinc-400 my-2">
         {message
           ? message
-          : `I'll only send emails when new content is posted. No spam.`}
+          : `I'll only send emails when new article is posted. No spam.`}
       </div>
     </form>
   );
