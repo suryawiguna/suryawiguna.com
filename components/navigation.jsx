@@ -72,7 +72,7 @@ function DarkModeToggle(theme, setTheme) {
           className={`dot absolute transition-all translate-x mx-1 ${
             theme == "dark" ? "translate-x-6" : ""
           } top-1 flex h-6 w-6 items-center justify-center rounded-full ${
-            theme == "dark" ? "bg-slate-800" : "bg-amber-400"
+            theme == "dark" ? "bg-slate-800" : "bg-amber-500"
           }`}
         >
           {/* ICON */}
