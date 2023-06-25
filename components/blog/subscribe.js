@@ -56,7 +56,7 @@ export default function SubscribeForm() {
             ref={inputEl}
             required
             type="email"
-            className="bg-gray-100 dark:text-black rounded-lg px-4 py-3"
+            className="bg-gray-100 dark:bg-zinc-300 dark:text-black rounded-lg px-4 py-3"
             disabled={sending}
           />
         </div>
