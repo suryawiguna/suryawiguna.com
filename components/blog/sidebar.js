@@ -74,7 +74,7 @@ export default function Sidebar({ featuredPosts }) {
           )}
         </div>
       </div>
-      <div class="flex">
+      <div className="flex">
         <SubscribeForm />
       </div>
     </div>
