@@ -32,7 +32,7 @@ export default function FullPost({ post }) {
         data-ad-client="ca-pub-8562944824984533"
         data-ad-slot="8123192866"
       ></ins>
-      <Script>(adsbygoogle = window.adsbygoogle || []).push({});</Script>
+      <Script id="ads-push">(adsbygoogle = window.adsbygoogle || []).push({});</Script>
       <Link href="/blog" passHref>
         <a
           href=""
