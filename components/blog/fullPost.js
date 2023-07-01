@@ -24,15 +24,28 @@ export default function FullPost({ post }) {
         />
       </div>
       <RichText data={post.content.content} />
+
+      <Script
+        id="Adsense-id"
+        async
+        onError={(e) => {
+          console.error("Script failed to load", e);
+        }}
+        strategy="afterInteractive"
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8562944824984533"
+        crossorigin="anonymous"
+      />
+      {/* blog ads */}
       <ins
-        className="adsbygoogle"
-        style={{ display: "block", textAlign: "center" }}
-        data-ad-layout="in-article"
-        data-ad-format="fluid"
+        class="adsbygoogle"
+        style="display:block"
         data-ad-client="ca-pub-8562944824984533"
-        data-ad-slot="8123192866"
+        data-ad-slot="5983640257"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
       ></ins>
-      <Script id="ads-push">(adsbygoogle = window.adsbygoogle || []).push({});</Script>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
       <Link href="/blog" passHref>
         <a
           href=""
