@@ -35,12 +35,13 @@ export default function FullPost({ post }) {
       <RichText data={post.content.content} />
       <ins
         className="adsbygoogle"
-        style={{ display: "block" }}
+        style={{ display: "block", textAlign: "center" }}
+        data-ad-layout="in-article"
+        data-ad-format="fluid"
         data-ad-client="ca-pub-8562944824984533"
-        data-ad-slot="5983640257"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
+        data-ad-slot="8123192866"
       ></ins>
+      <script></script>
       <Link href="/blog" passHref>
         <a
           href=""
