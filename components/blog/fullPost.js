@@ -2,7 +2,6 @@ import moment from "moment";
 import { RichText } from "../global";
 import Link from "next/link";
 import Image from "next/image";
-import Script from "next/script";
 import AdBanner from "../adBanner";
 
 export default function FullPost({ post }) {
@@ -14,26 +13,25 @@ export default function FullPost({ post }) {
           {moment(post.first_published_at).format("MMMM DD, YYYY")}
         </small>
       </div>
-      <div className="w-full h-80 relative">
+      <div className="w-full h-96 relative">
         <Image
           alt=""
           src={post.content.featured_image.filename}
-          placeholder="blur"
           blurDataURL={`${post.content.featured_image.filename}/m/40x40`}
-          layout="fill"
-          objectFit="cover"
+          placeholder="blur"
+          fill
+          style={{ objectFit: "contain" }}
         />
       </div>
       <RichText data={post.content.content} />
-      <AdBanner />
-      <Link href="/blog" passHref>
-        <a
-          href=""
-          className="p-4 px-6 flex gap-1 align-middle mt-8 text-sm rounded-full bg-zinc-200 hover:bg-zinc-100 dark:bg-zinc-700  "
-        >
-          <i className="bx bx-left-arrow-alt text-xl" />
-          Other posts
-        </a>
+      {/* <AdBanner /> */}
+      <Link
+        href="/blog"
+        passHref
+        className="p-4 px-6 flex gap-1 align-middle mt-8 text-sm rounded-full bg-zinc-200 hover:bg-zinc-100 dark:bg-zinc-700  "
+      >
+        <i className="bx bx-left-arrow-alt text-xl" />
+        Other posts
       </Link>
     </div>
   );

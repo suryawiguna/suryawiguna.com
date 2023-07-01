@@ -35,18 +35,19 @@ export default function Navigation({ navigation }) {
         <div className={`${menuOpen ? "block" : "hidden"} md:block mt-3`}>
           {navigation.menu.map((menu) => {
             return (
-              <Link key={menu._uid} href={menu.link.url} passHref>
-                <a
-                  className={`flex text-md hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full py-3 px-5 ${
-                    router.pathname.includes(menu.text.toLowerCase()) ||
-                    (menu.text == "Home" && router.pathname == "/")
-                      ? "font-bold"
-                      : ""
-                  }`}
-                >
-                  <span className="mr-3">{menu.emoji}</span>
-                  {menu.text}
-                </a>
+              <Link
+                key={menu._uid}
+                href={menu.link.url}
+                passHref
+                className={`flex text-md hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full py-3 px-5 ${
+                  router.pathname.includes(menu.text.toLowerCase()) ||
+                  (menu.text == "Home" && router.pathname == "/")
+                    ? "font-bold"
+                    : ""
+                }`}
+              >
+                <span className="mr-3">{menu.emoji}</span>
+                {menu.text}
               </Link>
             );
           })}
