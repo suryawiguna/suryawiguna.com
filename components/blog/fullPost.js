@@ -38,7 +38,7 @@ export default function FullPost({ post }) {
       {/* blog ads */}
       <ins
         class="adsbygoogle"
-        style="display:block"
+        style={{ display: "block" }}
         data-ad-client="ca-pub-8562944824984533"
         data-ad-slot="5983640257"
         data-ad-format="auto"
