@@ -2,18 +2,9 @@ import moment from "moment";
 import { RichText } from "../global";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect } from "react";
+import Script from "next/script";
 
 export default function FullPost({ post }) {
-  useEffect(() => {
-    var ads = document.getElementsByClassName("adsbygoogle").length;
-    for (var i = 0; i < ads; i++) {
-      try {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-      } catch (e) {}
-    }
-  }, []);
-
   return (
     <div className="w-full flex flex-col items-start gap-6">
       <div>
@@ -41,7 +32,7 @@ export default function FullPost({ post }) {
         data-ad-client="ca-pub-8562944824984533"
         data-ad-slot="8123192866"
       ></ins>
-      <script></script>
+      <Script>(adsbygoogle = window.adsbygoogle || []).push({});</Script>
       <Link href="/blog" passHref>
         <a
           href=""
