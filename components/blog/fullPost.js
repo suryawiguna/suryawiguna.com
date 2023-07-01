@@ -3,6 +3,7 @@ import { RichText } from "../global";
 import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
+import AdBanner from "../adBanner";
 
 export default function FullPost({ post }) {
   return (
@@ -24,28 +25,7 @@ export default function FullPost({ post }) {
         />
       </div>
       <RichText data={post.content.content} />
-
-      <Script
-        id="Adsense-id"
-        async
-        onError={(e) => {
-          console.error("Script failed to load", e);
-        }}
-        strategy="afterInteractive"
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8562944824984533"
-        crossorigin="anonymous"
-      />
-      {/* blog ads */}
-      <ins
-        class="adsbygoogle"
-        style={{ display: "block" }}
-        data-ad-client="ca-pub-8562944824984533"
-        data-ad-slot="5983640257"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      ></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
+      <AdBanner />
       <Link href="/blog" passHref>
         <a
           href=""
