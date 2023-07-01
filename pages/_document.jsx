@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 
 export default class MyDocument extends Document {
   render() {
@@ -23,11 +24,12 @@ export default class MyDocument extends Document {
             }}
           />
           {/* Google Ads */}
-          <script
+          <Script
             async
+            strategy="beforeInteractive"
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8562944824984533"
             crossOrigin="anonymous"
-          ></script>
+          ></Script>
         </Head>
         <body>
           <Main />
