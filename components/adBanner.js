@@ -1,14 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 const AdBanner = () => {
-  useEffect(() => {
-    try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
-
   return (
     <>
       <script
