@@ -3,7 +3,7 @@ import { RichText } from "../global";
 
 export default function Introduction({ blok }) {
   return (
-    <section className="flex flex-col md:flex-row items-center">
+    <section className="flex flex-col items-center md:items-start">
       <Image
         src={blok.image.filename}
         alt=""

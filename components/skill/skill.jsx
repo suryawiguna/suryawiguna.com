@@ -7,19 +7,19 @@ export default function Skills({ blok }) {
         return (
           <div
             key={key}
-            className="flex flex-col gap-2 bg-zinc-50 dark:bg-zinc-700 p-4 rounded-2xl"
+            className="flex flex-col gap-2 bg-zinc-50 dark:bg-zinc-200 p-4 rounded-2xl"
           >
             <div className="relative min-h-[60px]">
               <Image
                 src={item.logo.filename}
                 alt={item.name}
-                layout="fill"
-                objectFit="contain"
+                fill
+                style={{ objectFit: "contain" }}
                 placeholder="blur"
                 blurDataURL={`${item.logo.filename}/m/40x40`}
               />
             </div>
-            <h3 className="text-center self-center text-sm md:text-base">
+            <h3 className="text-center text-zinc-800 self-center text-sm md:text-base">
               {item.name}
             </h3>
           </div>

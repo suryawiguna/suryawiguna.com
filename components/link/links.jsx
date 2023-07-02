@@ -1,19 +1,52 @@
+import Link from "next/link";
+import Script from "next/script";
+
 export default function Links({ blok }) {
   return (
     <section className="flex flex-col gap-5">
-      {blok.links.map((link, key) => {
-        return (
-          <a
-            key={key}
-            href={link.link.url}
-            target="_blank"
-            rel="noreferrer"
-            className="bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-700 dark:hover:bg-zinc-600 hover:scale-[0.98] transition-transform py-4 px-5 text-center gap-2 rounded-full max-w-md"
-          >
-            {link.name}
-          </a>
-        );
-      })}
+      <div className="flex justify-center md:justify-start gap-2 overflow-auto">
+        {blok.links
+          .filter((link) => link.socialLink)
+          .map((link, key) => (
+            <Link
+              key={key}
+              href={link.link.url || link.link.cached_url}
+              target={`${link.linktype == "url" ? "_blank" : ""}`}
+              className="flex items-center hover:bg-zinc-200 dark:hover:bg-zinc-600 hover:scale-[0.95] rounded-full transition-transform p-2"
+            >
+              <i className={`bx ${link.icon} dark:text-zinc-100 text-2xl`}></i>
+            </Link>
+          ))}
+      </div>
+      <div className="flex flex-col items-stretch self-center md:self-start gap-5">
+        {blok.links
+          .filter((link) => !link.socialLink)
+          .map((link, key) => {
+            return (
+              <Link
+                key={key}
+                href={link.link.url || link.link.cached_url}
+                target={`${link.linktype == "url" ? "_blank" : ""}`}
+                className="bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-700 dark:hover:bg-zinc-600 hover:scale-[0.98] transition-transform py-4 px-5 text-center gap-2 rounded-full max-w-md"
+              >
+                {link.name}
+              </Link>
+            );
+          })}
+        <Script
+          type="text/javascript"
+          src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+          data-name="bmc-button"
+          data-slug="suryawiguna"
+          data-color="#FFDD00"
+          data-emoji=""
+          data-font="Cookie"
+          data-text="Buy me a coffee"
+          data-outline-color="#000000"
+          data-font-color="#000000"
+          data-coffee-color="#ffffff"
+        ></Script>
+      </div>
     </section>
   );
 }
