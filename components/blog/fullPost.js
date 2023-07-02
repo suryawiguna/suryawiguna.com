@@ -2,7 +2,6 @@ import moment from "moment";
 import { RichText } from "../global";
 import Link from "next/link";
 import Image from "next/image";
-import AdBanner from "../adBanner";
 
 export default function FullPost({ post }) {
   return (
@@ -24,7 +23,7 @@ export default function FullPost({ post }) {
         />
       </div>
       <RichText data={post.content.content} />
-      {/* <AdBanner /> */}
+
       <Link
         href="/blog"
         passHref

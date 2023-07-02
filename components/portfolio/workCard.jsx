@@ -17,6 +17,7 @@ export default function WorkCard({ work }) {
         placeholder="blur"
         blurDataURL={`${work.image.filename}/m/40x40`}
         className="rounded-2xl"
+        style={{ objectFit: "cover" }}
       />
     </Link>
   );

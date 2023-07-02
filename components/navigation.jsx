@@ -8,7 +8,7 @@ export default function Navigation({ navigation }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="w-full z-10 md:w-4/12 lg:w-3/12 xl:w-2/12 p-0 lg:p-4 md:h-screen fixed top-0 md:sticky bg-white drop-shadow-sm md:drop-shadow-none dark:bg-zinc-900 dark:text-gray-300">
+    <nav className="w-full z-10 md:z-0 md:w-4/12 lg:w-3/12 xl:w-2/12 p-0 lg:p-4 md:h-screen fixed top-0 md:sticky bg-white drop-shadow-sm md:drop-shadow-none dark:bg-zinc-900 dark:text-gray-300">
       <div className="flex px-6 md:p-0 overflow-x-auto p-2 lg:p-0 flex-col gap-0 lg:gap-2">
         <div className="flex w-full items-center justify-between md:hidden">
           <p className="flex-1">
@@ -34,20 +34,25 @@ export default function Navigation({ navigation }) {
 
         <div className={`${menuOpen ? "block" : "hidden"} md:block mt-3`}>
           {navigation.menu.map((menu) => {
+            const isActive =
+              router.pathname.includes(menu.text.toLowerCase()) ||
+              (menu.text == "Home" && router.pathname == "/");
+
             return (
               <Link
                 key={menu._uid}
                 href={menu.link.url}
                 passHref
-                className={`flex text-md hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full py-3 px-5 ${
-                  router.pathname.includes(menu.text.toLowerCase()) ||
-                  (menu.text == "Home" && router.pathname == "/")
-                    ? "font-bold"
-                    : ""
-                }`}
+                className="flex text-md hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full py-3 px-5"
               >
                 <span className="mr-3">{menu.emoji}</span>
-                {menu.text}
+                <span
+                  className={`${
+                    isActive ? "font-bold border-b-2 border-b-amber-500" : ""
+                  }`}
+                >
+                  {menu.text}
+                </span>
               </Link>
             );
           })}

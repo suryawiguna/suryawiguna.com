@@ -11,7 +11,7 @@ export default function Index({ data, navigation }) {
         <h1 className="font-bold text-3xl">{data.title}</h1>
         <DynamicComponent bloks={data.body} components={components} />
         <div className="flex flex-col mt-8">
-          <h2 className="text-xl font-bold mb-6">Subscribe on my blog</h2>
+          <h2 className="text-xl font-bold mb-6">Subscribe to my blog</h2>
           <SubscribeForm />
         </div>
       </div>
