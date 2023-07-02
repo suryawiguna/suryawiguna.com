@@ -48,7 +48,9 @@ export default function Navigation({ navigation }) {
                 <span className="mr-3">{menu.emoji}</span>
                 <span
                   className={`${
-                    isActive ? "font-bold border-b-2 border-b-amber-500" : ""
+                    isActive
+                      ? "font-bold underline decoration-wavy underline-offset-4 decoration-amber-500"
+                      : ""
                   }`}
                 >
                   {menu.text}

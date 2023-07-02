@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Link from "next/link";
-import Script from "next/script";
 
 export default function Links({ blok }) {
   return (
@@ -33,19 +33,16 @@ export default function Links({ blok }) {
               </Link>
             );
           })}
-        <Script
-          type="text/javascript"
-          src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
-          data-name="bmc-button"
-          data-slug="suryawiguna"
-          data-color="#FFDD00"
-          data-emoji=""
-          data-font="Cookie"
-          data-text="Buy me a coffee"
-          data-outline-color="#000000"
-          data-font-color="#000000"
-          data-coffee-color="#ffffff"
-        ></Script>
+        <div className="relative h-12">
+          <Link href="https://www.buymeacoffee.com/suryawiguna" target="_blank">
+            <Image
+              src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+              fill
+              alt="Buy Me A Coffee"
+              className="text-sm object-contain object-center md:object-left"
+            />
+          </Link>
+        </div>
       </div>
     </section>
   );
