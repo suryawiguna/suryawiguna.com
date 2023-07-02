@@ -18,6 +18,16 @@ export default function Links({ blok }) {
             </Link>
           ))}
       </div>
+      <div className="relative h-12">
+        <Link href="https://www.buymeacoffee.com/suryawiguna" target="_blank">
+          <Image
+            src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+            fill
+            alt="Buy Me A Coffee"
+            className="text-sm object-contain object-center md:object-left"
+          />
+        </Link>
+      </div>
       <div className="flex flex-col items-stretch self-center md:self-start gap-5">
         {blok.links
           .filter((link) => !link.socialLink)
@@ -33,16 +43,6 @@ export default function Links({ blok }) {
               </Link>
             );
           })}
-        <div className="relative h-12">
-          <Link href="https://www.buymeacoffee.com/suryawiguna" target="_blank">
-            <Image
-              src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-              fill
-              alt="Buy Me A Coffee"
-              className="text-sm object-contain object-center md:object-left"
-            />
-          </Link>
-        </div>
       </div>
     </section>
   );
