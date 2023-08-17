@@ -1,5 +1,4 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import Script from "next/script";
 
 export default class MyDocument extends Document {
   render() {
@@ -9,6 +8,7 @@ export default class MyDocument extends Document {
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
             async
+            defer
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
           />
           <script
@@ -23,14 +23,6 @@ export default class MyDocument extends Document {
           `,
             }}
           />
-          {/* Google Ads */}
-          <Script
-            id="googleads"
-            async
-            strategy="beforeInteractive"
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8562944824984533"
-            crossOrigin="anonymous"
-          ></Script>
         </Head>
         <body>
           <Main />
