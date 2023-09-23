@@ -1,6 +1,6 @@
 import { RichText } from "../global";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import moment from "moment";
 
 export default function PostCard({ post }) {

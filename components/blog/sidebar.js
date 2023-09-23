@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { RichText } from "../global";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { InlineShareButtons } from "sharethis-reactjs";
 import SubscribeForm from "./subscribe";
 
