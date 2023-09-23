@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { RichText } from "../global";
 import styled from "styled-components";
 

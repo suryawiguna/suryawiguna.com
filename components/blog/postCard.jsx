@@ -1,6 +1,6 @@
 import { RichText } from "../global";
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import moment from "moment";
 
 export default function PostCard({ post }) {
@@ -16,9 +16,8 @@ export default function PostCard({ post }) {
           <Image
             src={post.content.featured_image.filename}
             alt=""
-            layout="fill"
-            objectFit="cover"
-            objectPosition="center"
+            fill
+            style={{ objectFit: "cover", objectPosition: "center" }}
             placeholder="blur"
             blurDataURL={`${post.content.featured_image.filename}/m/40x40`}
             className="shrink rounded-t-2xl"
