@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import { RichText } from "../global";
 import styled from "styled-components";
+import { storyblokEditable } from "@storyblok/react";
 
 const Richtext = styled(RichText)`
   a {
@@ -12,9 +15,9 @@ const Richtext = styled(RichText)`
   }
 `;
 
-export default function introduction({ blok }) {
+export default function Introduction({ blok }) {
   return (
-    <section>
+    <section {...storyblokEditable(blok)}>
       <Image
         src={blok.image.filename}
         alt=""

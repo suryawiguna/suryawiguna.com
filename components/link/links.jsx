@@ -1,10 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Links({ blok }) {
   return (
     <section className="flex flex-col gap-5">
-      <div className="flex justify-center md:justify-start gap-2 overflow-auto">
+      <div className="flex justify-center gap-2 overflow-auto">
         {blok.links
           .filter((link) => link.socialLink)
           .map((link, key) => (
@@ -18,7 +17,7 @@ export default function Links({ blok }) {
             </Link>
           ))}
       </div>
-      <div className="flex flex-col items-stretch self-center md:self-start gap-5">
+      <div className="flex flex-col items-stretch self-center gap-5">
         {blok.links
           .filter((link) => !link.socialLink)
           .map((link, key) => {

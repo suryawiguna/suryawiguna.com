@@ -1,4 +1,5 @@
-import SbEditable from "storyblok-react";
+"use client";
+import { storyblokEditable } from "@storyblok/react";
 
 export default function DynamicComponent({ bloks, components }) {
   return (
@@ -7,9 +8,9 @@ export default function DynamicComponent({ bloks, components }) {
         if (typeof components[blok.component] !== "undefined") {
           const Component = components[blok.component];
           return (
-            <SbEditable key={blok._uid} content={blok}>
+            <div {...storyblokEditable} key={blok._uid} content={blok}>
               <Component blok={blok} />
-            </SbEditable>
+            </div>
           );
         }
         return (

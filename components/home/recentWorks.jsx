@@ -1,3 +1,5 @@
+"use client";
+
 import WorkCard from "../portfolio/workCard";
 import Link from "next/link";
 

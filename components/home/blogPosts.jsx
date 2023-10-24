@@ -1,9 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import PostCard from "../blog/postCard";
 
 export default function BlogPosts({ blok }) {
   return (
-    <div className="mt-8 flex flex-col gap-6">
+    <div className="flex flex-col gap-6">
       <h2 className="text-xl font-bold">Recent Blog Posts</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {blok.posts.map((post, key) => {

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useRef, useState } from "react";
 
 export default function SubscribeForm() {
@@ -43,16 +45,10 @@ export default function SubscribeForm() {
     <form onSubmit={subscribe} className="max-w-sm">
       <div className="flex flex-col gap-2">
         <div className="flex flex-col">
-          <label
-            htmlFor="email-input"
-            className="text-sm text-zinc-600 dark:text-zinc-300 mb-1"
-          >
-            {"Email Address"}
-          </label>
           <input
             id="email-input"
             name="email"
-            placeholder="you@awesome.com"
+            placeholder="Enter your email here"
             ref={inputEl}
             required
             type="email"
@@ -89,14 +85,9 @@ export default function SubscribeForm() {
               Subscribing...
             </>
           ) : (
-            "💌 Subscribe"
+            "Subscribe"
           )}
         </button>
-      </div>
-      <div className="text-xs text-zinc-500 dark:text-zinc-400 my-2">
-        {message
-          ? message
-          : `I'll only send emails when new article is posted. No spam.`}
       </div>
     </form>
   );

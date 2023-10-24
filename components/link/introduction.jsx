@@ -1,9 +1,10 @@
+"use client";
 import Image from "next/image";
 import { RichText } from "../global";
 
 export default function Introduction({ blok }) {
   return (
-    <section className="flex flex-col items-center md:items-start">
+    <section className="flex flex-col items-center">
       <Image
         src={blok.image.filename}
         alt=""
@@ -15,7 +16,7 @@ export default function Introduction({ blok }) {
       />
       <RichText
         data={blok.description}
-        className="text-lg text-center md:text-left mt-2 ml-3"
+        className="text-lg text-center mt-2 ml-3"
       />
     </section>
   );
