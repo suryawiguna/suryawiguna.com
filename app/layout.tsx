@@ -19,6 +19,7 @@ storyblokInit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://suryawiguna.com"),
   title: {
     template: "%s | Surya Wiguna",
     default: "Surya Wiguna",
