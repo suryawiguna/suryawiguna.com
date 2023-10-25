@@ -1,20 +1,20 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { InlineShareButtons } from "sharethis-reactjs";
 import SubscribeForm from "./subscribe";
 
 export default function Sidebar({ featuredPosts }) {
   const [showShare, setShowShare] = useState(false);
-  const router = useRouter();
+  const router = usePathname();
 
   useEffect(() => {
     setShowShare(false);
     setTimeout(() => {
       setShowShare(true);
     }, 500);
-  }, [router.asPath]);
+  }, [router]);
 
   return (
     <div className="grid grid-cols md:grid-cols-2 gap-10">
@@ -28,7 +28,7 @@ export default function Sidebar({ featuredPosts }) {
                 color: "social", // set the color of buttons (social, white)
                 enabled: true, // show/hide buttons (true, false)
                 font_size: 18, // font size for the buttons
-                labels: "null", // button labels (cta, counts, null)
+                labels: null, // button labels (cta, counts, null)
                 language: "en", // which language to use (see LANGUAGES)
                 networks: [
                   // which networks to include (see SHARING NETWORKS)
@@ -41,7 +41,7 @@ export default function Sidebar({ featuredPosts }) {
                 radius: 100, // the corner radius on each button (INTEGER)
                 show_total: false,
                 size: 40, // the size of each button (INTEGER)
-                url: `https://suryawiguna.com${router.asPath}`,
+                url: `https://suryawiguna.com${router}`,
               }}
             />
           ) : (

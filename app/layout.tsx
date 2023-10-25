@@ -39,9 +39,9 @@ export default async function RootLayout({
         <link rel="icon" href="/images/favicon.png" sizes="any" />
         <body>
           <ThemeProviders>
-            <main className="px-4 md:p-0 dark:bg-zinc-900 min-h-screen">
+            <main className="dark:bg-zinc-900 min-h-screen">
               <Navigation navigation={navigation} />
-              <div className="container max-w-screen-md mx-auto py-5">
+              <div className="container max-w-screen-md mx-auto px-4 py-5 lg:px-0">
                 {children}
               </div>
               <footer className="flex justify-center py-10">

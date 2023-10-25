@@ -3,9 +3,7 @@
 import React, { useRef, useState } from "react";
 
 export default function SubscribeForm() {
-  // 1. Create a reference to the input so we can fetch/clear it's value.
-  const inputEl = useRef(null);
-  // 2. Hold a message in state to handle the response from our API.
+  const inputEl = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState("");
   const [sending, isSending] = useState(false);
 
@@ -13,37 +11,31 @@ export default function SubscribeForm() {
     e.preventDefault();
     isSending(true);
 
-    // 3. Send a request to our API with the user's email address.
-    const res = await fetch("/api/subscribe", {
+    const res = await fetch(`/api/subscribe`, {
       body: JSON.stringify({
-        email: inputEl.current.value,
+        email: inputEl.current?.value,
       }),
       headers: {
+        email: inputEl.current?.value || "",
         "Content-Type": "application/json",
       },
       method: "POST",
     });
-    console.log(res);
+    const data = await res.json();
 
-    const { error } = await res.json();
-
-    if (error) {
-      // 4. If there was an error, update the message in state.
-      setMessage(error);
-      isSending(false);
-
-      return;
+    if (data.id) {
+      setMessage("Success! 🎉 You are now subscribed to the newsletter.");
+    } else {
+      let mes = JSON.parse(data.response.text);
+      setMessage(mes.title);
     }
 
-    // 5. Clear the input value and show a success message.
-    inputEl.current.value = "";
-    setMessage("Success! 🎉 You are now subscribed to the newsletter.");
     isSending(false);
   };
 
   return (
     <form onSubmit={subscribe} className="max-w-sm">
-      <div className="flex flex-col sm:flex-row gap-2">
+      <div className="flex flex-col items-start sm:flex-row gap-2">
         <div className="flex flex-col">
           <input
             id="email-input"
@@ -55,10 +47,11 @@ export default function SubscribeForm() {
             className="bg-gray-100 dark:bg-zinc-300 dark:text-black rounded-lg px-4 py-3"
             disabled={sending}
           />
+          <small className="text-xs m-1 text-zinc-500 italic">{message}</small>
         </div>
         <button
           type="submit"
-          className="bg-amber-600 dark:bg-amber-700 flex items-center justify-center px-4 py-3 uppercase font-bold text-white text-xs rounded-lg"
+          className="bg-amber-600 dark:bg-amber-700 flex items-center justify-center px-4 py-3 text-white rounded-lg"
         >
           {sending ? (
             <>
@@ -74,7 +67,7 @@ export default function SubscribeForm() {
                   cy="12"
                   r="10"
                   stroke="currentColor"
-                  stroke-width="4"
+                  strokeWidth="4"
                 ></circle>
                 <path
                   className="opacity-75"

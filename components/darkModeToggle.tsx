@@ -26,7 +26,7 @@ export default function DarkModeToggle() {
       onClick={() => (theme == "dark" ? setTheme("light") : setTheme("dark"))}
     >
       <i
-        className={`bx text-lg ${
+        className={`bx text-2xl ${
           theme != "light" ? "bxs-moon text-zinc-100" : "bxs-sun text-amber-500"
         }`}
       ></i>

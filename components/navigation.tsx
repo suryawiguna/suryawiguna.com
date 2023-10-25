@@ -14,19 +14,25 @@ export default function Navigation({ navigation }) {
   return (
     <div className="z-10 sticky top-0 bg-white dark:bg-zinc-900">
       <div className="max-w-screen-md mx-auto h-16 flex justify-between items-center w-full z-10 sticky top-0">
-        <Image src={logo} alt="" width={24} height={24} />
+        <Image
+          src={logo}
+          alt=""
+          width={24}
+          height={24}
+          className="ml-4 lg:m-0"
+        />
         <nav
           className={`h-screen md:h-16 flex flex-col md:flex-row justify-center md:justify-end items-center bg-white dark:bg-zinc-900 w-full absolute top-0 md:relative md:visible ${
             menuOpen ? "visible" : "invisible"
           }`}
         >
           <button
-            className="flex absolute p-2 top-3 right-0 md:hidden"
+            className="flex absolute p-2 mr-4 md:m-0 top-3 right-0 md:hidden"
             onClick={() => {
               setMenuOpen(!menuOpen);
             }}
           >
-            <i className="bx bx-x text-2xl"></i>
+            <i className="bx bx-x text-3xl"></i>
           </button>
           {navigation.menu.map((menu) => {
             const isActive =
@@ -44,7 +50,7 @@ export default function Navigation({ navigation }) {
                 }}
               >
                 <span
-                  className={`hover:text-zinc-400 ${
+                  className={`text-xl md:text-base hover:text-zinc-400 ${
                     isActive ? "font-bold" : "font-light"
                   }`}
                 >
@@ -54,7 +60,7 @@ export default function Navigation({ navigation }) {
             );
           })}
         </nav>
-        <div className="flex items-center">
+        <div className="flex items-center mr-4 lg:m-0">
           <span className="p-2">
             <DarkModeToggle />
           </span>
@@ -64,7 +70,7 @@ export default function Navigation({ navigation }) {
               setMenuOpen(!menuOpen);
             }}
           >
-            <i className="bx bx-menu text-2xl"></i>
+            <i className="bx bx-menu text-3xl"></i>
           </button>
         </div>
       </div>

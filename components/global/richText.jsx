@@ -8,7 +8,7 @@ import {
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import oneDark from "react-syntax-highlighter/dist/cjs/styles/prism/one-dark";
 
-export default function RichText({ data, className }) {
+export default function RichText({ data, className = null }) {
   return (
     <div
       className={`prose prose-zinc dark:prose-invert w-full min-w-full ${
