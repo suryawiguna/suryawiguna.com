@@ -1,4 +1,4 @@
-import { getAllPosts, getPage } from "lib/api";
+import { getAllPosts } from "lib/api";
 import { Metadata } from "next";
 import PostGrid from "components/blog/PostGrid";
 
@@ -7,7 +7,6 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const data = await getPage("blog");
   const posts = (await getAllPosts()) || [];
 
   return (

@@ -1,8 +1,7 @@
-import { useRouter } from "next/router";
+"use client";
+
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { RichText } from "../global";
-import Link from "next/link";
-import Image from "next/image";
 import { InlineShareButtons } from "sharethis-reactjs";
 import SubscribeForm from "./subscribe";
 
@@ -18,12 +17,9 @@ export default function Sidebar({ featuredPosts }) {
   }, [router.asPath]);
 
   return (
-    <div className="sticky top-4 xl:max-w-[280px] flex flex-col gap-10 h-fit ">
+    <div className="grid grid-cols md:grid-cols-2 gap-10">
       <div className="flex flex-col gap-2">
-        <h3 className="text-xl font-bold px-2 flex gap-2">
-          <span>🙌🏼</span>
-          Share this
-        </h3>
+        <h3 className="font-bold px-2 flex gap-2">Share this</h3>
         <div className="ml-2">
           {showShare ? (
             <InlineShareButtons
@@ -74,7 +70,8 @@ export default function Sidebar({ featuredPosts }) {
           )}
         </div>
       </div>
-      <div className="flex">
+      <div className="flex flex-col">
+        <p className="font-semibold mb-2">Subscribe</p>
         <SubscribeForm />
       </div>
     </div>

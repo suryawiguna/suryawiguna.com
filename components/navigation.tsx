@@ -39,8 +39,15 @@ export default function Navigation({ navigation }) {
                 href={menu.link.url}
                 passHref
                 className="flex p-3"
+                onClick={() => {
+                  setMenuOpen(false);
+                }}
               >
-                <span className={`${isActive ? "font-bold" : "font-light"}`}>
+                <span
+                  className={`hover:text-zinc-400 ${
+                    isActive ? "font-bold" : "font-light"
+                  }`}
+                >
                   {menu.text}
                 </span>
               </Link>
