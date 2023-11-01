@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 
-const apiKey = process.env.BREVO_API_KEY as string;
+const apiKey = process.env.NEXT_PUBLIC_BREVO_API_KEY as string;
 
 export default function SubscribeForm() {
   const inputEl = useRef<HTMLInputElement>(null);
