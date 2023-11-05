@@ -7,7 +7,7 @@ import { Metadata } from "next";
 import { searchComponent } from "lib/helper";
 
 export const metadata: Metadata = {
-  title: "Home | Surya Wiguna",
+  title: "Home",
 };
 
 export default async function Home() {
