@@ -56,3 +56,5 @@ export default async function RootLayout({
     </StoryblokProvider>
   );
 }
+
+export const revalidate = 3600; // revalidate at most every hour

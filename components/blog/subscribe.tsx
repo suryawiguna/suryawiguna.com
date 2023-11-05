@@ -2,6 +2,8 @@
 
 import React, { useRef, useState } from "react";
 
+const apiKey = process.env.NEXT_PUBLIC_BREVO_API_KEY as string;
+
 export default function SubscribeForm() {
   const inputEl = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState("");
@@ -11,48 +13,43 @@ export default function SubscribeForm() {
     e.preventDefault();
     isSending(true);
 
-    const res = await fetch(`/api/subscribe`, {
-      body: JSON.stringify({
-        email: inputEl.current?.value,
-      }),
-      headers: {
-        email: inputEl.current?.value || "",
-        "Content-Type": "application/json",
-      },
+    const options: RequestInit = {
       method: "POST",
-    });
-    const data = await res.json();
-
-    if (data.id) {
-      setMessage("Success! 🎉 You are now subscribed to the newsletter.");
-    } else {
-      let mes = JSON.parse(data.response.text);
-      setMessage(mes.title);
-    }
-
-    isSending(false);
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+        "api-key": apiKey,
+      },
+      body: JSON.stringify({ email: inputEl.current?.value }),
+    };
+    fetch("https://api.brevo.com/v3/contacts", options)
+      .then((response) => response.json())
+      .then((response) => {
+        setMessage(
+          response.message ||
+            "Success! 🎉 You are now subscribed to Surya Wiguna's blog."
+        );
+        isSending(false);
+      })
+      .catch((err) => {
+        setMessage(err);
+        isSending(false);
+      });
   };
 
   return (
     <form onSubmit={subscribe} className="max-w-sm">
-      <div className="flex flex-col items-start sm:flex-row gap-2">
-        <div className="flex flex-col">
-          <input
-            id="email-input"
-            name="email"
-            placeholder="Enter your email here"
-            ref={inputEl}
-            required
-            type="email"
-            className="bg-gray-100 dark:bg-zinc-300 dark:text-black rounded-lg px-4 py-3"
-            disabled={sending}
-          />
-          <small className="text-xs m-1 text-zinc-500 italic">{message}</small>
-        </div>
-        <button
-          type="submit"
-          className="bg-amber-600 dark:bg-amber-700 flex items-center justify-center px-4 py-3 text-white rounded-lg"
-        >
+      <div className="relative text-gray-700">
+        <input
+          id="email-input"
+          name="email"
+          placeholder="Enter your email here"
+          ref={inputEl}
+          required
+          type="email"
+          className="bg-gray-100 dark:bg-zinc-300 dark:text-black rounded-lg px-4 py-3 w-full pl-3 pr-8 text-base focus:outline-amber-600 outline-offset-2"
+        />
+        <button className="bg-amber-600 dark:bg-amber-700 flex items-center justify-center px-4 py-3 text-white rounded-tr-lg rounded-br-lg absolute inset-y-0 right-0">
           {sending ? (
             <>
               <svg
@@ -82,6 +79,7 @@ export default function SubscribeForm() {
           )}
         </button>
       </div>
+      <small className="text-xs m-1 text-zinc-500 italic">{message}</small>
     </form>
   );
 }
