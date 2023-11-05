@@ -5,6 +5,7 @@ import SubscribeForm from "components/blog/subscribe";
 import BlogPosts from "components/home/blogPosts";
 import { Metadata } from "next";
 import { searchComponent } from "lib/helper";
+import Loading from "./loading";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -12,13 +13,14 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const data = await getHome();
-
+  const options = { seeMore: true, title: true };
+// return <Loading />
   return (
     <div className="flex flex-col items-stretch gap-8">
       <h1 className="font-bold text-3xl">{data.title}</h1>
       <div className="flex flex-col gap-12">
         <Introduction blok={searchComponent(data, "introduction")} />
-        <Portfolios blok={searchComponent(data, "portfolios")} />
+        <Portfolios blok={searchComponent(data, "portfolios")} show={options} />
         <BlogPosts blok={searchComponent(data, "blogPosts")} />
         <div className="flex flex-col">
           <h2 className="text-xl font-bold mb-6">Subscribe to my blog</h2>

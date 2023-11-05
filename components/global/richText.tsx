@@ -8,7 +8,13 @@ import {
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import oneDark from "react-syntax-highlighter/dist/cjs/styles/prism/one-dark";
 
-export default function RichText({ data, className = null }) {
+export default function RichText({
+  data,
+  className,
+}: {
+  data: any;
+  className?: string;
+}) {
   return (
     <div
       className={`prose prose-zinc dark:prose-invert w-full min-w-full ${
@@ -18,7 +24,7 @@ export default function RichText({ data, className = null }) {
       {render(data, {
         markResolvers: {
           [MARK_BOLD]: (children) => <strong>{children}</strong>,
-          [NODE_HEADING]: (children) => <h1>{children}</h1>,
+
           [MARK_CODE]: (children) => <code>{children}</code>,
         },
         nodeResolvers: {

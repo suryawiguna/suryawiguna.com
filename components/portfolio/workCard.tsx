@@ -15,6 +15,7 @@ export default function WorkCard({ work }) {
       <Image
         src={work.image.filename}
         fill
+        sizes="auto"
         alt=""
         placeholder="blur"
         blurDataURL={`${work.image.filename}/m/40x40`}

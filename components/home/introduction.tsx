@@ -26,6 +26,7 @@ export default function Introduction({ blok }) {
         placeholder="blur"
         blurDataURL={`${blok.image.filename}/m/40x40`}
         className="rounded-full mb-2"
+        style={{ width: "auto", height: "auto" }}
       />
       <Richtext data={blok.description} />
     </section>

@@ -13,16 +13,17 @@ export default function PostCard({ post }) {
       passHref
       className="bg-zinc-100 dark:bg-zinc-700 dark:text-zinc-300 hover:scale-[0.98] transition-transform rounded-2xl"
     >
-      <div className="rounded-lg flex xl:flex-col items-stretch">
+      <div className="rounded-lg flex flex-col sm:flex-row items-stretch">
         <div className="relative min-h-[120px] min-w-[140px] sm:min-h-[140px] sm:min-w-[180px]">
           <Image
             src={post.content.featured_image.filename}
             alt=""
             fill
+            sizes="auto"
             style={{ objectFit: "cover", objectPosition: "center" }}
             placeholder="blur"
             blurDataURL={`${post.content.featured_image.filename}/m/40x40`}
-            className="shrink rounded-tl-2xl rounded-bl-2xl xl:rounded-t-2xl xl:rounded-bl-none"
+            className="shrink rounded-t-2xl rounded-bl-none sm:rounded-tl-2xl sm:rounded-bl-2xl sm:rounded-tr-none"
           />
         </div>
         <div className="pt-3 flex-1 p-5">
