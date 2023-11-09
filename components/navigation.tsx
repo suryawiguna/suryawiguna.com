@@ -14,13 +14,15 @@ export default function Navigation({ navigation }) {
   return (
     <div className="z-10 sticky top-0 bg-white dark:bg-zinc-900">
       <div className="max-w-screen-md mx-auto h-16 flex justify-between items-center w-full z-10 sticky top-0">
-        <Image
-          src={logo}
-          alt=""
-          width={24}
-          height={24}
-          className="ml-4 lg:m-0"
-        />
+        <Link href={"/"}>
+          <Image
+            src={logo}
+            alt=""
+            width={24}
+            height={24}
+            className="ml-4 lg:m-0"
+          />
+        </Link>
         <nav
           className={`h-screen md:h-16 flex flex-col md:flex-row justify-center md:justify-end items-center bg-white dark:bg-zinc-900 w-full absolute top-0 md:relative md:visible ${
             menuOpen ? "visible" : "invisible"
