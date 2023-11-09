@@ -57,4 +57,4 @@ export default async function RootLayout({
   );
 }
 
-export const revalidate = 3600; // revalidate at most every hour
+export const revalidate = 600;
