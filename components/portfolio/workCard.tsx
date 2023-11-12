@@ -3,19 +3,24 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export default function WorkCard({ work }) {
+export default function WorkCard({ work, setPortfolio }) {
   return (
     <Link
       key={work._uid}
-      href={work.link.url}
+      onClick={(e) => {
+        e.preventDefault();
+        setPortfolio(work);
+        // @ts-expect-error
+        document.getElementById("my_modal_1").showModal();
+      }}
+      href={""}
       passHref
-      target="_blank"
       className="relative h-32 hover:scale-[0.98] transition-transform"
     >
       <Image
         src={work.image.filename}
         fill
-        sizes="auto"
+        sizes="100vw"
         alt=""
         placeholder="blur"
         blurDataURL={`${work.image.filename}/m/40x40`}
