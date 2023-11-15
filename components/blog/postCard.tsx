@@ -27,7 +27,7 @@ export default function PostCard({ post }) {
           />
         </div>
         <div className="pt-3 flex-1 p-5">
-          <h5 className="text-xl font-semibold mb-1">{post.name}</h5>
+          <h3 className="text-xl font-semibold mb-1">{post.name}</h3>
           <div>
             <RichText
               className="text-sm line-clamp-3 leading-relaxed"

@@ -19,7 +19,7 @@ export default function Portfolios({ blok, show }: { blok: any; show?: any }) {
             className="flex items-center justify-center h-32 hover:scale-[0.98] transition-transform bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-700
 dark:text-zinc-300 rounded-2xl"
           >
-            <span>See more</span>
+            <span>See other portfolio</span>
             <i className="bx bx-right-arrow-alt text-2xl" />
           </Link>
         )}
