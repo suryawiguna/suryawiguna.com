@@ -5,6 +5,8 @@ import Skills from "components/skill/skill";
 
 export const metadata: Metadata = {
   title: "Skill",
+  description:
+    "See my skills from Next.js, Wordpress, Shopify, to Tailwind and Node.js",
 };
 
 export default async function Home() {

@@ -8,6 +8,8 @@ import { searchComponent } from "lib/helper";
 
 export const metadata: Metadata = {
   title: "Home | Surya Wiguna",
+  description:
+    "Surya Wiguna is a web developer based in Bali who will help you build website that fits your needs.",
 };
 
 export default async function Home() {

@@ -4,6 +4,7 @@ import PostGrid from "components/blog/PostGrid";
 
 export const metadata: Metadata = {
   title: "Blog",
+  description: "Read my blog, where I write my thought.",
 };
 
 export default async function Home() {

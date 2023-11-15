@@ -13,14 +13,14 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const post = await getPost(params.slug);
-  const featuredImage = await post.featured_image;
 
-  // optionally access and extend (rather than replace) parent metadata
   return {
     title: post.name,
+    description: post.content.excerption,
     openGraph: {
       title: post.name,
-      //   images: [`${featuredImage.filename}`, ...previousImages],
+      description: post.content.excerption,
+      images: [`${post.content.featured_image.filename}`],
     },
   };
 }
