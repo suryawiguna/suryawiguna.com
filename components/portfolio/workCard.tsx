@@ -3,7 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export default function WorkCard({ work, setPortfolio }) {
+export default function WorkCard({
+  work,
+  setPortfolio,
+}: {
+  work: any;
+  setPortfolio?: any;
+}) {
   return (
     <Link
       key={work._uid}
@@ -11,7 +17,7 @@ export default function WorkCard({ work, setPortfolio }) {
         e.preventDefault();
         setPortfolio(work);
         // @ts-expect-error
-        document.getElementById("my_modal_1").showModal();
+        document.getElementById("portfolio-modal").showModal();
       }}
       href={""}
       passHref
@@ -26,7 +32,7 @@ export default function WorkCard({ work, setPortfolio }) {
         alt=""
         placeholder="blur"
         blurDataURL={`${work.image.filename}/m/40x40`}
-        className="rounded-2xl"
+        className="rounded-xl"
         style={{ objectFit: "cover" }}
       />
     </Link>

@@ -22,6 +22,7 @@ export default function FullPost({ post }) {
           placeholder="blur"
           fill
           style={{ objectFit: "cover" }}
+          className="rounded-lg"
         />
       </div>
       <RichText data={post.content.content} />

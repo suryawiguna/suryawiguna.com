@@ -6,6 +6,7 @@ import WorkCard from "./workCard";
 import Modal from "components/global/modal";
 import { useState } from "react";
 import Image from "next/image";
+import { RichText } from "components/global";
 
 export default function Portfolios({ blok, show }: { blok: any; show?: any }) {
   const [portfolio, setPortfolio] = useState(blok.items[0]);
@@ -23,14 +24,21 @@ export default function Portfolios({ blok, show }: { blok: any; show?: any }) {
           <Link
             href="/portfolio"
             className="flex items-center justify-center h-32 hover:scale-[0.98] transition-transform bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-700
-dark:text-zinc-300 rounded-2xl"
+dark:text-zinc-300 rounded-xl"
           >
             <span>Other portfolio</span>
             <i className="bx bx-right-arrow-alt text-2xl" />
           </Link>
         )}
       </div>
+
       <Modal>
+        <div>
+          <h3 className="text-xl font-bold">{portfolio.title}</h3>
+          <small className="text-sm italic text-amber-500">
+            {portfolio.category}
+          </small>
+        </div>
         <Image
           src={portfolio.image.filename}
           alt=""
@@ -39,20 +47,19 @@ dark:text-zinc-300 rounded-2xl"
           sizes="100vw"
           placeholder="blur"
           blurDataURL={`${portfolio.image.filename}/m/40x40`}
+          className="w-screen rounded-lg"
         />
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deleniti
-          animi libero rem voluptatibus eveniet odio reprehenderit, sapiente
-          sequi praesentium error nobis possimus nam quaerat quidem distinctio,
-          deserunt expedita maxime veniam, quo ipsa. Ducimus animi quo maxime
-          sit ipsa? Ipsam vel hic laudantium itaque minima dolore nobis ea sint
-          sed, architecto voluptatum, quae libero minus ullam consequatur eos,
-          nostrum provident doloribus rerum nemo veritatis reiciendis? Inventore
-          dolorem molestias exercitationem dolor iste velit quia repellat, id
-          reiciendis in minus quod, corrupti autem ea eos. Perferendis in hic
-          veniam provident reprehenderit. Fugit aut, doloremque consectetur
-          commodi autem ad delectus esse nam neque.
-        </p>
+        <RichText data={portfolio.description} />
+        <Link
+          href={portfolio.link.url}
+          passHref
+          target="_blank"
+          className="flex items-center justify-center py-2 hover:scale-[0.98] transition-transform bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-700
+dark:text-zinc-300 rounded-xl"
+        >
+          <span>See it</span>
+          <i className="bx bx-link-external text-lg ml-1" />
+        </Link>
       </Modal>
     </div>
   );

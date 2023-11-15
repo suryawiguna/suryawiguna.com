@@ -12,7 +12,7 @@ export default function Loading() {
             return (
               <div
                 key={i}
-                className="flex flex-col gap-2 bg-zinc-200 rounded-2xl dark:bg-zinc-700 h-32 max-w-48"
+                className="flex flex-col gap-2 bg-zinc-200 rounded-xl dark:bg-zinc-700 h-32 max-w-48"
               ></div>
             );
           })}
