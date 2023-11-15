@@ -15,6 +15,7 @@ export default function WorkCard({ work, setPortfolio }) {
       }}
       href={""}
       passHref
+      aria-label={`portfolio-${work._uid}`}
       className="relative h-32 hover:scale-[0.98] transition-transform"
     >
       <Image
