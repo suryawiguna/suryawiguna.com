@@ -6,6 +6,7 @@ import Links from "components/link/links";
 
 export const metadata: Metadata = {
   title: "Link",
+  description: "Find my social links, latest blog posts, and more here.",
 };
 
 export default async function Home() {

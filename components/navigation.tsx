@@ -14,7 +14,7 @@ export default function Navigation({ navigation }) {
   return (
     <div className="z-10 sticky top-0 bg-white dark:bg-zinc-900">
       <div className="max-w-screen-md mx-auto h-16 flex justify-between items-center w-full z-10 sticky top-0">
-        <Link href={"/"}>
+        <Link href={"/"} aria-label="logo">
           <Image
             src={logo}
             alt=""
@@ -71,6 +71,7 @@ export default function Navigation({ navigation }) {
             onClick={() => {
               setMenuOpen(!menuOpen);
             }}
+            aria-label="menu-button"
           >
             <i className="bx bx-menu text-3xl"></i>
           </button>

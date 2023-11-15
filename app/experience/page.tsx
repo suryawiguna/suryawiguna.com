@@ -5,6 +5,7 @@ import Histories from "components/experience/histories";
 
 export const metadata: Metadata = {
   title: "Experience",
+  description: "Read my experiences on web development field",
 };
 
 export default async function Home() {
