@@ -3,10 +3,15 @@
 import Link from "next/link";
 import WorkCard from "./workCard";
 
-import Modal from "components/global/modal";
 import { useState } from "react";
 import Image from "next/image";
 import { RichText } from "components/global";
+import dynamic from "next/dynamic";
+
+const Modal = dynamic(() => import("../../components/global/modal"), {
+  loading: () => <p>Loading...</p>,
+  ssr: false,
+});
 
 export default function Portfolios({ blok, show }: { blok: any; show?: any }) {
   const [portfolio, setPortfolio] = useState(blok.items[0]);
@@ -57,7 +62,7 @@ dark:text-zinc-300 rounded-xl"
           className="flex items-center justify-center py-2 hover:scale-[0.98] transition-transform bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-700
 dark:text-zinc-300 rounded-xl"
         >
-          <span>See it</span>
+          <span>View</span>
           <i className="bx bx-link-external text-lg ml-1" />
         </Link>
       </Modal>
