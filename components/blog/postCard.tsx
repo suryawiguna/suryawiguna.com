@@ -11,7 +11,7 @@ export default function PostCard({ post }) {
       key={post._uid}
       href={post.full_slug}
       passHref
-      className="bg-zinc-100 dark:bg-zinc-700 dark:text-zinc-300 hover:scale-[0.98] transition-transform rounded-xl"
+      className="bg-zinc-100 dark:bg-zinc-700 dark:text-zinc-300 hover:scale-[0.99] transition-transform rounded-lg"
     >
       <div className="rounded-lg flex flex-col sm:flex-row items-stretch">
         <div className="relative min-h-[120px] min-w-[140px] sm:min-h-[140px] sm:min-w-[180px]">
@@ -23,7 +23,7 @@ export default function PostCard({ post }) {
             style={{ objectFit: "cover", objectPosition: "center" }}
             placeholder="blur"
             blurDataURL={`${post.content.featured_image.filename}/m/40x40`}
-            className="shrink rounded-t-2xl rounded-bl-none sm:rounded-tl-2xl sm:rounded-bl-2xl sm:rounded-tr-none"
+            className="shrink rounded-t-lg rounded-bl-none sm:rounded-tl-lg sm:rounded-bl-lg sm:rounded-tr-none"
           />
         </div>
         <div className="pt-3 flex-1 p-5">

@@ -19,21 +19,21 @@ export default function WorkCard({
         // @ts-expect-error
         document.getElementById("portfolio-modal").showModal();
       }}
-      href={""}
+      href={work.link.url}
       passHref
       target="_blank"
       aria-label={`portfolio-${work._uid}`}
-      className="relative h-32 hover:scale-[0.98] transition-transform"
+      className="hover:scale-[0.99] transition-transform"
     >
       <Image
         src={work.image.filename}
-        fill
         sizes="100vw"
         alt=""
         placeholder="blur"
         blurDataURL={`${work.image.filename}/m/40x40`}
-        className="rounded-xl"
-        style={{ objectFit: "cover" }}
+        className="rounded-lg w-full my-4 first:mt-0"
+        width={600}
+        height={600}
       />
     </Link>
   );

@@ -29,7 +29,7 @@ export default function FullPost({ post }) {
       <Link
         href="/blog"
         passHref
-        className="flex gap-1 items-center my-8 rounded-full hover:text-zinc-400 self-start"
+        className="flex gap-1 items-center my-8 rounded-lg hover:text-zinc-400 self-start"
       >
         <i className="bx bx-left-arrow-alt text-2xl" />
         Other posts

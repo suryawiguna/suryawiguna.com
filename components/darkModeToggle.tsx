@@ -15,7 +15,7 @@ export default function DarkModeToggle() {
   if (!mounted) {
     return (
       <div className="animate-pulse">
-        <div className="bg-zinc-100 dark:bg-zinc-700 rounded-full h-4 w-4"></div>
+        <div className="bg-zinc-100 dark:bg-zinc-700 rounded-lg h-4 w-4"></div>
       </div>
     );
   }

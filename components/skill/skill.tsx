@@ -7,7 +7,7 @@ export default function Skills({ blok }) {
         return (
           <div
             key={key}
-            className="flex flex-col gap-2 bg-zinc-50 dark:bg-zinc-200 p-4 rounded-xl"
+            className="flex flex-col gap-2 bg-zinc-50 dark:bg-zinc-200 p-4 rounded-lg"
           >
             <div className="relative min-h-[60px]">
               <Image

@@ -14,7 +14,7 @@ export default function RecentWorks({ blok }) {
         <Link
           href="/portfolio"
           passHref
-          className="relative h-32 self-center rounded-xl bg-zinc-100 dark:bg-zinc-700 dark:text-zinc-300 hover:scale-[0.98] transition-transform flex justify-center items-center text-zinc-500"
+          className="relative h-32 self-center rounded-lg bg-zinc-100 dark:bg-zinc-700 dark:text-zinc-300 hover:scale-[0.99] transition-transform flex justify-center items-center text-zinc-500"
         >
           See more
           <i className="bx bx-right-arrow-alt text-2xl" />
