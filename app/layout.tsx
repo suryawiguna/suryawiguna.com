@@ -10,6 +10,7 @@ import Navigation from "components/navigation";
 import { getNavigation } from "lib/api";
 import { ThemeProviders } from "components/ThemeProviders";
 import { Metadata } from "next";
+import Script from "next/script";
 
 const token = process.env.STORYBLOK_ACCESS_TOKEN;
 
@@ -36,6 +37,24 @@ export default async function RootLayout({
   return (
     <StoryblokProvider>
       <html lang="en">
+        <head>
+          {/* Google tag (gtag.js) */}
+          <Script
+            strategy="afterInteractive"
+            async
+            defer
+            src="https://www.googletagmanager.com/gtag/js?id=G-QTDZRVWC6J"
+          ></Script>
+          <Script>
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-QTDZRVWC6J');
+            `}
+          </Script>
+        </head>
         <link rel="icon" href="/images/favicon.png" sizes="any" />
         <body>
           <ThemeProviders>
