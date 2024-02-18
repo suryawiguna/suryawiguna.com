@@ -40,12 +40,13 @@ export default async function RootLayout({
         <head>
           {/* Google tag (gtag.js) */}
           <Script
+            id="google-tag-manager"
             strategy="afterInteractive"
             async
             defer
             src="https://www.googletagmanager.com/gtag/js?id=G-QTDZRVWC6J"
           ></Script>
-          <Script>
+          <Script id="google-analytics" strategy="afterInteractive" defer>
             {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
