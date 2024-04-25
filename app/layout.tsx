@@ -1,6 +1,5 @@
 import "styles/global.css";
 import "styles/nprogress.css";
-
 import "boxicons/css/boxicons.min.css";
 
 // @ts-ignore
@@ -8,9 +7,9 @@ import { storyblokInit, apiPlugin } from "@storyblok/react/rsc";
 import StoryblokProvider from "components/StoryblokProvider";
 import Navigation from "components/navigation";
 import { getNavigation } from "lib/api";
-import { ThemeProviders } from "components/ThemeProviders";
 import { Metadata } from "next";
 import Script from "next/script";
+import { ThemeProviders } from "components/ThemeProvider";
 
 const token = process.env.STORYBLOK_ACCESS_TOKEN;
 
@@ -57,8 +56,8 @@ export default async function RootLayout({
           </Script>
         </head>
         <link rel="icon" href="/images/favicon.png" sizes="any" />
-        <body>
-          <ThemeProviders>
+        <ThemeProviders>
+          <body>
             <main className="dark:bg-zinc-900 min-h-screen">
               <Navigation navigation={navigation} />
               <div className="container max-w-screen-md mx-auto px-4 py-5 lg:px-0">
@@ -70,8 +69,8 @@ export default async function RootLayout({
                 </small>
               </footer>
             </main>
-          </ThemeProviders>
-        </body>
+          </body>
+        </ThemeProviders>
       </html>
     </StoryblokProvider>
   );
