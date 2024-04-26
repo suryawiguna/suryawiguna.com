@@ -44,7 +44,7 @@ export default function Portfolios({ blok, show }: { blok: any; show?: any }) {
               return (
                 <small
                   key={k}
-                  className="text-xs text-gray-400 bg-gray-100 dark:text-gray-500 dark:bg-gray-800 py-1 px-2 rounded"
+                  className="text-xs text-zinc-400 bg-gray-100 dark:text-zinc-400 dark:bg-zinc-700 py-1 px-2 rounded"
                 >
                   {c}
                 </small>
@@ -67,8 +67,7 @@ export default function Portfolios({ blok, show }: { blok: any; show?: any }) {
           href={portfolio.link.url}
           passHref
           target="_blank"
-          className="flex items-center justify-center py-2 hover:scale-[0.99] transition-transform bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-700
-dark:text-zinc-300 rounded-lg"
+          className="flex items-center justify-center py-2 hover:scale-[0.99] transition-transform text-zinc-50 bg-zinc-600 hover:bg-zinc-200 dark:bg-zinc-300 dark:text-zinc-800 rounded-lg"
         >
           <span>View</span>
           <i className="bx bx-link-external text-lg ml-1" />

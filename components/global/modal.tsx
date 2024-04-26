@@ -2,7 +2,10 @@
 
 export default function Modal({ children }) {
   return (
-    <dialog id="portfolio-modal" className="rounded-xl backdrop:bg-black/50">
+    <dialog
+      id="portfolio-modal"
+      className="rounded-xl dark:bg-zinc-800 backdrop:bg-black/50 backdrop:backdrop-blur"
+    >
       <div className="modal-box max-w-xl p-8 flex flex-col justify-between">
         <form method="dialog">
           <button

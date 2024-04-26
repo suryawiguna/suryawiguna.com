@@ -46,7 +46,7 @@ export default function Navigation({ navigation }) {
                 key={menu._uid}
                 href={menu.link.url}
                 passHref
-                className={`"flex p-3 text-xl md:text-base hover:text-gray-500 ${
+                className={`"flex p-3 text-xl md:text-base underline-offset-4 hover:underline ${
                   isActive ? "" : ""
                 }`}
                 onClick={() => {
