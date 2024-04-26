@@ -46,18 +46,14 @@ export default function Navigation({ navigation }) {
                 key={menu._uid}
                 href={menu.link.url}
                 passHref
-                className="flex p-3"
+                className={`"flex p-3 text-xl md:text-base hover:text-gray-500 ${
+                  isActive ? "" : ""
+                }`}
                 onClick={() => {
                   setMenuOpen(false);
                 }}
               >
-                <span
-                  className={`text-xl md:text-base hover:text-zinc-400 ${
-                    isActive ? "font-bold" : "font-light"
-                  }`}
-                >
-                  {menu.text}
-                </span>
+                {menu.text}
               </Link>
             );
           })}

@@ -12,15 +12,17 @@ export default function Histories({ blok }) {
                 item.periode.includes("now")
                   ? "bg-amber-600 dark:bg-amber-800"
                   : "bg-zinc-300 dark:bg-zinc-500"
-              } rounded-lg mt-1 -left-2.5 border-4 border-white dark:border-zinc-900`}
+              } rounded-full mt-1 -left-2.5 border-4 border-white dark:border-zinc-900`}
             />
-            <time className="mb-1 text-xs font-normal leading-none text-zinc-400">
-              {item.periode}
-            </time>
-            <h3 className="text-lg font-semibold">{item.title}</h3>
-            <p className="mb-4 text-sm font-normal text-zinc-600 dark:text-zinc-400">
-              {item.description}
-            </p>
+            <div className="grid">
+              <time className="mb-1 text-xs font-normal leading-none text-zinc-400">
+                {item.periode}
+              </time>
+              <h3 className="text-lg font-semibold">{item.title}</h3>
+              <p className="mb-4 text-sm font-normal text-zinc-600 dark:text-zinc-400">
+                {item.description}
+              </p>
+            </div>
           </li>
         );
       })}

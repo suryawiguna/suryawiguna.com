@@ -1,7 +1,6 @@
 import {
   render,
   MARK_BOLD,
-  NODE_HEADING,
   MARK_CODE,
   NODE_CODEBLOCK,
 } from "storyblok-rich-text-react-renderer";
@@ -24,7 +23,6 @@ export default function RichText({
       {render(data, {
         markResolvers: {
           [MARK_BOLD]: (children) => <strong>{children}</strong>,
-
           [MARK_CODE]: (children) => <code>{children}</code>,
         },
         nodeResolvers: {

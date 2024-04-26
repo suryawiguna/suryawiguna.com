@@ -1,5 +1,4 @@
 import "styles/global.css";
-import "styles/nprogress.css";
 import "boxicons/css/boxicons.min.css";
 
 // @ts-ignore
@@ -64,7 +63,7 @@ export default async function RootLayout({
                 {children}
               </div>
               <footer className="flex justify-center py-10">
-                <small className="text-xs text-center italic opacity-40">
+                <small className="text-xs text-center opacity-40">
                   Made with ❤️ in Bali
                 </small>
               </footer>
