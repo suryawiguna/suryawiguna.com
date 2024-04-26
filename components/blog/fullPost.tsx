@@ -21,8 +21,7 @@ export default function FullPost({ post }) {
           blurDataURL={`${post.content.featured_image.filename}/m/40x40`}
           placeholder="blur"
           fill
-          style={{ objectFit: "cover" }}
-          className="rounded-lg"
+          className="rounded-lg object-cover"
         />
       </div>
       <RichText data={post.content.content} />
