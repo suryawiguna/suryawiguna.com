@@ -37,11 +37,20 @@ export default function Portfolios({ blok, show }: { blok: any; show?: any }) {
       </div>
 
       <Modal>
-        <div>
-          <h3 className="text-xl font-bold">{portfolio.title}</h3>
-          <small className="text-sm italic text-amber-600">
-            {portfolio.category}
-          </small>
+        <div className=" grid gap-2">
+          <h3 className="text-2xl font-bold">{portfolio.title}</h3>
+          <div className="flex gap-2">
+            {portfolio.category.map((c: string, k: number) => {
+              return (
+                <small
+                  key={k}
+                  className="text-xs text-gray-400 bg-gray-100 dark:text-gray-500 dark:bg-gray-800 py-1 px-2 rounded"
+                >
+                  {c}
+                </small>
+              );
+            })}
+          </div>
         </div>
         <Image
           src={portfolio.image.filename}
