@@ -75,4 +75,4 @@ export default async function RootLayout({
   );
 }
 
-export const revalidate = 600;
+export const revalidate = 10;
