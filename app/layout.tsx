@@ -9,6 +9,7 @@ import { getNavigation } from "lib/api";
 import { Metadata } from "next";
 import Script from "next/script";
 import { ThemeProviders } from "components/ThemeProvider";
+import { headers } from "next/headers";
 
 const token = process.env.STORYBLOK_ACCESS_TOKEN;
 
@@ -19,6 +20,13 @@ storyblokInit({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://suryawiguna.com"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    url: "https://suryawiguna.com",
+    type: "website",
+  },
   title: {
     template: "%s - Surya Wiguna | Web Developer in Bali",
     default: "Surya Wiguna",
@@ -31,7 +39,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const navigation = await getNavigation();
-
+  const headerList = headers();
+  const pathname = headerList.get("x-current-path");
   return (
     <StoryblokProvider>
       <html lang="en">
@@ -53,6 +62,7 @@ export default async function RootLayout({
               gtag('config', 'G-QTDZRVWC6J');
             `}
           </Script>
+          <link rel="canonical" href={`https://suryawiguna.com/${pathname}`} />
         </head>
         <link rel="icon" href="/images/favicon.png" sizes="any" />
         <ThemeProviders>
