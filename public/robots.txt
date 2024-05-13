@@ -6,4 +6,4 @@ Allow: /
 Host: https://suryawiguna.com
 
 # Sitemaps
-Sitemap: https://suryawiguna.com/sitemap.xml
+Sitemap: https://suryawiguna.com/sitemap-0.xml
