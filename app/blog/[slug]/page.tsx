@@ -1,15 +1,11 @@
 import FullPost from "components/blog/fullPost";
 import Sidebar from "components/blog/sidebar";
 import { getAllPosts, getPost } from "lib/api";
+import { MetadataProps } from "lib/helper";
 import type { Metadata, ResolvingMetadata } from "next";
 
-type Props = {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
 export async function generateMetadata(
-  { params, searchParams }: Props,
+  { params, searchParams }: MetadataProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const post = await getPost(params.slug);
@@ -17,6 +13,9 @@ export async function generateMetadata(
   return {
     title: post.name,
     description: post.content.excerption,
+    alternates: {
+      canonical: `/blog/${params.slug}`,
+    },
     openGraph: {
       title: post.name,
       description: post.content.excerption,

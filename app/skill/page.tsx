@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Skill",
   description:
     "See my skills from Next.js, Wordpress, Shopify, to Tailwind and Node.js",
+  alternates: {
+    canonical: `/skill`,
+  },
 };
 
 export default async function Home() {

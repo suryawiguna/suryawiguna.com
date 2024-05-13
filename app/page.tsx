@@ -15,6 +15,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: data.seo.title,
     description: data.seo.description,
+    alternates: {
+      canonical: `/`,
+    },
     openGraph: {
       images: [data.seo.og_image],
     },

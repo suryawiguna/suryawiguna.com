@@ -6,6 +6,9 @@ import Portfolios from "components/portfolio/portfolios";
 export const metadata: Metadata = {
   title: "Portfolio",
   description: "Check out my portfolios",
+  alternates: {
+    canonical: `/portfolio`,
+  },
 };
 
 export default async function Home() {

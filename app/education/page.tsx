@@ -6,6 +6,9 @@ import Histories from "components/education/histories";
 export const metadata: Metadata = {
   title: "Education",
   description: "Here is described what education that I took.",
+  alternates: {
+    canonical: `/education`,
+  },
 };
 
 export default async function Home() {
