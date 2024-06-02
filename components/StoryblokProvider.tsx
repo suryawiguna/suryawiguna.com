@@ -1,5 +1,3 @@
-"use client";
-
 // @ts-ignore
 import { storyblokInit, apiPlugin } from "@storyblok/react/rsc";
 

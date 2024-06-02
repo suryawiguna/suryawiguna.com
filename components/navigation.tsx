@@ -40,7 +40,6 @@ export default function Navigation({ navigation }) {
             const isActive =
               (pathname && pathname.includes(menu.text.toLowerCase())) ||
               (menu.text == "Home" && pathname == "/");
-
             return (
               <Link
                 key={menu._uid}

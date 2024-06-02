@@ -37,30 +37,30 @@ export default async function RootLayout({
   const navigation = await getNavigation();
 
   return (
-    <StoryblokProvider>
-      <html lang="en">
-        <head>
-          {/* Google tag (gtag.js) */}
-          <Script
-            id="google-tag-manager"
-            strategy="afterInteractive"
-            async
-            defer
-            src="https://www.googletagmanager.com/gtag/js?id=G-QTDZRVWC6J"
-          ></Script>
-          <Script id="google-analytics" strategy="afterInteractive" defer>
-            {`
+    <html lang="en">
+      <head>
+        {/* Google tag (gtag.js) */}
+        <Script
+          id="google-tag-manager"
+          strategy="afterInteractive"
+          async
+          defer
+          src="https://www.googletagmanager.com/gtag/js?id=G-QTDZRVWC6J"
+        ></Script>
+        <Script id="google-analytics" strategy="afterInteractive" defer>
+          {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
 
               gtag('config', 'G-QTDZRVWC6J');
             `}
-          </Script>
-        </head>
-        <link rel="icon" href="/images/favicon.png" sizes="any" />
-        <ThemeProviders>
-          <body>
+        </Script>
+      </head>
+      <link rel="icon" href="/images/favicon.png" sizes="any" />
+      <body>
+        <StoryblokProvider>
+          <ThemeProviders>
             <main className="dark:bg-zinc-900 min-h-screen">
               <Navigation navigation={navigation} />
               <div className="container max-w-screen-md mx-auto px-4 py-5 lg:px-0">
@@ -72,10 +72,10 @@ export default async function RootLayout({
                 </small>
               </footer>
             </main>
-          </body>
-        </ThemeProviders>
-      </html>
-    </StoryblokProvider>
+          </ThemeProviders>
+        </StoryblokProvider>
+      </body>
+    </html>
   );
 }
 
