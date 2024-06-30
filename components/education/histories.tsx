@@ -15,14 +15,14 @@ export default function Histories({ blok }) {
             </time>
             {item.link !== undefined ? (
               <a href={item.link.url} target="_blank" rel="noreferrer">
-                <h3 className="text-lg font-semibold mr-2">
+                <h3 className="text-lg mr-2">
                   {item.title}
                   <i className="bx bx-link-external ml-1" />
                 </h3>
               </a>
             ) : (
               <div>
-                <h3 className="text-lg font-semibold mr-2">{item.title}</h3>
+                <h3 className="text-lg mr-2">{item.title}</h3>
               </div>
             )}
             <p className="mb-4 text-sm font-normal text-zinc-600">

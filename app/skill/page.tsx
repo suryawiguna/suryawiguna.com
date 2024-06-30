@@ -17,7 +17,7 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col items-stretch gap-6">
-      <h1 className="font-bold text-3xl">{data.title}</h1>
+      <h1 className="text-3xl">{data.title}</h1>
       <Skills blok={searchComponent(data, "skills")} />
     </div>
   );

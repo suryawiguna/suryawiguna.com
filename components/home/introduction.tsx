@@ -7,24 +7,26 @@ export default function Introduction({ blok }) {
   return (
     <section
       {...storyblokEditable(blok)}
-      className="flex flex-col items-start gap-4"
+      className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-8"
     >
       <Image
         src={blok.image.filename}
         alt=""
-        width={120}
-        height={120}
+        width={80}
+        height={80}
         placeholder="blur"
         blurDataURL={`${blok.image.filename}/m/40x40`}
-        className="rounded-full mb-2 w-auto h-auto"
+        className="rounded-full w-auto h-auto"
       />
-      <RichText data={blok.description} />
-      <Link
-        href={"mailto:hi@suryawiguna.com"}
-        className="bg-amber-600 dark:bg-amber-700 text-white rounded py-1 px-3"
-      >
-        Email me
-      </Link>
+      <div className="gap-2 flex flex-col justify-start items-start">
+        <RichText data={blok.description} />
+        <Link
+          href={"mailto:hi@suryawiguna.com"}
+          className="bg-amber-600 dark:bg-amber-700 text-white self-start rounded py-2 px-4"
+        >
+          Email me
+        </Link>
+      </div>
     </section>
   );
 }

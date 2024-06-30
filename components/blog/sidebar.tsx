@@ -22,7 +22,7 @@ export default function Sidebar() {
   return (
     <div className="grid grid-cols md:grid-cols-2 gap-10">
       <div>
-        <p className="font-semibold mb-4">Share this</p>
+        <p className="mb-4">Share this</p>
         <div className="flex gap-2">
           <FacebookShareButton url={fullUrl} hashtag="#react">
             <FacebookIcon size={48} iconFillColor="#fff" borderRadius={100} />
@@ -36,7 +36,7 @@ export default function Sidebar() {
         </div>
       </div>
       <div>
-        <p className="font-semibold mb-4">Subscribe</p>
+        <p className="mb-4">Subscribe</p>
         <SubscribeForm />
       </div>
     </div>

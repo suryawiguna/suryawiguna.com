@@ -9,7 +9,7 @@ export default function PostCard({ post }) {
       key={post._uid}
       href={post.full_slug}
       passHref
-      className="bg-zinc-100 dark:bg-zinc-700 dark:text-zinc-300 hover:scale-[0.99] transition-transform rounded-lg"
+      className="bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-600 rounded-lg"
     >
       <div className="rounded-lg flex flex-col sm:flex-row items-stretch">
         <div className="relative min-h-[120px] min-w-[140px] sm:min-h-[140px] sm:min-w-[180px]">
@@ -25,7 +25,7 @@ export default function PostCard({ post }) {
           />
         </div>
         <div className="pt-3 flex-1 p-5">
-          <h3 className="text-xl font-semibold mb-1">{post.name}</h3>
+          <h3 className="text-2xl mb-1">{post.name}</h3>
           <div>
             <RichText
               className="text-sm line-clamp-3 leading-relaxed"
