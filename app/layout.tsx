@@ -24,8 +24,8 @@ export const metadata: Metadata = {
     type: "website",
   },
   title: {
-    template: "%s - Surya Wiguna | Web Developer in Bali",
-    default: "Surya Wiguna",
+    template: "%s",
+    default: "Web Developer in Bali | Surya Wiguna",
   },
 };
 
