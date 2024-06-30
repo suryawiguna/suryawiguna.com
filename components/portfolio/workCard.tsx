@@ -26,14 +26,14 @@ export default function WorkCard({ work }: { work: any }) {
           return (
             <small
               key={k}
-              className="text-xs text-amber-700 dark:text-amber-400 font-light"
+              className="text-xs text-gray-400 bg-gray-50 p-1 px-2 rounded-full dark:text-gray-400 dark:bg-zinc-600 font-light"
             >
-              #{c}
+              {c}
             </small>
           );
         })}
       </div>
-      <RichText data={work.description} className="text-sm" />
+      <RichText data={work.description} className="leading-relaxed" />
       <Link
         href={work.link.url}
         passHref
