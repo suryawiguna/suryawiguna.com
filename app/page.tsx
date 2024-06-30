@@ -20,6 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     openGraph: {
       images: [data.seo.og_image],
+      url: "https://suryawiguna.com/",
     },
   };
 }

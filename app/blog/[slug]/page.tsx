@@ -20,6 +20,7 @@ export async function generateMetadata(
       title: post.name,
       description: post.content.excerption,
       type: "article",
+      url: "https://suryawiguna.com/blog/" + params.slug,
       images: [`${post.content.featured_image.filename}`],
     },
   };
