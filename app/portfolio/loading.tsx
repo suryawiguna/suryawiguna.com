@@ -4,7 +4,7 @@ export default function Loading() {
       <div className="h-8 bg-zinc-200 rounded-lg dark:bg-zinc-700 w-48 mb-5"></div>
       <div
         role="status"
-        className="grid grid-cols sm:grid-cols-3 gap-6 animate-pulse"
+        className="grid grid-cols sm:grid-cols-2 gap-6 animate-pulse"
       >
         {Array(8)
           .fill("i")
@@ -12,7 +12,7 @@ export default function Loading() {
             return (
               <div
                 key={i}
-                className="flex flex-col gap-2 bg-zinc-200 rounded-lg dark:bg-zinc-700 h-32 max-w-48"
+                className="rounded-xl bg-zinc-200 dark:bg-zinc-700 p-4 flex flex-col gap-2 h-60 max-w-48"
               ></div>
             );
           })}
