@@ -14,10 +14,12 @@ export default function Portfolios({ blok, show }: { blok: any; show?: any }) {
         </div>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {blok.items.map((item, key) => {
-          return <WorkCard key={key} work={item} />;
-        })}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {blok.items
+          .filter((item: any) => !item.hide)
+          .map((item: any, key: number) => {
+            return <WorkCard key={key} work={item} />;
+          })}
       </div>
     </div>
   );

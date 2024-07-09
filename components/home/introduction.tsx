@@ -12,11 +12,11 @@ export default function Introduction({ blok }) {
       <Image
         src={blok.image.filename}
         alt=""
-        width={80}
-        height={80}
+        width={300}
+        height={300}
         placeholder="blur"
         blurDataURL={`${blok.image.filename}/m/40x40`}
-        className="rounded-full w-auto h-auto"
+        className="rounded-full w-28 h-28"
       />
       <div className="gap-2 flex flex-col justify-start items-start">
         <RichText data={blok.description} />
@@ -24,7 +24,7 @@ export default function Introduction({ blok }) {
           href={"mailto:hi@suryawiguna.com"}
           className="bg-amber-600 dark:bg-amber-700 text-white self-start rounded py-2 px-4"
         >
-          Email me
+          Talk with me
         </Link>
       </div>
     </section>
