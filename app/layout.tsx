@@ -1,5 +1,4 @@
 import "styles/global.css";
-import "boxicons/css/boxicons.min.css";
 
 // @ts-ignore
 import { storyblokInit, apiPlugin } from "@storyblok/react/rsc";

@@ -12,7 +12,7 @@ export default function Introduction({ blok }) {
         height={84}
         placeholder="blur"
         blurDataURL={`${blok.image.filename}/m/40x40`}
-        className="rounded-full"
+        className="rounded-full h-16 w-16"
       />
       <RichText
         data={blok.description}

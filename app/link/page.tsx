@@ -5,7 +5,7 @@ import Introduction from "components/link/introduction";
 import Links from "components/link/links";
 
 export const metadata: Metadata = {
-  title: "Link",
+  title: "Links | Surya Wiguna",
   description: "Find my social links, latest blog posts, and more here.",
   alternates: {
     canonical: `/link`,
