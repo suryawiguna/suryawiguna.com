@@ -3,8 +3,9 @@ import { Metadata } from "next";
 import PostGrid from "components/blog/PostGrid";
 
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "Read my blog, where I write my thought.",
+  title: "Web Developer Bali Blog | Surya Wiguna",
+  description:
+    "Read articles about my web developer experiences and journey here.",
   alternates: {
     canonical: `/blog`,
   },

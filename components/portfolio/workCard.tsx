@@ -8,7 +8,7 @@ export default function WorkCard({ work }: { work: any }) {
   return (
     <div
       key={work._uid}
-      className="rounded-xl bg-zinc-100 dark:bg-zinc-700 p-4 flex flex-col gap-2"
+      className="rounded-xl bg-zinc-100   p-4 flex flex-col gap-2"
     >
       <Image
         src={work.image.filename}
@@ -26,7 +26,7 @@ export default function WorkCard({ work }: { work: any }) {
           return (
             <small
               key={k}
-              className="text-xs text-gray-400 bg-gray-50 p-1 px-2 rounded-full dark:text-gray-400 dark:bg-zinc-600 font-light"
+              className="text-xs text-gray-400 bg-gray-50 p-1 px-2 rounded-full font-light"
             >
               {c}
             </small>
@@ -38,7 +38,7 @@ export default function WorkCard({ work }: { work: any }) {
         href={work.link.url}
         passHref
         target="_blank"
-        className="flex items-center self-start justify-center mt-2 py-2 px-5 bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-500 dark:text-zinc-200 dark:hover:bg-zinc-600 rounded-lg"
+        className="flex items-center self-start justify-center mt-2 py-2 px-5 bg-zinc-200 hover:bg-zinc-300 rounded-lg"
       >
         <span>View</span>
         <i className="bx bx-link-external text-sm ml-1" />

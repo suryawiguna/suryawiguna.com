@@ -11,9 +11,9 @@ export default function Links({ blok }) {
               key={key}
               href={link.link.url || link.link.cached_url}
               target={`${link.linktype == "url" ? "_blank" : ""}`}
-              className="flex items-center hover:bg-zinc-200 dark:hover:bg-zinc-600 hover:scale-[0.95] rounded-lg transition-transform p-2"
+              className="flex items-center hover:bg-zinc-200 hover:scale-[0.95] rounded-lg transition-transform p-2"
             >
-              <i className={`bx ${link.icon} dark:text-zinc-100 text-2xl`}></i>
+              <i className={`bx ${link.icon} text-2xl`}></i>
             </Link>
           ))}
       </div>
@@ -26,7 +26,7 @@ export default function Links({ blok }) {
                 key={key}
                 href={link.link.url || link.link.cached_url}
                 target={`${link.linktype == "url" ? "_blank" : ""}`}
-                className="bg-zinc-700 text-white dark:text-zinc-800 dark:bg-zinc-200 hover:bg-zinc-800 dark:hover:bg-zinc-400 hover:scale-[0.99] transition-transform py-4 px-5 text-center gap-2 rounded-lg max-w-md"
+                className="bg-zinc-700 text-white hover:bg-zinc-800 hover:scale-[0.99] transition-transform py-4 px-5 text-center gap-2 rounded-lg max-w-md"
               >
                 {link.name}
               </Link>

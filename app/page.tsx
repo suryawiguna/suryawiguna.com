@@ -1,9 +1,9 @@
 import { getHome } from "lib/api";
 import Introduction from "components/home/introduction";
 import Portfolios from "components/portfolio/portfolios";
-import SubscribeForm from "components/blog/subscribe";
+import Histories from "components/experience/histories";
 import BlogPosts from "components/home/blogPosts";
-
+import Skills from "components/skill/skill";
 import { searchComponent } from "lib/helper";
 
 import type { Metadata } from "next";
@@ -34,11 +34,16 @@ export default async function Home() {
       <div className="flex flex-col gap-20">
         <Introduction blok={searchComponent(data, "introduction")} />
         <Portfolios blok={searchComponent(data, "portfolios")} />
-        <BlogPosts blok={searchComponent(data, "blogPosts")} />
-        <div className="flex flex-col">
-          <h2 className="text-3xl mb-6">Subscribe to my blog</h2>
-          <SubscribeForm />
+        <div className="grid md:grid-cols-2 gap-8">
+          {data.body.map(
+            (blok: any, key: number) =>
+              blok.component == "histories" && (
+                <Histories key={key} blok={blok} />
+              )
+          )}
         </div>
+        <Skills blok={searchComponent(data, "skills")} />
+        <BlogPosts blok={searchComponent(data, "blogPosts")} />
       </div>
     </div>
   );

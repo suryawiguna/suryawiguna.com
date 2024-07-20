@@ -4,7 +4,7 @@ import { searchComponent } from "lib/helper";
 import Portfolios from "components/portfolio/portfolios";
 
 export const metadata: Metadata = {
-  title: "Portfolio",
+  title: "Web Developer Bali Portfolio | Surya Wiguna",
   description: "Check out my portfolios",
   alternates: {
     canonical: `/portfolio`,

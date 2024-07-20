@@ -8,7 +8,6 @@ import Navigation from "components/navigation";
 import { getNavigation } from "lib/api";
 import { Metadata } from "next";
 import Script from "next/script";
-import { ThemeProviders } from "components/ThemeProvider";
 
 const token = process.env.STORYBLOK_ACCESS_TOKEN;
 
@@ -60,19 +59,12 @@ export default async function RootLayout({
       <link rel="icon" href="/images/favicon.png" sizes="any" />
       <body>
         <StoryblokProvider>
-          <ThemeProviders>
-            <main className="dark:bg-zinc-900 min-h-screen">
-              <Navigation navigation={navigation} />
-              <div className="container max-w-screen-md mx-auto px-4 py-5 lg:px-0">
-                {children}
-              </div>
-              <footer className="flex justify-center py-10">
-                <small className="text-xs text-center opacity-40">
-                  Made with ❤️ in Bali
-                </small>
-              </footer>
-            </main>
-          </ThemeProviders>
+          <main className="min-h-screen">
+            <Navigation navigation={navigation} />
+            <div className="container max-w-screen-md mx-auto px-4 py-5 lg:px-0">
+              {children}
+            </div>
+          </main>
         </StoryblokProvider>
       </body>
     </html>

@@ -16,13 +16,13 @@ export default function Introduction({ blok }) {
         height={300}
         placeholder="blur"
         blurDataURL={`${blok.image.filename}/m/40x40`}
-        className="rounded-full w-28 h-28"
+        className="rounded-full w-24 h-24"
       />
       <div className="gap-2 flex flex-col justify-start items-start">
         <RichText data={blok.description} />
         <Link
           href={"mailto:hi@suryawiguna.com"}
-          className="bg-amber-600 dark:bg-amber-700 text-white self-start rounded py-2 px-4"
+          className="bg-amber-600 hover:bg-amber-700 text-white self-start rounded-lg py-2 px-4"
         >
           Talk with me
         </Link>

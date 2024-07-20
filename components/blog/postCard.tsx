@@ -9,7 +9,7 @@ export default function PostCard({ post }) {
       key={post._uid}
       href={post.full_slug}
       passHref
-      className="bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-600 rounded-lg"
+      className="bg-zinc-100 hover:bg-zinc-200 rounded-lg"
     >
       <div className="rounded-lg flex flex-col sm:flex-row items-stretch">
         <div className="relative min-h-[120px] min-w-[140px] sm:min-h-[140px] sm:min-w-[180px]">

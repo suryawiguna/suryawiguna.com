@@ -16,7 +16,7 @@ export default function RichText({
 }) {
   return (
     <div
-      className={`prose prose-zinc dark:prose-invert prose-headings:font-normal w-full min-w-full ${
+      className={`prose prose-zinc prose-headings:font-normal w-full min-w-full ${
         className ? className : ""
       } `}
     >

@@ -17,7 +17,7 @@ export default function PostGrid({ posts }) {
       </div>
       {postToShow < posts.length && (
         <button
-          className="flex flex-1 justify-center text-gray-500 rounded-lg p-4 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-700 hover:scale-[0.99] transition-transform dark:text-zinc-300"
+          className="flex flex-1 justify-center text-gray-500 rounded-lg p-4 bg-zinc-100 hover:bg-zinc-200   hover:scale-[0.99] transition-transform"
           onClick={() => {
             setPostToShow(postToShow + 8);
           }}

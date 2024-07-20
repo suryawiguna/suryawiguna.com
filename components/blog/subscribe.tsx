@@ -47,9 +47,9 @@ export default function SubscribeForm() {
           ref={inputEl}
           required
           type="email"
-          className="bg-gray-100 dark:bg-zinc-300 dark:text-black rounded-lg px-4 py-3 w-full pl-3 pr-8 text-base focus:outline-amber-600 outline-offset-2"
+          className="bg-gray-100 rounded-lg px-4 py-3 w-full pl-3 pr-8 text-base focus:outline-amber-600 outline-offset-2"
         />
-        <button className="bg-amber-600 dark:bg-amber-700 flex items-center justify-center px-4 py-3 text-white rounded-tr-lg rounded-br-lg absolute inset-y-0 right-0">
+        <button className="bg-amber-600 flex items-center justify-center px-4 py-3 text-white rounded-tr-lg rounded-br-lg absolute inset-y-0 right-0">
           {sending ? (
             <>
               <svg
