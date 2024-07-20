@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `/portfolio`,
   },
+  openGraph: {
+    images: ["https://a.storyblok.com/f/169901/877x895/eed121f43d/me.jpeg"],
+    url: "https://suryawiguna.com/portfolio",
+    type: "website",
+  },
 };
 
 export default async function Home() {
