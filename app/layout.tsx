@@ -25,6 +25,7 @@ export const metadata: Metadata = {
     template: "%s",
     default: "Web Developer in Bali | Surya Wiguna",
   },
+  robots: { index: true, follow: true },
 };
 
 export default async function RootLayout({

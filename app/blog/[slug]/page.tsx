@@ -23,6 +23,9 @@ export async function generateMetadata(
       url: "https://suryawiguna.com/blog/" + params.slug,
       images: [`${post.content.featured_image.filename}`],
     },
+    other: {
+      "article:published_time": post.first_published_at,
+    },
   };
 }
 
