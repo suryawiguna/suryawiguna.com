@@ -34,9 +34,9 @@ export default function PostCard({ post, show }) {
               data={post.content.excerpt}
             />
           </div>
-          <small className="published_date text-xs self-end font-light text-zinc-400">
-            {moment(post.first_published_at).format("MMMM DD, YYYY")}
-          </small>
+          <p className="published_date text-xs self-end font-light text-zinc-500 mt-2">
+            Published {moment(post.first_published_at).format("MMMM DD, YYYY")}
+          </p>
         </div>
       </div>
     </Link>

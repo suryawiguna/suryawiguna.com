@@ -10,9 +10,9 @@ export default function FullPost({ post }) {
     <div className="flex flex-col gap-6">
       <div>
         <h1 className="text-3xl">{post.name}</h1>
-        <small className="text-gray-500">
-          {moment(post.first_published_at).format("MMMM DD, YYYY")}
-        </small>
+        <p className="text-gray-600 text-xs mt-2">
+          Published {moment(post.first_published_at).format("MMMM DD, YYYY")}
+        </p>
       </div>
       <div className="w-full h-80 relative">
         <Image
