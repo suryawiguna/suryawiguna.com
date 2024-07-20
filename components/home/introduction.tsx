@@ -11,7 +11,7 @@ export default function Introduction({ blok }) {
     >
       <Image
         src={blok.image.filename}
-        alt=""
+        alt={blok.image.alt}
         width={300}
         height={300}
         placeholder="blur"

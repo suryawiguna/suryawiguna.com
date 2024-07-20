@@ -16,7 +16,7 @@ export default function FullPost({ post }) {
       </div>
       <div className="w-full h-80 relative">
         <Image
-          alt=""
+          alt={post.content.featured_image.alt}
           src={post.content.featured_image.filename}
           blurDataURL={`${post.content.featured_image.filename}/m/40x40`}
           placeholder="blur"

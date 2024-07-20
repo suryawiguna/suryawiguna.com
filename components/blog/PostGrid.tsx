@@ -9,11 +9,9 @@ export default function PostGrid({ posts }) {
   return (
     <>
       <div className="grid grid-cols-1  gap-6">
-        {posts.map((post: any, key: number) => {
-          if (key + 1 <= postToShow) {
-            return <PostCard key={key} post={post} />;
-          }
-        })}
+        {posts.map((post: any, key: number) => (
+          <PostCard key={key} post={post} show={key + 1 <= postToShow} />
+        ))}
       </div>
       {postToShow < posts.length && (
         <button

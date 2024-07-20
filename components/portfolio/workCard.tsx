@@ -12,7 +12,7 @@ export default function WorkCard({ work }: { work: any }) {
     >
       <Image
         src={work.image.filename}
-        alt=""
+        alt={work.image.alt}
         width={400}
         height={200}
         sizes="100vw"

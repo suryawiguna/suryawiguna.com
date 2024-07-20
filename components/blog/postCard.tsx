@@ -3,19 +3,21 @@ import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
 
-export default function PostCard({ post }) {
+export default function PostCard({ post, show }) {
   return (
     <Link
       key={post._uid}
       href={post.full_slug}
       passHref
-      className="bg-zinc-100 hover:bg-zinc-200 rounded-lg"
+      className={`bg-zinc-100 hover:bg-zinc-200 rounded-lg${
+        show ? "" : " hidden"
+      }`}
     >
       <div className="rounded-lg flex flex-col sm:flex-row items-stretch">
         <div className="relative min-h-[120px] min-w-[140px] sm:min-h-[140px] sm:min-w-[180px]">
           <Image
             src={post.content.featured_image.filename}
-            alt=""
+            alt={post.content.featured_image.alt}
             fill
             sizes="auto"
             style={{ objectFit: "cover", objectPosition: "center" }}

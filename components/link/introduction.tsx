@@ -7,7 +7,7 @@ export default function Introduction({ blok }) {
     <section className="flex flex-col items-center">
       <Image
         src={blok.image.filename}
-        alt=""
+        alt={blok.image.alt}
         width={84}
         height={84}
         placeholder="blur"
