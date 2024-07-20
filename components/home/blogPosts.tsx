@@ -7,7 +7,7 @@ export default function BlogPosts({ blok }) {
       <h2 className="text-3xl">Recent Blog Posts</h2>
       <div className="grid grid-cols-1 gap-6">
         {blok.posts.map((post, key) => {
-          return <PostCard key={key} post={post} />;
+          return <PostCard key={key} post={post} show={true} />;
         })}
       </div>
       <Link
