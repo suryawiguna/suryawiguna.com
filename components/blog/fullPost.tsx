@@ -11,7 +11,7 @@ export default function FullPost({ post }) {
       <div>
         <h1 className="text-3xl">{post.name}</h1>
         <p className="text-gray-600 text-xs mt-2">
-          Published {moment(post.first_published_at).format("MMMM DD, YYYY")}
+          Posted {moment(post.first_published_at).format("MMMM DD, YYYY")}
         </p>
       </div>
       <div className="w-full h-80 relative">
