@@ -6,6 +6,7 @@ import StoryblokProvider from "components/StoryblokProvider";
 import Navigation from "components/navigation";
 import { getNavigation } from "lib/api";
 import { Metadata } from "next";
+import Script from "next/script";
 
 const token = process.env.STORYBLOK_ACCESS_TOKEN;
 
@@ -38,11 +39,12 @@ export default async function RootLayout({
     <html lang="en">
       <head>
         {/* Google tag (gtag.js) */}
-        <script
-          async
+        <Script
+          id="gtag"
+          strategy="beforeInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-QTDZRVWC6J"
-        ></script>
-        <script>
+        ></Script>
+        <Script id="gtag-code" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -50,9 +52,9 @@ export default async function RootLayout({
           
             gtag('config', 'G-QTDZRVWC6J');
           `}
-        </script>
+        </Script>
         {/* Hotjar Tracking Code for https://suryawiguna.com */}
-        <script>
+        <Script id="hotjar-tracking-code" strategy="beforeInteractive">
           {`
             (function(h,o,t,j,a,r){
                 h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
@@ -63,7 +65,7 @@ export default async function RootLayout({
                 a.appendChild(r);
             })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
           `}
-        </script>
+        </Script>
       </head>
       <link rel="icon" href="/images/favicon.png" sizes="any" />
       <body>
