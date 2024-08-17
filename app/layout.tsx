@@ -6,7 +6,6 @@ import StoryblokProvider from "components/StoryblokProvider";
 import Navigation from "components/navigation";
 import { getNavigation } from "lib/api";
 import { Metadata } from "next";
-import Script from "next/script";
 
 const token = process.env.STORYBLOK_ACCESS_TOKEN;
 
@@ -39,22 +38,32 @@ export default async function RootLayout({
     <html lang="en">
       <head>
         {/* Google tag (gtag.js) */}
-        <Script
-          id="google-tag-manager"
-          strategy="afterInteractive"
+        <script
           async
-          defer
           src="https://www.googletagmanager.com/gtag/js?id=G-QTDZRVWC6J"
-        ></Script>
-        <Script id="google-analytics" strategy="afterInteractive" defer>
+        ></script>
+        <script>
           {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-
-              gtag('config', 'G-QTDZRVWC6J');
-            `}
-        </Script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+          
+            gtag('config', 'G-QTDZRVWC6J');
+          `}
+        </script>
+        {/* Hotjar Tracking Code for https://suryawiguna.com */}
+        <script>
+          {`
+            (function(h,o,t,j,a,r){
+                h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                h._hjSettings={hjid:2579732,hjsv:6};
+                a=o.getElementsByTagName('head')[0];
+                r=o.createElement('script');r.async=1;
+                r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                a.appendChild(r);
+            })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+          `}
+        </script>
       </head>
       <link rel="icon" href="/images/favicon.png" sizes="any" />
       <body>
