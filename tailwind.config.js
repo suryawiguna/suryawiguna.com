@@ -7,7 +7,9 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    fontFamily: {
+      sans: "Open Sans, Arial, sans-serif",
+    },
   },
   plugins: [require("@tailwindcss/typography")],
 };

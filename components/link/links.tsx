@@ -11,7 +11,7 @@ export default function Links({ blok }) {
               key={key}
               href={link.link.url || link.link.cached_url}
               target={`${link.linktype == "url" ? "_blank" : ""}`}
-              className="flex items-center bg-zinc-200 hover:bg-zinc-100 rounded-full py-1 px-2 text-sm"
+              className="flex items-center bg-zinc-200 hover:bg-zinc-100 rounded-full py-1 px-3 text-sm"
             >
               <p>{link.name}</p>
             </Link>
