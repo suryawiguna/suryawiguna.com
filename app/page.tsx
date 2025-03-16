@@ -35,7 +35,7 @@ export default async function Home() {
       <div className="flex flex-col gap-20">
         <Introduction blok={searchComponent(data, "introduction")} />
         <Portfolios blok={searchComponent(data, "portfolios")} />
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-4">
           {data.body.map(
             (blok: any, key: number) =>
               blok.component == "histories" && (

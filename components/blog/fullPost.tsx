@@ -9,8 +9,8 @@ export default function FullPost({ post }) {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-3xl">{post.name}</h1>
-        <p className="text-gray-600 text-xs mt-2">
+        <h1 className="text-4xl">{post.name}</h1>
+        <p className="text-gray-600 text-sm mt-2">
           Posted {moment(post.first_published_at).format("MMMM DD, YYYY")}
         </p>
       </div>
@@ -21,10 +21,10 @@ export default function FullPost({ post }) {
           blurDataURL={`${post.content.featured_image.filename}/m/40x40`}
           placeholder="blur"
           fill
-          className="rounded-lg object-cover"
+          className="object-cover"
         />
       </div>
-      <RichText data={post.content.content} />
+      <RichText data={post.content.content} className="text-lg" />
       <Link
         href="/blog"
         passHref

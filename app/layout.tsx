@@ -82,7 +82,7 @@ export default async function RootLayout({
         <StoryblokProvider>
           <main className="min-h-screen pb-8">
             <Navigation navigation={navigation} />
-            <div className="container max-w-screen-md mx-auto px-4 py-5 lg:px-0">
+            <div className="container max-w-screen-md mx-auto px-4 lg:px-0">
               {children}
             </div>
           </main>

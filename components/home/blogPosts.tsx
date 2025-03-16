@@ -13,7 +13,7 @@ export default function BlogPosts({ blok }) {
       <Link
         href="/blog"
         passHref
-        className="flex justify-center items-center text-gray-500 rounded-lg p-4 bg-zinc-100 hover:bg-zinc-200"
+        className="flex flex-1 justify-center text-gray-500 hover:underline underline-offset-8"
       >
         <span>Other blog posts</span>
       </Link>

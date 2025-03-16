@@ -9,11 +9,11 @@ export default function Histories({ blok }) {
             return (
               <li key={key}>
                 <div className="grid gap-2">
-                  <p>
+                  <p className="text-lg">
                     {item.title} at
                     <span className="font-semibold ml-1">{item.place}</span>
                   </p>
-                  <small className="mb-1 text-xs font-normal leading-none text-zinc-400">
+                  <small className="mb-1 text-sm font-normal leading-none text-zinc-400">
                     {item.periode}
                   </small>
                 </div>
