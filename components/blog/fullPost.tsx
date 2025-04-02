@@ -10,18 +10,21 @@ export default function FullPost({ post }) {
     <div className="flex flex-col gap-6">
       <div>
         <h1 className="text-4xl">{post.name}</h1>
-        <p className="text-gray-600 text-sm mt-2">
-          Posted {moment(post.first_published_at).format("MMMM DD, YYYY")}
+        <p className="text-gray-400 text-sm mt-2">
+          Published on {moment(post.first_published_at).format("MMMM DD, YYYY")}
         </p>
       </div>
-      <div className="w-full h-80 relative">
+      <div className="w-full">
         <Image
           alt={post.content.featured_image.alt}
           src={post.content.featured_image.filename}
-          blurDataURL={`${post.content.featured_image.filename}/m/40x40`}
-          placeholder="blur"
-          fill
-          className="object-cover"
+          loading="lazy"
+          width={
+            post.content.featured_image.filename.split("/")[5].split("x")[0]
+          }
+          height={
+            post.content.featured_image.filename.split("/")[5].split("x")[1]
+          }
         />
       </div>
       <RichText data={post.content.content} className="text-lg" />

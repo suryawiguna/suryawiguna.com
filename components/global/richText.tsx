@@ -3,6 +3,7 @@ import {
   MARK_BOLD,
   MARK_CODE,
   NODE_CODEBLOCK,
+  NODE_LI,
 } from "storyblok-rich-text-react-renderer";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import oneDark from "react-syntax-highlighter/dist/cjs/styles/prism/one-dark";
@@ -35,6 +36,7 @@ export default function RichText({
               {children}
             </SyntaxHighlighter>
           ),
+          [NODE_LI]: (children) => <li className="not-prose">{children}</li>,
         },
       })}
     </div>

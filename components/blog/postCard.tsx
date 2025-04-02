@@ -18,10 +18,9 @@ export default function PostCard({ post, show }) {
             alt={post.content.featured_image.alt}
             fill
             sizes="auto"
-            style={{ objectFit: "cover", objectPosition: "center" }}
-            placeholder="blur"
-            blurDataURL={`${post.content.featured_image.filename}/m/40x40`}
+            style={{ objectFit: "contain", objectPosition: "center" }}
             className="shrink"
+            loading="eager"
           />
         </div>
         <div className="pt-3 flex-1 p-5">
@@ -33,7 +32,8 @@ export default function PostCard({ post, show }) {
             />
           </div>
           <p className="published_date text-xs self-end font-light text-zinc-500 mt-4 tracking-wide">
-            Published {moment(post.first_published_at).format("MMMM DD, YYYY")}
+            Published on{" "}
+            {moment(post.first_published_at).format("MMMM DD, YYYY")}
           </p>
         </div>
       </div>
