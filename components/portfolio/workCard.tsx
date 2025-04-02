@@ -25,7 +25,7 @@ export default function WorkCard({ work }: { work: any }) {
           return (
             <small
               key={k}
-              className="text-xs text-gray-400 bg-gray-100 p-1 px-2 lowercase"
+              className="text-xs text-gray-500 bg-gray-100 p-1 px-2 lowercase"
             >
               #{c}
             </small>
@@ -34,7 +34,7 @@ export default function WorkCard({ work }: { work: any }) {
       </div>
       <RichText
         data={work.description}
-        className="leading-relaxed text-gray-400"
+        className="leading-relaxed text-gray-500"
       />
     </div>
   );
