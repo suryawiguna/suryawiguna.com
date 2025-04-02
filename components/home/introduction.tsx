@@ -22,7 +22,7 @@ export default function Introduction({ blok }) {
         <RichText data={blok.description} className="text-lg mb-2" />
         <Link
           href={"mailto:hi@suryawiguna.com"}
-          className="bg-amber-600 hover:bg-amber-700 text-white self-start py-2 px-4"
+          className="bg-amber-600 hover:bg-amber-700 text-white self-start py-2 px-4 rounded"
         >
           Email me
         </Link>

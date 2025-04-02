@@ -11,19 +11,18 @@ export default function PostCard({ post, show }) {
       passHref
       className={`${show ? "" : " hidden"}`}
     >
-      <div className="flex flex-col sm:flex-row items-stretch">
-        <div className="relative min-h-[120px] min-w-[140px] sm:min-h-[140px] sm:min-w-[180px]">
+      <div className="flex flex-col sm:flex-row items-stretch gap-4">
+        <div className="relative min-h-[180px] min-w-[140px] sm:min-h-[140px] sm:min-w-[180px]">
           <Image
             src={post.content.featured_image.filename}
             alt={post.content.featured_image.alt}
             fill
             sizes="auto"
-            style={{ objectFit: "contain", objectPosition: "center" }}
-            className="shrink"
+            style={{ objectFit: "cover", objectPosition: "center" }}
             loading="eager"
           />
         </div>
-        <div className="pt-3 flex-1 p-5">
+        <div>
           <h3 className="text-2xl mb-1">{post.name}</h3>
           <div>
             <RichText
