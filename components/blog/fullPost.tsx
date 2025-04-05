@@ -7,7 +7,6 @@ import Image from "next/image";
 import { DiscussionEmbed } from "disqus-react";
 
 export default function FullPost({ post }) {
-  console.log(post);
   return (
     <div className="flex flex-col gap-6">
       <div>
