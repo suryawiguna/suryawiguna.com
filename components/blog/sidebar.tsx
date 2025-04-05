@@ -11,6 +11,7 @@ import {
   XIcon,
   FacebookIcon,
 } from "react-share";
+
 export default function Sidebar() {
   const [fullUrl, setFullUrl] = useState("");
   const router = usePathname();

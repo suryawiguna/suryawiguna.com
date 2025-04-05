@@ -4,8 +4,10 @@ import moment from "moment";
 import { RichText } from "../global";
 import Link from "next/link";
 import Image from "next/image";
+import { DiscussionEmbed } from "disqus-react";
 
 export default function FullPost({ post }) {
+  console.log(post);
   return (
     <div className="flex flex-col gap-6">
       <div>
@@ -35,6 +37,17 @@ export default function FullPost({ post }) {
       >
         Read other posts
       </Link>
+      <div>
+        <DiscussionEmbed
+          shortname="surya-wiguna"
+          config={{
+            url: "https://suryawiguna.com/blog/" + post.slug,
+            identifier: post.content._uid,
+            title: post.name,
+            language: "",
+          }}
+        />
+      </div>
     </div>
   );
 }
