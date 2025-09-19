@@ -14,9 +14,8 @@ export default function Introduction({ blok }) {
         alt={blok.image.alt}
         width={800}
         height={800}
-        placeholder="blur"
-        blurDataURL={`${blok.image.filename}/m/40x40`}
         className="rounded-full w-28 h-28"
+        priority
       />
       <div className="gap-2 flex flex-col justify-start items-start">
         <RichText data={blok.description} className="text-lg mb-2" />

@@ -1,10 +1,14 @@
 import { getHome } from "lib/api";
 import Introduction from "components/home/introduction";
-import Portfolios from "components/portfolio/portfolios";
 import Histories from "components/experience/histories";
-import BlogPosts from "components/home/blogPosts";
 import Skills from "components/skill/skill";
 import { searchComponent } from "lib/helper";
+import dynamic from "next/dynamic";
+
+const BlogPosts = dynamic(() => import("../components/home/blogPosts"), {
+  ssr: false,
+});
+const Portfolios = dynamic(() => import("../components/portfolio/portfolios"));
 
 import type { Metadata } from "next";
 

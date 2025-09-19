@@ -7,7 +7,8 @@ import Navigation from "components/navigation";
 import { getNavigation } from "lib/api";
 import { Metadata } from "next";
 import Script from "next/script";
-
+import { Open_Sans } from "next/font/google";
+const openSans = Open_Sans({ subsets: ["latin"], display: "swap" });
 const token = process.env.STORYBLOK_ACCESS_TOKEN;
 
 storyblokInit({
@@ -38,16 +39,6 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin=""
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-          rel="stylesheet"
-        />
         {/* Google tag (gtag.js) */}
         <Script
           id="gtag"
@@ -76,14 +67,32 @@ export default async function RootLayout({
             })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
           `}
         </Script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              name: "Surya Wiguna - Web Developer Bali",
+              url: "https://suryawiguna.com",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Bali",
+                addressCountry: "ID",
+              },
+            }),
+          }}
+        />
       </head>
       <link rel="icon" href="/images/favicon.png" sizes="any" />
       <body>
         <StoryblokProvider>
-          <main className="min-h-screen pb-8">
-            <Navigation navigation={navigation} />
-            <div className="container max-w-screen-md mx-auto px-4 lg:px-0">
-              {children}
+          <main className={openSans.className}>
+            <div className="min-h-screen pb-8">
+              <Navigation navigation={navigation} />
+              <div className="container max-w-screen-md mx-auto px-4 lg:px-0">
+                {children}
+              </div>
             </div>
           </main>
         </StoryblokProvider>
