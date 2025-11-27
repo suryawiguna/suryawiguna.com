@@ -20,27 +20,23 @@ export default function FullPost({ post }) {
               return (
                 <div
                   key={index}
-                  className="inline-block text-xs bg-gray-200 text-gray-500 px-2 py-1 rounded-md"
+                  className="inline-block text-xs bg-gray-200 text-gray-400 px-2 py-1 rounded"
                   style={{ margin: "2px" }}
                 >
-                  #{tag}
+                  {tag}
                 </div>
               );
             })}
           </div>
         )}
       </div>
-      <div className="w-full">
+      <div className="w-auto h-max relative">
         <Image
           alt={post.content.featured_image.alt}
           src={post.content.featured_image.filename}
           loading="lazy"
-          width={
-            post.content.featured_image.filename.split("/")[5].split("x")[0]
-          }
-          height={
-            post.content.featured_image.filename.split("/")[5].split("x")[1]
-          }
+          width={600}
+          height={600}
         />
       </div>
       <RichText data={post.content.content} className="text-lg" />

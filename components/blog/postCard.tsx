@@ -40,10 +40,10 @@ export default function PostCard({ post, show }) {
                 return (
                   <div
                     key={index}
-                    className="inline-block text-xs bg-gray-200 text-gray-500 px-2 py-1 rounded-md"
+                    className="inline-block text-xs bg-gray-200 text-gray-400 px-2 py-1 rounded"
                     style={{ margin: "2px" }}
                   >
-                    #{tag}
+                    {tag}
                   </div>
                 );
               })}

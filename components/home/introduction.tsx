@@ -18,10 +18,10 @@ export default function Introduction({ blok }) {
         priority
       />
       <div className="gap-2 flex flex-col justify-start items-start">
-        <RichText data={blok.description} className="text-lg mb-2" />
+        <RichText data={blok.description} className="text-lg mb-1" />
         <Link
           href={"mailto:hi@suryawiguna.com"}
-          className="bg-amber-600 hover:bg-amber-700 text-white self-start py-2 px-4 rounded"
+          className="bg-amber-600 hover:bg-amber-700 text-white self-start py-2 px-4 rounded-lg"
         >
           Email me
         </Link>

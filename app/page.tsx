@@ -34,9 +34,9 @@ export default async function Home() {
   const data = await getHome();
 
   return (
-    <div className="flex flex-col items-stretch gap-8">
-      <h1 className="text-3xl">{data.title}</h1>
-      <div className="flex flex-col gap-20">
+    <div className="flex flex-col items-stretch">
+      <h1 className="text-2xl md:text-3xl mb-4">{data.title}</h1>
+      <div className="flex flex-col gap-12 md:gap-16">
         <Introduction blok={searchComponent(data, "introduction")} />
         <Portfolios blok={searchComponent(data, "portfolios")} />
         <div className="grid md:grid-cols-2 gap-4">
