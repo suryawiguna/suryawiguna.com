@@ -1,6 +1,6 @@
 import "styles/global.css";
 
-import { storyblokInit, apiPlugin } from "@storyblok/react/rsc";
+import { storyblokInit, apiPlugin } from "@storyblok/react";
 import StoryblokProvider from "components/StoryblokProvider";
 import Navigation from "components/navigation";
 import { getNavigation } from "lib/api";
