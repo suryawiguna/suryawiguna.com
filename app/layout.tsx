@@ -8,17 +8,11 @@ import { Metadata } from "next";
 import Script from "next/script";
 import { Open_Sans } from "next/font/google";
 
-// Constants
-const GOOGLE_ANALYTICS_ID = "G-QTDZRVWC6J";
-const HOTJAR_ID = 2579732;
-const HOTJAR_VERSION = 6;
 const SITE_URL = "https://suryawiguna.com";
-const token = process.env.STORYBLOK_ACCESS_TOKEN;
-
 const openSans = Open_Sans({ subsets: ["latin"], display: "swap" });
 
 storyblokInit({
-  accessToken: token,
+  accessToken: process.env.STORYBLOK_ACCESS_TOKEN,
   use: [apiPlugin],
 });
 
@@ -61,20 +55,20 @@ export default async function RootLayout({
         <Script
           id="gtag"
           strategy="beforeInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
         />
         <Script id="gtag-config" strategy="beforeInteractive">
           {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', '${GOOGLE_ANALYTICS_ID}');`}
+gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');`}
         </Script>
 
         {/* Hotjar Analytics */}
         <Script id="hotjar-tracking-code" strategy="beforeInteractive">
           {`(function(h,o,t,j,a,r){
 h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-h._hjSettings={hjid:${HOTJAR_ID},hjsv:${HOTJAR_VERSION}};
+h._hjSettings={hjid:${process.env.NEXT_PUBLIC_HOTJAR_ID},hjsv:6};
 a=o.getElementsByTagName('head')[0];
 r=o.createElement('script');r.async=1;
 r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
