@@ -3,14 +3,9 @@ import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
 
-export default function PostCard({ post, show }) {
+export default function PostCard({ post }) {
   return (
-    <Link
-      key={post._uid}
-      href={post.full_slug}
-      passHref
-      className={`${show ? "" : " hidden"}`}
-    >
+    <Link key={post._uid} href={post.full_slug} passHref>
       <div className="flex flex-col sm:flex-row items-stretch gap-4">
         <div className="relative min-h-[180px] min-w-[140px] sm:min-h-[140px] sm:min-w-[240px]">
           <Image
