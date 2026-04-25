@@ -3,7 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
 
-export default function PostCard({ post }) {
+interface PostCardProps {
+  post: any;
+}
+
+export default function PostCard({ post }: PostCardProps) {
   return (
     <Link key={post._uid} href={post.full_slug} passHref>
       <div className="flex flex-col sm:flex-row items-stretch gap-4">

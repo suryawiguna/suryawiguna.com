@@ -10,7 +10,7 @@ export default async function BlogPosts({ blok }) {
       <h2 className="text-3xl">Recent Blog Posts</h2>
       <div className="grid grid-cols-1 gap-6">
         {posts.map((post, key) => {
-          return <PostCard key={key} post={post} show={true} />;
+          return <PostCard key={key} post={post} />;
         })}
       </div>
       <Link

@@ -7,7 +7,7 @@
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint && tsc --noEmit"
   },
   "dependencies": {
     "@mailchimp/mailchimp_marketing": "^3.0.80",
