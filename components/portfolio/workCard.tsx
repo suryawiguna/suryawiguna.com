@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { RichText } from "components/global";
 import Link from "next/link";
 
@@ -11,6 +12,17 @@ export default function WorkCard({ work }: { work: any }) {
         target="_blank"
         className="m-work-row"
       >
+        {work.image?.filename && (
+          <div className="m-work-img">
+            <Image
+              src={work.image.filename}
+              alt={work.image.alt || work.title}
+              fill
+              sizes="96px"
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+        )}
         <div className="m-work-body">
           <div className="m-work-link">
             <span className="m-work-title">{work.title}</span>

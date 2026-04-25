@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import moment from "moment";
 import { X } from "lucide-react";
@@ -185,22 +186,35 @@ export default function PostGrid({ posts }: { posts: any[] }) {
                 href={`/${post.full_slug}`}
                 className="m-bp"
               >
-                <div className="m-bp-meta">
-                  <span>
-                    {moment(post.first_published_at).format("MMM DD, YYYY")}
-                  </span>
-                </div>
-                <h2 className="m-bp-title">{post.name}</h2>
-                {excerpt && <p className="m-bp-excerpt">{excerpt}</p>}
-                {post.tag_list?.length > 0 && (
-                  <div className="m-bp-tags">
-                    {post.tag_list.map((t: string) => (
-                      <span key={t} className="m-chip">
-                        {t}
-                      </span>
-                    ))}
+                {post.content?.featured_image?.filename && (
+                  <div className="m-bp-img">
+                    <Image
+                      src={post.content.featured_image.filename}
+                      alt={post.content.featured_image.alt || post.name}
+                      fill
+                      sizes="96px"
+                      style={{ objectFit: "cover" }}
+                    />
                   </div>
                 )}
+                <div className="m-bp-content">
+                  <div className="m-bp-meta">
+                    <span>
+                      {moment(post.first_published_at).format("MMM DD, YYYY")}
+                    </span>
+                  </div>
+                  <h2 className="m-bp-title">{post.name}</h2>
+                  {excerpt && <p className="m-bp-excerpt">{excerpt}</p>}
+                  {post.tag_list?.length > 0 && (
+                    <div className="m-bp-tags">
+                      {post.tag_list.map((t: string) => (
+                        <span key={t} className="m-chip">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </Link>
             );
           })

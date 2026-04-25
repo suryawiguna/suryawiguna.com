@@ -234,8 +234,19 @@ strong { font-weight: 600; }
 .m-work-item:last-child { border-bottom: 0; }
 .m-work-row {
   display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.2rem;
+}
+
+.m-work-img {
+  flex: 0 0 96px;
+  width: 96px;
+  height: 96px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--line);
 }
 
 .m-work-body { display: flex; flex-direction: column; gap: 0.4rem; min-width: 0; }
@@ -357,4 +368,5 @@ strong { font-weight: 600; }
 }
 @media (max-width: 480px) {
   .m-foot { flex-direction: column; gap: 0.3rem; }
+  .m-work-img { flex: 0 0 72px; width: 72px; height: 72px; }
 }
