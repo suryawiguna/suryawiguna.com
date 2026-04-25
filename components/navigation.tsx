@@ -1,20 +1,22 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navigation({ navigation }) {
   return (
-    <nav className="flex gap-4 md:gap-8 justify-center md:justify-start sticky top-0 z-20 py-4 mb-2 bg-white">
-      {navigation.menu.map((menu: any) => {
-        return (
-          <Link
-            key={menu._uid}
-            href={menu.link.url}
-            passHref
-            className="md:text-lg hover:underline underline-offset-8"
-          >
-            {menu.text}
-          </Link>
-        );
-      })}
+    <nav className="m-nav" aria-label="Primary">
+      <div className="m-nav-inner">
+        <Link href="/" className="m-brand">
+          <Image src="/images/favicon.png" alt="" width={22} height={22} />
+          <span>Surya Wiguna</span>
+        </Link>
+        <ul className="m-nav-items">
+          {navigation.menu.map((menu: any) => (
+            <li key={menu._uid}>
+              <Link href={menu.link.url}>{menu.text.toLowerCase()}</Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </nav>
   );
 }

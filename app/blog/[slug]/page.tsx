@@ -1,5 +1,6 @@
+import "styles/v3-blog-post.css";
+
 import FullPost from "components/blog/fullPost";
-import Sidebar from "components/blog/sidebar";
 import JsonLd from "components/jsonLd";
 import { getAllPosts, getPost } from "lib/api";
 import { MetadataProps } from "lib/helper";
@@ -40,11 +41,14 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }) {
   const post = await getPost(params.slug);
+  const all = (await getAllPosts()) || [];
+  const related = all
+    .filter((p: any) => p.slug !== params.slug)
+    .slice(0, 2);
 
   return (
-    <div className="flex flex-col gap-10">
-      <FullPost post={post} />
-      <Sidebar />
+    <>
+      <FullPost post={post} related={related} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -73,7 +77,7 @@ export default async function Page({ params }) {
           },
         }}
       />
-    </div>
+    </>
   );
 }
 

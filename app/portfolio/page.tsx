@@ -20,9 +20,11 @@ export default async function Home() {
   const data = await getPage("portfolio");
 
   return (
-    <div className="flex flex-col items-stretch gap-6">
-      <h1 className="text-3xl">{data.title}</h1>
+    <section className="m-section" style={{ borderTop: 0 }}>
+      <h1 className="m-h2" style={{ fontSize: "clamp(1.7rem, 3.6vw, 2.4rem)" }}>
+        {data.title}
+      </h1>
       <Portfolios blok={searchComponent(data, "portfolios")} />
-    </div>
+    </section>
   );
 }

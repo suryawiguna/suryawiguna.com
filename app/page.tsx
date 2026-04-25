@@ -13,7 +13,6 @@ const Portfolios = dynamic(() => import("../components/portfolio/portfolios"));
 import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
-  // fetch data
   const data = await getHome();
 
   return {
@@ -32,24 +31,23 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home() {
   const data = await getHome();
+  const histories = data.body.filter(
+    (blok: any) => blok.component == "histories"
+  );
 
   return (
-    <div className="flex flex-col items-stretch">
-      <h1 className="text-2xl md:text-3xl mb-4">{data.title}</h1>
-      <div className="flex flex-col gap-12 md:gap-16">
-        <Introduction blok={searchComponent(data, "introduction")} />
-        <Portfolios blok={searchComponent(data, "portfolios")} />
-        <div className="grid md:grid-cols-2 gap-4">
-          {data.body.map(
-            (blok: any, key: number) =>
-              blok.component == "histories" && (
-                <Histories key={key} blok={blok} />
-              )
-          )}
+    <>
+      <Introduction blok={searchComponent(data, "introduction")} />
+      <Portfolios blok={searchComponent(data, "portfolios")} />
+      <section id="about" className="m-section">
+        <div className="m-cols">
+          {histories.map((blok: any, key: number) => (
+            <Histories key={key} blok={blok} />
+          ))}
         </div>
         <Skills blok={searchComponent(data, "skills")} />
-        <BlogPosts blok={searchComponent(data, "blogPosts")} />
-      </div>
-    </div>
+      </section>
+      <BlogPosts blok={searchComponent(data, "blogPosts")} />
+    </>
   );
 }

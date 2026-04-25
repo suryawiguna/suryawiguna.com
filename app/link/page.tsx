@@ -24,9 +24,9 @@ export default async function Link() {
   const data = await getPage("link");
 
   return (
-    <div className="flex flex-col items-stretch gap-6">
+    <>
       <Introduction blok={searchComponent(data, "introduction")} />
       <Links blok={searchComponent(data, "links")} />
-    </div>
+    </>
   );
 }

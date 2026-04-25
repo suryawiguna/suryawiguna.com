@@ -1,3 +1,5 @@
+import "styles/v3-blog-index.css";
+
 import { getAllPosts } from "lib/api";
 import { Metadata } from "next";
 import PostGrid from "components/blog/PostGrid";
@@ -20,9 +22,16 @@ export default async function Home() {
   const posts = (await getAllPosts()) || [];
 
   return (
-    <div className="flex flex-col items-stretch gap-6">
-      <h1 className="text-3xl">Blog</h1>
+    <>
+      <header className="m-blog-head">
+        <p className="m-eyebrow">Blog</p>
+        <h1 className="m-blog-title">Work journey</h1>
+        <p className="m-blog-dek">
+          Short reads on web development, SEO, B2B funnels, and what it&rsquo;s
+          like freelancing from Bali.
+        </p>
+      </header>
       <PostGrid posts={posts} />
-    </div>
+    </>
   );
 }

@@ -1,38 +1,50 @@
 import Link from "next/link";
 
 export default function Links({ blok }) {
+  const social = blok.links.filter((l: any) => l.socialLink);
+  const primary = blok.links.filter((l: any) => !l.socialLink);
+
   return (
-    <section className="flex flex-col gap-5">
-      <div className="flex justify-center gap-2 overflow-auto">
-        {blok.links
-          .filter((link) => link.socialLink)
-          .map((link, key) => (
-            <Link
-              key={key}
-              href={link.link.url || link.link.cached_url}
-              target={`${link.linktype == "url" ? "_blank" : ""}`}
-              className="flex items-center bg-zinc-200 hover:bg-zinc-100 rounded-full py-1 px-3 text-sm"
-            >
-              <p>{link.name}</p>
-            </Link>
-          ))}
-      </div>
-      <div className="flex flex-col items-stretch self-center gap-5">
-        {blok.links
-          .filter((link) => !link.socialLink)
-          .map((link, key) => {
-            return (
+    <section id="links" className="m-section">
+      {social.length > 0 && (
+        <>
+          <h2 className="m-h2">Explore my other stuff</h2>
+          <div className="m-links">
+            {social.map((link: any, key: number) => (
               <Link
                 key={key}
                 href={link.link.url || link.link.cached_url}
-                target={`${link.linktype == "url" ? "_blank" : ""}`}
-                className="bg-zinc-200 hover:bg-zinc-100 text-zinc-800 transition-transform py-4 px-5 text-center gap-2 rounded-lg max-w-md"
+                target={link.linktype == "url" ? "_blank" : undefined}
+                className="m-chip m-chip-link"
               >
                 {link.name}
               </Link>
-            );
-          })}
-      </div>
+            ))}
+          </div>
+        </>
+      )}
+      {primary.length > 0 && (
+        <div
+          className="m-links"
+          style={{
+            flexDirection: "column",
+            alignItems: "stretch",
+            marginTop: social.length > 0 ? "1.4rem" : 0,
+          }}
+        >
+          {primary.map((link: any, key: number) => (
+            <Link
+              key={key}
+              href={link.link.url || link.link.cached_url}
+              target={link.linktype == "url" ? "_blank" : undefined}
+              className="m-btn ghost"
+              style={{ justifyContent: "center" }}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

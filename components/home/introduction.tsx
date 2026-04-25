@@ -5,27 +5,40 @@ import Link from "next/link";
 
 export default function Introduction({ blok }) {
   return (
-    <section
+    <header
       {...storyblokEditable(blok)}
-      className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-8"
+      id="home"
+      className="m-hero"
     >
-      <Image
-        src={blok.image.filename}
-        alt={blok.image.alt}
-        width={800}
-        height={800}
-        className="rounded-full w-28 h-28"
-        priority
-      />
-      <div className="gap-2 flex flex-col justify-start items-start">
-        <RichText data={blok.description} className="text-lg mb-1" />
-        <Link
-          href={"mailto:hi@suryawiguna.com"}
-          className="bg-amber-600 hover:bg-amber-700 text-white self-start py-2 px-4 rounded-lg"
-        >
+      <div className="m-avatar">
+        <Image
+          src={blok.image.filename}
+          alt={blok.image.alt}
+          width={200}
+          height={200}
+          priority
+        />
+      </div>
+      <h1 className="m-h1">
+        Freelance Web Developer in Bali
+        <span className="m-h1-sep">—</span>
+        Surya Wiguna
+      </h1>
+      <div className="m-lede">
+        <RichText data={blok.description} />
+      </div>
+      <div className="m-cta-row">
+        <Link href="mailto:hi@suryawiguna.com" className="m-btn primary">
           Email me
         </Link>
+        <Link href="#portfolio" className="m-btn ghost">
+          See work
+        </Link>
       </div>
-    </section>
+      <div className="m-status">
+        <span className="m-dot"></span>
+        <span>Available for new projects</span>
+      </div>
+    </header>
   );
 }

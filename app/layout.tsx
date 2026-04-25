@@ -1,15 +1,29 @@
 import "styles/global.css";
+import "styles/v3.css";
 
 import { storyblokInit, apiPlugin } from "@storyblok/react";
 import StoryblokProvider from "components/StoryblokProvider";
 import Navigation from "components/navigation";
+import Footer from "components/global/footer";
 import { getNavigation } from "lib/api";
 import { Metadata } from "next";
 import Script from "next/script";
-import { Open_Sans } from "next/font/google";
+import { Archivo, Inter } from "next/font/google";
 
 const SITE_URL = "https://suryawiguna.com";
-const openSans = Open_Sans({ subsets: ["latin"], display: "swap" });
+
+const archivo = Archivo({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-display",
+});
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+  variable: "--font-body",
+});
 
 storyblokInit({
   accessToken: process.env.STORYBLOK_ACCESS_TOKEN,
@@ -49,7 +63,12 @@ export default async function RootLayout({
   const navigation = await getNavigation();
 
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      data-rounded="on"
+      data-accent="on"
+      className={`${archivo.variable} ${inter.variable}`}
+    >
       <head>
         {/* Google Analytics */}
         <Script
@@ -85,12 +104,11 @@ a.appendChild(r);
         />
       </head>
       <link rel="icon" href="/images/favicon.png" sizes="any" />
-      <body className="max-w-screen-md mx-auto px-4 lg:px-0 pb-16">
+      <body>
         <StoryblokProvider>
-          <main className={openSans.className}>
-            <Navigation navigation={navigation} />
-            {children}
-          </main>
+          <Navigation navigation={navigation} />
+          <main className="m-main">{children}</main>
+          <Footer />
         </StoryblokProvider>
       </body>
     </html>

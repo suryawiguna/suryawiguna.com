@@ -1,25 +1,28 @@
 import Link from "next/link";
-import PostCard from "../blog/postCard";
+import moment from "moment";
 import { getAllPosts } from "lib/api";
 
 export default async function BlogPosts({ blok }) {
-  const posts = await getAllPosts(3);
+  const posts = await getAllPosts(5);
 
   return (
-    <div className="flex flex-col gap-6">
-      <h2 className="text-3xl">Recent Blog Posts</h2>
-      <div className="grid grid-cols-1 gap-6">
-        {posts.map((post, key) => {
-          return <PostCard key={key} post={post} />;
-        })}
-      </div>
-      <Link
-        href="/blog"
-        passHref
-        className="flex flex-1 justify-center text-gray-500 hover:underline underline-offset-8"
-      >
-        <span>Other blog posts</span>
+    <section id="blog" className="m-section">
+      <h2 className="m-h2">Recent Blog Posts</h2>
+      <ul className="m-posts">
+        {posts.map((post: any, key: number) => (
+          <li key={key}>
+            <Link href={`/${post.full_slug}`} className="m-post">
+              <span className="m-post-title">{post.name}</span>
+              <span className="m-post-date">
+                {moment(post.first_published_at).format("MMM DD, YYYY")}
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <Link href="/blog" className="m-more">
+        Other blog posts →
       </Link>
-    </div>
+    </section>
   );
 }
