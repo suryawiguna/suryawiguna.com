@@ -76,12 +76,6 @@ export default function FullPost({
             <h3>Subscribe</h3>
             <SubscribeForm />
           </div>
-          <div className="m-foot-block">
-            <h3>Read more</h3>
-            <Link href="/blog" className="m-back">
-              ← Back to all posts
-            </Link>
-          </div>
         </footer>
       </article>
 
@@ -113,6 +107,10 @@ export default function FullPost({
           </div>
         </section>
       )}
+
+      <Link href="/blog" className="m-back">
+        ← Back to all posts
+      </Link>
     </>
   );
 }
