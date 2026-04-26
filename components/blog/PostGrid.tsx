@@ -197,13 +197,15 @@ export default function PostGrid({ posts }: { posts: any[] }) {
                     />
                   </div>
                 )}
-                <div className="m-bp-content">
+                <div className="m-bp-right">
+                  <h2 className="m-bp-title">{post.name}</h2>
                   <div className="m-bp-meta">
                     <span>
                       {moment(post.first_published_at).format("MMM DD, YYYY")}
                     </span>
                   </div>
-                  <h2 className="m-bp-title">{post.name}</h2>
+                </div>
+                <div className="m-bp-body">
                   {excerpt && <p className="m-bp-excerpt">{excerpt}</p>}
                   {post.tag_list?.length > 0 && (
                     <div className="m-bp-tags">
