@@ -21,7 +21,7 @@ export default async function Home() {
 
   return (
     <section className="m-section" style={{ borderTop: 0 }}>
-      <h1 className="m-h2" style={{ fontSize: "clamp(1.7rem, 3.6vw, 2.4rem)" }}>
+      <h1 className="m-h2" style={{ fontSize: "var(--text-3xl)" }}>
         {data.title}
       </h1>
       <Portfolios blok={searchComponent(data, "portfolios")} />

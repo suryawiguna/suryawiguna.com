@@ -11,14 +11,12 @@ export default function FullPost({
   post: any;
   related?: any[];
 }) {
-  const breadcrumb = post.tag_list?.[0] || "Blog";
-
   return (
     <>
       <nav className="m-breadcrumb" aria-label="Breadcrumb">
         <Link href="/blog">Blog</Link>
         <span className="sep">/</span>
-        <span>{breadcrumb}</span>
+        <span>{post.name}</span>
       </nav>
 
       <article>
