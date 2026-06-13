@@ -3,9 +3,6 @@ import "styles/v3.css";
 
 import { storyblokInit, apiPlugin } from "@storyblok/react";
 import StoryblokProvider from "components/StoryblokProvider";
-import Navigation from "components/navigation";
-import Footer from "components/global/footer";
-import { getNavigation } from "lib/api";
 import { Metadata } from "next";
 import Script from "next/script";
 import { Archivo, Inter } from "next/font/google";
@@ -60,8 +57,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const navigation = await getNavigation();
-
   return (
     <html
       lang="en"
@@ -105,11 +100,7 @@ a.appendChild(r);
       </head>
       <link rel="icon" href="/images/favicon.png" sizes="any" />
       <body>
-        <StoryblokProvider>
-          <Navigation navigation={navigation} />
-          <main className="m-main">{children}</main>
-          <Footer />
-        </StoryblokProvider>
+        <StoryblokProvider>{children}</StoryblokProvider>
       </body>
     </html>
   );

@@ -7,10 +7,14 @@
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
-    "lint": "next lint && tsc --noEmit"
+    "lint": "next lint && tsc --noEmit",
+    "migrate:sanity": "node --env-file=.env.local scripts/migrate-storyblok-to-sanity.mjs"
   },
   "dependencies": {
     "@mailchimp/mailchimp_marketing": "^3.0.80",
+    "@portabletext/react": "^3.2.4",
+    "@sanity/client": "^6.29.1",
+    "@sanity/image-url": "^1.2.0",
     "@storyblok/react": "^2.4.7",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@types/react": "^18.2.35",
@@ -19,15 +23,17 @@
     "lucide-react": "^1.11.0",
     "moment": "^2.29.4",
     "next": "^14.2.3",
+    "next-sanity": "^9.12.3",
     "next-sitemap": "^3.1.48",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "react-share": "^5.1.0",
     "react-syntax-highlighter": "^15.5.0",
+    "sanity": "^3.99.0",
     "sharp": "^0.32.6",
     "storyblok-js-client": "^5.0.7",
     "storyblok-rich-text-react-renderer": "^2.6.1",
-    "styled-components": "^5.3.6"
+    "styled-components": "^6.4.2"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.8",

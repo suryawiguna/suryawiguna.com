@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { RichText } from "../global";
+import { blurThumb } from "lib/helper";
 
 export default function Introduction({ blok }) {
   return (
@@ -12,7 +13,7 @@ export default function Introduction({ blok }) {
           width={200}
           height={200}
           placeholder="blur"
-          blurDataURL={`${blok.image.filename}/m/40x40`}
+          blurDataURL={blurThumb(blok.image.filename)}
         />
       </div>
       <div className="m-lede">

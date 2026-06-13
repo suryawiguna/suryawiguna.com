@@ -11,8 +11,19 @@ const PER_PAGE = 5;
 function excerptText(excerpt: any): string {
   if (!excerpt) return "";
   if (typeof excerpt === "string") return excerpt;
-  // Storyblok rich-text JSON: walk content nodes for text.
   const parts: string[] = [];
+  // Sanity Portable Text: array of blocks with `children` spans.
+  if (Array.isArray(excerpt)) {
+    excerpt.forEach((block: any) => {
+      if (Array.isArray(block?.children)) {
+        block.children.forEach((span: any) => {
+          if (typeof span?.text === "string") parts.push(span.text);
+        });
+      }
+    });
+    return parts.join(" ").trim();
+  }
+  // Storyblok rich-text JSON: walk content nodes for text.
   const walk = (node: any) => {
     if (!node) return;
     if (typeof node.text === "string") parts.push(node.text);

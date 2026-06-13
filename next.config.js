@@ -4,6 +4,7 @@ module.exports = {
       "blog.suryawiguna.com",
       "a.storyblok.com",
       "cdn.buymeacoffee.com",
+      "cdn.sanity.io",
     ],
   },
 };
