@@ -18,7 +18,7 @@
 .m-blog-title {
   font-family: var(--display);
   font-weight: var(--font-semibold);
-  font-size: var(--text-3xl);
+  font-size: var(--text-xl);
   line-height: var(--leading-tight);
   letter-spacing: -0.025em;
   margin-bottom: 0.7rem;

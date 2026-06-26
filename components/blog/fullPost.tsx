@@ -4,6 +4,27 @@ import Link from "next/link";
 import Image from "next/image";
 import SubscribeForm from "./subscribe";
 
+// Some posts repeat the title (as an <h1>) and the excerpt (as an intro
+// paragraph) at the top of the body — the header already renders both. Drop
+// that leading duplicate. Posts authored cleanly start with a paragraph, not
+// an h1, so this only triggers on the duplicated ones.
+function stripDuplicateLead(doc: any, title: string) {
+  const nodes = doc?.content;
+  if (!Array.isArray(nodes) || !nodes.length) return doc;
+
+  const first = nodes[0];
+  const firstText = first?.content?.[0]?.text?.trim();
+  const isTitleHeading =
+    first?.type === "heading" &&
+    first?.attrs?.level === 1 &&
+    firstText === title?.trim();
+  if (!isTitleHeading) return doc;
+
+  // Drop the title heading, plus an immediately-following intro paragraph.
+  const cut = nodes[1]?.type === "paragraph" ? 2 : 1;
+  return { ...doc, content: nodes.slice(cut) };
+}
+
 export default function FullPost({
   post,
   related = [],
@@ -11,6 +32,8 @@ export default function FullPost({
   post: any;
   related?: any[];
 }) {
+  const bodyContent = stripDuplicateLead(post.content.content, post.name);
+
   return (
     <>
       <nav className="m-breadcrumb" aria-label="Breadcrumb">
@@ -67,7 +90,7 @@ export default function FullPost({
           </figure>
         )}
 
-        <RichText data={post.content.content} className="m-article" />
+        <RichText data={bodyContent} className="m-article" />
 
         <footer className="m-article-foot">
           <div className="m-foot-block">
