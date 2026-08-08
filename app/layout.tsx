@@ -30,18 +30,6 @@ storyblokInit({
   use: [apiPlugin],
 });
 
-const generateJsonLdSchema = () => ({
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "Surya Wiguna - Web Developer Bali",
-  url: SITE_URL,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Bali",
-    addressCountry: "ID",
-  },
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   openGraph: {
@@ -94,14 +82,6 @@ r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
 a.appendChild(r);
 })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`}
         </Script>
-
-        {/* Schema.org JSON-LD */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(generateJsonLdSchema()),
-          }}
-        />
       </head>
       <link rel="icon" href="/images/favicon.png" sizes="any" />
       <body>

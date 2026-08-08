@@ -6,6 +6,10 @@ import { getAllPosts, getPost } from "lib/api";
 import { MetadataProps } from "lib/helper";
 import type { Metadata, ResolvingMetadata } from "next";
 
+const SITE_URL = "https://suryawiguna.com";
+const PERSON_ID = `${SITE_URL}/#person`;
+const POST_URL = (slug: string) => `${SITE_URL}/blog/${slug}`;
+
 export async function generateMetadata(
   { params, searchParams }: MetadataProps,
   parent: ResolvingMetadata
@@ -52,29 +56,55 @@ export default async function Page({ params }) {
       <JsonLd
         data={{
           "@context": "https://schema.org",
-          "@type": "Article",
-          url: "https://suryawiguna.com/blog/" + params.slug,
-          image: [post.content.featured_image.filename],
-          headline: post.name,
-          datePublished: post.first_published_at,
-          dateModified: post.first_published_at,
-          mainEntityOfPage: {
-            "@type": "Website",
-            "@id": "https://suryawiguna.com/blog/" + params.slug,
-          },
-          author: {
-            "@type": "Person",
-            name: "Surya Wiguna",
-            url: "https://suryawiguna.com",
-          },
-          publisher: {
-            "@type": "Organization",
-            name: "Surya Wiguna Blog",
-            logo: {
-              "@type": "ImageObject",
-              url: "https://a.storyblok.com/f/169901/1080x1080/b793aa9e72/favicon.png",
+          "@graph": [
+            {
+              "@type": "BlogPosting",
+              "@id": `${POST_URL(params.slug)}#post`,
+              url: POST_URL(params.slug),
+              image: [post.content.featured_image.filename],
+              headline: post.name,
+              description: post.content.excerpt,
+              keywords: post.tag_list?.join(", "),
+              articleSection: post.content.categories?.map((c: any) => c.name),
+              datePublished: post.first_published_at,
+              dateModified: post.first_published_at,
+              inLanguage: "en",
+              mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": POST_URL(params.slug),
+              },
+              author: { "@id": PERSON_ID },
+              publisher: { "@id": PERSON_ID },
             },
-          },
+            {
+              "@type": "Person",
+              "@id": PERSON_ID,
+              name: "Surya Wiguna",
+              url: SITE_URL,
+              jobTitle: "Freelance Web Developer",
+              image:
+                "https://a.storyblok.com/f/169901/877x895/eed121f43d/me.jpeg",
+              sameAs: [
+                "https://www.linkedin.com/in/suryawigunaa/",
+                "https://www.behance.net/suryawiguna",
+                "https://dribbble.com/suryawigunaa",
+                "https://www.tiktok.com/@suryawigunaaaa",
+              ],
+            },
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { name: "Home", item: SITE_URL },
+                { name: "Blog", item: `${SITE_URL}/blog` },
+                { name: post.name, item: POST_URL(params.slug) },
+              ].map((crumb, index) => ({
+                "@type": "ListItem",
+                position: index + 1,
+                name: crumb.name,
+                item: crumb.item,
+              })),
+            },
+          ],
         }}
       />
     </>
