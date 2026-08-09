@@ -447,6 +447,14 @@ strong { font-weight: 600; }
   color: var(--ink);
   white-space: nowrap;
 }
+.m-price-note {
+  margin: 1.6rem 0 0;
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--line);
+  color: var(--muted);
+  font-size: var(--text-sm);
+  max-width: 60ch;
+}
 
 /* Services: process */
 .m-steps {

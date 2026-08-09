@@ -7,11 +7,13 @@ export default function Offers({
   heading,
   offers,
   detailed = false,
+  note,
   more,
 }: {
   heading: string;
   offers: Offer[];
   detailed?: boolean;
+  note?: string;
   more?: { href: string; label: string };
 }) {
   return (
@@ -45,6 +47,8 @@ export default function Offers({
           ))}
         </ul>
       )}
+
+      {note && <p className="m-price-note">{note}</p>}
 
       {more && (
         <Link href={more.href} className="m-more">

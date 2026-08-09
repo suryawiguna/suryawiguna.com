@@ -21,7 +21,12 @@ import {
   worksTitle,
 } from "content/home";
 import { featuredProjects } from "content/projects";
-import { CHOOSE_DEVELOPER_POST, OFFERS, PROCESS } from "content/services";
+import {
+  CHOOSE_DEVELOPER_POST,
+  OFFERS,
+  PROCESS,
+  pricingNote,
+} from "content/services";
 import { SITE_URL } from "content/site";
 import {
   PERSON_ID,
@@ -91,6 +96,7 @@ export default function Home() {
       <Offers
         heading="What I do"
         offers={OFFERS}
+        note={pricingNote}
         more={{ href: "/services", label: "See the full detail and prices →" }}
       />
       <Portfolios projects={featuredProjects} heading={worksTitle} />

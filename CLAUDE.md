@@ -23,7 +23,7 @@ This is a **Next.js 14 App Router** personal portfolio site (`suryawiguna.com`).
 
 | File | Holds |
 |------|-------|
-| `content/site.ts` | Site URL/name, email, location, avatar, social profiles, services, nav items, sitemap `PAGE_UPDATED` dates |
+| `content/site.ts` | Site URL/name, email, location, avatar, social profiles, nav items, sitemap `PAGE_UPDATED` dates |
 | `content/home.ts` | Home SEO, hero copy, working experiences, education, skills |
 | `content/projects.ts` | Every portfolio project, plus `visibleProjects` / `featuredProjects` and the `/portfolio` page's heading and SEO |
 | `content/links.ts` | `/link` SEO, intro, and the link list split into `socialLinks` / `primaryLinks` |

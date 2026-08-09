@@ -30,17 +30,9 @@ export const SOCIAL_PROFILES = [
 export const BUSINESS_DESCRIPTION =
   "Freelance web development and design based in Bali, building fast marketing sites and Shopify storefronts for founders and small teams, with SEO and AI search optimization built in.";
 
-// `serviceType` is the broader category each offering falls under; `name` is
-// how it is sold.
-export const SERVICES = [
-  { name: "Next.js Web Development", serviceType: "Web Development" },
-  { name: "Shopify Store Development", serviceType: "E-commerce Development" },
-  {
-    name: "SEO & AI Search Optimization",
-    serviceType: "Search Engine Optimization",
-  },
-  { name: "UI/UX Design", serviceType: "Web Design" },
-];
+// What is on offer now lives in content/services.ts as OFFERS, which feeds
+// both the sales copy and the OfferCatalog in lib/jsonLd.ts. Keeping a second
+// list here meant the schema and the pages described different businesses.
 
 export const NAV_ITEMS = [
   { href: "/", label: "home" },

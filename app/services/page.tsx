@@ -12,6 +12,7 @@ import {
   OFFERS,
   PROCESS,
   SECTORS,
+  pricingNote,
   servicesPage,
   servicesSeo,
 } from "content/services";
@@ -47,14 +48,15 @@ function generateServicesJsonLd() {
       // Repeated from the home page on purpose: same @id, so consumers merge
       // the two into one business rather than seeing two.
       businessNode(),
-      // The three things actually for sale, which is a narrower list than the
-      // SERVICES catalog on the business node.
+      // The same three offers the business node carries as an OfferCatalog,
+      // repeated here as first-class Service nodes so each one can be
+      // addressed by @id and carry its own description.
       ...OFFERS.map((offer) => ({
         "@type": "Service",
         "@id": `${PAGE_URL}#${offer.slug}`,
         name: offer.title,
         description: offer.detail[0],
-        serviceType: offer.title,
+        serviceType: offer.serviceType,
         provider: { "@id": BUSINESS_ID },
         areaServed: AREA_SERVED,
       })),
@@ -101,7 +103,12 @@ export default function Services() {
         </div>
       </header>
 
-      <Offers heading="What I build" offers={OFFERS} detailed />
+      <Offers
+        heading="What I build"
+        offers={OFFERS}
+        detailed
+        note={pricingNote}
+      />
       <Sectors
         heading={SECTORS.title}
         intro={SECTORS.intro}

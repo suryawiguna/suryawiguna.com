@@ -4,11 +4,11 @@
 // here rather than being copied per page.
 
 import { education, experiences, hero, homeSeo, skills } from "content/home";
+import { OFFERS } from "content/services";
 import {
   BUSINESS_DESCRIPTION,
   EMAIL,
   LOCATION,
-  SERVICES,
   SITE_NAME,
   SITE_URL,
   SOCIAL_PROFILES,
@@ -78,15 +78,18 @@ export function businessNode() {
     sameAs: SOCIAL_PROFILES,
     address: ADDRESS,
     areaServed: AREA_SERVED,
+    // Built from OFFERS so the catalog describes the same three things the
+    // pages sell. It used to be a separate four-item list in content/site.ts,
+    // which meant the copy and the schema described different businesses.
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Web Development Services",
-      itemListElement: SERVICES.map((service) => ({
+      itemListElement: OFFERS.map((offer) => ({
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: service.name,
-          serviceType: service.serviceType,
+          name: offer.title,
+          serviceType: offer.serviceType,
           // The Service sits inside the business's catalog, but linking the
           // provider explicitly survives consumers that flatten the graph.
           provider: { "@id": BUSINESS_ID },

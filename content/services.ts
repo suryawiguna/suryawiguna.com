@@ -13,10 +13,13 @@ export type Offer = {
   cardBlurb: string;
   // /services: one paragraph per entry.
   detail: string[];
-  // Shown as-is. TODO: confirm pricing. The post
-  // /blog/how-to-choose-web-developer-bali already publishes IDR ranges, so
-  // whatever lands here should agree with it.
+  // Shown as-is, aimed at the remote client. Local enquiries are covered by
+  // `pricingNote` below rather than by a second set of numbers.
+  // TODO: confirm pricing. These are proposals, not Surya's confirmed rates.
   priceFrom: string;
+  // Feeds the OfferCatalog on the ProfessionalService node. Broader than
+  // `title`: it is the category, not the product name.
+  serviceType: string;
 };
 
 export type Step = { title: string; line: string };
@@ -46,7 +49,8 @@ export const OFFERS = [
       "This is the one most people come for. You have a business, you need a site that loads fast, reads well on a phone, and turns a visitor into an enquiry.",
       "I write the structure with you, design it, then build it. Next.js if speed and search matter most, WordPress if you would rather log in and change the copy yourself without calling me. Either way you get the pages, the forms, and the basic SEO setup done properly the first time.",
     ],
-    priceFrom: "from $X",
+    priceFrom: "from $2,000",
+    serviceType: "Web Development",
   },
   {
     slug: "shopify",
@@ -57,7 +61,8 @@ export const OFFERS = [
       "If you sell physical products, Shopify handles the boring parts: payments, stock, shipping, taxes. What it does not do is make your store look like anyone in particular.",
       "I set up the store and customise the theme so it matches your brand, not the demo. That covers product pages, collections, cart, and checkout styling. If you already have a store and it just looks generic, I can work on the existing theme instead of starting over.",
     ],
-    priceFrom: "from $X",
+    priceFrom: "from $3,000",
+    serviceType: "E-commerce Development",
   },
   {
     slug: "migration",
@@ -68,9 +73,18 @@ export const OFFERS = [
       "Old sites get slow and awkward. Plugins pile up, the theme stops being supported, and every small change turns into a job.",
       "I move the content across, keep the URLs and redirects intact so you do not lose the traffic you already earn, and rebuild the front end on something current. The usual routes are WordPress to Next.js and a stock Shopify theme to a headless setup, but the principle is the same: same content, faster site, easier to change.",
     ],
-    priceFrom: "from $X",
+    priceFrom: "from $2,500",
+    serviceType: "Web Development",
   },
 ] satisfies Offer[];
+
+// The two halves of the audience sit about ten times apart on budget: the
+// post /blog/how-to-choose-web-developer-bali puts typical Bali market rates
+// at IDR 3,000,000 to 20,000,000, which is roughly $200 to $1,250. Rather
+// than print two sets of numbers, the USD bands speak to the remote client
+// and this line tells a local reader the figures are not the whole story.
+export const pricingNote =
+  "Based in Bali? Local projects get scoped and quoted in rupiah, and they usually land below the figures above. Ask me and I will give you a straight number.";
 
 export const PROCESS = {
   title: "How it works",
