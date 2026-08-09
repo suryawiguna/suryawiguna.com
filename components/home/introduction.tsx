@@ -17,7 +17,7 @@ export default function Introduction() {
       </div>
       <h1 className="m-h1">
         {hero.headline}
-        <span className="m-h1-sep">—</span>
+        <span className="m-h1-sep">|</span>
         {hero.name}
       </h1>
       <div className="m-lede">
