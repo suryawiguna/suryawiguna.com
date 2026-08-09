@@ -1,22 +1,21 @@
-"use client";
 import Image from "next/image";
-import { RichText } from "../global";
+import { linkIntro } from "content/links";
 
-export default function Introduction({ blok }) {
+export default function Introduction() {
   return (
     <header className="m-hero">
       <div className="m-avatar">
         <Image
-          src={blok.image.filename}
-          alt={blok.image.alt}
+          src={linkIntro.image.src}
+          alt={linkIntro.image.alt}
           width={200}
           height={200}
           placeholder="blur"
-          blurDataURL={`${blok.image.filename}/m/40x40`}
+          blurDataURL={`${linkIntro.image.src}/m/40x40`}
         />
       </div>
       <div className="m-lede">
-        <RichText data={blok.description} />
+        <p>{linkIntro.description}</p>
       </div>
     </header>
   );

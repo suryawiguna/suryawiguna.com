@@ -1,16 +1,12 @@
 import "styles/global.css";
 import "styles/v3.css";
 
-import { storyblokInit, apiPlugin } from "@storyblok/react";
-import StoryblokProvider from "components/StoryblokProvider";
 import Navigation from "components/navigation";
 import Footer from "components/global/footer";
-import { getNavigation } from "lib/api";
+import { SITE_URL } from "content/site";
 import { Metadata } from "next";
 import Script from "next/script";
 import { Archivo, Inter } from "next/font/google";
-
-const SITE_URL = "https://suryawiguna.com";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -23,11 +19,6 @@ const inter = Inter({
   weight: ["400", "500", "600"],
   display: "swap",
   variable: "--font-body",
-});
-
-storyblokInit({
-  accessToken: process.env.STORYBLOK_ACCESS_TOKEN,
-  use: [apiPlugin],
 });
 
 export const metadata: Metadata = {
@@ -43,13 +34,11 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const navigation = await getNavigation();
-
   return (
     <html
       lang="en"
@@ -85,11 +74,9 @@ a.appendChild(r);
       </head>
       <link rel="icon" href="/images/favicon.png" sizes="any" />
       <body>
-        <StoryblokProvider>
-          <Navigation navigation={navigation} />
-          <main className="m-main">{children}</main>
-          <Footer />
-        </StoryblokProvider>
+        <Navigation />
+        <main className="m-main">{children}</main>
+        <Footer />
       </body>
     </html>
   );

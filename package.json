@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@mailchimp/mailchimp_marketing": "^3.0.80",
-    "@storyblok/react": "^2.4.7",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@types/react": "^18.2.35",
     "@types/react-dom": "^18.2.14",
@@ -23,7 +22,6 @@
     "react-share": "^5.1.0",
     "react-syntax-highlighter": "^15.5.0",
     "sharp": "^0.32.6",
-    "storyblok-js-client": "^5.0.7",
     "storyblok-rich-text-react-renderer": "^2.6.1",
     "styled-components": "^5.3.6"
   },

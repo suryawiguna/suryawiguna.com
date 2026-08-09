@@ -1,18 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
+import { NAV_ITEMS, SITE_NAME } from "content/site";
 
-export default function Navigation({ navigation }) {
+export default function Navigation() {
   return (
     <nav className="m-nav" aria-label="Primary">
       <div className="m-nav-inner">
         <Link href="/" className="m-brand">
           <Image src="/images/favicon.png" alt="" width={22} height={22} />
-          <span>Surya Wiguna</span>
+          <span>{SITE_NAME}</span>
         </Link>
         <ul className="m-nav-items">
-          {navigation.menu.map((menu: any) => (
-            <li key={menu._uid}>
-              <Link href={menu.link.url}>{menu.text.toLowerCase()}</Link>
+          {NAV_ITEMS.map((item) => (
+            <li key={item.href}>
+              <Link href={item.href}>{item.label}</Link>
             </li>
           ))}
         </ul>

@@ -1,8 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts, getSitemapEntries } from "lib/api";
 import { archivableTags } from "lib/tags";
-
-const SITE_URL = "https://suryawiguna.com";
+import { PAGE_UPDATED, SITE_URL } from "content/site";
 
 // Regenerated on the same cadence as the blog routes, so a post published in
 // Storyblok reaches the sitemap without a redeploy. The previous next-sitemap
@@ -10,7 +9,7 @@ const SITE_URL = "https://suryawiguna.com";
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const { posts, pageDate } = await getSitemapEntries();
+  const posts = await getSitemapEntries();
 
   const newestPost = posts
     .map((post: any) => post.published_at)
@@ -19,10 +18,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .pop();
 
   const staticRoutes = [
-    { path: "", lastModified: pageDate("home"), priority: 1 },
+    { path: "", lastModified: PAGE_UPDATED.home, priority: 1 },
     { path: "/blog", lastModified: newestPost, priority: 0.8 },
-    { path: "/portfolio", lastModified: pageDate("portfolio"), priority: 0.8 },
-    { path: "/link", lastModified: pageDate("link"), priority: 0.5 },
+    { path: "/portfolio", lastModified: PAGE_UPDATED.portfolio, priority: 0.8 },
+    { path: "/link", lastModified: PAGE_UPDATED.link, priority: 0.5 },
   ];
 
   // Tag archives are derived from the posts, so they are only as fresh as the

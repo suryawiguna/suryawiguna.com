@@ -1,30 +1,28 @@
-import { getPage } from "lib/api";
 import { Metadata } from "next";
-import { searchComponent } from "lib/helper";
 import Portfolios from "components/portfolio/portfolios";
+import { portfolioPage, visibleProjects } from "content/projects";
+import { SITE_URL } from "content/site";
 
 export const metadata: Metadata = {
-  title: "Web Developer Bali Portfolio | Surya Wiguna",
-  description: "Check out my portfolios",
+  title: portfolioPage.seo.title,
+  description: portfolioPage.seo.description,
   alternates: {
     canonical: `/portfolio`,
   },
   openGraph: {
-    images: ["https://a.storyblok.com/f/169901/877x895/eed121f43d/me.jpeg"],
-    url: "https://suryawiguna.com/portfolio",
+    images: [portfolioPage.seo.ogImage],
+    url: `${SITE_URL}/portfolio`,
     type: "website",
   },
 };
 
-export default async function Home() {
-  const data = await getPage("portfolio");
-
+export default function Portfolio() {
   return (
     <section className="m-section" style={{ borderTop: 0 }}>
       <h1 className="m-h2" style={{ fontSize: "var(--text-3xl)" }}>
-        {data.title}
+        {portfolioPage.heading}
       </h1>
-      <Portfolios blok={searchComponent(data, "portfolios")} />
+      <Portfolios projects={visibleProjects} />
     </section>
   );
 }

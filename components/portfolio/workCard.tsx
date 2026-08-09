@@ -1,21 +1,15 @@
-"use client";
-
 import Image from "next/image";
-import { RichText } from "components/global";
 import Link from "next/link";
+import type { Project } from "content/projects";
 
-export default function WorkCard({ work }: { work: any }) {
+export default function WorkCard({ work }: { work: Project }) {
   return (
     <li className="m-work-item">
-      <Link
-        href={work.link.url}
-        target="_blank"
-        className="m-work-row"
-      >
-        {work.image?.filename && (
+      <Link href={work.href} target="_blank" className="m-work-row">
+        {work.image && (
           <div className="m-work-img">
             <Image
-              src={work.image.filename}
+              src={work.image.src}
               alt={work.image.alt || work.title}
               fill
               sizes="96px"
@@ -27,15 +21,14 @@ export default function WorkCard({ work }: { work: any }) {
           <div className="m-work-link">
             <span className="m-work-title">{work.title}</span>
             <span className="m-work-meta">
-              {work.category?.[0] && (
-                <span className="m-chip">{work.category[0]}</span>
+              {work.categories[0] && (
+                <span className="m-chip">{work.categories[0]}</span>
               )}
             </span>
           </div>
-          <RichText
-            data={work.description}
-            className="m-work-blurb"
-          />
+          <div className="m-work-blurb">
+            <p>{work.description}</p>
+          </div>
         </div>
       </Link>
     </li>
