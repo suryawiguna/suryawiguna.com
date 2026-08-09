@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
-import { getSitemapEntries } from "lib/api";
+import { getAllPosts, getSitemapEntries } from "lib/api";
+import { archivableTags } from "lib/tags";
 
 const SITE_URL = "https://suryawiguna.com";
 
@@ -24,6 +25,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/link", lastModified: pageDate("link"), priority: 0.5 },
   ];
 
+  // Tag archives are derived from the posts, so they are only as fresh as the
+  // newest post that carries the tag.
+  const tagArchives = archivableTags((await getAllPosts()) || []).map(
+    (entry) => ({
+      url: `${SITE_URL}/blog/tag/${entry.slug}`,
+      lastModified: new Date(newestPost ?? Date.now()),
+      priority: 0.6,
+    })
+  );
+
   return [
     ...staticRoutes.map((route) => ({
       url: `${SITE_URL}${route.path}`,
@@ -35,5 +46,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(post.published_at),
       priority: 0.7,
     })),
+    ...tagArchives,
   ];
 }

@@ -5,6 +5,8 @@ import JsonLd from "components/jsonLd";
 import { getAllPosts, getPost, isNoindex } from "lib/api";
 import { MetadataProps } from "lib/helper";
 import { findRelatedPosts } from "lib/related";
+import { archivableTags } from "lib/tags";
+import { notFound } from "next/navigation";
 import type { Metadata, ResolvingMetadata } from "next";
 
 const SITE_URL = "https://suryawiguna.com";
@@ -16,6 +18,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const post = await getPost(params.slug);
+  if (!post) return {};
 
   return {
     title: post.name,
@@ -49,12 +52,19 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }) {
   const post = await getPost(params.slug);
+  // by_slugs returns an empty list for an unknown slug, so getPost yields
+  // undefined and every `post.*` read below used to throw a 500 at crawlers.
+  if (!post) notFound();
+
   const all = (await getAllPosts()) || [];
   const related = findRelatedPosts(post, all);
+  const tagLinks = Object.fromEntries(
+    archivableTags(all).map((entry) => [entry.tag, entry.slug])
+  );
 
   return (
     <>
-      <FullPost post={post} related={related} />
+      <FullPost post={post} related={related} tagLinks={tagLinks} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
