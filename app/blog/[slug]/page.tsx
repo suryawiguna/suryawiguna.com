@@ -4,6 +4,7 @@ import FullPost from "components/blog/fullPost";
 import JsonLd from "components/jsonLd";
 import { getAllPosts, getPost } from "lib/api";
 import { MetadataProps } from "lib/helper";
+import { findRelatedPosts } from "lib/related";
 import type { Metadata, ResolvingMetadata } from "next";
 
 const SITE_URL = "https://suryawiguna.com";
@@ -46,9 +47,7 @@ export async function generateStaticParams() {
 export default async function Page({ params }) {
   const post = await getPost(params.slug);
   const all = (await getAllPosts()) || [];
-  const related = all
-    .filter((p: any) => p.slug !== params.slug)
-    .slice(0, 2);
+  const related = findRelatedPosts(post, all);
 
   return (
     <>

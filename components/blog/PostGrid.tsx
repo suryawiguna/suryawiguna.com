@@ -5,22 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import moment from "moment";
 import { X } from "lucide-react";
+import { richTextToPlain as excerptText } from "lib/helper";
 
 const PER_PAGE = 5;
-
-function excerptText(excerpt: any): string {
-  if (!excerpt) return "";
-  if (typeof excerpt === "string") return excerpt;
-  // Storyblok rich-text JSON: walk content nodes for text.
-  const parts: string[] = [];
-  const walk = (node: any) => {
-    if (!node) return;
-    if (typeof node.text === "string") parts.push(node.text);
-    if (Array.isArray(node.content)) node.content.forEach(walk);
-  };
-  walk(excerpt);
-  return parts.join(" ").trim();
-}
 
 export default function PostGrid({ posts }: { posts: any[] }) {
   const [tag, setTag] = useState<string>("all");
