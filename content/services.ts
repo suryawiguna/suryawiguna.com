@@ -13,9 +13,10 @@ export type Offer = {
   cardBlurb: string;
   // /services: one paragraph per entry.
   detail: string[];
-  // Shown as-is, aimed at the remote client. Local enquiries are covered by
-  // `pricingNote` below rather than by a second set of numbers.
-  // TODO: confirm pricing. These are proposals, not Surya's confirmed rates.
+  // Entry price, shown as-is and aimed at the remote client. Local enquiries
+  // are covered by `pricingNote` below rather than by a second set of numbers.
+  // The marketing site band sits just above the top of the Bali market range
+  // quoted in /blog/how-to-choose-web-developer-bali, so the two agree.
   priceFrom: string;
   // Feeds the OfferCatalog on the ProfessionalService node. Broader than
   // `title`: it is the category, not the product name.
@@ -49,7 +50,7 @@ export const OFFERS = [
       "This is the one most people come for. You have a business, you need a site that loads fast, reads well on a phone, and turns a visitor into an enquiry.",
       "I write the structure with you, design it, then build it. Next.js if speed and search matter most, WordPress if you would rather log in and change the copy yourself without calling me. Either way you get the pages, the forms, and the basic SEO setup done properly the first time.",
     ],
-    priceFrom: "from $2,000",
+    priceFrom: "from $800",
     serviceType: "Web Development",
   },
   {
@@ -61,7 +62,7 @@ export const OFFERS = [
       "If you sell physical products, Shopify handles the boring parts: payments, stock, shipping, taxes. What it does not do is make your store look like anyone in particular.",
       "I set up the store and customise the theme so it matches your brand, not the demo. That covers product pages, collections, cart, and checkout styling. If you already have a store and it just looks generic, I can work on the existing theme instead of starting over.",
     ],
-    priceFrom: "from $3,000",
+    priceFrom: "from $1,500",
     serviceType: "E-commerce Development",
   },
   {
@@ -73,7 +74,7 @@ export const OFFERS = [
       "Old sites get slow and awkward. Plugins pile up, the theme stops being supported, and every small change turns into a job.",
       "I move the content across, keep the URLs and redirects intact so you do not lose the traffic you already earn, and rebuild the front end on something current. The usual routes are WordPress to Next.js and a stock Shopify theme to a headless setup, but the principle is the same: same content, faster site, easier to change.",
     ],
-    priceFrom: "from $2,500",
+    priceFrom: "from $1,200",
     serviceType: "Web Development",
   },
 ] satisfies Offer[];
