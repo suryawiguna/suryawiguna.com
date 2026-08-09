@@ -81,7 +81,10 @@ export default function FullPost({
         {post.content?.featured_image?.filename && (
           <figure className="m-cover">
             <Image
-              alt={post.content.featured_image.alt || ""}
+              // 36 of 37 featured images have no alt set in Storyblok; falling
+              // back to the title beats shipping an empty one. Remove the
+              // fallback once the field is filled in.
+              alt={post.content.featured_image.alt || post.name}
               src={post.content.featured_image.filename}
               width={1280}
               height={720}
