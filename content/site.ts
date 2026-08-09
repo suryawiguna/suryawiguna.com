@@ -44,6 +44,7 @@ export const SERVICES = [
 
 export const NAV_ITEMS = [
   { href: "/", label: "home" },
+  { href: "/services", label: "services" },
   { href: "/portfolio", label: "portfolio" },
   { href: "/blog", label: "blog" },
   { href: "/link", label: "link" },
@@ -54,6 +55,7 @@ export const NAV_ITEMS = [
 // matching entry whenever you meaningfully edit a page.
 export const PAGE_UPDATED = {
   home: "2026-08-09",
+  services: "2026-08-09",
   portfolio: "2026-08-09",
   link: "2026-08-09",
 };
