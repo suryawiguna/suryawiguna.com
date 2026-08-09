@@ -6,9 +6,12 @@ import JsonLd from "components/jsonLd";
 import { searchComponent } from "lib/helper";
 import dynamic from "next/dynamic";
 
-const BlogPosts = dynamic(() => import("../components/home/blogPosts"), {
-  ssr: false,
-});
+// BlogPosts is an async server component — it must be a static import so its
+// post links land in the server-rendered HTML. Loading it via next/dynamic
+// with `ssr: false` kept the whole section (and every /blog/* link on the
+// homepage) out of the served markup.
+import BlogPosts from "components/home/blogPosts";
+
 const Portfolios = dynamic(() => import("../components/portfolio/portfolios"));
 
 import type { Metadata } from "next";
