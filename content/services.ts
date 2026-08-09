@@ -203,10 +203,24 @@ export const servicesPage = {
     "I build websites for small businesses: villas, cafes, studios, and product brands here in Bali, plus founders and small teams working remotely.",
     "You do not need to know what Next.js is. You need a site that loads fast, says the right thing, and brings you enquiries. That is the part I handle.",
   ],
-  // Soft CTA at the foot of the page, above the form.
+  // Used by the parked contact form, see contactCta below.
   contactHeading: "Tell me about your project",
   contactIntro:
     "Fill this in and I will come back to you with a price and a timeline. No obligation, and I will tell you if I am not the right fit.",
+};
+
+// Soft CTA at the foot of /services. This is a mailto rather than the form in
+// components/services/contactForm.tsx: Brevo accepted the test sends but the
+// mail never arrived, so the form is parked until delivery is sorted out
+// rather than shipped as a lead sink that silently loses enquiries.
+export const contactCta = {
+  heading: "Tell me about your project",
+  body: [
+    "Email me what you are building and roughly when you need it live. I will come back with a price and a timeline.",
+    "No obligation, and I will tell you if I am not the right fit.",
+  ],
+  subject: "Project enquiry",
+  label: "Email me",
 };
 
 // Rendered under every blog post. The audit for internal linking opportunities

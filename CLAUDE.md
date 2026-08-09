@@ -64,9 +64,13 @@ Two parallel subscription systems exist:
 - `app/api/subscribe/route.ts` — server-side Mailchimp integration (POST with email header)
 - `components/blog/subscribe.tsx` — client-side Brevo API call using `NEXT_PUBLIC_BREVO_API_KEY`
 
-### Contact form
+### Contact form (parked)
+
+`/services` currently ends with `components/services/contactCta.tsx`, a plain mailto. The real form is built but **not wired up**:
 
 `components/services/contactForm.tsx` (client) POSTs JSON to `app/api/contact/route.ts`, which sends the enquiry as a transactional email via Brevo. It uses the server-only `BREVO_API_KEY`, **not** the `NEXT_PUBLIC_BREVO_API_KEY` the subscribe widget ships to the browser. Without the key set the route returns 502 and the form tells the visitor to email instead. The `company` field is a honeypot: a filled one gets a silent 200 and no email.
+
+Both were validated end to end in a browser, and Brevo returned 2xx, but the mail never arrived. Check the Brevo transactional log (delivered / blocked / bounced) and that `hi@suryawiguna.com` is a verified sender before swapping `ContactCta` back for `ContactForm` in `app/services/page.tsx`. Note Brevo IP restriction must stay off, since serverless hosts rotate egress IPs.
 
 ### Styling
 
