@@ -1,20 +1,17 @@
 import Link from "next/link";
+import { primaryLinks, socialHeading, socialLinks } from "content/links";
 
-export default function Links({ blok }) {
-  const social = blok.links.filter((l: any) => l.socialLink);
-  const primary = blok.links.filter((l: any) => !l.socialLink);
-
+export default function Links() {
   return (
     <section id="links" className="m-section">
-      {social.length > 0 && (
+      {socialLinks.length > 0 && (
         <>
-          <h2 className="m-h2">Explore my other stuff</h2>
+          <h2 className="m-h2">{socialHeading}</h2>
           <div className="m-links">
-            {social.map((link: any, key: number) => (
+            {socialLinks.map((link) => (
               <Link
-                key={key}
-                href={link.link.url || link.link.cached_url}
-                target={link.linktype == "url" ? "_blank" : undefined}
+                key={link.name}
+                href={link.href}
                 className="m-chip m-chip-link"
               >
                 {link.name}
@@ -23,20 +20,19 @@ export default function Links({ blok }) {
           </div>
         </>
       )}
-      {primary.length > 0 && (
+      {primaryLinks.length > 0 && (
         <div
           className="m-links"
           style={{
             flexDirection: "column",
             alignItems: "stretch",
-            marginTop: social.length > 0 ? "1.4rem" : 0,
+            marginTop: socialLinks.length > 0 ? "1.4rem" : 0,
           }}
         >
-          {primary.map((link: any, key: number) => (
+          {primaryLinks.map((link) => (
             <Link
-              key={key}
-              href={link.link.url || link.link.cached_url}
-              target={link.linktype == "url" ? "_blank" : undefined}
+              key={link.name}
+              href={link.href}
               className="m-btn ghost"
               style={{ justifyContent: "center" }}
             >

@@ -15,37 +15,41 @@ No test suite is configured.
 
 ## Architecture
 
-This is a **Next.js 14 App Router** personal portfolio site (`suryawiguna.com`) that uses **Storyblok** as a headless CMS for all content.
+This is a **Next.js 14 App Router** personal portfolio site (`suryawiguna.com`). **Only blog posts come from Storyblok** — every other page is hardcoded in `content/`.
 
 ### Content flow
 
-All page content is fetched from Storyblok's GraphQL API (`https://gapi.storyblok.com/v1/api`) via `lib/api.js`. The CMS drives:
-- Home page (`getHome`) — resolves relations to blog posts
-- Generic pages like portfolio and link (`getPage`)
-- Blog post listing (`getAllPosts`, `getFeaturedPosts`) and individual posts (`getPost`)
-- Navigation (`getNavigation`)
-- Sitemap URLs and their `published_at` dates (`getSitemapEntries`)
+**Hardcoded pages.** The home, portfolio, and link pages, plus site-wide facts and navigation, live as plain typed TypeScript modules under `content/`:
+
+| File | Holds |
+|------|-------|
+| `content/site.ts` | Site URL/name, email, location, avatar, social profiles, services, nav items, sitemap `PAGE_UPDATED` dates |
+| `content/home.ts` | Home SEO, hero copy, working experiences, education, skills |
+| `content/projects.ts` | Every portfolio project, plus `visibleProjects` / `featuredProjects` and the `/portfolio` page's heading and SEO |
+| `content/links.ts` | `/link` SEO, intro, and the link list split into `socialLinks` / `primaryLinks` |
+
+Editing site copy means editing these files — there is no CMS entry for them. Images still point at the Storyblok CDN (`a.storyblok.com`), which stays an allowed `next/image` host.
+
+Two flags worth knowing: a project marked `hidden: true` stays in the file but renders nowhere; `featured: true` adds it to the home page's "Recent Works". A history entry marked `current: true` feeds `worksFor` in the home page JSON-LD.
+
+`content/site.ts` `PAGE_UPDATED` supplies the sitemap `lastModified` for `/`, `/portfolio`, and `/link` — Storyblok used to provide those dates, so bump the matching entry when you meaningfully edit a page.
+
+**Blog.** Post content is fetched from Storyblok's GraphQL API (`https://gapi.storyblok.com/v1/api`) via `lib/api.js`: `getAllPosts`, `getFeaturedPosts`, `getPost`, and `getSitemapEntries`.
 
 Storyblok's GraphQL API defaults `PostItems` to 25 per page and caps `per_page` at 100, so any query that must return *every* post has to paginate — go through the `fetchAllPostItems` helper in `lib/api.js` rather than issuing a bare `PostItems` query. Skipping this silently truncates the blog index, `generateStaticParams`, and the sitemap.
 
-Pages are server components that fetch their content directly, then pass `blok` props to presentational components. The `lib/helper.ts` `searchComponent(data, name)` utility extracts a specific component block from a page's `body` array by component type name.
-
-### Storyblok integration
-
-- `components/StoryblokProvider.tsx` — initializes `@storyblok/react/rsc` for RSC and registers the `page` and `introduction` component mappings
-- `components/global/dynamicComponent.tsx` — client-side renderer for Storyblok bloks; maps component names to React components
-- The root layout (`app/layout.tsx`) also calls `storyblokInit` for client-side use and sets `revalidate = 10`
+The Storyblok React SDK (`@storyblok/react`) is **not** a dependency — posts are fetched with plain `fetch` and rendered through `components/global/richText.tsx` (`storyblok-rich-text-react-renderer`). There is no visual editor wiring; don't reintroduce `storyblokInit`, `StoryblokComponent`, or `storyblokEditable`.
 
 ### Pages
 
 | Route | Data source |
 |-------|-------------|
-| `/` | `getHome()` — sections (introduction, portfolios, histories, skills, blogPosts) come from `data.body` |
+| `/` | `content/home.ts` + `featuredProjects`; the recent-posts strip calls `getAllPosts(5)` |
 | `/blog` | `getAllPosts()` |
 | `/blog/[slug]` | `getPost(slug)`, static params generated at build |
-| `/portfolio` | `getPage("portfolio")` |
-| `/link` | `getPage("link")` |
-| `/sitemap.xml` | `app/sitemap.ts` — `getSitemapEntries()`, revalidates hourly |
+| `/portfolio` | `content/projects.ts` |
+| `/link` | `content/links.ts` |
+| `/sitemap.xml` | `app/sitemap.ts` — `getSitemapEntries()` + `PAGE_UPDATED`, revalidates hourly |
 | `/robots.txt` | `app/robots.ts` |
 
 `sitemap.xml` and `robots.txt` are generated routes, not files. Do not add either to `public/` — static files there shadow app routes and would silently freeze the sitemap again.

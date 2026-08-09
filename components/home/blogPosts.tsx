@@ -2,7 +2,7 @@ import Link from "next/link";
 import moment from "moment";
 import { getAllPosts } from "lib/api";
 
-export default async function BlogPosts({ blok }) {
+export default async function BlogPosts() {
   const posts = await getAllPosts(5);
 
   return (
