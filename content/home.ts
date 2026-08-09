@@ -11,13 +11,13 @@ export type HistoryItem = {
 export const homeSeo = {
   title: "Freelance Web Developer Bali | Surya Wiguna",
   description:
-    "Freelance web developer in Bali. I build fast marketing sites and Shopify storefronts for founders and small teams. Next.js, Shopify, SEO.",
+    "Freelance web developer in Bali. I build fast marketing sites and Shopify storefronts for founders and small teams. Next.js, Shopify, WordPress.",
   ogImage: AVATAR.src,
 };
 
 export const hero = {
   image: AVATAR,
-  // Rendered as `{headline} — {name}` in the <h1>.
+  // Rendered as `{headline} | {name}` in the <h1>.
   headline: "Freelance Web Developer in Bali",
   name: "Surya Wiguna",
   description:
@@ -31,7 +31,7 @@ export const worksTitle = "Recent Works";
 export const worksListName = "My Portfolio - Web Development Projects";
 
 export const experiences = {
-  title: "Working Experiences",
+  title: "Experience",
   items: [
     {
       title: "Web Developer",
@@ -45,7 +45,7 @@ export const experiences = {
 };
 
 export const education = {
-  title: "Educations",
+  title: "Education",
   items: [
     { title: "Graduated", place: "ITB Stikom Bali", period: "2015 - 2019" },
   ] satisfies HistoryItem[],

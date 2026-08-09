@@ -3,6 +3,8 @@ import Histories from "components/experience/histories";
 import Skills from "components/skill/skill";
 import JsonLd from "components/jsonLd";
 import Portfolios from "components/portfolio/portfolios";
+import Offers from "components/services/offers";
+import Process from "components/services/process";
 
 // BlogPosts is an async server component — it must be a static import so its
 // post links land in the server-rendered HTML. Loading it via next/dynamic
@@ -13,7 +15,6 @@ import BlogPosts from "components/home/blogPosts";
 import {
   education,
   experiences,
-  hero,
   homeSeo,
   skills,
   worksListName,
@@ -21,100 +22,39 @@ import {
 } from "content/home";
 import { featuredProjects } from "content/projects";
 import {
-  BUSINESS_DESCRIPTION,
-  EMAIL,
-  LOCATION,
-  SERVICES,
-  SITE_NAME,
-  SITE_URL,
-  SOCIAL_PROFILES,
-} from "content/site";
+  CHOOSE_DEVELOPER_POST,
+  OFFERS,
+  PROCESS,
+  pricingNote,
+} from "content/services";
+import { SITE_URL } from "content/site";
+import {
+  PERSON_ID,
+  WEBSITE_ID,
+  businessNode,
+  personNode,
+  websiteNode,
+} from "lib/jsonLd";
 
 import type { Metadata } from "next";
-
-const PERSON_ID = `${SITE_URL}/#person`;
-
-const ADDRESS = {
-  "@type": "PostalAddress",
-  addressLocality: LOCATION.locality,
-  addressCountry: LOCATION.country,
-};
 
 function generateHomeJsonLd() {
   return {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "Person",
-        "@id": PERSON_ID,
-        name: SITE_NAME,
-        url: SITE_URL,
-        image: hero.image.src,
-        jobTitle: "Freelance Web Developer",
-        description: homeSeo.description,
-        email: `mailto:${EMAIL}`,
-        address: ADDRESS,
-        knowsAbout: skills.items,
-        alumniOf: education.items.map((item) => ({
-          "@type": "CollegeOrUniversity",
-          name: item.place,
-        })),
-        worksFor: experiences.items
-          .filter((item) => item.current)
-          .map((item) => ({ "@type": "Organization", name: item.place })),
-        sameAs: SOCIAL_PROFILES,
-      },
-      {
-        "@type": "WebSite",
-        "@id": `${SITE_URL}/#website`,
-        url: SITE_URL,
-        name: SITE_NAME,
-        alternateName: "Freelance Web Developer Bali",
-        publisher: { "@id": PERSON_ID },
-        inLanguage: "en",
-      },
+      personNode(),
+      websiteNode(),
       {
         "@type": "ProfilePage",
         "@id": `${SITE_URL}/#webpage`,
         url: SITE_URL,
         name: homeSeo.title,
         description: homeSeo.description,
-        isPartOf: { "@id": `${SITE_URL}/#website` },
+        isPartOf: { "@id": WEBSITE_ID },
         about: { "@id": PERSON_ID },
         mainEntity: { "@id": PERSON_ID },
       },
-      {
-        "@type": "ProfessionalService",
-        "@id": `${SITE_URL}/#business`,
-        name: `${SITE_NAME} — Freelance Web Developer Bali`,
-        url: SITE_URL,
-        image: hero.image.src,
-        description: BUSINESS_DESCRIPTION,
-        email: `mailto:${EMAIL}`,
-        founder: { "@id": PERSON_ID },
-        sameAs: SOCIAL_PROFILES,
-        address: ADDRESS,
-        areaServed: [
-          { "@type": "Place", name: "Bali" },
-          { "@type": "Country", name: "Indonesia" },
-          { "@type": "Place", name: "Worldwide" },
-        ],
-        hasOfferCatalog: {
-          "@type": "OfferCatalog",
-          name: "Web Development Services",
-          itemListElement: SERVICES.map((service) => ({
-            "@type": "Offer",
-            itemOffered: {
-              "@type": "Service",
-              name: service.name,
-              serviceType: service.serviceType,
-              // The Service sits inside the business's catalog, but linking the
-              // provider explicitly survives consumers that flatten the graph.
-              provider: { "@id": `${SITE_URL}/#business` },
-            },
-          })),
-        },
-      },
+      businessNode(),
       {
         "@type": "ItemList",
         "@id": `${SITE_URL}/#works`,
@@ -153,7 +93,23 @@ export default function Home() {
   return (
     <>
       <Introduction />
+      <Offers
+        heading="What I do"
+        offers={OFFERS}
+        note={pricingNote}
+        more={{ href: "/services", label: "See the full detail and prices →" }}
+      />
       <Portfolios projects={featuredProjects} heading={worksTitle} />
+      <Process
+        heading={PROCESS.title}
+        timeline={PROCESS.timeline}
+        steps={PROCESS.steps}
+        more={{
+          href: CHOOSE_DEVELOPER_POST,
+          label: "How to choose the right web developer in Bali →",
+        }}
+      />
+      <BlogPosts />
       <section id="about" className="m-section">
         <div className="m-cols">
           <Histories title={experiences.title} items={experiences.items} />
@@ -161,7 +117,6 @@ export default function Home() {
         </div>
         <Skills title={skills.title} items={skills.items} />
       </section>
-      <BlogPosts />
       <JsonLd data={generateHomeJsonLd()} />
     </>
   );

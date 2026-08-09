@@ -23,16 +23,19 @@ This is a **Next.js 14 App Router** personal portfolio site (`suryawiguna.com`).
 
 | File | Holds |
 |------|-------|
-| `content/site.ts` | Site URL/name, email, location, avatar, social profiles, services, nav items, sitemap `PAGE_UPDATED` dates |
+| `content/site.ts` | Site URL/name, email, location, avatar, social profiles, nav items, sitemap `PAGE_UPDATED` dates |
 | `content/home.ts` | Home SEO, hero copy, working experiences, education, skills |
 | `content/projects.ts` | Every portfolio project, plus `visibleProjects` / `featuredProjects` and the `/portfolio` page's heading and SEO |
 | `content/links.ts` | `/link` SEO, intro, and the link list split into `socialLinks` / `primaryLinks` |
+| `content/services.ts` | `/services` SEO and copy: the three `OFFERS`, `PROCESS`, `SECTORS`, `CASE_STUDIES`, `FAQS`, the blog CTA, and `BUDGET_RANGES` for the contact form |
+
+`content/services.ts` also feeds the home page's "What I do" and "How it works" sections, so the short and long versions of an offer stay in sync. `CASE_STUDIES` entries reference projects by title and are looked up in `visibleProjects`, so the titles must match `content/projects.ts` exactly (including the macron in `Vāyu`).
 
 Editing site copy means editing these files — there is no CMS entry for them. Images still point at the Storyblok CDN (`a.storyblok.com`), which stays an allowed `next/image` host.
 
 Two flags worth knowing: a project marked `hidden: true` stays in the file but renders nowhere; `featured: true` adds it to the home page's "Recent Works". A history entry marked `current: true` feeds `worksFor` in the home page JSON-LD.
 
-`content/site.ts` `PAGE_UPDATED` supplies the sitemap `lastModified` for `/`, `/portfolio`, and `/link` — Storyblok used to provide those dates, so bump the matching entry when you meaningfully edit a page.
+`content/site.ts` `PAGE_UPDATED` supplies the sitemap `lastModified` for `/`, `/services`, `/portfolio`, and `/link` — Storyblok used to provide those dates, so bump the matching entry when you meaningfully edit a page.
 
 **Blog.** Post content is fetched from Storyblok's GraphQL API (`https://gapi.storyblok.com/v1/api`) via `lib/api.js`: `getAllPosts`, `getFeaturedPosts`, `getPost`, and `getSitemapEntries`.
 
@@ -47,6 +50,7 @@ The Storyblok React SDK (`@storyblok/react`) is **not** a dependency — posts a
 | `/` | `content/home.ts` + `featuredProjects`; the recent-posts strip calls `getAllPosts(5)` |
 | `/blog` | `getAllPosts()` |
 | `/blog/[slug]` | `getPost(slug)`, static params generated at build |
+| `/services` | `content/services.ts` |
 | `/portfolio` | `content/projects.ts` |
 | `/link` | `content/links.ts` |
 | `/sitemap.xml` | `app/sitemap.ts` — `getSitemapEntries()` + `PAGE_UPDATED`, revalidates hourly |
@@ -59,6 +63,14 @@ The Storyblok React SDK (`@storyblok/react`) is **not** a dependency — posts a
 Two parallel subscription systems exist:
 - `app/api/subscribe/route.ts` — server-side Mailchimp integration (POST with email header)
 - `components/blog/subscribe.tsx` — client-side Brevo API call using `NEXT_PUBLIC_BREVO_API_KEY`
+
+### Contact form (parked)
+
+`/services` currently ends with `components/services/contactCta.tsx`, a plain mailto. The real form is built but **not wired up**:
+
+`components/services/contactForm.tsx` (client) POSTs JSON to `app/api/contact/route.ts`, which sends the enquiry as a transactional email via Brevo. It uses the server-only `BREVO_API_KEY`, **not** the `NEXT_PUBLIC_BREVO_API_KEY` the subscribe widget ships to the browser. Without the key set the route returns 502 and the form tells the visitor to email instead. The `company` field is a honeypot: a filled one gets a silent 200 and no email.
+
+Both were validated end to end in a browser, and Brevo returned 2xx, but the mail never arrived. Check the Brevo transactional log (delivered / blocked / bounced) and that `hi@suryawiguna.com` is a verified sender before swapping `ContactCta` back for `ContactForm` in `app/services/page.tsx`. Note Brevo IP restriction must stay off, since serverless hosts rotate egress IPs.
 
 ### Styling
 
@@ -73,7 +85,8 @@ NEXT_PUBLIC_HOTJAR_ID         # Hotjar site ID
 MAILCHIMP_API_KEY             # Mailchimp API key
 MAILCHIMP_API_SERVER          # Mailchimp server prefix (e.g. us14)
 MAILCHIMP_AUDIENCE_ID         # Mailchimp list/audience ID
-NEXT_PUBLIC_BREVO_API_KEY     # Brevo (Sendinblue) API key
+NEXT_PUBLIC_BREVO_API_KEY     # Brevo (Sendinblue) API key, client-side, blog subscribe only
+BREVO_API_KEY                 # Brevo API key, server-only, sends the /services contact form
 ```
 
 ### Image domains

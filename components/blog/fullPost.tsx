@@ -3,6 +3,7 @@ import { RichText } from "../global";
 import Link from "next/link";
 import Image from "next/image";
 import SubscribeForm from "./subscribe";
+import ServicesCta from "components/services/servicesCta";
 
 // Some posts repeat the title (as an <h1>) and the excerpt (as an intro
 // paragraph) at the top of the body — the header already renders both. Drop
@@ -111,6 +112,8 @@ export default function FullPost({
         )}
 
         <RichText data={bodyContent} className="m-article" />
+
+        <ServicesCta />
 
         <footer className="m-article-foot">
           <div className="m-foot-block">
