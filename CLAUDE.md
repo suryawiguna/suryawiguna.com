@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 npm run dev       # Start development server
-npm run build     # Build for production (also runs next-sitemap as postbuild)
+npm run build     # Build for production
 npm run start     # Start production server
 npm run lint      # Run ESLint
 ```
@@ -24,6 +24,9 @@ All page content is fetched from Storyblok's GraphQL API (`https://gapi.storyblo
 - Generic pages like portfolio and link (`getPage`)
 - Blog post listing (`getAllPosts`, `getFeaturedPosts`) and individual posts (`getPost`)
 - Navigation (`getNavigation`)
+- Sitemap URLs and their `published_at` dates (`getSitemapEntries`)
+
+Storyblok's GraphQL API defaults `PostItems` to 25 per page and caps `per_page` at 100, so any query that must return *every* post has to paginate — go through the `fetchAllPostItems` helper in `lib/api.js` rather than issuing a bare `PostItems` query. Skipping this silently truncates the blog index, `generateStaticParams`, and the sitemap.
 
 Pages are server components that fetch their content directly, then pass `blok` props to presentational components. The `lib/helper.ts` `searchComponent(data, name)` utility extracts a specific component block from a page's `body` array by component type name.
 
@@ -42,6 +45,10 @@ Pages are server components that fetch their content directly, then pass `blok` 
 | `/blog/[slug]` | `getPost(slug)`, static params generated at build |
 | `/portfolio` | `getPage("portfolio")` |
 | `/link` | `getPage("link")` |
+| `/sitemap.xml` | `app/sitemap.ts` — `getSitemapEntries()`, revalidates hourly |
+| `/robots.txt` | `app/robots.ts` |
+
+`sitemap.xml` and `robots.txt` are generated routes, not files. Do not add either to `public/` — static files there shadow app routes and would silently freeze the sitemap again.
 
 ### Email subscriptions
 

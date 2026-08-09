@@ -68,9 +68,13 @@ export default function PostGrid({ posts }: { posts: any[] }) {
   const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
   const safePage = Math.min(page, totalPages);
   const start = (safePage - 1) * PER_PAGE;
-  const slice = filtered.slice(start, start + PER_PAGE);
   const from = filtered.length === 0 ? 0 : start + 1;
   const to = Math.min(start + PER_PAGE, filtered.length);
+
+  // Every post is rendered; off-page ones are hidden rather than sliced away.
+  // Pagination here is client-only state with no URL per page, so slicing left
+  // all but the first five posts with no crawlable link anywhere on the site.
+  const onCurrentPage = (index: number) => index >= start && index < start + PER_PAGE;
 
   const setTagAndReset = (t: string) => {
     setTag(t);
@@ -173,18 +177,22 @@ export default function PostGrid({ posts }: { posts: any[] }) {
       </div>
 
       <section className="m-blog-list" aria-live="polite">
-        {slice.length === 0 ? (
+        {filtered.length === 0 ? (
           <p className="m-empty">
             No posts found{tag !== "all" ? ` in "${tag}"` : ""}{search.trim() ? ` for "${search.trim()}"` : ""}.
           </p>
         ) : (
-          slice.map((post: any) => {
+          filtered.map((post: any, index: number) => {
             const excerpt = excerptText(post.content?.excerpt);
+            const visible = onCurrentPage(index);
             return (
               <Link
                 key={post.slug}
                 href={`/${post.full_slug}`}
                 className="m-bp"
+                hidden={!visible}
+                aria-hidden={!visible ? "true" : undefined}
+                tabIndex={!visible ? -1 : undefined}
               >
                 {post.content?.featured_image?.filename && (
                   <div className="m-bp-img">

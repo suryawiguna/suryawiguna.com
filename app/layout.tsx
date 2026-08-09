@@ -61,10 +61,10 @@ export default async function RootLayout({
         {/* Google Analytics */}
         <Script
           id="gtag"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
         />
-        <Script id="gtag-config" strategy="beforeInteractive">
+        <Script id="gtag-config" strategy="afterInteractive">
           {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
@@ -72,7 +72,7 @@ gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');`}
         </Script>
 
         {/* Hotjar Analytics */}
-        <Script id="hotjar-tracking-code" strategy="beforeInteractive">
+        <Script id="hotjar-tracking-code" strategy="lazyOnload">
           {`(function(h,o,t,j,a,r){
 h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
 h._hjSettings={hjid:${process.env.NEXT_PUBLIC_HOTJAR_ID},hjsv:6};

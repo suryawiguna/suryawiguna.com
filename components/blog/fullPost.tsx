@@ -85,6 +85,9 @@ export default function FullPost({
               src={post.content.featured_image.filename}
               width={1280}
               height={720}
+              // The column caps at --maxw (720px); without this Next derives
+              // 1x/2x off width={1280} and the fallback src asks for w=3840.
+              sizes="(min-width: 720px) 720px, 100vw"
               priority
             />
           </figure>

@@ -206,6 +206,12 @@
   transition: padding 0.2s;
 }
 .m-bp:last-child { border-bottom: 0; }
+/* Off-page rows stay in the DOM so crawlers see every post link; `display: grid`
+   above would otherwise beat the UA stylesheet's [hidden] rule. */
+.m-bp[hidden] { display: none; }
+/* ...which means the last *visible* row, not :last-child, is the one that
+   should drop its divider. */
+.m-bp:not([hidden]):not(:has(~ .m-bp:not([hidden]))) { border-bottom: 0; }
 .m-bp:hover { padding-left: 0.4rem; padding-right: 0.4rem; }
 .m-bp:hover .m-bp-title { color: var(--accent); }
 [data-accent="off"] .m-bp:hover .m-bp-title { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
