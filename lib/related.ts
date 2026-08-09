@@ -36,7 +36,8 @@ export function findRelatedPosts(current: any, all: any[], limit = 2) {
   const currentTerms = new Set(terms(current));
 
   return all
-    .filter((post) => post.slug !== current.slug)
+    // Never recommend a post we've asked Google not to index.
+    .filter((post) => post.slug !== current.slug && post.content?.noindex !== true)
     .map((post) => ({
       post,
       score:
