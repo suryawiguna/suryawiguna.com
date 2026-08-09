@@ -28,9 +28,11 @@ function stripDuplicateLead(doc: any, title: string) {
 export default function FullPost({
   post,
   related = [],
+  tagLinks = {},
 }: {
   post: any;
   related?: any[];
+  tagLinks?: Record<string, string>;
 }) {
   const bodyContent = stripDuplicateLead(post.content.content, post.name);
 
@@ -46,11 +48,23 @@ export default function FullPost({
         <header className="m-article-head">
           {post.tag_list?.length > 0 && (
             <div className="m-article-tags">
-              {post.tag_list.map((tag: string) => (
-                <span key={tag} className="m-chip">
-                  {tag}
-                </span>
-              ))}
+              {post.tag_list.map((tag: string) =>
+                // Only tags that cleared the archive threshold have a page to
+                // link to; the rest stay plain chips.
+                tagLinks[tag] ? (
+                  <Link
+                    key={tag}
+                    href={`/blog/tag/${tagLinks[tag]}`}
+                    className="m-chip m-chip-link"
+                  >
+                    {tag}
+                  </Link>
+                ) : (
+                  <span key={tag} className="m-chip">
+                    {tag}
+                  </span>
+                )
+              )}
             </div>
           )}
           <h1 className="m-article-title">{post.name}</h1>
