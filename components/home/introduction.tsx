@@ -23,12 +23,14 @@ export default function Introduction() {
       <div className="m-lede">
         <p>{hero.description}</p>
       </div>
+      {/* Primary CTA points at /services, not mailto: someone who does not yet
+          know the price or the timeline is not ready to write an email. */}
       <div className="m-cta-row">
-        <Link href={`mailto:${EMAIL}`} className="m-btn primary">
-          Email me
+        <Link href="/services" className="m-btn primary">
+          What I can build for you
         </Link>
-        <Link href="#portfolio" className="m-btn ghost">
-          See work
+        <Link href={`mailto:${EMAIL}`} className="m-btn ghost">
+          Email me
         </Link>
       </div>
       <div className="m-status">
