@@ -2,7 +2,7 @@ import "styles/v3-blog-post.css";
 
 import FullPost from "components/blog/fullPost";
 import JsonLd from "components/jsonLd";
-import { getAllPosts, getPost } from "lib/api";
+import { getAllPosts, getPost, isNoindex } from "lib/api";
 import { MetadataProps } from "lib/helper";
 import { findRelatedPosts } from "lib/related";
 import type { Metadata, ResolvingMetadata } from "next";
@@ -20,6 +20,9 @@ export async function generateMetadata(
   return {
     title: post.name,
     description: post.content.excerpt,
+    // `follow` stays on so the post's own outbound links keep working while
+    // the page itself drops out of the index.
+    ...(isNoindex(post) && { robots: { index: false, follow: true } }),
     alternates: {
       canonical: `/blog/${params.slug}`,
     },
