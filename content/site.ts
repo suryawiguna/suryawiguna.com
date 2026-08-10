@@ -20,6 +20,7 @@ export const SOCIAL_PROFILES = [
   "https://www.linkedin.com/in/suryawigunaa/",
   "https://www.behance.net/suryawiguna",
   "https://dribbble.com/suryawigunaa",
+  "https://www.instagram.com/suryawigunaa/",
   "https://www.tiktok.com/@suryawigunaaaa",
   "https://www.goodreads.com/user/show/135018678-surya-wiguna",
 ];
@@ -46,8 +47,8 @@ export const NAV_ITEMS = [
 // With the content in code there is nothing to read a date from, so bump the
 // matching entry whenever you meaningfully edit a page.
 export const PAGE_UPDATED = {
-  home: "2026-08-09",
+  home: "2026-08-10",
   services: "2026-08-09",
-  portfolio: "2026-08-09",
+  portfolio: "2026-08-10",
   link: "2026-08-09",
 };

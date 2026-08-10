@@ -17,7 +17,10 @@ export default function Introduction() {
       </div>
       <h1 className="m-h1">
         {hero.headline}
-        <span className="m-h1-sep">|</span>
+        {/* Literal spaces, not CSS margin: the separator is part of the text
+            content crawlers and screen readers read, and JSX drops the
+            whitespace-only lines around this span. */}
+        <span className="m-h1-sep">{" | "}</span>
         {hero.name}
       </h1>
       <div className="m-lede">
