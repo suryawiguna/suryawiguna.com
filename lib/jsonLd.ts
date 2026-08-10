@@ -69,7 +69,7 @@ export function businessNode() {
   return {
     "@type": "ProfessionalService",
     "@id": BUSINESS_ID,
-    name: `${SITE_NAME} — Freelance Web Developer Bali`,
+    name: `${SITE_NAME} - Freelance Web Developer Bali`,
     url: SITE_URL,
     image: hero.image.src,
     description: BUSINESS_DESCRIPTION,
