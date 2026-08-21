@@ -1,0 +1,166 @@
+/* /services — page-scoped polish layer.
+   Loaded only by app/services/page.tsx and scoped under .m-services, so the
+   shared primitives in v3.css keep their home / portfolio / blog rendering.
+   Anything here that proves itself is a one-line promotion into v3.css. */
+
+.m-services {
+  /* One step lighter than --chip: a full panel needs less tint than a pill. */
+  --surface: color-mix(in oklab, var(--chip) 55%, var(--bg));
+  --panel-radius: 16px;
+}
+
+/* 1 — Hero reads left.
+   The home hero is a profile and earns its centre axis. This one is a
+   two-paragraph pitch, and centred body copy costs the reader a return sweep
+   on every line — then hands off to six hard-left sections, which shows as a
+   seam at the first section boundary. */
+.m-services .m-hero {
+  text-align: left;
+  align-items: flex-start;
+  padding: 3.5rem 0 3rem;
+}
+
+/* 2 — Section headings take the 30px step the scale defines but never used.
+   24px against 16px body is a 1.5x step, too shallow to carry six sections. */
+.m-services .m-h2 {
+  font-size: var(--text-2xl);
+  line-height: var(--leading-snug);
+  margin-bottom: 1.5rem;
+}
+
+/* 3 — Asymmetric rhythm. Space pools above a heading so it binds to the
+   content it introduces, instead of floating equidistant between two blocks. */
+.m-services .m-section {
+  padding: 4rem 0 3.25rem;
+}
+
+/* 4 — Two surfaces across the page: the offer block and the closing CTA.
+   Selected by id, so Offers and ContactCta need no new props and the home
+   page's copy of Offers is untouched. id + class outranks .m-services
+   .m-section, so the padding and border-top above are overridden here. */
+.m-services #services,
+.m-services #contact {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--panel-radius);
+  padding: 2.5rem 2rem 2.25rem;
+  margin: 1.25rem 0;
+}
+
+/* Dividers between the three offers: three long text blocks on one panel need
+   a horizon line to scan against. */
+.m-services .m-offer-full + .m-offer-full {
+  border-top: 1px solid var(--line);
+  padding-top: 1.75rem;
+}
+
+/* 5 — Sectors were three 209px columns inside a 672px content box: about 26
+   characters a line, against a 45-character comfortable floor. Name and blurb
+   now sit side by side, which puts the blurb back at roughly 55. */
+.m-services .m-sectors {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.m-services .m-sector {
+  display: grid;
+  grid-template-columns: 13rem 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.m-services .m-sector:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.m-services .m-sector-name {
+  margin-bottom: 0;
+}
+.m-services .m-sector-blurb {
+  max-width: 56ch;
+}
+
+/* 6 — Title and price were pinned to opposite ends of a 672px line, so the eye
+   had to cross the full measure to connect a product to its number. */
+.m-services .m-offer-head {
+  justify-content: flex-start;
+  gap: 0.85rem;
+  margin-bottom: 0.7rem;
+}
+
+/* 8 — The summary row was a full-width click target with no hover state, no
+   focus ring, and a literal "+" glyph set at body weight. */
+.m-services .m-faq-q {
+  align-items: center;
+  /* Negative margin cancels the padding, so the question text stays on the
+     same left edge as the section heading while the hover fill bleeds past
+     it on both sides. */
+  padding: 1rem 0.5rem;
+  margin-inline: -0.5rem;
+  border-radius: 6px;
+  transition: background 0.18s;
+}
+.m-services .m-faq-q:hover {
+  background: var(--surface);
+}
+.m-services .m-faq-a {
+  padding: 0 0 1.25rem;
+}
+.m-services .m-faq-q::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: 0.2rem;
+  border-right: 1.5px solid var(--muted);
+  border-bottom: 1.5px solid var(--muted);
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.2s ease;
+}
+.m-services .m-faq-item[open] .m-faq-q::after {
+  transform: rotate(-135deg) translateY(-2px);
+}
+
+/* 9 — The page's only job is one click; 14px in a tight pill undersold it. */
+.m-services .m-btn {
+  font-size: var(--text-base);
+  padding: 0.8rem 1.5rem;
+}
+
+/* Focus rings. v3.css has none for these controls, so keyboard users get
+   nothing on the page's only conversion path. */
+.m-services .m-btn:focus-visible,
+.m-services .m-faq-q:focus-visible,
+.m-services .m-faq-link:focus-visible,
+.m-services .m-case-link:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .m-services .m-sector {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .m-services .m-hero {
+    padding: 2.5rem 0 2.25rem;
+  }
+  .m-services .m-section {
+    padding: 3rem 0 2.5rem;
+  }
+  .m-services #services,
+  .m-services #contact {
+    padding: 2rem 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .m-services .m-faq-q,
+  .m-services .m-faq-q::after {
+    transition: none;
+  }
+}

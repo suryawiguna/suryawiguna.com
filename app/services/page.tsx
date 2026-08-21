@@ -1,3 +1,5 @@
+import "styles/v3-services.css";
+
 import JsonLd from "components/jsonLd";
 import Offers from "components/services/offers";
 import Sectors from "components/services/sectors";
@@ -97,7 +99,9 @@ export const metadata: Metadata = {
 
 export default function Services() {
   return (
-    <>
+    // Scopes styles/v3-services.css. The polish layer overrides shared
+    // primitives (.m-h2, .m-section, .m-btn), so it must not leak to other pages.
+    <div className="m-services">
       <header className="m-hero">
         <h1 className="m-h1 m-h1-wide">{servicesPage.h1}</h1>
         <div className="m-lede">
@@ -132,6 +136,6 @@ export default function Services() {
       <ContactCta />
 
       <JsonLd data={generateServicesJsonLd()} />
-    </>
+    </div>
   );
 }
