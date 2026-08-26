@@ -421,10 +421,6 @@ strong { font-weight: 600; }
   scroll-margin-top: 5rem;
 }
 .m-offer-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
   margin-bottom: 0.5rem;
 }
 .m-offer-title {
@@ -441,20 +437,6 @@ strong { font-weight: 600; }
 }
 .m-offer-body:last-child { margin-bottom: 0; }
 .m-offer .m-offer-body { flex: 1; margin: 0; }
-.m-offer-price {
-  font-size: var(--text-sm);
-  font-weight: var(--font-medium);
-  color: var(--ink);
-  white-space: nowrap;
-}
-.m-price-note {
-  margin: 1.6rem 0 0;
-  padding-left: 0.9rem;
-  border-left: 2px solid var(--line);
-  color: var(--muted);
-  font-size: var(--text-sm);
-  max-width: 60ch;
-}
 
 /* Services: process */
 .m-steps {
