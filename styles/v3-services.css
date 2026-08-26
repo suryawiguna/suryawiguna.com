@@ -81,11 +81,8 @@
   max-width: 56ch;
 }
 
-/* 6 — Title and price were pinned to opposite ends of a 672px line, so the eye
-   had to cross the full measure to connect a product to its number. */
+/* 6 — Offer titles sit tighter to their copy than the shared 0.5rem. */
 .m-services .m-offer-head {
-  justify-content: flex-start;
-  gap: 0.85rem;
   margin-bottom: 0.7rem;
 }
 

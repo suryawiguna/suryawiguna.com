@@ -13,11 +13,6 @@ export type Offer = {
   cardBlurb: string;
   // /services: one paragraph per entry.
   detail: string[];
-  // Entry price, shown as-is and aimed at the remote client. Local enquiries
-  // are covered by `pricingNote` below rather than by a second set of numbers.
-  // The marketing site band sits just above the top of the Bali market range
-  // quoted in /blog/how-to-choose-web-developer-bali, so the two agree.
-  priceFrom: string;
   // Feeds the OfferCatalog on the ProfessionalService node. Broader than
   // `title`: it is the category, not the product name.
   serviceType: string;
@@ -50,7 +45,6 @@ export const OFFERS = [
       "This is the one most people come for. You have a business, you need a site that loads fast, reads well on a phone, and turns a visitor into an enquiry.",
       "I write the structure with you, design it, then build it. Next.js if speed and search matter most, WordPress if you would rather log in and change the copy yourself without calling me. Either way you get the pages, the forms, and the basic SEO setup done properly the first time.",
     ],
-    priceFrom: "from $800",
     serviceType: "Web Development",
   },
   {
@@ -62,7 +56,6 @@ export const OFFERS = [
       "If you sell physical products, Shopify handles the boring parts: payments, stock, shipping, taxes. What it does not do is make your store look like anyone in particular.",
       "I set up the store and customise the theme so it matches your brand, not the demo. That covers product pages, collections, cart, and checkout styling. If you already have a store and it just looks generic, I can work on the existing theme instead of starting over.",
     ],
-    priceFrom: "from $1,500",
     serviceType: "E-commerce Development",
   },
   {
@@ -74,27 +67,18 @@ export const OFFERS = [
       "Old sites get slow and awkward. Plugins pile up, the theme stops being supported, and every small change turns into a job.",
       "I move the content across, keep the URLs and redirects intact so you do not lose the traffic you already earn, and rebuild the front end on something current. The usual routes are WordPress to Next.js and a stock Shopify theme to a headless setup, but the principle is the same: same content, faster site, easier to change.",
     ],
-    priceFrom: "from $1,200",
     serviceType: "Web Development",
   },
 ] satisfies Offer[];
 
-// The two halves of the audience sit about ten times apart on budget: the
-// post /blog/how-to-choose-web-developer-bali puts typical Bali market rates
-// at IDR 3,000,000 to 20,000,000, which is roughly $200 to $1,250. Rather
-// than print two sets of numbers, the USD bands speak to the remote client
-// and this line tells a local reader the figures are not the whole story.
-export const pricingNote =
-  "Based in Bali? Local projects get scoped and quoted in rupiah, and they usually land below the figures above. Ask me and I will give you a straight number.";
-
 export const PROCESS = {
   title: "How it works",
   timeline:
-    "Most sites go live in under two weeks from the first call. Bigger builds take longer, and I will tell you that before you pay anything.",
+    "Most sites go live in under two weeks from the first email. Bigger builds take longer, and I will tell you that before you pay anything.",
   steps: [
     {
-      title: "Call",
-      line: "Thirty minutes. You tell me what you sell and who buys it, I tell you what it costs and how long it takes.",
+      title: "Email",
+      line: "You email me what you sell and who buys it. I come back with what it costs and how long it takes, in writing.",
     },
     {
       title: "Design",
@@ -166,11 +150,11 @@ export const FAQS = {
   items: [
     {
       q: "What does a site cost?",
-      a: "It depends on how many pages you need and whether you are selling online. I give you a fixed number after the first call, before you commit to anything, so you are never billed for a surprise.",
+      a: "It depends on how many pages you need and whether you are selling online. I give you a fixed number after the first email, before you commit to anything, so you are never billed for a surprise.",
     },
     {
       q: "How long does it take?",
-      a: "Most sites go live in under two weeks from the first call. A store with a lot of products, or a build that needs custom functionality, takes longer. I will say so upfront rather than promise two days and disappear.",
+      a: "Most sites go live in under two weeks from the first email. A store with a lot of products, or a build that needs custom functionality, takes longer. I will say so upfront rather than promise two days and disappear.",
       link: {
         href: CHOOSE_DEVELOPER_POST,
         label: "More on spotting unrealistic timelines",
@@ -178,7 +162,7 @@ export const FAQS = {
     },
     {
       q: "Can you work with me if I am not in Bali?",
-      a: "Yes. About half my clients are elsewhere. We do a call to start, then most of it runs over email and a shared preview link, so the time difference rarely matters.",
+      a: "Yes. About half my clients are elsewhere. It runs over email and a shared preview link from the first message onwards, so the time difference rarely matters.",
     },
     {
       q: "What happens after launch?",
