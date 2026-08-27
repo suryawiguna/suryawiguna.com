@@ -11,5 +11,5 @@ module.exports = {
       sans: "Open Sans, Arial, sans-serif",
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [],
 };

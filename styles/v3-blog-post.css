@@ -1,52 +1,41 @@
-/* Blog post page — extends v3 theme */
+/* Blog post — page layer over the v3 design system.
+   Only what /blog/[slug] adds: breadcrumb, cover, prose, share, related.
+   Titles, deks, chips, buttons and fields come from styles/v3.css. */
 
 .m-breadcrumb {
   font-size: var(--text-sm);
   color: var(--muted);
-  padding: 1.6rem 0 0;
+  padding: var(--space-6) 0 0;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: var(--space-2);
 }
 .m-breadcrumb a:hover { color: var(--ink); }
 .m-breadcrumb .sep { color: var(--line); }
 
+/* Sits under the breadcrumb, so it opens on less space than .m-hero, but
+   closes on the same --space-10 every section does. */
 .m-article-head {
-  padding: 2rem 0 2.4rem;
+  padding: var(--space-8) 0 var(--space-10);
   border-bottom: 1px solid var(--line);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--space-4);
 }
 .m-article-tags {
   display: flex;
-  gap: 0.4rem;
+  gap: var(--space-2);
   flex-wrap: wrap;
-}
-.m-article-title {
-  font-family: var(--display);
-  font-weight: var(--font-semibold);
-  font-size: var(--text-3xl);
-  line-height: var(--leading-tight);
-  letter-spacing: -0.025em;
-  text-wrap: balance;
-}
-.m-article-dek {
-  color: var(--muted);
-  font-size: var(--text-md);
-  line-height: 1.55;
-  max-width: 60ch;
-  text-wrap: pretty;
 }
 .m-article-byline {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  margin-top: 0.4rem;
+  gap: var(--space-3);
+  margin-top: var(--space-1);
 }
 .m-byline-avatar {
   width: 36px; height: 36px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   overflow: hidden;
   background: var(--chip);
   border: 1px solid var(--line);
@@ -58,19 +47,20 @@
 .m-byline-meta {
   display: flex;
   flex-direction: column;
-  gap: 0.05rem;
   font-size: var(--text-sm);
 }
 .m-byline-meta strong { font-weight: var(--font-semibold); }
 .m-byline-meta span { color: var(--muted); font-size: var(--text-sm); }
 
+/* Contained inside the reading column by default; goes full-bleed only once
+   the viewport is narrower than the column plus its gutters. */
 .m-cover {
-  width: calc(100% + 3rem);
-  margin: 2rem -1.5rem;
+  width: 100%;
+  margin: var(--space-8) 0;
   aspect-ratio: 16 / 9;
   background: var(--chip);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
   position: relative;
   overflow: hidden;
 }
@@ -80,26 +70,34 @@
   object-fit: cover;
   display: block;
 }
-
-@media (min-width: 720px) {
-  .m-cover { width: 100%; margin: 2rem 0; border-radius: 6px; border: 1px solid var(--line); }
+@media (max-width: 768px) {
+  .m-cover {
+    width: calc(100% + var(--gutter) * 2);
+    margin: var(--space-8) calc(var(--gutter) * -1);
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+  }
 }
 
-/* Article body */
+/* ── Article body ─────────────────────────────────────────────────────── */
 .m-article {
-  padding: 1.5rem 0 2.5rem;
+  padding: var(--space-6) 0 var(--space-10);
   font-size: var(--text-base);
   line-height: var(--leading-relaxed);
   color: var(--ink);
 }
-.m-article > * + * { margin-top: 1.1rem; }
-.m-article p { color: #374151; }
+.m-article > * + * { margin-top: var(--space-5); }
+.m-article p { color: var(--ink-soft); }
+/* In-prose headings run one step under .m-h2. A page-structural heading
+   separates blocks of a page; these sit inside a 16px reading column and
+   would shout at 30px. */
 .m-article h2 {
   font-family: var(--display);
   font-weight: var(--font-semibold);
   font-size: var(--text-xl);
   letter-spacing: var(--tracking-tight);
-  margin-top: 2.4rem;
+  margin-top: var(--space-10);
   line-height: var(--leading-snug);
 }
 .m-article h3 {
@@ -107,27 +105,28 @@
   font-weight: var(--font-semibold);
   font-size: var(--text-lg);
   letter-spacing: var(--tracking-snug);
-  margin-top: 1.6rem;
+  margin-top: var(--space-6);
+  line-height: var(--leading-snug);
   color: var(--ink);
 }
 .m-article ul, .m-article ol {
-  padding-left: 1.4rem;
-  color: #374151;
+  padding-left: var(--space-6);
+  color: var(--ink-soft);
 }
 .m-article ul { list-style: disc; }
 .m-article ol { list-style: decimal; }
-.m-article li { margin: 0.35rem 0; }
+.m-article li { margin: var(--space-2) 0; }
 .m-article li::marker { color: var(--accent); }
 
 .m-article blockquote {
-  margin: 2rem 0;
-  padding: 0.8rem 1.2rem;
+  margin: var(--space-8) 0;
+  padding: var(--space-3) var(--space-5);
   border-left: 3px solid var(--accent);
   font-family: var(--display);
   font-weight: var(--font-medium);
   font-size: var(--text-md);
   letter-spacing: var(--tracking-snug);
-  line-height: 1.45;
+  line-height: var(--leading-normal);
   color: var(--ink);
   background: color-mix(in oklab, var(--accent) 4%, transparent);
 }
@@ -137,82 +136,115 @@
   font-size: 0.88em;
   padding: 0.1em 0.4em;
   background: var(--chip);
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
 }
 .m-article a {
   color: var(--ink);
   border-bottom: 1px solid var(--accent);
   padding-bottom: 1px;
-  transition: color 0.18s, background 0.18s;
+  transition: color var(--transition), background var(--transition);
 }
 .m-article a:hover { color: var(--accent); }
+
+/* Elements @tailwindcss/typography used to cover. Post bodies are Storyblok
+   rich text, so any of these can appear without a class on it. */
+.m-article h4 {
+  font-family: var(--display);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-md);
+  letter-spacing: var(--tracking-snug);
+  margin-top: var(--space-5);
+  line-height: var(--leading-snug);
+}
+.m-article img { max-width: 100%; height: auto; border-radius: var(--radius-md); }
+.m-article figure { margin: var(--space-8) 0; }
+.m-article figcaption {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  text-align: center;
+}
+.m-article pre {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+}
+.m-article table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+  display: block;
+  overflow-x: auto;
+}
+.m-article th,
+.m-article td {
+  border: 1px solid var(--line);
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+}
+.m-article th {
+  font-weight: var(--font-semibold);
+  background: var(--chip);
+}
 
 .m-article hr {
   border: 0;
   border-top: 1px solid var(--line);
-  margin: 2.5rem auto;
-  width: 4rem;
+  margin: var(--space-10) auto;
+  width: var(--space-16);
 }
 
-/* Article footer */
+/* ── Article footer ───────────────────────────────────────────────────── */
 .m-article-foot {
   border-top: 1px solid var(--line);
-  padding: 2rem 0;
+  padding: var(--space-8) 0;
 }
+/* Block title, same size as every other h3 in the system. */
 .m-foot-block h3 {
   font-family: var(--display);
   font-weight: var(--font-semibold);
-  font-size: var(--text-base);
-  letter-spacing: -0.01em;
-  margin-bottom: 0.7rem;
+  font-size: var(--text-md);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-snug);
+  margin-bottom: var(--space-3);
   color: var(--ink);
 }
 .m-share {
   display: flex;
-  gap: 0.4rem;
+  gap: var(--space-2);
   flex-wrap: wrap;
 }
 .m-share a {
   display: inline-grid;
   place-items: center;
-  width: 34px; height: 34px;
-  border-radius: 999px;
+  width: var(--space-10); height: var(--space-10);
+  border-radius: var(--radius-pill);
   background: var(--chip);
   color: var(--chip-ink);
-  transition: background 0.18s, color 0.18s;
+  transition: background var(--transition), color var(--transition);
   font-size: var(--text-sm);
   font-weight: var(--font-semibold);
 }
-.m-share a:hover { background: var(--accent); color: #fff; }
+.m-share a:hover { background: var(--accent); color: var(--on-accent); }
 
-/* Related */
+/* ── Related ──────────────────────────────────────────────────────────── */
 .m-related {
   border-top: 1px solid var(--line);
-  padding: 2.4rem 0;
-}
-.m-related-h {
-  font-family: var(--display);
-  font-weight: var(--font-semibold);
-  font-size: var(--text-sm);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 1.2rem;
+  padding: var(--space-10) 0;
 }
 .m-related-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.2rem;
+  gap: var(--space-5);
 }
 @media (max-width: 560px) { .m-related-list { grid-template-columns: 1fr; } }
 .m-related-card {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  padding: 1rem;
+  gap: var(--space-2);
+  padding: var(--space-5);
   border: 1px solid var(--line);
-  border-radius: 8px;
-  transition: border-color 0.18s, transform 0.18s;
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition), transform var(--transition);
 }
 .m-related-card:hover { border-color: var(--ink); transform: translateY(-1px); }
 .m-related-card:hover .m-rc-title { color: var(--accent); }
@@ -220,33 +252,31 @@
   font-size: var(--text-sm);
   color: var(--muted);
 }
+/* Size and family come from the shared block-title rule in v3.css. */
 .m-rc-title {
-  font-family: var(--display);
-  font-weight: var(--font-semibold);
-  font-size: var(--text-md);
-  letter-spacing: var(--tracking-snug);
-  line-height: var(--leading-snug);
-  transition: color 0.18s;
+  transition: color var(--transition);
   text-wrap: balance;
 }
 .m-rc-meta {
-  margin-top: 0.4rem;
+  margin-top: var(--space-2);
   display: flex;
-  gap: 0.35rem;
+  gap: var(--space-2);
   flex-wrap: wrap;
 }
 
 .m-back {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 1.5rem 0 2.5rem;
+  gap: var(--space-2);
+  padding: var(--space-6) 0 var(--space-10);
   color: var(--muted);
   font-size: var(--text-sm);
 }
 .m-back:hover { color: var(--ink); }
 
-/* Subscribe form */
+/* ── Subscribe form ───────────────────────────────────────────────────── */
+/* A joined pill: the input carries the field metric, the button the small
+   control metric, so the two halves are the same height. */
 .m-subscribe-wrap {
   display: flex;
   position: relative;
@@ -257,13 +287,12 @@
   background: var(--chip);
   border: 1px solid var(--line);
   border-right: 0;
-  border-radius: 999px 0 0 999px;
-  padding: 0.6rem 0.85rem;
+  border-radius: var(--radius-pill) 0 0 var(--radius-pill);
+  padding: var(--field-py) var(--field-px);
   font-size: var(--text-sm);
   font-family: var(--body);
   color: var(--ink);
-  outline: none;
-  transition: border-color 0.18s;
+  transition: border-color var(--transition);
   min-width: 0;
 }
 .m-subscribe-input::placeholder { color: var(--muted); }
@@ -271,24 +300,23 @@
 .m-subscribe-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.6rem 1rem;
+  gap: var(--space-2);
+  padding: var(--control-py-sm) var(--control-px-sm);
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
   border: 1px solid var(--accent);
-  border-radius: 0 999px 999px 0;
+  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
   font-family: var(--body);
   cursor: pointer;
   white-space: nowrap;
-  transition: filter 0.18s;
+  transition: filter var(--transition);
 }
 .m-subscribe-btn:hover { filter: brightness(1.08); }
 .m-subscribe-msg {
   display: block;
-  margin-top: 0.45rem;
+  margin-top: var(--space-2);
   font-size: var(--text-sm);
   color: var(--muted);
-  font-style: italic;
 }

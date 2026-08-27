@@ -18,11 +18,11 @@ export const metadata: Metadata = {
 
 export default function Portfolio() {
   return (
-    <section className="m-section" style={{ borderTop: 0 }}>
-      <h1 className="m-h2" style={{ fontSize: "var(--text-3xl)" }}>
-        {portfolioPage.heading}
-      </h1>
+    <>
+      <header className="m-hero m-hero-left">
+        <h1 className="m-h1 m-h1-wide">{portfolioPage.heading}</h1>
+      </header>
       <Portfolios projects={visibleProjects} />
-    </section>
+    </>
   );
 }

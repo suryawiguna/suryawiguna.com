@@ -1,5 +1,3 @@
-import "styles/v3-services.css";
-
 import JsonLd from "components/jsonLd";
 import Offers from "components/services/offers";
 import Sectors from "components/services/sectors";
@@ -98,10 +96,11 @@ export const metadata: Metadata = {
 
 export default function Services() {
   return (
-    // Scopes styles/v3-services.css. The polish layer overrides shared
-    // primitives (.m-h2, .m-section, .m-btn), so it must not leak to other pages.
-    <div className="m-services">
-      <header className="m-hero">
+    <>
+      {/* Reads left, not centred: this hero is a two-paragraph pitch that
+          hands off to six hard-left sections, and centred body copy costs the
+          reader a return sweep on every line. */}
+      <header className="m-hero m-hero-left">
         <h1 className="m-h1 m-h1-wide">{servicesPage.h1}</h1>
         <div className="m-lede">
           {servicesPage.intro.map((paragraph) => (
@@ -110,7 +109,7 @@ export default function Services() {
         </div>
       </header>
 
-      <Offers heading="What I build" offers={OFFERS} detailed />
+      <Offers heading="What I build" offers={OFFERS} detailed panel />
       <Sectors
         heading={SECTORS.title}
         intro={SECTORS.intro}
@@ -127,9 +126,9 @@ export default function Services() {
         more={{ href: "/portfolio", label: "All projects →" }}
       />
       <Faqs heading={FAQS.title} items={FAQS.items} />
-      <ContactCta />
+      <ContactCta panel />
 
       <JsonLd data={generateServicesJsonLd()} />
-    </div>
+    </>
   );
 }

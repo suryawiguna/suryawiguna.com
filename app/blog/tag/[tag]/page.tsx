@@ -73,10 +73,10 @@ export default async function TagArchive({
         <span>{tag}</span>
       </nav>
 
-      <header className="m-blog-head">
+      <header className="m-hero m-hero-left m-hero-tight">
         <p className="m-eyebrow">Topic</p>
-        <h1 className="m-blog-title">{tag}</h1>
-        <p className="m-blog-dek">
+        <h1 className="m-h1 m-h1-wide">{tag}</h1>
+        <p className="m-lede m-lede-wide">
           {tagged.length} {tagged.length === 1 ? "article" : "articles"} on{" "}
           {tag}.
         </p>
@@ -115,7 +115,7 @@ export default async function TagArchive({
       </section>
 
       {others.length > 0 && (
-        <section className="m-section" style={{ borderBottom: 0 }}>
+        <section className="m-section">
           <h2 className="m-h2">Other topics</h2>
           <div className="m-links">
             {others.map((entry) => (
