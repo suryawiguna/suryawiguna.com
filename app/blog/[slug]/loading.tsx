@@ -1,60 +1,81 @@
-const S = { background: "var(--line)", borderRadius: 4 } as const;
-const pill = { ...S, borderRadius: 999 } as const;
-
-function Bar({ w, h = 14 }: { w: number | string; h?: number }) {
-  return <div style={{ ...S, width: w, height: h }} />;
-}
+import { Bar, Pill, Skeleton, Stack } from "components/global/skeleton";
 
 export default function Loading() {
   return (
-    <div role="status" aria-label="Loading" style={{ animation: "pulse 2s cubic-bezier(.4,0,.6,1) infinite" }}>
-
+    <Skeleton>
       {/* Breadcrumb */}
-      <div style={{ display: "flex", gap: 8, padding: "1.6rem 0 0" }}>
-        <Bar w={32} h={12} />
-        <Bar w={8} h={12} />
-        <Bar w={60} h={12} />
+      <div
+        style={{
+          display: "flex",
+          gap: "var(--space-2)",
+          padding: "var(--space-6) 0 0",
+        }}
+      >
+        <Bar w={32} h="meta" />
+        <Bar w={8} h="meta" />
+        <Bar w={60} h="meta" />
       </div>
 
       {/* Article head */}
-      <div style={{ padding: "2rem 0 2.4rem", borderBottom: "1px solid var(--line)", display: "flex", flexDirection: "column" as const, gap: 16 }}>
-        {/* Tags */}
-        <div style={{ display: "flex", gap: 6 }}>
+      <div className="m-article-head">
+        <div style={{ display: "flex", gap: "var(--space-2)" }}>
           {[56, 68, 48].map((w, i) => (
-            <div key={i} style={{ ...pill, width: w, height: 24 }} />
+            <Pill key={i} w={w} />
           ))}
         </div>
-        {/* Title */}
-        <div style={{ ...S, width: "85%", height: 42, borderRadius: 6 }} />
-        <div style={{ ...S, width: "65%", height: 42, borderRadius: 6 }} />
-        {/* Dek */}
-        <Bar w="90%" h={15} />
-        <Bar w="70%" h={15} />
-        {/* Byline */}
-        <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 4 }}>
-          <div style={{ ...pill, width: 36, height: 36 }} />
-          <div style={{ display: "flex", flexDirection: "column" as const, gap: 6 }}>
-            <Bar w={100} h={13} />
-            <Bar w={140} h={11} />
-          </div>
+        <Bar w="85%" h="title" />
+        <Bar w="65%" h="title" />
+        <Bar w="90%" h="blockTitle" />
+        <Bar w="70%" h="blockTitle" />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "var(--space-3)",
+          }}
+        >
+          <Pill w={36} h={36} />
+          <Stack gap="var(--space-1)">
+            <Bar w={100} h="meta" />
+            <Bar w={140} h="meta" />
+          </Stack>
         </div>
       </div>
 
       {/* Cover */}
-      <div style={{ ...S, width: "100%", aspectRatio: "16/9", borderRadius: 6, margin: "2rem 0" }} />
+      <div
+        className="m-skel-bar"
+        style={{
+          width: "100%",
+          aspectRatio: "16/9",
+          borderRadius: "var(--radius-md)",
+          margin: "var(--space-8) 0",
+        }}
+      />
 
       {/* Article body */}
-      <div style={{ display: "flex", flexDirection: "column" as const, gap: 12, padding: "1.5rem 0 2.5rem" }}>
+      <Stack
+        gap="var(--space-5)"
+        style={{ padding: "var(--space-6) 0 var(--space-10)" }}
+      >
         {[
-          "90%", "100%", "75%",
+          "90%",
+          "100%",
+          "75%",
           "60%", // h2
-          "95%", "85%", "100%", "70%",
+          "95%",
+          "85%",
+          "100%",
+          "70%",
           "55%", // h3
-          "90%", "80%", "100%", "65%",
+          "90%",
+          "80%",
+          "100%",
+          "65%",
         ].map((w, i) => (
-          <Bar key={i} w={w} h={i === 3 || i === 8 ? 20 : 14} />
+          <Bar key={i} w={w} h={i === 3 ? "heading" : i === 8 ? "rowTitle" : "text"} />
         ))}
-      </div>
-    </div>
+      </Stack>
+    </Skeleton>
   );
 }

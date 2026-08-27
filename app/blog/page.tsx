@@ -23,10 +23,10 @@ export default async function Home() {
 
   return (
     <>
-      <header className="m-blog-head">
+      <header className="m-hero m-hero-left">
         <p className="m-eyebrow">Blog</p>
-        <h1 className="m-blog-title">Work journey</h1>
-        <p className="m-blog-dek">
+        <h1 className="m-h1 m-h1-wide">Work journey</h1>
+        <p className="m-lede m-lede-wide">
           Short reads on web development, SEO, B2B funnels, and what it&rsquo;s
           like freelancing from Bali.
         </p>

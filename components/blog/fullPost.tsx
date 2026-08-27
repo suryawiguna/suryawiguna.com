@@ -1,5 +1,5 @@
 import moment from "moment";
-import { RichText } from "../global";
+import RichText from "../global/richText";
 import Link from "next/link";
 import Image from "next/image";
 import SubscribeForm from "./subscribe";
@@ -68,9 +68,9 @@ export default function FullPost({
               )}
             </div>
           )}
-          <h1 className="m-article-title">{post.name}</h1>
+          <h1 className="m-h1 m-h1-full">{post.name}</h1>
           {post.content?.excerpt && (
-            <div className="m-article-dek">
+            <div className="m-lede m-lede-wide">
               <RichText data={post.content.excerpt} />
             </div>
           )}

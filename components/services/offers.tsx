@@ -3,19 +3,25 @@ import type { Offer } from "content/services";
 
 // `detailed` is the /services variant: full copy instead of the card blurb,
 // and each offer gets an id so the home page cards can deep link to it.
+// `panel` renders the section as a tinted card rather than a ruled block.
 export default function Offers({
   heading,
   offers,
   detailed = false,
+  panel = false,
   more,
 }: {
   heading: string;
   offers: Offer[];
   detailed?: boolean;
+  panel?: boolean;
   more?: { href: string; label: string };
 }) {
   return (
-    <section id="services" className="m-section">
+    <section
+      id="services"
+      className={`m-section${panel ? " m-section-panel" : ""}`}
+    >
       <h2 className="m-h2">{heading}</h2>
 
       {detailed ? (

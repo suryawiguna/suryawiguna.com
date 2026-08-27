@@ -22,20 +22,12 @@ export default function Links() {
       )}
       {primaryLinks.length > 0 && (
         <div
-          className="m-links"
-          style={{
-            flexDirection: "column",
-            alignItems: "stretch",
-            marginTop: socialLinks.length > 0 ? "1.4rem" : 0,
-          }}
+          className={`m-links m-links-stack${
+            socialLinks.length > 0 ? "" : " m-links-stack-first"
+          }`}
         >
           {primaryLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="m-btn ghost"
-              style={{ justifyContent: "center" }}
-            >
+            <Link key={link.name} href={link.href} className="m-btn ghost">
               {link.name}
             </Link>
           ))}

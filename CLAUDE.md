@@ -74,7 +74,21 @@ Both were validated end to end in a browser, and Brevo returned 2xx, but the mai
 
 ### Styling
 
-Tailwind CSS with `@tailwindcss/typography` plugin. Font is Open Sans via `next/font/google`. Dark mode is class-based but not currently wired to a toggle. Styled-components is installed but Tailwind is the primary styling approach.
+**Read [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md) before touching any stylesheet.** It is the contract; `styles/v3.css` is the implementation.
+
+Three hand-written stylesheets, no CSS framework in practice:
+
+| File | Scope | Loaded by |
+|------|-------|-----------|
+| `styles/v3.css` | Tokens + every shared primitive | `app/layout.tsx` — site-wide |
+| `styles/v3-blog-index.css` | Toolbar, post row, pagination | `app/blog/page.tsx` |
+| `styles/v3-blog-post.css` | Breadcrumb, cover, prose, share, related | `app/blog/[slug]/page.tsx` |
+
+Every token lives in `:root` in `styles/v3.css`: colour, type scale, a 4px space scale, radius, control metrics, motion, focus, elevation. **No stylesheet may use a raw px/rem for a font size, space, radius, colour, or duration** — add a token first. The site has exactly two breakpoints, 768px and 560px.
+
+A page layer may only add what that route introduces; it must not restyle a shared primitive. If a page needs `.m-h2` or `.m-btn` to look different, either the primitive is wrong for everyone or the page needs a modifier class (`.m-hero-left`, `.m-section-panel`). There is deliberately no `/services` layer any more.
+
+Fonts are Archivo (display) and Inter (body) via `next/font/google`. Tailwind is still compiled via `styles/global.css` but styles almost nothing — a spinner in the contact form is all that is left, and `@tailwindcss/typography` is no longer registered because it was layering a second type system over `.m-article`. Dark mode is class-based but not wired to a toggle.
 
 ### Environment variables
 

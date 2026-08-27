@@ -49,12 +49,11 @@ export default function RichText({
   data: any;
   className?: string;
 }) {
+  // No `prose` classes here. Article typography is .m-article in
+  // styles/v3-blog-post.css; layering @tailwindcss/typography over it meant
+  // two systems setting the same sizes, margins and colours.
   return (
-    <div
-      className={`prose prose-zinc prose-headings:font-normal prose-headings:mb-3 prose-headings:mt-7 prose-p:mb-3 prose-ul:my-3 w-full min-w-full ${
-        className ? className : ""
-      } `}
-    >
+    <div className={className}>
       {render(data, {
         markResolvers: {
           [MARK_BOLD]: (children) => <strong>{children}</strong>,
@@ -70,7 +69,7 @@ export default function RichText({
               {children}
             </SyntaxHighlighter>
           ),
-          [NODE_LI]: (children) => <li className="not-prose">{children}</li>,
+          [NODE_LI]: (children) => <li>{children}</li>,
           [NODE_IMAGE]: (_children, props) => <ImageNode {...(props as any)} />,
         },
       })}

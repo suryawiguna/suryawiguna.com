@@ -1,37 +1,28 @@
-const S = { background: "var(--line)", borderRadius: 4 } as const;
-const pill = { ...S, borderRadius: 999 } as const;
-
-function Bar({ w, h = 14 }: { w: number | string; h?: number }) {
-  return <div style={{ ...S, width: w, height: h }} />;
-}
+import { Bar, Pill, Skeleton, Stack, Thumb } from "components/global/skeleton";
 
 export default function Loading() {
   return (
-    <div role="status" aria-label="Loading" style={{ animation: "pulse 2s cubic-bezier(.4,0,.6,1) infinite" }}>
-      {/* Page title */}
-      <div style={{ padding: "2.6rem 0 0", marginBottom: "1.4rem" }}>
-        <div style={{ ...S, width: 200, height: 36, borderRadius: 6 }} />
+    <Skeleton>
+      {/* Page title — same .m-hero box the real page uses. */}
+      <div className="m-hero m-hero-left">
+        <Bar w={260} h="title" />
       </div>
 
-      {/* Work list rows */}
+      {/* Work rows */}
       {[1, 2, 3, 4, 5, 6].map((i) => (
-        <div
-          key={i}
-          style={{
-            padding: "1.2rem 0",
-            borderBottom: "1px solid var(--line)",
-            display: "flex",
-            flexDirection: "column" as const,
-            gap: 8,
-          }}
-        >
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <Bar w="42%" h={18} />
-            <div style={{ ...pill, width: 68, height: 22 }} />
+        <div key={i} className="m-skel-line">
+          <div style={{ display: "flex", gap: "var(--space-5)" }}>
+            <Thumb />
+            <Stack gap="var(--space-2)" style={{ flex: 1, minWidth: 0 }}>
+              <div className="m-skel-split">
+                <Bar w="42%" h="rowTitle" />
+                <Pill w={68} />
+              </div>
+              <Bar w="72%" />
+            </Stack>
           </div>
-          <Bar w="72%" h={13} />
         </div>
       ))}
-    </div>
+    </Skeleton>
   );
 }

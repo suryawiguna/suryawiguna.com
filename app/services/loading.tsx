@@ -1,57 +1,28 @@
-const S = { background: "var(--line)", borderRadius: 4 } as const;
-
-function Bar({ w, h = 14 }: { w: number | string; h?: number }) {
-  return <div style={{ ...S, width: w, height: h }} />;
-}
+import { Bar, Skeleton, Stack } from "components/global/skeleton";
 
 export default function Loading() {
   return (
-    <div
-      role="status"
-      aria-label="Loading"
-      style={{ animation: "pulse 2s cubic-bezier(.4,0,.6,1) infinite" }}
-    >
-      {/* Hero */}
-      <div
-        style={{
-          padding: "4rem 0 3.5rem",
-          display: "flex",
-          flexDirection: "column" as const,
-          alignItems: "center",
-          gap: 12,
-        }}
-      >
-        <div style={{ ...S, width: "70%", height: 34, borderRadius: 6 }} />
-        <div style={{ ...S, width: "50%", height: 34, borderRadius: 6 }} />
-        <Bar w="60%" h={13} />
+    <Skeleton>
+      {/* Hero — left aligned, like the real one. */}
+      <div className="m-hero m-hero-left">
+        <Bar w="70%" h="title" />
+        <Bar w="50%" h="title" />
+        <Bar w="60%" />
       </div>
 
-      {/* Offer blocks */}
-      {[1, 2, 3].map((i) => (
-        <div
-          key={i}
-          style={{
-            padding: "1.6rem 0",
-            borderTop: "1px solid var(--line)",
-            display: "flex",
-            flexDirection: "column" as const,
-            gap: 10,
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Bar w="38%" h={20} />
-            <Bar w={64} h={14} />
-          </div>
-          <Bar w="92%" h={13} />
-          <Bar w="80%" h={13} />
-        </div>
-      ))}
-    </div>
+      {/* Offer blocks, inside the tinted panel the real page renders. */}
+      <div className="m-section m-section-panel">
+        <Bar w={220} h="heading" style={{ marginBottom: "var(--space-6)" }} />
+        <Stack gap="var(--space-8)">
+          {[1, 2, 3].map((i) => (
+            <Stack key={i} gap="var(--space-3)">
+              <Bar w="38%" h="blockTitle" />
+              <Bar w="92%" />
+              <Bar w="80%" />
+            </Stack>
+          ))}
+        </Stack>
+      </div>
+    </Skeleton>
   );
 }
