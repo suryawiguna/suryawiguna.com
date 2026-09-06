@@ -3,7 +3,13 @@ import moment from "moment";
 import { getAllPosts } from "lib/api";
 
 export default async function BlogPosts() {
+  // getAllPosts returns undefined when the Storyblok call fails or the token
+  // is missing — `data?.PostItems.items` short-circuits rather than throwing.
+  // Mapping that directly took the whole home page down with it, so an
+  // unreachable CMS now costs the section, not the page.
   const posts = await getAllPosts(5);
+
+  if (!posts?.length) return null;
 
   return (
     <section id="blog" className="m-section">

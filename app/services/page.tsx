@@ -18,7 +18,6 @@ import {
   OFFERS,
   PROCESS,
   SECTORS,
-  pricingNote,
   servicesPage,
   servicesSeo,
 } from "content/services";
@@ -111,12 +110,7 @@ export default function Services() {
         </div>
       </header>
 
-      <Offers
-        heading="What I build"
-        offers={OFFERS}
-        detailed
-        note={pricingNote}
-      />
+      <Offers heading="What I build" offers={OFFERS} detailed />
       <Sectors
         heading={SECTORS.title}
         intro={SECTORS.intro}

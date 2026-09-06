@@ -7,13 +7,11 @@ export default function Offers({
   heading,
   offers,
   detailed = false,
-  note,
   more,
 }: {
   heading: string;
   offers: Offer[];
   detailed?: boolean;
-  note?: string;
   more?: { href: string; label: string };
 }) {
   return (
@@ -24,10 +22,7 @@ export default function Offers({
         <div className="m-offer-list">
           {offers.map((offer) => (
             <article key={offer.slug} id={offer.slug} className="m-offer-full">
-              <div className="m-offer-head">
-                <h3 className="m-offer-title">{offer.title}</h3>
-                <span className="m-offer-price">{offer.priceFrom}</span>
-              </div>
+              <h3 className="m-offer-title m-offer-head">{offer.title}</h3>
               {offer.detail.map((paragraph) => (
                 <p key={paragraph.slice(0, 32)} className="m-offer-body">
                   {paragraph}
@@ -42,13 +37,10 @@ export default function Offers({
             <li key={offer.slug} className="m-offer">
               <h3 className="m-offer-title">{offer.title}</h3>
               <p className="m-offer-body">{offer.cardBlurb}</p>
-              <span className="m-offer-price">{offer.priceFrom}</span>
             </li>
           ))}
         </ul>
       )}
-
-      {note && <p className="m-price-note">{note}</p>}
 
       {more && (
         <Link href={more.href} className="m-more">
