@@ -13,11 +13,6 @@ export type Offer = {
   cardBlurb: string;
   // /services: one paragraph per entry.
   detail: string[];
-  // Entry price, shown as-is and aimed at the remote client. Local enquiries
-  // are covered by `pricingNote` below rather than by a second set of numbers.
-  // The marketing site band sits just above the top of the Bali market range
-  // quoted in /blog/how-to-choose-web-developer-bali, so the two agree.
-  priceFrom: string;
   // Feeds the OfferCatalog on the ProfessionalService node. Broader than
   // `title`: it is the category, not the product name.
   serviceType: string;
@@ -45,94 +40,84 @@ export const OFFERS = [
     slug: "marketing-site",
     title: "Marketing site",
     cardBlurb:
-      "A site that explains what you sell and gets people to enquire. Built in Next.js when you want it fast, WordPress when you want to edit it yourself. Usually four to six pages.",
+      "Four to six pages that explain what you sell. Usually WordPress, so you can edit it yourself. Next.js when speed matters more than editing.",
     detail: [
-      "This is the one most people come for. You have a business, you need a site that loads fast, reads well on a phone, and turns a visitor into an enquiry.",
-      "I write the structure with you, design it, then build it. Next.js if speed and search matter most, WordPress if you would rather log in and change the copy yourself without calling me. Either way you get the pages, the forms, and the basic SEO setup done properly the first time.",
+      "This is most of what I do. A few pages that say what you sell, load quickly, and read well on a phone.",
+      "I plan the structure with you, design it, then build it. Usually WordPress, so you can log in and change the copy yourself. I also build in Next.js — this site is one — which is faster but needs me for content changes. Either way it includes the pages, a contact form, and the basic SEO setup.",
     ],
-    priceFrom: "from $800",
     serviceType: "Web Development",
   },
   {
     slug: "shopify",
     title: "Shopify storefront",
     cardBlurb:
-      "A new store, or a theme customised until it actually looks like your brand. Products, payments, and shipping set up so you can start selling.",
+      "A new store with the theme customised to match your brand. Or work on the theme and pages of a store you already have.",
     detail: [
-      "If you sell physical products, Shopify handles the boring parts: payments, stock, shipping, taxes. What it does not do is make your store look like anyone in particular.",
-      "I set up the store and customise the theme so it matches your brand, not the demo. That covers product pages, collections, cart, and checkout styling. If you already have a store and it just looks generic, I can work on the existing theme instead of starting over.",
+      "Shopify handles payments, stock, shipping, and taxes. The part it leaves to you is how the store looks.",
+      "I set up the store and customise the theme to match your brand: product pages, collections, cart, and checkout. I have built a store from scratch (Vāyu) and worked inside an existing one on design and single pages (Stryv), so either is fine.",
     ],
-    priceFrom: "from $1,500",
     serviceType: "E-commerce Development",
   },
   {
     slug: "migration",
     title: "Rebuild or migration",
     cardBlurb:
-      "You already have a site and it is slow, dated, or a pain to update. WordPress to Next.js, or a Shopify theme to headless, without losing your search rankings.",
+      "Your site is slow or hard to update. I move the content, redirect the old URLs, and rebuild the front end.",
     detail: [
       "Old sites get slow and awkward. Plugins pile up, the theme stops being supported, and every small change turns into a job.",
-      "I move the content across, keep the URLs and redirects intact so you do not lose the traffic you already earn, and rebuild the front end on something current. The usual routes are WordPress to Next.js and a stock Shopify theme to a headless setup, but the principle is the same: same content, faster site, easier to change.",
+      "I move the content across, set up redirects so the old URLs still work, and rebuild the front end. So far the only one I have done is this site, moved from Gridsome to Next.js. Worth knowing before you decide.",
     ],
-    priceFrom: "from $1,200",
     serviceType: "Web Development",
   },
 ] satisfies Offer[];
 
-// The two halves of the audience sit about ten times apart on budget: the
-// post /blog/how-to-choose-web-developer-bali puts typical Bali market rates
-// at IDR 3,000,000 to 20,000,000, which is roughly $200 to $1,250. Rather
-// than print two sets of numbers, the USD bands speak to the remote client
-// and this line tells a local reader the figures are not the whole story.
-export const pricingNote =
-  "Based in Bali? Local projects get scoped and quoted in rupiah, and they usually land below the figures above. Ask me and I will give you a straight number.";
-
 export const PROCESS = {
   title: "How it works",
   timeline:
-    "Most sites go live in under two weeks from the first call. Bigger builds take longer, and I will tell you that before you pay anything.",
+    "A small site usually takes two to three weeks, depending on how quickly the content and photos arrive. Bigger builds take longer.",
   steps: [
     {
       title: "Call",
-      line: "Thirty minutes. You tell me what you sell and who buys it, I tell you what it costs and how long it takes.",
+      line: "Thirty minutes. You tell me what you sell and who buys it. I reply with a price and a timeline.",
     },
     {
       title: "Design",
-      line: "I send you the layout before any code exists. You change what you want while changing it is cheap.",
+      line: "I send you the layout before I start building. Changes are easy at this stage.",
     },
     {
       title: "Build",
-      line: "I build it and you watch it happen on a preview link, not in a status email.",
+      line: "I build it. You follow along on a preview link.",
     },
     {
       title: "Launch",
-      line: "It goes live, you own it, and I show you how to edit the parts you will want to edit.",
+      line: "It goes live and I show you how to edit the content.",
     },
   ] satisfies Step[],
 };
 
-// The Bali half of the audience. These three sectors stay open to foreign
-// investment after the 2026 PT PMA restrictions, so they are where the local
-// budget actually is.
+// The Bali side of the audience. These three sectors stay open to foreign
+// investment after the 2026 PT PMA restrictions. None of them is in the
+// portfolio yet, so `intro` says what has actually been built and frames
+// these as the work being sought rather than work already done.
 export const SECTORS = {
   title: "Who I work with",
   intro:
-    "Half my work is for businesses here on the island, half is remote. If you are local, these are the sectors I know best.",
+    "Most of my clients are in Bali. So far I have built for a cargo company, a dental clinic, an entertainment company, a swim school, and a hair care brand. These three are the kind of work I am looking for next.",
   items: [
     {
       name: "Villas and accommodation",
       blurb:
-        "Direct bookings instead of paying a platform for every guest. Fast photo-heavy pages, clear rates, an enquiry form that actually reaches you.",
+        "Photo-heavy pages that load fast, clear rates, and an enquiry form, so guests can book with you directly instead of through a platform.",
     },
     {
       name: "Cafes and restaurants",
       blurb:
-        "Menu, location, hours, and reservations, on a page that opens quickly on a tourist's phone with bad signal. Plus the Google setup so you turn up when someone searches nearby.",
+        "Menu, location, hours, and reservations on a page that opens quickly on a phone. Plus the Google Business setup.",
     },
     {
       name: "Wellness and yoga studios",
       blurb:
-        "Schedules, teacher profiles, retreat pages, and class bookings. Built so you can update next month's timetable without asking anyone for help.",
+        "Schedules, teacher profiles, retreat pages, and class bookings, set up so you can update the timetable yourself.",
     },
   ] satisfies Sector[],
 };
@@ -147,16 +132,16 @@ export const CASE_STUDIES = {
       built:
         "A WordPress site structured around the services rather than the company history, with each service on its own page so it can be found and linked directly. Search setup handled at the same time as the build, not bolted on later.",
       result:
-        "Each service now has a page that can rank and be sent to a client on its own, and the team can add or edit services without a developer.",
+        "Each service has its own page, and the team can add or edit them without a developer.",
     },
     {
       projectTitle: "Vāyu",
       problem:
-        "A new hair care brand launching into a crowded market, with no store and a brand identity that a stock Shopify theme would have flattened.",
+        "A new hair care brand launching with no store, and a brand identity they wanted the store to reflect.",
       built:
         "Their first Shopify store, with the theme customised around the brand: product pages that explain the problem each product solves, and a checkout flow kept short.",
       result:
-        "They launched with a store that looks like their brand rather than a template, and can add products themselves as the range grows.",
+        "They launched with the store and can add products themselves as the range grows.",
     },
   ] satisfies CaseStudy[],
 };
@@ -166,27 +151,27 @@ export const FAQS = {
   items: [
     {
       q: "What does a site cost?",
-      a: "It depends on how many pages you need and whether you are selling online. I give you a fixed number after the first call, before you commit to anything, so you are never billed for a surprise.",
+      a: "It depends on how many pages you need and whether you are selling online. I send you a fixed price by email before we start.",
     },
     {
       q: "How long does it take?",
-      a: "Most sites go live in under two weeks from the first call. A store with a lot of products, or a build that needs custom functionality, takes longer. I will say so upfront rather than promise two days and disappear.",
+      a: "A small site is usually two to three weeks. A store with a lot of products, or anything custom, takes longer.",
       link: {
         href: CHOOSE_DEVELOPER_POST,
-        label: "More on spotting unrealistic timelines",
+        label: "How to choose a web developer in Bali",
       },
     },
     {
       q: "Can you work with me if I am not in Bali?",
-      a: "Yes. About half my clients are elsewhere. We do a call to start, then most of it runs over email and a shared preview link, so the time difference rarely matters.",
+      a: "Yes. Most of my clients are in Bali, but not all. It runs over email and a shared preview link, so the time difference rarely matters.",
     },
     {
       q: "What happens after launch?",
-      a: "You can take it from there, or keep me on for updates, backups, and fixes. I will show you how to edit the content either way. There is no lock-in and no monthly fee you did not agree to.",
+      a: "You can take it from there, or keep me on for updates, backups, and fixes. Either way I show you how to edit the content.",
     },
     {
       q: "Who owns the code and the site?",
-      a: "You do. The domain, the hosting account, the code, and the content are all in your name. If you want to move to another developer later you can, and nothing is held hostage.",
+      a: "You do. The domain, the hosting account, the code, and the content are all in your name.",
     },
   ] satisfies Faq[],
 };
@@ -194,20 +179,20 @@ export const FAQS = {
 export const servicesSeo = {
   title: "Web Developer in Bali | Websites and Shopify Stores | Surya Wiguna",
   description:
-    "Freelance web developer in Bali. Marketing sites, Shopify storefronts, and rebuilds for villas, cafes, wellness studios, and remote founders. Most sites live in under two weeks.",
+    "Freelance web developer in Bali. WordPress and Shopify sites for small businesses, plus custom builds. Get a price and a timeline by email.",
   ogImage: AVATAR.src,
 };
 
 export const servicesPage = {
   h1: "Web developer in Bali for small businesses and founders",
   intro: [
-    "I build websites for small businesses: villas, cafes, studios, and product brands here in Bali, plus founders and small teams working remotely.",
-    "You do not need to know what Next.js is. You need a site that loads fast, says the right thing, and brings you enquiries. That is the part I handle.",
+    "I build websites for small businesses. Most of my clients are in Bali, a few are remote.",
+    "Most of the work is WordPress and Shopify, plus the occasional custom build. If you are not sure which you need, email me.",
   ],
   // Used by the parked contact form, see contactCta below.
   contactHeading: "Tell me about your project",
   contactIntro:
-    "Fill this in and I will come back to you with a price and a timeline. No obligation, and I will tell you if I am not the right fit.",
+    "Fill this in and I will reply with a price and a timeline.",
 };
 
 // Soft CTA at the foot of /services. This is a mailto rather than the form in
@@ -217,8 +202,8 @@ export const servicesPage = {
 export const contactCta = {
   heading: "Tell me about your project",
   body: [
-    "Email me what you are building and roughly when you need it live. I will come back with a price and a timeline.",
-    "No obligation, and I will tell you if I am not the right fit.",
+    "Email me what you are building and roughly when you need it live.",
+    "I will reply with a price and a timeline.",
   ],
   subject: "Project enquiry",
   label: "Email me",
@@ -228,7 +213,7 @@ export const contactCta = {
 // is handled once here rather than by editing individual posts in Storyblok.
 export const blogCta = {
   heading: "Need a site building?",
-  body: "I am a freelance web developer in Bali. Marketing sites, Shopify stores, and rebuilds, usually live in under two weeks.",
+  body: "I am a freelance web developer in Bali. WordPress sites, Shopify stores, and custom builds.",
   href: "/services",
   label: "See what I do",
 };
