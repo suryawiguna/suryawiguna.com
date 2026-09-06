@@ -74,7 +74,7 @@ export const OFFERS = [
 export const PROCESS = {
   title: "How it works",
   timeline:
-    "A small site usually takes two to three weeks, depending on how quickly the content and photos arrive. Bigger builds take longer.",
+    "How long it takes depends on the size of the site, and mostly on how quickly the content and photos arrive. You get a date along with the price, before anything starts.",
   steps: [
     {
       title: "Email",
@@ -155,7 +155,7 @@ export const FAQS = {
     },
     {
       q: "How long does it take?",
-      a: "A small site is usually two to three weeks. A store with a lot of products, or anything custom, takes longer.",
+      a: "It depends on the size of the site, and mostly on how quickly you can get me the content and photos. I send a date by email along with the price, before we start.",
       link: {
         href: CHOOSE_DEVELOPER_POST,
         label: "How to choose a web developer in Bali",
