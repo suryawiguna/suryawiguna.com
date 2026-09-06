@@ -77,8 +77,8 @@ export const PROCESS = {
     "A small site usually takes two to three weeks, depending on how quickly the content and photos arrive. Bigger builds take longer.",
   steps: [
     {
-      title: "Call",
-      line: "Thirty minutes. You tell me what you sell and who buys it. I reply with a price and a timeline.",
+      title: "Email",
+      line: "You email me what you sell and who buys it. I reply with a price and a timeline.",
     },
     {
       title: "Design",
