@@ -217,13 +217,3 @@ export const blogCta = {
   href: "/services",
   label: "See what I do",
 };
-
-// Budget bands for the contact form select. Kept vague on purpose: it is a
-// qualifying question, not a quote.
-export const BUDGET_RANGES = [
-  "Under $1,000",
-  "$1,000 to $3,000",
-  "$3,000 to $7,000",
-  "$7,000+",
-  "Not sure yet",
-];

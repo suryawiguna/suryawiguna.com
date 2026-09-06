@@ -9,7 +9,6 @@ type ContactPayload = {
   name?: string;
   email?: string;
   projectType?: string;
-  budget?: string;
   message?: string;
   // Honeypot. Real people leave it empty because they never see it.
   company?: string;
@@ -43,7 +42,6 @@ export async function POST(request: Request) {
   const email = payload.email?.trim() ?? "";
   const message = payload.message?.trim() ?? "";
   const projectType = payload.projectType?.trim() || "Not specified";
-  const budget = payload.budget?.trim() || "Not specified";
 
   if (!name || !email || !message) {
     return Response.json(
@@ -73,7 +71,6 @@ export async function POST(request: Request) {
     ["Name", name],
     ["Email", email],
     ["Project type", projectType],
-    ["Budget", budget],
     ["Message", message],
   ];
 
