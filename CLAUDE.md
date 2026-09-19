@@ -47,16 +47,26 @@ The Storyblok React SDK (`@storyblok/react`) is **not** a dependency — posts a
 
 | Route | Data source |
 |-------|-------------|
-| `/` | `content/home.ts` + `featuredProjects`; the recent-posts strip calls `getAllPosts(5)` |
+| `/` | `content/home.ts` + `featuredProjects`; the recent-posts strip calls `getAllPosts(3)` |
 | `/blog` | `getAllPosts()` |
 | `/blog/[slug]` | `getPost(slug)`, static params generated at build |
+| `/blog/tag/[tag]` | `getAllPosts()` filtered through `lib/tags.ts`; static params generated at build, `dynamicParams = false` |
 | `/services` | `content/services.ts` |
 | `/portfolio` | `content/projects.ts` |
 | `/link` | `content/links.ts` |
-| `/sitemap.xml` | `app/sitemap.ts` — `getSitemapEntries()` + `PAGE_UPDATED`, revalidates hourly |
+| `/sitemap.xml` | `app/sitemap.ts` — `getSitemapEntries()` + `PAGE_UPDATED` + tag archives, revalidates hourly |
 | `/robots.txt` | `app/robots.ts` |
 
 `sitemap.xml` and `robots.txt` are generated routes, not files. Do not add either to `public/` — static files there shadow app routes and would silently freeze the sitemap again.
+
+### Tag archives
+
+`/blog/tag/[tag]` lists every indexable post carrying a tag. The rules live in `lib/tags.ts`, not in the route:
+
+- A tag only gets a URL once it has `MIN_POSTS_PER_TAG` (3) posts — below that the page would be near-empty and compete with the posts it links to. `archivableTags` is the single source of which archives exist, and it is what the route, the post page's tag links, and the sitemap all read.
+- `tagSlug` derives the URL segment from the tag text (`&` becomes ` and `, everything non-alphanumeric collapses to `-`). Storyblok tags are free text, so never hand-write a slug — round-trip through `tagSlug` / `tagFromSlug`.
+- Posts with `noindex` are excluded from both the counts and the listings.
+- The route sets `dynamicParams = false` on purpose. Without it an unknown tag renders the not-found page behind a 200 — a soft 404 — because `notFound()` gets captured by the ISR cache. The trade-off is that a tag newly crossing the threshold needs a redeploy before its archive exists.
 
 ### Email subscriptions
 
@@ -81,7 +91,7 @@ Three hand-written stylesheets, no CSS framework in practice:
 | File | Scope | Loaded by |
 |------|-------|-----------|
 | `styles/v3.css` | Tokens + every shared primitive | `app/layout.tsx` — site-wide |
-| `styles/v3-blog-index.css` | Toolbar, post row, pagination | `app/blog/page.tsx` |
+| `styles/v3-blog-index.css` | Toolbar, post row, pagination | `app/blog/page.tsx`, `app/blog/tag/[tag]/page.tsx` |
 | `styles/v3-blog-post.css` | Breadcrumb, cover, prose, share, related | `app/blog/[slug]/page.tsx` |
 
 Every token lives in `:root` in `styles/v3.css`: colour, type scale, a 4px space scale, radius, control metrics, motion, focus, elevation. **No stylesheet may use a raw px/rem for a font size, space, radius, colour, or duration** — add a token first. The site has exactly two breakpoints, 768px and 560px.
