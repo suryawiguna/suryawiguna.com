@@ -31,6 +31,13 @@ export const SOCIAL_PROFILES = [
 export const BUSINESS_DESCRIPTION =
   "Freelance web development and design based in Bali, building fast marketing sites and Shopify storefronts for founders and small teams, with SEO and AI search optimization built in.";
 
+// Describes the person (the Person node in the home page JSON-LD). Split from
+// homeSeo.description for the same reason as BUSINESS_DESCRIPTION: the meta
+// description is a sales line ending in a call to action, which has no place
+// in a structured-data field a machine reads as a statement of fact.
+export const PERSON_DESCRIPTION =
+  "Freelance web developer and designer based in Bali, building marketing sites, Shopify storefronts, and rebuilds for small businesses and founders working remotely.";
+
 // What is on offer now lives in content/services.ts as OFFERS, which feeds
 // both the sales copy and the OfferCatalog in lib/jsonLd.ts. Keeping a second
 // list here meant the schema and the pages described different businesses.

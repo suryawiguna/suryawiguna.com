@@ -11,7 +11,7 @@ export type HistoryItem = {
 export const homeSeo = {
   title: "Freelance Web Developer Bali | Surya Wiguna",
   description:
-    "Freelance web developer in Bali. I build fast marketing sites and Shopify storefronts for founders and small teams. Next.js, Shopify, WordPress.",
+    "Freelance web developer in Bali building fast Shopify and WordPress sites for villas, cafes and small brands. No agency layers. Let's talk.",
   ogImage: AVATAR.src,
 };
 

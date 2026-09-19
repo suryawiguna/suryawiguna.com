@@ -168,7 +168,7 @@ export const FAQS = {
 };
 
 export const servicesSeo = {
-  title: "Web Developer in Bali | Websites and Shopify Stores | Surya Wiguna",
+  title: "Web Development Services in Bali | Surya Wiguna",
   description:
     "Freelance web developer in Bali. Marketing sites, Shopify storefronts, and rebuilds for villas, cafes, wellness studios, and remote founders. Most sites live in under two weeks.",
   ogImage: AVATAR.src,

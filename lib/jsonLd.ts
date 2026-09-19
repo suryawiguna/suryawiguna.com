@@ -3,12 +3,13 @@
 // values for consumers to merge them into one entity, so the definitions live
 // here rather than being copied per page.
 
-import { education, experiences, hero, homeSeo, skills } from "content/home";
+import { education, experiences, hero, skills } from "content/home";
 import { OFFERS } from "content/services";
 import {
   BUSINESS_DESCRIPTION,
   EMAIL,
   LOCATION,
+  PERSON_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
   SOCIAL_PROFILES,
@@ -38,7 +39,7 @@ export function personNode() {
     url: SITE_URL,
     image: hero.image.src,
     jobTitle: "Freelance Web Developer",
-    description: homeSeo.description,
+    description: PERSON_DESCRIPTION,
     email: `mailto:${EMAIL}`,
     address: ADDRESS,
     knowsAbout: skills.items,
