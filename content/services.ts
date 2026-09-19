@@ -1,6 +1,5 @@
-// What I sell, in one place. Both the home page ("What I do" and "How it
-// works") and the /services page read from here, so the short and long
-// versions of an offer can never drift apart.
+// What I sell, in one place. Both the home page's short cards and the
+// /services page's detailed offers read from here, so they cannot drift apart.
 
 import { AVATAR } from "content/site";
 
@@ -9,7 +8,7 @@ export type Offer = {
   // the fragment the home page cards link to on /services.
   slug: "marketing-site" | "shopify" | "migration";
   title: string;
-  // Home page card: two to three sentences.
+  // Home page card: one short sentence.
   cardBlurb: string;
   // /services: one paragraph per entry.
   detail: string[];
@@ -40,10 +39,9 @@ export const OFFERS = [
     slug: "marketing-site",
     title: "Marketing site",
     cardBlurb:
-      "A site that explains what you sell and gets people to enquire. Built in Next.js when you want it fast, WordPress when you want to edit it yourself. Usually four to six pages.",
+      "A focused website that explains your offer and turns visits into enquiries.",
     detail: [
-      "This is the one most people come for. You have a business, you need a site that loads fast, reads well on a phone, and turns a visitor into an enquiry.",
-      "I write the structure with you, design it, then build it. Next.js if speed and search matter most, WordPress if you would rather log in and change the copy yourself without calling me. Either way you get the pages, the forms, and the basic SEO setup done properly the first time.",
+      "A fast, mobile-friendly site that explains your business and turns visitors into enquiries. I plan the structure, design the pages, build them in Next.js or WordPress, and handle forms and essential SEO.",
     ],
     serviceType: "Web Development",
   },
@@ -51,10 +49,9 @@ export const OFFERS = [
     slug: "shopify",
     title: "Shopify storefront",
     cardBlurb:
-      "A new store, or a theme customised until it actually looks like your brand. Products, payments, and shipping set up so you can start selling.",
+      "A branded Shopify store with products, payments, and shipping ready to sell.",
     detail: [
-      "If you sell physical products, Shopify handles the boring parts: payments, stock, shipping, taxes. What it does not do is make your store look like anyone in particular.",
-      "I set up the store and customise the theme so it matches your brand, not the demo. That covers product pages, collections, cart, and checkout styling. If you already have a store and it just looks generic, I can work on the existing theme instead of starting over.",
+      "A new Shopify store or a thoughtful redesign of an existing one. I customise the theme around your brand and set up the product, collection, cart, payment, and shipping experience.",
     ],
     serviceType: "E-commerce Development",
   },
@@ -62,10 +59,9 @@ export const OFFERS = [
     slug: "migration",
     title: "Rebuild or migration",
     cardBlurb:
-      "You already have a site and it is slow, dated, or a pain to update. WordPress to Next.js, or a Shopify theme to headless, without losing your search rankings.",
+      "A faster, easier-to-manage rebuild that preserves your content and search traffic.",
     detail: [
-      "Old sites get slow and awkward. Plugins pile up, the theme stops being supported, and every small change turns into a job.",
-      "I move the content across, keep the URLs and redirects intact so you do not lose the traffic you already earn, and rebuild the front end on something current. The usual routes are WordPress to Next.js and a stock Shopify theme to a headless setup, but the principle is the same: same content, faster site, easier to change.",
+      "A modern rebuild for a slow, dated, or difficult-to-update site. I move the content, preserve URLs and redirects, and rebuild it without throwing away the search traffic you already earn.",
     ],
     serviceType: "Web Development",
   },
@@ -74,23 +70,23 @@ export const OFFERS = [
 export const PROCESS = {
   title: "How it works",
   timeline:
-    "Most sites go live in under two weeks from the first email. Bigger builds take longer, and I will tell you that before you pay anything.",
+    "Most small sites launch within two weeks. Larger builds get a clear timeline before work starts.",
   steps: [
     {
       title: "Email",
-      line: "You email me what you sell and who buys it. I come back with what it costs and how long it takes, in writing.",
+      line: "You email me the goal; I reply with the scope, price, and timeline.",
     },
     {
       title: "Design",
-      line: "I send you the layout before any code exists. You change what you want while changing it is cheap.",
+      line: "You review the layout before development starts.",
     },
     {
       title: "Build",
-      line: "I build it and you watch it happen on a preview link, not in a status email.",
+      line: "I build the site and share a live preview.",
     },
     {
       title: "Launch",
-      line: "It goes live, you own it, and I show you how to edit the parts you will want to edit.",
+      line: "We publish it, and I show you how to update it.",
     },
   ] satisfies Step[],
 };
@@ -101,22 +97,22 @@ export const PROCESS = {
 export const SECTORS = {
   title: "Who I work with",
   intro:
-    "Half my work is for businesses here on the island, half is remote. If you are local, these are the sectors I know best.",
+    "I work remotely and with Bali businesses, especially these sectors.",
   items: [
     {
       name: "Villas and accommodation",
       blurb:
-        "Direct bookings instead of paying a platform for every guest. Fast photo-heavy pages, clear rates, an enquiry form that actually reaches you.",
+        "Fast, photo-led sites designed to win more direct enquiries and bookings.",
     },
     {
       name: "Cafes and restaurants",
       blurb:
-        "Menu, location, hours, and reservations, on a page that opens quickly on a tourist's phone with bad signal. Plus the Google setup so you turn up when someone searches nearby.",
+        "Menus, hours, maps, and reservations that load quickly on mobile.",
     },
     {
       name: "Wellness and yoga studios",
       blurb:
-        "Schedules, teacher profiles, retreat pages, and class bookings. Built so you can update next month's timetable without asking anyone for help.",
+        "Schedules, teacher profiles, retreat pages, and simple booking journeys.",
     },
   ] satisfies Sector[],
 };
@@ -127,20 +123,20 @@ export const CASE_STUDIES = {
     {
       projectTitle: "One Line Solutions",
       problem:
-        "A Bali cargo and shipping company with a wide range of services, air freight, sea freight, door to door, warehousing, cross trade, and no clear way for a potential client to work out which one they needed.",
+        "Its many freight services were difficult for potential clients to navigate.",
       built:
-        "A WordPress site structured around the services rather than the company history, with each service on its own page so it can be found and linked directly. Search setup handled at the same time as the build, not bolted on later.",
+        "A WordPress site organised around individual service pages, with SEO included from the start.",
       result:
-        "Each service now has a page that can rank and be sent to a client on its own, and the team can add or edit services without a developer.",
+        "Clients can find and share the right service, while the team can update the site themselves.",
     },
     {
       projectTitle: "Vāyu",
       problem:
-        "A new hair care brand launching into a crowded market, with no store and a brand identity that a stock Shopify theme would have flattened.",
+        "A new hair-care brand needed a store that did not feel like a stock Shopify theme.",
       built:
-        "Their first Shopify store, with the theme customised around the brand: product pages that explain the problem each product solves, and a checkout flow kept short.",
+        "A customised Shopify storefront with focused product pages and a simple checkout journey.",
       result:
-        "They launched with a store that looks like their brand rather than a template, and can add products themselves as the range grows.",
+        "The brand launched with a distinctive store the team can expand without a developer.",
     },
   ] satisfies CaseStudy[],
 };
@@ -150,11 +146,11 @@ export const FAQS = {
   items: [
     {
       q: "What does a site cost?",
-      a: "It depends on how many pages you need and whether you are selling online. I give you a fixed number after the first email, before you commit to anything, so you are never billed for a surprise.",
+      a: "It depends on the scope and whether you are selling online. You receive a fixed price after the first email and before committing, with no surprise billing.",
     },
     {
       q: "How long does it take?",
-      a: "Most sites go live in under two weeks from the first email. A store with a lot of products, or a build that needs custom functionality, takes longer. I will say so upfront rather than promise two days and disappear.",
+      a: "Most small sites launch within two weeks. Stores with many products or custom features take longer, and you will know the timeline upfront.",
       link: {
         href: CHOOSE_DEVELOPER_POST,
         label: "More on spotting unrealistic timelines",
@@ -162,15 +158,11 @@ export const FAQS = {
     },
     {
       q: "Can you work with me if I am not in Bali?",
-      a: "Yes. About half my clients are elsewhere. It runs over email and a shared preview link from the first message onwards, so the time difference rarely matters.",
+      a: "Yes. I work with remote clients through email and a shared preview link, so time differences rarely get in the way.",
     },
     {
       q: "What happens after launch?",
-      a: "You can take it from there, or keep me on for updates, backups, and fixes. I will show you how to edit the content either way. There is no lock-in and no monthly fee you did not agree to.",
-    },
-    {
-      q: "Who owns the code and the site?",
-      a: "You do. The domain, the hosting account, the code, and the content are all in your name. If you want to move to another developer later you can, and nothing is held hostage.",
+      a: "You own the domain, hosting, code, and content. I show you how to edit the site, and you can manage it yourself or retain me for support. There is no lock-in.",
     },
   ] satisfies Faq[],
 };
@@ -185,8 +177,7 @@ export const servicesSeo = {
 export const servicesPage = {
   h1: "Web developer in Bali for small businesses and founders",
   intro: [
-    "I build websites for small businesses: villas, cafes, studios, and product brands here in Bali, plus founders and small teams working remotely.",
-    "You do not need to know what Next.js is. You need a site that loads fast, says the right thing, and brings you enquiries. That is the part I handle.",
+    "I build fast marketing sites and Shopify stores for businesses in Bali and founders working remotely, from strategy and design through launch.",
   ],
   // Used by the parked contact form, see contactCta below.
   contactHeading: "Tell me about your project",
@@ -201,8 +192,7 @@ export const servicesPage = {
 export const contactCta = {
   heading: "Tell me about your project",
   body: [
-    "Email me what you are building and roughly when you need it live. I will come back with a price and a timeline.",
-    "No obligation, and I will tell you if I am not the right fit.",
+    "Email me what you are building and when you need it. I will reply with a price, a timeline, and an honest view of whether I am the right fit.",
   ],
   subject: "Project enquiry",
   label: "Email me",
@@ -216,13 +206,3 @@ export const blogCta = {
   href: "/services",
   label: "See what I do",
 };
-
-// Budget bands for the contact form select. Kept vague on purpose: it is a
-// qualifying question, not a quote.
-export const BUDGET_RANGES = [
-  "Under $1,000",
-  "$1,000 to $3,000",
-  "$3,000 to $7,000",
-  "$7,000+",
-  "Not sure yet",
-];

@@ -3,11 +3,11 @@ import moment from "moment";
 import { getAllPosts } from "lib/api";
 
 export default async function BlogPosts() {
-  const posts = await getAllPosts(5);
+  const posts = await getAllPosts(3);
 
   return (
     <section id="blog" className="m-section">
-      <h2 className="m-h2">Recent Blog Posts</h2>
+      <h2 className="m-h2">Latest writing</h2>
       <ul className="m-posts">
         {posts.map((post: any, key: number) => (
           <li key={key}>
@@ -21,7 +21,7 @@ export default async function BlogPosts() {
         ))}
       </ul>
       <Link href="/blog" className="m-more">
-        Other blog posts →
+        All posts →
       </Link>
     </section>
   );

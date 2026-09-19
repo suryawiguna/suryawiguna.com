@@ -4,7 +4,7 @@ import Skills from "components/skill/skill";
 import JsonLd from "components/jsonLd";
 import Portfolios from "components/portfolio/portfolios";
 import Offers from "components/services/offers";
-import Process from "components/services/process";
+import ContactCta from "components/services/contactCta";
 
 // BlogPosts is an async server component — it must be a static import so its
 // post links land in the server-rendered HTML. Loading it via next/dynamic
@@ -21,7 +21,7 @@ import {
   worksTitle,
 } from "content/home";
 import { featuredProjects } from "content/projects";
-import { CHOOSE_DEVELOPER_POST, OFFERS, PROCESS } from "content/services";
+import { OFFERS } from "content/services";
 import { SITE_URL } from "content/site";
 import {
   PERSON_ID,
@@ -88,22 +88,12 @@ export default function Home() {
   return (
     <>
       <Introduction />
+      <Portfolios projects={featuredProjects} heading={worksTitle} />
       <Offers
         heading="What I do"
         offers={OFFERS}
-        more={{ href: "/services", label: "See the full detail →" }}
+        more={{ href: "/services", label: "View services →" }}
       />
-      <Portfolios projects={featuredProjects} heading={worksTitle} />
-      <Process
-        heading={PROCESS.title}
-        timeline={PROCESS.timeline}
-        steps={PROCESS.steps}
-        more={{
-          href: CHOOSE_DEVELOPER_POST,
-          label: "How to choose the right web developer in Bali →",
-        }}
-      />
-      <BlogPosts />
       <section id="about" className="m-section">
         <div className="m-cols">
           <Histories title={experiences.title} items={experiences.items} />
@@ -111,6 +101,8 @@ export default function Home() {
         </div>
         <Skills title={skills.title} items={skills.items} />
       </section>
+      <BlogPosts />
+      <ContactCta />
       <JsonLd data={generateHomeJsonLd()} />
     </>
   );

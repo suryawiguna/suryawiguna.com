@@ -21,7 +21,7 @@ export const hero = {
   headline: "Freelance Web Developer in Bali",
   name: "Surya Wiguna",
   description:
-    "I started in backend, moved through QA, and now spend most days designing and building marketing sites and Shopify storefronts. I work directly with founders and small teams.",
+    "I design and build fast marketing sites and Shopify stores for founders and small teams.",
   status: "Available for new projects",
 };
 

@@ -47,8 +47,8 @@ export const NAV_ITEMS = [
 // With the content in code there is nothing to read a date from, so bump the
 // matching entry whenever you meaningfully edit a page.
 export const PAGE_UPDATED = {
-  home: "2026-08-26",
-  services: "2026-08-26",
+  home: "2026-09-19",
+  services: "2026-09-19",
   portfolio: "2026-08-10",
   link: "2026-08-09",
 };

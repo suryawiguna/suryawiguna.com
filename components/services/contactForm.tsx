@@ -8,7 +8,7 @@
 // once delivery is confirmed in the Brevo transactional log.
 
 import { useState } from "react";
-import { BUDGET_RANGES, OFFERS, servicesPage } from "content/services";
+import { OFFERS, servicesPage } from "content/services";
 import { EMAIL } from "content/site";
 
 type Status = "idle" | "sending" | "sent" | "error";
@@ -78,20 +78,6 @@ export default function ContactForm() {
               </option>
             ))}
             <option value="Something else">Something else</option>
-          </select>
-        </div>
-
-        <div className="m-field">
-          <label htmlFor="contact-budget">Budget</label>
-          <select id="contact-budget" name="budget" defaultValue="">
-            <option value="" disabled>
-              Pick a range
-            </option>
-            {BUDGET_RANGES.map((range) => (
-              <option key={range} value={range}>
-                {range}
-              </option>
-            ))}
           </select>
         </div>
 

@@ -32,7 +32,7 @@ export const PROJECTS: Project[] = [
     },
     categories: ["Wordpress", "SEO"],
     description:
-      "One Line Solutions is a Bali cargo and shipping company covering air and sea freight, door-to-door export-import, and domestic logistics. Built their WordPress site and optimized the service pages for search.",
+      "A WordPress site and search-focused service pages for a Bali cargo and shipping company.",
     featured: true,
   },
   {
@@ -44,7 +44,7 @@ export const PROJECTS: Project[] = [
     },
     categories: ["Shopify"],
     description:
-      "Vāyu is a new hair-care brand that aims to solve fundamental problems with current products in the market. Set up their initial Shopify store with a customized design.",
+      "A customised Shopify storefront for an emerging hair-care brand.",
     featured: true,
   },
   {

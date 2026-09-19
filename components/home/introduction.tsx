@@ -30,7 +30,7 @@ export default function Introduction() {
           know the price or the timeline is not ready to write an email. */}
       <div className="m-cta-row">
         <Link href="/services" className="m-btn primary">
-          What I can build for you
+          View services
         </Link>
         <Link href={`mailto:${EMAIL}`} className="m-btn ghost">
           Email me
