@@ -40,9 +40,21 @@ export default function Offers({
       ) : (
         <ul className="m-offer-grid">
           {offers.map((offer) => (
-            <li key={offer.slug} className="m-offer">
-              <h3 className="m-offer-title">{offer.title}</h3>
-              <p className="m-offer-body">{offer.cardBlurb}</p>
+            <li key={offer.slug}>
+              <Link
+                href={`/services#${offer.slug}`}
+                className="m-offer"
+                aria-label={`Learn more about ${offer.title}`}
+              >
+                <span className="m-offer-heading">
+                  <h3 className="m-offer-title">{offer.title}</h3>
+                  <span className="m-offer-arrow" aria-hidden="true">
+                    →
+                  </span>
+                </span>
+                <p className="m-offer-body">{offer.cardBlurb}</p>
+                <span className="m-offer-more">View service</span>
+              </Link>
             </li>
           ))}
         </ul>

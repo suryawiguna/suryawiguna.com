@@ -1,5 +1,5 @@
 import {
-  AVATAR,
+  AVATAR_COMPACT,
   Bar,
   CONTROL_H,
   Pill,
@@ -12,14 +12,16 @@ export default function Loading() {
   return (
     <Skeleton>
       {/* Hero */}
-      <div className="m-hero">
-        <Pill w={AVATAR} h={AVATAR} />
-        <Bar w="60%" h="title" style={{ maxWidth: 320 }} />
-        <Bar w="80%" style={{ maxWidth: 400 }} />
-        <Bar w="65%" style={{ maxWidth: 320 }} />
+      <div className="m-hero m-home-hero">
+        <Pill w={AVATAR_COMPACT} h={AVATAR_COMPACT} />
+        <Bar w="48%" h="meta" style={{ maxWidth: 280 }} />
+        <Bar w="72%" h="title" style={{ maxWidth: 420 }} />
+        <Bar w="58%" h="title" style={{ maxWidth: 340 }} />
+        <Bar w="82%" style={{ maxWidth: 440 }} />
+        <Bar w="68%" style={{ maxWidth: 360 }} />
         <div style={{ display: "flex", gap: "var(--space-3)" }}>
-          <Pill w={210} h={CONTROL_H} />
-          <Pill w={110} h={CONTROL_H} />
+          <Pill w={125} h={CONTROL_H} />
+          <Pill w={145} h={CONTROL_H} />
         </div>
         <div
           style={{

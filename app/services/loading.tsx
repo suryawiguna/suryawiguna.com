@@ -1,4 +1,10 @@
-import { Bar, Skeleton, Stack } from "components/global/skeleton";
+import {
+  Bar,
+  CONTROL_H,
+  Pill,
+  Skeleton,
+  Stack,
+} from "components/global/skeleton";
 
 export default function Loading() {
   return (
@@ -8,6 +14,10 @@ export default function Loading() {
         <Bar w="70%" h="title" />
         <Bar w="50%" h="title" />
         <Bar w="60%" />
+        <div style={{ display: "flex", gap: "var(--space-3)" }}>
+          <Pill w={145} h={CONTROL_H} />
+          <Pill w={150} h={CONTROL_H} />
+        </div>
       </div>
 
       {/* Offer blocks, inside the tinted panel the real page renders. */}

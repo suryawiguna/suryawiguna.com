@@ -1,8 +1,12 @@
 export const portfolioPage = {
-  heading: "Portfolio",
+  eyebrow: "Portfolio",
+  heading: "Websites built to move a business forward",
+  intro:
+    "A selection of client websites, Shopify storefronts, and interface concepts—from early structure and design through launch.",
   seo: {
     title: "Web Developer Bali Portfolio | Surya Wiguna",
-    description: "Check out my portfolios",
+    description:
+      "Explore client websites, Shopify storefronts, and interface concepts designed and built by Surya Wiguna in Bali.",
     ogImage:
       "https://a.storyblok.com/f/169901/1424x900/2c7d9e1381/tropicalkidsbali.jpeg",
   },
@@ -14,6 +18,7 @@ export type Project = {
   image?: { src: string; alt: string };
   categories: string[];
   description: string;
+  kind: "client" | "concept";
   // Also shown in the "Recent Works" section on the home page.
   featured?: boolean;
   // Kept for reference but not rendered anywhere.
@@ -33,6 +38,7 @@ export const PROJECTS: Project[] = [
     categories: ["Wordpress", "SEO"],
     description:
       "A WordPress site and search-focused service pages for a Bali cargo and shipping company.",
+    kind: "client",
     featured: true,
   },
   {
@@ -45,6 +51,7 @@ export const PROJECTS: Project[] = [
     categories: ["Shopify"],
     description:
       "A customised Shopify storefront for an emerging hair-care brand.",
+    kind: "client",
     featured: true,
   },
   {
@@ -56,7 +63,8 @@ export const PROJECTS: Project[] = [
     },
     categories: ["Wordpress", "SEO"],
     description:
-      "Kamandhani Dental is a dental clinic have 2 branches in Denpasar and Tabanan. They want to make website and gain more traffic through Google with Ads and organic by optimizing SEO.",
+      "A conversion-focused website and local search foundation for a dental clinic with branches in Denpasar and Tabanan.",
+    kind: "client",
   },
   {
     title: "Stryv - About us",
@@ -67,7 +75,8 @@ export const PROJECTS: Project[] = [
     },
     categories: ["Shopify"],
     description:
-      "On this project, I was asked to applied the design that were created on Figma to their Shopify store using Pagefly page builder.",
+      "A Shopify About page built in PageFly from an established Figma design system.",
+    kind: "client",
   },
   {
     title: "Tropical Entertainment Bali",
@@ -78,7 +87,8 @@ export const PROJECTS: Project[] = [
     },
     categories: ["Wordpress", "Web design"],
     description:
-      "In this project, I worked on the web design that was done using Figma and then implement it using Wordpress with the help of Elementor.",
+      "A responsive entertainment-services website designed in Figma and implemented in WordPress with Elementor.",
+    kind: "client",
   },
   {
     title: "Tropical Kids Bali",
@@ -89,7 +99,8 @@ export const PROJECTS: Project[] = [
     },
     categories: ["Wordpress", "Web design"],
     description:
-      "This project is related to a swimming class which still under Tropical Entertainment Bali, in this project I've also done the web design and implement it using Wordpress.",
+      "A dedicated swimming-class experience designed and built in WordPress for Tropical Entertainment Bali.",
+    kind: "client",
   },
   {
     title: "Virtual Tour 360",
@@ -101,6 +112,7 @@ export const PROJECTS: Project[] = [
     categories: ["Custom website"],
     description:
       "This project came from a friend that asked to create him a virtual tour website which displays the detailed information about one of the temple in Bali.",
+    kind: "client",
     hidden: true,
   },
   {
@@ -112,7 +124,8 @@ export const PROJECTS: Project[] = [
     },
     categories: ["Custom website"],
     description:
-      "This one is also a custom website for displaying information about one of a tourist destination in Bali.",
+      "An exploratory destination website presenting the landscape and cultural story of Batur Geopark.",
+    kind: "concept",
   },
   {
     title: "GasTrip",
@@ -123,7 +136,8 @@ export const PROJECTS: Project[] = [
     },
     categories: ["Web design"],
     description:
-      "This project is more like my personal exercise on web design. The idea is to build a travel agency and displaying the travel packages.",
+      "A travel-booking concept exploring destination discovery and package presentation.",
+    kind: "concept",
   },
   {
     title: "I Carry Them Everywhere",
@@ -134,7 +148,8 @@ export const PROJECTS: Project[] = [
     },
     categories: ["Custom website", "Web design"],
     description:
-      "One of my colleauge asked me to create a website for her to display her works in fashion design, basically to become a gallery.",
+      "An editorial gallery created to showcase a fashion designer's work and visual process.",
+    kind: "client",
   },
   {
     title: "Geopark - Design",
@@ -145,6 +160,7 @@ export const PROJECTS: Project[] = [
     },
     categories: ["Web design"],
     description: "This is the detail breakdown of my design work.",
+    kind: "concept",
   },
   {
     title: "BlogX",
@@ -155,7 +171,8 @@ export const PROJECTS: Project[] = [
     },
     categories: ["Web design"],
     description:
-      "I created simple blog design, the idea was to give the reader more comfort to read on the post. If you like it, you can purchase it on Lynk.",
+      "A minimalist publishing concept focused on comfortable long-form reading.",
+    kind: "concept",
   },
   {
     title: "Fruito",
@@ -166,7 +183,8 @@ export const PROJECTS: Project[] = [
     },
     categories: ["Web design"],
     description:
-      "Some web design inspiration that came to mind, this one is about a fruit store.",
+      "A playful ecommerce concept for a fresh-produce brand.",
+    kind: "concept",
   },
   {
     title: "Gear",
@@ -177,7 +195,8 @@ export const PROJECTS: Project[] = [
     },
     categories: ["Web design"],
     description:
-      "This web design is about a website to find resources about the tools that may help your productivity.",
+      "A resource-discovery landing page for productivity tools and workflows.",
+    kind: "concept",
   },
   {
     title: "Holiplace",
@@ -188,7 +207,8 @@ export const PROJECTS: Project[] = [
     },
     categories: ["Web design"],
     description:
-      "The idea of this design is to make a website to booking your stay when traveling around the world.",
+      "A travel-accommodation concept built around finding and booking memorable stays.",
+    kind: "concept",
   },
   {
     title: "GasTrip - Design",
@@ -199,6 +219,7 @@ export const PROJECTS: Project[] = [
     },
     categories: ["Web design"],
     description: "This is the detailed breakdown about GasTrip web design.",
+    kind: "concept",
   },
   {
     title: "Saksi Management System",
@@ -210,11 +231,20 @@ export const PROJECTS: Project[] = [
     categories: ["Custom website"],
     description:
       "A custom management system to record data of witnesses for an election.",
+    kind: "client",
     hidden: true,
   },
 ];
 
 export const visibleProjects = PROJECTS.filter((project) => !project.hidden);
+
+export const clientProjects = visibleProjects.filter(
+  (project) => project.kind === "client"
+);
+
+export const conceptProjects = visibleProjects.filter(
+  (project) => project.kind === "concept"
+);
 
 export const featuredProjects = visibleProjects.filter(
   (project) => project.featured

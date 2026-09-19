@@ -17,11 +17,10 @@ export const homeSeo = {
 
 export const hero = {
   image: AVATAR,
-  // Rendered as `{headline} | {name}` in the <h1>.
-  headline: "Freelance Web Developer in Bali",
-  name: "Surya Wiguna",
+  identity: "Surya Wiguna",
+  headline: "A Bali web developer for small businesses and independent brands.",
   description:
-    "I design and build fast marketing sites and Shopify stores for founders and small teams.",
+    "I design and build marketing sites and Shopify stores, from the first layout through launch.",
   status: "Available for new projects",
 };
 

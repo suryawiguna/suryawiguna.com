@@ -47,8 +47,8 @@ top of `.m-article` in the blog renderer.
 | `--chip` | `#f3f4f6` | Pill and avatar fill |
 | `--chip-ink` | → `--ink-soft` | Text on `--chip` |
 | `--surface` | 55% `--chip` over `--bg` | Panels — a full panel needs less tint than a pill |
-| `--accent` | `#FF4500` | Primary action, hover, markers |
-| `--on-accent` | `#ffffff` | Text on any accent fill |
+| `--accent` | `#C2410C` | Primary action, hover and markers; AA against white |
+| `--on-accent` | `#ffffff` | Text on the action-orange fill |
 | `--success` | `#10b981` | Availability dot |
 | `--danger` | `#b91c1c` | Form errors |
 
@@ -100,8 +100,8 @@ set its at 42px, and `/portfolio` faked one with an `.m-h2` plus an inline
 | **Block title** | `.m-offer-title`, `.m-sector-name`, `.m-step-title`, `.m-case-title`, `.m-cta-card-title`, `.m-rc-title`, `.m-foot-block h3` | `--text-md` | Every `<h3>` inside a section |
 | **Micro-label** | `.m-eyebrow`, `.m-related-h`, `.m-case-label` | `--text-xs` | Uppercase, tracked, muted |
 
-`.m-h1` takes two modifiers: `.m-h1-wide` (24ch, for titles longer than a
-name-plus-role) and `.m-h1-full` (unbounded, for article titles).
+`.m-h1` takes two modifiers: `.m-h1-wide` (24ch, for longer marketing
+headlines) and `.m-h1-full` (unbounded, for article titles).
 
 **One documented exception.** In-prose headings run one step below their
 page-structural equivalents: `.m-article h2` is `--text-xl`, `.m-article h3`
@@ -160,6 +160,7 @@ measured against anything.
 | Element | Padding |
 |---------|---------|
 | `.m-hero` (page header) | `--space-16` top, `--space-12` bottom |
+| `.m-home-hero` (compact desktop home header) | `--space-12` top, `--space-10` bottom |
 | `.m-hero-tight` (under a breadcrumb) | `--space-8` top |
 | `.m-section` | `--space-12` top, `--space-10` bottom |
 | `.m-section-panel` | `--space-10` / `--space-8` inset, `--space-5` outer margin |
@@ -174,8 +175,10 @@ instead of floating equidistant between two blocks.
 | Token | Value | Use |
 |-------|-------|-----|
 | `--maxw` | 720px | Content column |
+| `--maxw-wide` | 1080px | Image-led portfolio showcase |
 | `--gutter` | 1.5rem | Horizontal page padding |
 | `--thumb` / `--thumb-sm` | 96px / 72px | List thumbnails |
+| `--avatar` / `--avatar-compact` | 76px / 64px | Profile and compact-home avatars |
 | `--nav-offset` | 5rem | `scroll-margin` under the sticky nav |
 
 ---

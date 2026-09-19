@@ -49,6 +49,6 @@ export const NAV_ITEMS = [
 export const PAGE_UPDATED = {
   home: "2026-09-19",
   services: "2026-09-19",
-  portfolio: "2026-08-10",
+  portfolio: "2026-09-19",
   link: "2026-08-09",
 };

@@ -21,6 +21,7 @@ export const CONTROL_H = 46;
 export const CONTROL_SM_H = 36;
 export const CHIP_H = 32;
 export const AVATAR = 76;
+export const AVATAR_COMPACT = 64;
 
 type Height = keyof typeof HEIGHT;
 

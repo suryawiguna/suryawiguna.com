@@ -1,11 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { hero } from "content/home";
-import { EMAIL } from "content/site";
 
 export default function Introduction() {
   return (
-    <header id="home" className="m-hero">
+    <header id="home" className="m-hero m-home-hero">
       <div className="m-avatar">
         <Image
           src={hero.image.src}
@@ -15,25 +14,17 @@ export default function Introduction() {
           priority
         />
       </div>
-      <h1 className="m-h1">
-        {hero.headline}
-        {/* Literal spaces, not CSS margin: the separator is part of the text
-            content crawlers and screen readers read, and JSX drops the
-            whitespace-only lines around this span. */}
-        <span className="m-h1-sep">{" | "}</span>
-        {hero.name}
-      </h1>
+      <p className="m-eyebrow">{hero.identity}</p>
+      <h1 className="m-h1 m-h1-wide">{hero.headline}</h1>
       <div className="m-lede">
         <p>{hero.description}</p>
       </div>
-      {/* Primary CTA points at /services, not mailto: someone who does not yet
-          know the price or the timeline is not ready to write an email. */}
       <div className="m-cta-row">
-        <Link href="/services" className="m-btn primary">
-          View services
+        <Link href="/portfolio" className="m-btn primary">
+          See my work
         </Link>
-        <Link href={`mailto:${EMAIL}`} className="m-btn ghost">
-          Email me
+        <Link href="/services#contact" className="m-btn ghost">
+          Start a project
         </Link>
       </div>
       <div className="m-status">

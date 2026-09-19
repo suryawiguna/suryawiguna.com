@@ -15,8 +15,8 @@
   /* A full panel needs less tint than a pill, so --surface sits between
      --bg and --chip. */
   --surface: color-mix(in oklab, var(--chip) 55%, var(--bg));
-  --accent: #FF4500;
-  --on-accent: #ffffff;     /* text on any accent-filled surface */
+  --accent: #C2410C;
+  --on-accent: #ffffff;     /* accessible light text on the action orange */
   --success: #10b981;
   --danger: #b91c1c;
 
@@ -27,9 +27,12 @@
 
   /* ── Layout ─────────────────────────────────────────────────────────── */
   --maxw: 720px;
+  --maxw-wide: 1080px;       /* image-led portfolio showcase */
   --gutter: 1.5rem;
   --thumb: 96px;            /* list thumbnails, desktop */
   --thumb-sm: 72px;         /* list thumbnails, ≤560px */
+  --avatar: 76px;           /* profile hero, phone and utility routes */
+  --avatar-compact: 64px;   /* compact home hero on wider screens */
   --nav-offset: 5rem;       /* scroll-margin under the sticky nav */
 
   /* ── Type scale — see DESIGN-SYSTEM.md. Base 16px = 1rem. ───────────── */
@@ -217,8 +220,8 @@ textarea:focus-visible { outline-offset: 1px; }
 /* A header that sits under a breadcrumb opens on less space. */
 .m-hero-tight { padding-top: var(--space-8); }
 .m-avatar {
-  width: 76px;
-  height: 76px;
+  width: var(--avatar);
+  height: var(--avatar);
   border-radius: var(--radius-pill);
   overflow: hidden;
   background: var(--chip);
@@ -232,6 +235,16 @@ textarea:focus-visible { outline-offset: 1px; }
   height: 100%;
   object-fit: cover;
 }
+.m-home-hero {
+  padding: var(--space-12) 0 var(--space-10);
+  gap: var(--space-3);
+}
+.m-home-hero .m-avatar {
+  width: var(--avatar-compact);
+  height: var(--avatar-compact);
+  margin-bottom: var(--space-1);
+}
+.m-home-hero .m-h1 { max-width: 28ch; }
 
 /* ── Headings ─────────────────────────────────────────────────────────── */
 /* One page title treatment. Every route's <h1> uses .m-h1. */
@@ -244,17 +257,10 @@ textarea:focus-visible { outline-offset: 1px; }
   max-width: 18ch;
   text-wrap: balance;
 }
-/* Titles that run longer than the home page's name-plus-role H1. */
+/* Longer marketing titles that need a little more measure. */
 .m-h1-wide { max-width: 24ch; }
 /* Article titles, which have no useful upper bound. */
 .m-h1-full { max-width: none; }
-.m-h1-sep {
-  display: inline-block;
-  color: var(--muted);
-  margin: 0 0.35em;
-  font-weight: var(--font-regular);
-}
-[data-accent="on"] .m-h1-sep { color: var(--accent); }
 
 /* One section-heading treatment, on every page. */
 .m-h2 {
@@ -460,6 +466,7 @@ textarea:focus-visible { outline-offset: 1px; }
 [data-accent="off"] .m-work-row:hover .m-work-title { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
 
 .m-work-meta { display: inline-flex; align-items: center; gap: var(--space-3); }
+.m-work-arrow { color: var(--muted); font-size: var(--text-md); }
 .m-work-year { color: var(--muted); font-size: var(--text-sm); }
 .m-work-blurb { color: var(--muted); font-size: var(--text-base); max-width: 60ch; }
 .m-work-blurb p { margin: 0; }
@@ -474,6 +481,114 @@ textarea:focus-visible { outline-offset: 1px; }
   transition: color var(--transition), border-color var(--transition);
 }
 .m-more:hover { color: var(--ink); border-color: var(--ink); }
+
+/* Portfolio showcase. Reading routes stay on --maxw; only the image-led work
+   grid breaks out to a wider canvas. */
+.m-portfolio-showcase {
+  width: min(var(--maxw-wide), calc(100vw - var(--gutter) * 2));
+  margin-inline: 50%;
+  transform: translateX(-50%);
+}
+.m-project-group {
+  padding: var(--space-12) 0 var(--space-10);
+  border-top: 1px solid var(--line);
+  scroll-margin-top: var(--nav-offset);
+}
+.m-project-group-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  align-items: end;
+  gap: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+.m-project-group-head .m-h2 { margin-bottom: 0; }
+.m-project-group-intro {
+  color: var(--muted);
+  max-width: 52ch;
+  justify-self: end;
+}
+.m-project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.m-project-card { min-width: 0; }
+.m-project-link {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition), transform var(--transition-fast),
+    box-shadow var(--transition);
+}
+.m-project-link:hover {
+  border-color: var(--ink);
+  transform: translateY(calc(var(--space-1) * -1));
+  box-shadow: var(--shadow-drop);
+}
+.m-project-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--chip);
+  border-bottom: 1px solid var(--line);
+}
+.m-project-media img {
+  transition: transform var(--transition);
+}
+.m-project-link:hover .m-project-media img {
+  transform: scale(1.02);
+}
+.m-project-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6);
+}
+.m-project-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+.m-project-title {
+  font-family: var(--display);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-snug);
+  transition: color var(--transition);
+}
+.m-project-link:hover .m-project-title { color: var(--accent); }
+.m-project-arrow {
+  color: var(--muted);
+  font-size: var(--text-md);
+  line-height: var(--leading-tight);
+  transition: color var(--transition), transform var(--transition-fast);
+}
+.m-project-link:hover .m-project-arrow {
+  color: var(--accent);
+  transform: translate(var(--space-1), calc(var(--space-1) * -1));
+}
+.m-project-description {
+  flex: 1;
+  color: var(--muted);
+  max-width: 58ch;
+}
+.m-project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
 
 /* About */
 .m-cols {
@@ -587,6 +702,35 @@ textarea:focus-visible { outline-offset: 1px; }
   padding: var(--space-5);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
+  height: 100%;
+  transition: border-color var(--transition), transform var(--transition-fast),
+    box-shadow var(--transition);
+}
+.m-offer:hover {
+  border-color: var(--ink);
+  transform: translateY(calc(var(--space-1) * -1));
+  box-shadow: var(--shadow-drop);
+}
+.m-offer-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.m-offer-arrow {
+  color: var(--muted);
+  font-size: var(--text-md);
+  transition: color var(--transition), transform var(--transition-fast);
+}
+.m-offer:hover .m-offer-arrow {
+  color: var(--accent);
+  transform: translateX(var(--space-1));
+}
+.m-offer-more {
+  margin-top: var(--space-2);
+  color: var(--ink);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
 }
 .m-offer-list {
   display: flex;
@@ -693,11 +837,32 @@ textarea:focus-visible { outline-offset: 1px; }
 .m-case-list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: var(--space-6);
+}
+.m-case {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.35fr);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+.m-case-media {
+  position: relative;
+  min-width: 0;
+  min-height: 100%;
+  background: var(--chip);
+  overflow: hidden;
+}
+.m-case-media img { transition: transform var(--transition); }
+.m-case-media:hover img { transform: scale(1.02); }
+.m-case-content {
+  padding: var(--space-6);
 }
 .m-case-head {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--space-3);
   margin-bottom: var(--space-3);
 }
@@ -731,6 +896,12 @@ textarea:focus-visible { outline-offset: 1px; }
 .m-case-link:hover,
 .m-faq-link:hover,
 .m-form-alt a:hover { color: var(--ink); border-color: var(--ink); }
+.m-section-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
 
 /* Services: FAQ */
 .m-faq {
@@ -863,6 +1034,11 @@ textarea:focus-visible { outline-offset: 1px; }
 /* ── Breakpoints — the site has two: 768px and 560px. ─────────────────── */
 @media (max-width: 768px) {
   .m-offer-grid { grid-template-columns: 1fr; }
+  .m-project-group-head { grid-template-columns: 1fr; gap: var(--space-3); }
+  .m-project-group-intro { justify-self: start; }
+  .m-project-grid { grid-template-columns: 1fr; }
+  .m-case { grid-template-columns: 1fr; }
+  .m-case-media { min-height: auto; aspect-ratio: 16 / 9; }
   .m-sector {
     grid-template-columns: 1fr;
     gap: var(--space-1);
@@ -872,6 +1048,12 @@ textarea:focus-visible { outline-offset: 1px; }
   .m-nav-items { gap: var(--space-4); }
   .m-brand span { display: none; }
   .m-hero { padding: var(--space-12) 0 var(--space-8); }
+  .m-home-hero { gap: var(--space-4); }
+  .m-home-hero .m-avatar {
+    width: var(--avatar);
+    height: var(--avatar);
+    margin-bottom: var(--space-2);
+  }
   .m-section { padding: var(--space-8) 0 var(--space-6); }
   .m-cols { grid-template-columns: 1fr; gap: var(--space-6); }
   .m-form { grid-template-columns: 1fr; }

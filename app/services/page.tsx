@@ -9,6 +9,7 @@ import Faqs from "components/services/faq";
 // and the mail never arrived. Swap ContactCta back for ContactForm once
 // delivery is confirmed.
 import ContactCta from "components/services/contactCta";
+import Link from "next/link";
 
 import {
   CASE_STUDIES,
@@ -107,6 +108,14 @@ export default function Services() {
             <p key={paragraph.slice(0, 32)}>{paragraph}</p>
           ))}
         </div>
+        <div className="m-cta-row">
+          <Link href="#contact" className="m-btn primary">
+            Start a project
+          </Link>
+          <Link href="/portfolio" className="m-btn ghost">
+            See recent work
+          </Link>
+        </div>
       </header>
 
       <Offers heading="What I build" offers={OFFERS} detailed panel />
@@ -124,6 +133,7 @@ export default function Services() {
         heading={CASE_STUDIES.title}
         items={CASE_STUDIES.items}
         more={{ href: "/portfolio", label: "All projects →" }}
+        cta={{ href: "#contact", label: "Start a project" }}
       />
       <Faqs heading={FAQS.title} items={FAQS.items} />
       <ContactCta panel />
