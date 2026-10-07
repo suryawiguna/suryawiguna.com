@@ -55,7 +55,7 @@ export const NAV_ITEMS = [
 // matching entry whenever you meaningfully edit a page.
 export const PAGE_UPDATED = {
   home: "2026-10-07",
-  services: "2026-09-19",
+  services: "2026-10-07",
   portfolio: "2026-10-07",
   link: "2026-08-09",
 };

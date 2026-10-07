@@ -70,7 +70,7 @@ export const OFFERS = [
 export const PROCESS = {
   title: "How it works",
   timeline:
-    "Most small sites launch within two weeks. Larger builds get a clear timeline before work starts.",
+    "The timeline is set per project and arrives by email with the price, before any work starts.",
   steps: [
     {
       title: "Email",
@@ -150,7 +150,7 @@ export const FAQS = {
     },
     {
       q: "How long does it take?",
-      a: "Most small sites launch within two weeks. Stores with many products or custom features take longer, and you will know the timeline upfront.",
+      a: "It depends on the size of the site and how quickly your content is ready. You get the timeline by email, alongside the price, before you commit.",
       link: {
         href: CHOOSE_DEVELOPER_POST,
         label: "More on spotting unrealistic timelines",
@@ -170,7 +170,7 @@ export const FAQS = {
 export const servicesSeo = {
   title: "Web Development Services in Bali | Surya Wiguna",
   description:
-    "Freelance web developer in Bali. Marketing sites, Shopify storefronts, and rebuilds for villas, cafes, wellness studios, and remote founders. Most sites live in under two weeks.",
+    "Freelance web developer in Bali. Marketing sites, Shopify storefronts, and rebuilds for villas, cafes, wellness studios, and remote founders.",
   ogImage: AVATAR.src,
 };
 
@@ -202,7 +202,7 @@ export const contactCta = {
 // is handled once here rather than by editing individual posts in Storyblok.
 export const blogCta = {
   heading: "Need a site building?",
-  body: "I am a freelance web developer in Bali. Marketing sites, Shopify stores, and rebuilds, usually live in under two weeks.",
+  body: "I am a freelance web developer in Bali, building marketing sites, Shopify stores, and rebuilds.",
   href: "/services",
   label: "See what I do",
 };
