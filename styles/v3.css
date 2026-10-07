@@ -33,7 +33,7 @@
   --measure: 42rem;          /* blog post column: 720px less its two gutters */
   --maxw-wide: 1080px;       /* home, portfolio showcase, nav and footer */
   --gutter: 1.5rem;
-  --avatar: 76px;           /* profile hero, phone and utility routes */
+  --avatar: 76px;           /* /link profile photo */
   --avatar-sm: 44px;        /* home masthead, beside the name */
   --avatar-xs: 36px;        /* blog post byline */
   --nav-offset: 5rem;       /* scroll-margin under the sticky nav */
@@ -267,6 +267,44 @@ textarea:focus-visible { outline-offset: 1px; }
   line-height: var(--leading-snug);
 }
 .m-masthead .m-status { margin-top: 0; }
+
+/* /link profile. The name (--text-2xl × snug = 39px), --space-2, and the bio
+   (--text-md × normal = 28.8px) add up to the 76px photo, so on desktop the
+   text block and the photo share a top and bottom edge. */
+.m-profile {
+  display: grid;
+  grid-template-columns: var(--avatar) minmax(0, 1fr);
+  grid-template-areas:
+    "avatar name"
+    "avatar bio";
+  column-gap: var(--space-5);
+  row-gap: var(--space-2);
+  align-items: center;
+}
+.m-profile .m-avatar {
+  grid-area: avatar;
+  margin: 0;
+  border: 0;
+}
+.m-profile-name {
+  grid-area: name;
+  align-self: end;
+  font-family: var(--display);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+}
+.m-profile-bio {
+  grid-area: bio;
+  align-self: start;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: var(--text-md);
+  line-height: var(--leading-normal);
+  max-width: 52ch;
+  text-wrap: pretty;
+}
 .m-hero-foot {
   width: 100%;
   display: grid;
@@ -633,7 +671,13 @@ a.m-project-link:hover .m-project-arrow {
   flex-wrap: wrap;
   gap: var(--space-2);
 }
-/* /link: a plain list of rows, title left, arrow right. */
+/* /link: labelled groups of rows, title left, store and arrow right. */
+.m-link-groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+.m-link-groups .m-eyebrow { margin-bottom: var(--space-1); }
 .m-link-list {
   display: flex;
   flex-direction: column;
@@ -655,6 +699,18 @@ a.m-project-link:hover .m-project-arrow {
 .m-link-row .m-icon {
   color: var(--muted);
   transition: color var(--transition), transform var(--transition-fast);
+}
+.m-link-end {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+.m-link-note {
+  color: var(--muted);
+  font-size: var(--text-sm);
+  font-weight: var(--font-regular);
+  letter-spacing: normal;
 }
 .m-link-row:hover { color: var(--accent); }
 .m-link-row:hover .m-icon { color: var(--accent); transform: translateX(var(--space-1)); }
@@ -1000,6 +1056,15 @@ a.m-case-media:hover img { transform: scale(1.02); }
   .m-brand span { display: none; }
   .m-hero { padding: var(--space-12) 0 var(--space-8); }
   .m-home-hero { padding: var(--space-10) 0 var(--space-8); gap: var(--space-6); }
+  /* The bio wraps to three lines beside a photo at this width, so it drops
+     under it; the photo and name stay paired, centred on each other. */
+  .m-profile {
+    grid-template-areas:
+      "avatar name"
+      "bio bio";
+    row-gap: var(--space-4);
+  }
+  .m-profile-name { align-self: center; }
   .m-section { padding: var(--space-8) 0 var(--space-6); }
   .m-form { grid-template-columns: 1fr; }
   /* Date above title instead of beside it. */

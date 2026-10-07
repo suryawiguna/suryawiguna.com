@@ -1,23 +1,24 @@
 import Image from "next/image";
 import { linkIntro } from "content/links";
 
-// Same left masthead as the home page: avatar beside the name, then a lede.
+// Photo on the left; name and bio stacked beside it, sized so the two lines
+// together are the photo's height. On a phone the bio drops under both.
 export default function Introduction() {
   return (
     <header className="m-hero m-hero-left m-home-hero">
-      <div className="m-masthead">
+      <div className="m-profile">
         <div className="m-avatar">
           <Image
             src={linkIntro.image.src}
             alt={linkIntro.image.alt}
-            width={88}
-            height={88}
+            width={152}
+            height={152}
             priority
           />
         </div>
-        <h1 className="m-masthead-name">{linkIntro.name}</h1>
+        <h1 className="m-profile-name">{linkIntro.name}</h1>
+        <p className="m-profile-bio">{linkIntro.description}</p>
       </div>
-      <p className="m-lede">{linkIntro.description}</p>
     </header>
   );
 }

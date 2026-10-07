@@ -201,7 +201,7 @@ instead of floating equidistant between two blocks.
 | `--measure` | 42rem | Blog post article column (the old 720px column less its gutters) |
 | `--maxw-wide` | 1080px | Every route (`.m-page-wide`), nav, footer |
 | `--gutter` | 1.5rem | Horizontal page padding |
-| `--avatar` / `--avatar-sm` / `--avatar-xs` | 76px / 44px / 36px | Generic / masthead (home, `/link`) / blog byline |
+| `--avatar` / `--avatar-sm` / `--avatar-xs` | 76px / 44px / 36px | `/link` profile (`.m-profile`) / home masthead / blog byline |
 | `--nav-offset` | 5rem | `scroll-margin` under the sticky nav |
 
 ---
