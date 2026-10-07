@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Offer } from "content/services";
+import { ArrowRight } from "lucide-react";
 
 // `detailed` is the /services variant: full copy instead of the card blurb,
 // and each offer gets an id so the home page cards can deep link to it.
@@ -49,7 +50,7 @@ export default function Offers({
                 <span className="m-offer-heading">
                   <h3 className="m-offer-title">{offer.title}</h3>
                   <span className="m-offer-arrow" aria-hidden="true">
-                    →
+                    <ArrowRight className="m-icon" aria-hidden="true" />
                   </span>
                 </span>
                 <p className="m-offer-body">{offer.cardBlurb}</p>
@@ -62,7 +63,7 @@ export default function Offers({
 
       {more && (
         <Link href={more.href} className="m-more">
-          {more.label}
+          {more.label} <ArrowRight className="m-icon" aria-hidden="true" />
         </Link>
       )}
     </section>

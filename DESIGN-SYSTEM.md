@@ -260,6 +260,7 @@ picked up a border radius while still effectively full-width.
 | Thumbnail row | `.m-work-item` (portfolio), `.m-bp` (blog) | The same object — same thumbnail, radius, padding, title size, breakpoint |
 | Card | `.m-offer`, `.m-related-card`, `.m-cta-card` | `--radius-lg`, `--space-5`/`--space-6` padding, `--line` border |
 | Pill | `.m-chip` (+ `.m-chip-link`) | The only badge in the system |
+| Icon | `.m-icon` on a `lucide-react` icon | 1em square, takes the text colour. `ArrowUpRight` for outbound links, `ArrowRight` / `ArrowLeft` for on-site ones; no text arrows (↗ → ←) |
 | Ruled text link | `.m-case-link`, `.m-faq-link`, `.m-form-alt a` | One shared rule |
 | Skeleton | `components/global/skeleton.tsx` | Heights track the type scale |
 

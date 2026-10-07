@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Step } from "content/services";
+import { ArrowRight } from "lucide-react";
 
 export default function Process({
   heading,
@@ -31,7 +32,7 @@ export default function Process({
       <p className="m-timeline">{timeline}</p>
       {more && (
         <Link href={more.href} className="m-more">
-          {more.label}
+          {more.label} <ArrowRight className="m-icon" aria-hidden="true" />
         </Link>
       )}
     </section>

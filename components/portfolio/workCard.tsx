@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "content/projects";
+import { ArrowUpRight } from "lucide-react";
 
 export default function WorkCard({ work }: { work: Project }) {
   const content = (
@@ -27,7 +28,7 @@ export default function WorkCard({ work }: { work: Project }) {
             ))}
             {work.href && (
               <span className="m-work-arrow" aria-hidden="true">
-                ↗
+                <ArrowUpRight className="m-icon" aria-hidden="true" />
               </span>
             )}
           </span>

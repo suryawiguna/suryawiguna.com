@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "content/projects";
+import { ArrowUpRight } from "lucide-react";
 
 export default function ProjectCard({ project }: { project: Project }) {
   const content = (
@@ -22,7 +23,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           <h3 className="m-project-title">{project.title}</h3>
           {project.href && (
             <span className="m-project-arrow" aria-hidden="true">
-              ↗
+              <ArrowUpRight className="m-icon" aria-hidden="true" />
             </span>
           )}
         </div>

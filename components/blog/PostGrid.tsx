@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import moment from "moment";
-import { X } from "lucide-react";
+import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import { richTextToPlain as excerptText } from "lib/helper";
 
 const PER_PAGE = 5;
@@ -226,7 +226,7 @@ export default function PostGrid({ posts }: { posts: any[] }) {
             disabled={safePage === 1}
             onClick={() => setPage((p) => Math.max(1, p - 1))}
           >
-            ← Prev
+            <ArrowLeft className="m-icon" aria-hidden="true" /> Prev
           </button>
           <ol className="m-page-numbers">
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
@@ -248,7 +248,7 @@ export default function PostGrid({ posts }: { posts: any[] }) {
             disabled={safePage === totalPages || filtered.length === 0}
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
           >
-            Next →
+            Next <ArrowRight className="m-icon" aria-hidden="true" />
           </button>
         </nav>
       )}

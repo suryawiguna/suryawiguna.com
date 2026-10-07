@@ -92,7 +92,7 @@ export default function Home() {
       <Offers
         heading="What I do"
         offers={OFFERS}
-        more={{ href: "/services", label: "View services →" }}
+        more={{ href: "/services", label: "View services" }}
       />
       <section id="about" className="m-section">
         <div className="m-cols">

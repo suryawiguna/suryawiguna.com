@@ -132,7 +132,7 @@ export default function Services() {
       <CaseStudies
         heading={CASE_STUDIES.title}
         items={CASE_STUDIES.items}
-        more={{ href: "/portfolio", label: "All projects →" }}
+        more={{ href: "/portfolio", label: "All projects" }}
         cta={{ href: "#contact", label: "Start a project" }}
       />
       <Faqs heading={FAQS.title} items={FAQS.items} />

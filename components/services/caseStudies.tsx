@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { CaseStudy } from "content/services";
 import { visibleProjects } from "content/projects";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 // The live URL and category come from content/projects.ts rather than being
 // copied into content/services.ts, so a project that changes href or gets
@@ -85,7 +86,7 @@ export default function CaseStudies({
                     rel="noreferrer"
                     className="m-case-link"
                   >
-                    Visit {study.projectTitle} ↗
+                    Visit {study.projectTitle} <ArrowUpRight className="m-icon" aria-hidden="true" />
                   </Link>
                 )}
               </div>
@@ -102,7 +103,7 @@ export default function CaseStudies({
           )}
           {more && (
             <Link href={more.href} className="m-btn ghost">
-              {more.label}
+              {more.label} <ArrowRight className="m-icon" aria-hidden="true" />
             </Link>
           )}
         </div>

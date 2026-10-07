@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import SubscribeForm from "./subscribe";
 import ServicesCta from "components/services/servicesCta";
+import { ArrowLeft } from "lucide-react";
 
 // Some posts repeat the title (as an <h1>) and the excerpt (as an intro
 // paragraph) at the top of the body — the header already renders both. Drop
@@ -153,7 +154,7 @@ export default function FullPost({
       )}
 
       <Link href="/blog" className="m-back">
-        ← Back to all posts
+        <ArrowLeft className="m-icon" aria-hidden="true" /> Back to all posts
       </Link>
     </>
   );

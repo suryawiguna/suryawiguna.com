@@ -1,6 +1,7 @@
 import Link from "next/link";
 import moment from "moment";
 import { getAllPosts } from "lib/api";
+import { ArrowRight } from "lucide-react";
 
 export default async function BlogPosts() {
   const posts = await getAllPosts(3);
@@ -21,7 +22,7 @@ export default async function BlogPosts() {
         ))}
       </ul>
       <Link href="/blog" className="m-more">
-        All posts →
+        All posts <ArrowRight className="m-icon" aria-hidden="true" />
       </Link>
     </section>
   );

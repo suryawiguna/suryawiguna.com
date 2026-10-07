@@ -10,6 +10,7 @@ import { getAllPosts } from "lib/api";
 import JsonLd from "components/jsonLd";
 import { richTextToPlain } from "lib/helper";
 import { archivableTags, postsForTag, tagFromSlug } from "lib/tags";
+import { ArrowLeft } from "lucide-react";
 
 const SITE_URL = "https://suryawiguna.com";
 
@@ -132,7 +133,7 @@ export default async function TagArchive({
       )}
 
       <Link href="/blog" className="m-back">
-        ← Back to all posts
+        <ArrowLeft className="m-icon" aria-hidden="true" /> Back to all posts
       </Link>
 
       <JsonLd

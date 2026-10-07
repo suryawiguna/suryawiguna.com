@@ -2,6 +2,7 @@ import Link from "next/link";
 import WorkCard from "./workCard";
 import ProjectCard from "./projectCard";
 import type { Project } from "content/projects";
+import { ArrowRight } from "lucide-react";
 
 // `heading` is only set on the home page, where the list is a section of a
 // longer page; /portfolio renders its own <h1> and needs no "all projects" link.
@@ -71,7 +72,7 @@ export default function Portfolios({
       </ul>
       {heading && (
         <Link href="/portfolio" className="m-more">
-          All projects →
+          All projects <ArrowRight className="m-icon" aria-hidden="true" />
         </Link>
       )}
     </section>
