@@ -33,7 +33,7 @@ This is a **Next.js 14 App Router** personal portfolio site (`suryawiguna.com`).
 
 Editing site copy means editing these files — there is no CMS entry for them. Images still point at the Storyblok CDN (`a.storyblok.com`), which stays an allowed `next/image` host.
 
-Two flags worth knowing: a project marked `hidden: true` stays in the file but renders nowhere; `featured: true` adds it to the home page's "Recent work" grid, which is laid out 2×2 — keep it to four. A history entry marked `current: true` feeds `worksFor` in the home page JSON-LD.
+Two flags worth knowing: a project marked `hidden: true` stays in the file but renders nowhere; `featured: true` adds it to the home page's "Client work" grid, which is laid out 2×2 — keep it to four. A history entry marked `current: true` feeds `worksFor` in the home page JSON-LD.
 
 `content/site.ts` `PAGE_UPDATED` supplies the sitemap `lastModified` for `/`, `/services`, `/portfolio`, and `/link` — Storyblok used to provide those dates, so bump the matching entry when you meaningfully edit a page.
 

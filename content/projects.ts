@@ -21,7 +21,7 @@ export type Project = {
   categories: string[];
   description: string;
   kind: "client" | "concept";
-  // Also shown in the "Recent Works" section on the home page.
+  // Also shown in the "Client work" grid on the home page (keep it to four).
   featured?: boolean;
   // Kept for reference but not rendered anywhere.
   hidden?: boolean;

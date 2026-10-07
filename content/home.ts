@@ -24,7 +24,7 @@ export const hero = {
   status: "Available for new projects",
 };
 
-export const worksTitle = "Recent work";
+export const worksTitle = "Client work";
 
 // Name of the portfolio ItemList in the home page JSON-LD.
 export const worksListName = "My Portfolio - Web Development Projects";

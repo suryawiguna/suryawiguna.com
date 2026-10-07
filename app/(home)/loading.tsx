@@ -40,7 +40,7 @@ export default function Loading() {
           </div>
         </div>
 
-        {/* Recent work */}
+        {/* Client work */}
         <div className="m-section">
           <div className="m-section-head">
             <Bar w={200} h="heading" />
