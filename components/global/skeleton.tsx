@@ -8,10 +8,11 @@ import type { CSSProperties, ReactNode } from "react";
 // the space the real element will: swap a token there and the skeletons
 // follow. Widths stay per-route, because they describe that page's copy.
 const HEIGHT = {
+  display: 54, // --text-display, the home headline
   title: 36, // --text-3xl, a page title
   heading: 30, // --text-2xl, a section heading
   rowTitle: 20, // --text-lg, a work / post row title
-  blockTitle: 18, // --text-md, an offer or card title
+  blockTitle: 18, // --text-md, an offer or card title, or a lede line
   text: 14, // --text-base, a line of body copy
   meta: 12, // --text-sm, a date or byline
 } as const;

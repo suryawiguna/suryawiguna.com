@@ -59,6 +59,12 @@ The Storyblok React SDK (`@storyblok/react`) is **not** a dependency — posts a
 
 `sitemap.xml` and `robots.txt` are generated routes, not files. Do not add either to `public/` — static files there shadow app routes and would silently freeze the sitemap again.
 
+### Loading skeletons
+
+Each route has its own `loading.tsx`, and each one must cover **only** its own route. A `loading.tsx` wraps every segment below its folder, and Next shows the outermost one first, so a skeleton sitting above other routes leaks onto them. A post used to load behind the `/blog` grid skeleton, and every page behind the home one. That is why the home page lives in `app/(home)/` and the blog index in `app/blog/(index)/`: the route groups scope those two skeletons without changing a URL. Keep any new `page.tsx` that has child routes inside a group like this.
+
+Moving a page into or out of a route group needs a dev-server restart; until then `next dev` keeps the stale route and 404s.
+
 ### Tag archives
 
 `/blog/tag/[tag]` lists every indexable post carrying a tag. The rules live in `lib/tags.ts`, not in the route:
@@ -91,7 +97,7 @@ Three hand-written stylesheets, no CSS framework in practice:
 | File | Scope | Loaded by |
 |------|-------|-----------|
 | `styles/v3.css` | Tokens + every shared primitive | `app/layout.tsx` — site-wide |
-| `styles/v3-blog-index.css` | Toolbar, post card grid, pagination | `app/blog/page.tsx`, `app/blog/tag/[tag]/page.tsx` |
+| `styles/v3-blog-index.css` | Toolbar, post card grid, pagination | `app/blog/(index)/page.tsx`, `app/blog/tag/[tag]/page.tsx` |
 | `styles/v3-blog-post.css` | Breadcrumb, cover, prose, share, related | `app/blog/[slug]/page.tsx` |
 
 Every token lives in `:root` in `styles/v3.css`: colour, type scale, a 4px space scale, radius, control metrics, motion, focus, elevation. **No stylesheet may use a raw px/rem for a font size, space, radius, colour, or duration** — add a token first. The site has exactly two breakpoints, 768px and 560px.

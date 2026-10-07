@@ -18,7 +18,7 @@ that isn't on a scale below, add the token here first, then use it.
 | File | Scope | Loaded by |
 |------|-------|-----------|
 | [`styles/v3.css`](styles/v3.css) | Tokens + every shared primitive | `app/layout.tsx` — site-wide |
-| [`styles/v3-blog-index.css`](styles/v3-blog-index.css) | Toolbar, post card grid, pagination | `app/blog/page.tsx`, `app/blog/tag/[tag]/page.tsx` |
+| [`styles/v3-blog-index.css`](styles/v3-blog-index.css) | Toolbar, post card grid, pagination | `app/blog/(index)/page.tsx`, `app/blog/tag/[tag]/page.tsx` |
 | [`styles/v3-blog-post.css`](styles/v3-blog-post.css) | Breadcrumb, cover, prose, share, related | `app/blog/[slug]/page.tsx` |
 
 A page layer may only add what that route genuinely introduces. It must not

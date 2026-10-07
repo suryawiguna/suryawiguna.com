@@ -13,12 +13,15 @@ export default function Loading() {
         {/* Page title — same .m-hero box the real page uses. */}
         <div className="m-hero m-hero-left">
           <Bar w={72} h="meta" />
-          <Bar w="60%" h="title" />
-          <Bar w="45%" h="title" />
+          <Stack gap="var(--space-3)" style={{ width: "100%" }}>
+            <Bar w="60%" h="title" style={{ maxWidth: 560 }} />
+            <Bar w="45%" h="title" style={{ maxWidth: 420 }} />
+          </Stack>
           <div className="m-hero-foot">
             <Stack gap="var(--space-2)">
-              <Bar w="90%" />
-              <Bar w="64%" />
+              <Bar w="95%" h="blockTitle" />
+              <Bar w="90%" h="blockTitle" />
+              <Bar w="40%" h="blockTitle" />
             </Stack>
             <div style={{ display: "flex", gap: "var(--space-3)" }}>
               <Pill w={160} h={CONTROL_H} />
