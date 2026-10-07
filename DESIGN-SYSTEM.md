@@ -120,7 +120,7 @@ set its at 42px, and `/portfolio` faked one with an `.m-h2` plus an inline
 | **Section heading** | `.m-h2` | `--text-2xl` | Every `<h2>` that separates blocks of a page |
 | **Card title** | `.m-project-title`, `.m-bp-title` | `--text-lg` | The title under a project or post image |
 | **Block title** | `.m-offer-title`, `.m-sector-name`, `.m-step-title`, `.m-case-title`, `.m-cta-card-title`, `.m-rc-title`, `.m-foot-block h3` | `--text-md` | Every `<h3>` inside a section |
-| **Micro-label** | `.m-eyebrow`, `.m-related-h`, `.m-case-label` | `--text-xs` | Uppercase, tracked, muted |
+| **Micro-label** | `.m-eyebrow`, `.m-related-h` | `--text-xs` | Uppercase, tracked, muted |
 
 `.m-h1` takes three modifiers: `.m-h1-wide` (24ch, for longer marketing
 headlines), `.m-h1-full` (unbounded, for article titles) and
@@ -285,7 +285,7 @@ picked up a border radius while still effectively full-width.
 | Project card | `.m-project-link` | Image + text, no box. Home and `/portfolio` |
 | Offer column | `.m-offer` | Number, title, blurb, "View service" — no box |
 | Post card | `.m-bp` (`components/blog/postCard.tsx`) | The project card for posts: image, date · topic, title, 3-line excerpt. `/blog` and tag archives |
-| Case study | `.m-case` | Image and text side by side, no box |
+| Case study | `.m-case` | Image and text side by side, no box. Problem / built / result is a `<dl>` grid: `.m-case-label` (`--text-sm`, semibold, ink) in an 8rem column beside its text; stacks under 560px |
 | Link row | `.m-link-row` | `/link` — title left, arrow right |
 | CTA card | `.m-cta-card` | White `--surface` block, `--radius-lg`, no border. Under blog posts |
 | Pill | `.m-chip` (+ `.m-chip-link`) | The only badge in the system |

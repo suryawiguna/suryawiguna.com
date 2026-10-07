@@ -121,6 +121,15 @@ export const CASE_STUDIES = {
   title: "A couple of examples",
   items: [
     {
+      projectTitle: "Tropical Entertainment Bali",
+      problem:
+        "A Bali school teaching dance, swimming, yoga and aqua fitness to children and adults needed one site that sends each visitor to the right class.",
+      built:
+        "A WordPress site designed in Figma and built with Elementor, with a choose-your-interest entry point and dedicated dance and swim class pages.",
+      result:
+        "Visitors pick dance, swimming or another programme from the home page and reach the team directly on WhatsApp.",
+    },
+    {
       projectTitle: "One Line Solutions",
       problem:
         "Its many freight services were difficult for potential clients to navigate.",
@@ -128,15 +137,6 @@ export const CASE_STUDIES = {
         "A WordPress site organised around individual service pages, with SEO included from the start.",
       result:
         "Clients can find and share the right service, while the team can update the site themselves.",
-    },
-    {
-      projectTitle: "Vāyu",
-      problem:
-        "A new hair-care brand needed a store that did not feel like a stock Shopify theme.",
-      built:
-        "A customised Shopify storefront with focused product pages and a simple checkout journey.",
-      result:
-        "The brand launched with a distinctive store the team can expand without a developer.",
     },
   ] satisfies CaseStudy[],
 };

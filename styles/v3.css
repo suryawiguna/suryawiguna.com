@@ -876,17 +876,23 @@ a.m-case-media:hover img { transform: scale(1.02); }
   gap: var(--space-1);
   margin-bottom: var(--space-5);
 }
-.m-case-body { margin: 0; }
-.m-case-label {
-  font-size: var(--text-xs);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-eyebrow);
-  color: var(--muted);
-  margin-top: var(--space-3);
+/* Problem / built / result as a label column and a text column, with space
+   between the pairs — stacked uppercase labels read as one long paragraph. */
+.m-case-body {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  gap: var(--space-5) var(--space-5);
+  align-items: baseline;
+  margin: 0;
 }
-.m-case-label:first-child { margin-top: 0; }
+.m-case-label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--ink);
+  line-height: var(--leading-normal);
+}
 .m-case-text {
-  margin: var(--space-1) 0 0;
+  margin: 0;
   color: var(--ink-soft);
   max-width: 62ch;
 }
@@ -1067,6 +1073,9 @@ a.m-case-media:hover img { transform: scale(1.02); }
   .m-profile-name { align-self: center; }
   .m-section { padding: var(--space-8) 0 var(--space-6); }
   .m-form { grid-template-columns: 1fr; }
+  /* Label over text on a phone; the pairs keep their spacing. */
+  .m-case-body { grid-template-columns: 1fr; row-gap: var(--space-1); }
+  .m-case-text + .m-case-label { margin-top: var(--space-4); }
   /* Date above title instead of beside it. */
   .m-post,
   .m-fact { grid-template-columns: 1fr; gap: 0; }
