@@ -57,5 +57,5 @@ export const PAGE_UPDATED = {
   home: "2026-10-07",
   services: "2026-10-07",
   portfolio: "2026-10-07",
-  link: "2026-08-09",
+  link: "2026-10-07",
 };
