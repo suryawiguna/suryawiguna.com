@@ -29,6 +29,42 @@ export type Project = {
 // ones, in this same order.
 export const PROJECTS: Project[] = [
   {
+    title: "Tropical Entertainment Bali",
+    href: "https://tropicalentertainmentbali.com/",
+    image: {
+      src: "https://a.storyblok.com/f/169901/1426x900/4892aeb281/tropicalentertainmentbali.jpeg",
+      alt: "Tropical Entertainment Bali",
+    },
+    categories: ["Wordpress", "Web design"],
+    description:
+      "A responsive entertainment-services website designed in Figma and implemented in WordPress with Elementor.",
+    kind: "client",
+  },
+  {
+    title: "Tropical Kids Bali",
+    href: "https://tropicalentertainmentbali.com/swim",
+    image: {
+      src: "https://a.storyblok.com/f/169901/1424x900/2c7d9e1381/tropicalkidsbali.jpeg",
+      alt: "Tropical Kids Bali",
+    },
+    categories: ["Wordpress", "Web design"],
+    description:
+      "A dedicated swimming-class experience designed and built in WordPress for Tropical Entertainment Bali.",
+    kind: "client",
+  },
+  {
+    title: "Stryv - About us",
+    href: "https://stryv.co/pages/about-us",
+    image: {
+      src: "https://a.storyblok.com/f/169901/1722x962/ee54dbf0d1/stryv-about-us-page.webp",
+      alt: "Stryv about us page",
+    },
+    categories: ["Shopify"],
+    description:
+      "A Shopify About page built in PageFly from an established Figma design system.",
+    kind: "client",
+  },
+  {
     title: "One Line Solutions",
     href: "https://onelinesolutionsindo.com/",
     image: {
@@ -55,6 +91,18 @@ export const PROJECTS: Project[] = [
     featured: true,
   },
   {
+    title: "I Carry Them Everywhere",
+    href: "https://www.icarrythemeverywhere.com/gallery/",
+    image: {
+      src: "https://a.storyblok.com/f/169901/2880x1590/e7422ab31a/icarrythemeverywhere.jpeg",
+      alt: "I Carry Them Everywhere",
+    },
+    categories: ["Custom website", "Web design"],
+    description:
+      "An editorial gallery created to showcase a fashion designer's work and visual process.",
+    kind: "client",
+  },
+  {
     title: "Kamandhani Dental",
     href: "https://kamandhani.id/",
     image: {
@@ -64,42 +112,6 @@ export const PROJECTS: Project[] = [
     categories: ["Wordpress", "SEO"],
     description:
       "A conversion-focused website and local search foundation for a dental clinic with branches in Denpasar and Tabanan.",
-    kind: "client",
-  },
-  {
-    title: "Stryv - About us",
-    href: "https://stryv.co/pages/about-us",
-    image: {
-      src: "https://a.storyblok.com/f/169901/1722x962/ee54dbf0d1/stryv-about-us-page.webp",
-      alt: "Stryv about us page",
-    },
-    categories: ["Shopify"],
-    description:
-      "A Shopify About page built in PageFly from an established Figma design system.",
-    kind: "client",
-  },
-  {
-    title: "Tropical Entertainment Bali",
-    href: "https://tropicalentertainmentbali.com/",
-    image: {
-      src: "https://a.storyblok.com/f/169901/1426x900/4892aeb281/tropicalentertainmentbali.jpeg",
-      alt: "Tropical Entertainment Bali",
-    },
-    categories: ["Wordpress", "Web design"],
-    description:
-      "A responsive entertainment-services website designed in Figma and implemented in WordPress with Elementor.",
-    kind: "client",
-  },
-  {
-    title: "Tropical Kids Bali",
-    href: "https://tropicalentertainmentbali.com/swim",
-    image: {
-      src: "https://a.storyblok.com/f/169901/1424x900/2c7d9e1381/tropicalkidsbali.jpeg",
-      alt: "Tropical Kids Bali",
-    },
-    categories: ["Wordpress", "Web design"],
-    description:
-      "A dedicated swimming-class experience designed and built in WordPress for Tropical Entertainment Bali.",
     kind: "client",
   },
   {
@@ -138,18 +150,6 @@ export const PROJECTS: Project[] = [
     description:
       "A travel-booking concept exploring destination discovery and package presentation.",
     kind: "concept",
-  },
-  {
-    title: "I Carry Them Everywhere",
-    href: "https://www.icarrythemeverywhere.com/gallery/",
-    image: {
-      src: "https://a.storyblok.com/f/169901/2880x1590/e7422ab31a/icarrythemeverywhere.jpeg",
-      alt: "I Carry Them Everywhere",
-    },
-    categories: ["Custom website", "Web design"],
-    description:
-      "An editorial gallery created to showcase a fashion designer's work and visual process.",
-    kind: "client",
   },
   {
     title: "Geopark - Design",
