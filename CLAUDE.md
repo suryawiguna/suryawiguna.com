@@ -82,11 +82,11 @@ Two parallel subscription systems exist:
 
 ### Contact form (parked)
 
-`/services` currently ends with `components/services/contactCta.tsx`, a plain mailto. The real form is built but **not wired up**:
+`/services` currently ends with `components/services/contactCta.tsx`, a plain mailto, and every "start a project" button on the site (home hero, `/services` hero and case studies, `/portfolio` hero, the closing contact sections) links to the same mailto through `CONTACT_HREF` in `content/services.ts`. The real form is built but **not wired up**:
 
 `components/services/contactForm.tsx` (client) POSTs JSON to `app/api/contact/route.ts`, which sends the enquiry as a transactional email via Brevo. It uses the server-only `BREVO_API_KEY`, **not** the `NEXT_PUBLIC_BREVO_API_KEY` the subscribe widget ships to the browser. Without the key set the route returns 502 and the form tells the visitor to email instead. The `company` field is a honeypot: a filled one gets a silent 200 and no email.
 
-Both were validated end to end in a browser, and Brevo returned 2xx, but the mail never arrived. Check the Brevo transactional log (delivered / blocked / bounced) and that `hi@suryawiguna.com` is a verified sender before swapping `ContactCta` back for `ContactForm` in `app/services/page.tsx`. Note Brevo IP restriction must stay off, since serverless hosts rotate egress IPs.
+Both were validated end to end in a browser, and Brevo returned 2xx, but the mail never arrived. Check the Brevo transactional log (delivered / blocked / bounced) and that `hi@suryawiguna.com` is a verified sender before swapping `ContactCta` back for `ContactForm` in `app/services/page.tsx` and pointing `CONTACT_HREF` at `/services#contact`. Note Brevo IP restriction must stay off, since serverless hosts rotate egress IPs.
 
 ### Styling
 

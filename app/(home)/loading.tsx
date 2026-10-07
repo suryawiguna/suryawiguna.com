@@ -35,7 +35,7 @@ export default function Loading() {
             </Stack>
             <div style={{ display: "flex", gap: "var(--space-3)" }}>
               <Pill w={125} h={CONTROL_H} />
-              <Pill w={145} h={CONTROL_H} />
+              <Pill w={110} h={CONTROL_H} />
             </div>
           </div>
         </div>

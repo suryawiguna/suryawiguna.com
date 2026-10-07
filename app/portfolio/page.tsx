@@ -3,6 +3,7 @@ import Link from "next/link";
 import Portfolios from "components/portfolio/portfolios";
 import ContactCta from "components/services/contactCta";
 import { portfolioPage, visibleProjects } from "content/projects";
+import { CONTACT_HREF, contactCta } from "content/services";
 import { SITE_URL } from "content/site";
 
 export const metadata: Metadata = {
@@ -28,11 +29,11 @@ export default function Portfolio() {
         <div className="m-hero-foot">
           <p className="m-lede">{portfolioPage.intro}</p>
           <div className="m-cta-row">
-            <Link href="#client-work" className="m-btn primary">
-              View client work
-            </Link>
+            <a href={CONTACT_HREF} className="m-btn primary">
+              {contactCta.label}
+            </a>
             <Link href="/services" className="m-btn ghost">
-              Work with me
+              See services
             </Link>
           </div>
         </div>

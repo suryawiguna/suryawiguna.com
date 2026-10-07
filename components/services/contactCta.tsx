@@ -1,6 +1,4 @@
-import Link from "next/link";
-import { contactCta } from "content/services";
-import { EMAIL } from "content/site";
+import { CONTACT_HREF, contactCta } from "content/services";
 
 // Stands in for components/services/contactForm.tsx while that is parked.
 // A mailto is higher friction than a form, but it cannot lose an enquiry,
@@ -17,14 +15,9 @@ export default function ContactCta() {
           ))}
         </div>
         <div className="m-cta-row">
-          <Link
-            href={`mailto:${EMAIL}?subject=${encodeURIComponent(
-              contactCta.subject
-            )}`}
-            className="m-btn primary"
-          >
+          <a href={CONTACT_HREF} className="m-btn primary">
             {contactCta.label}
-          </Link>
+          </a>
         </div>
       </div>
     </section>

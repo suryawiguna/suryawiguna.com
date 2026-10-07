@@ -13,6 +13,8 @@ import Link from "next/link";
 
 import {
   CASE_STUDIES,
+  CONTACT_HREF,
+  contactCta,
   FAQS,
   OFFERS,
   PROCESS,
@@ -111,9 +113,9 @@ export default function Services() {
             ))}
           </div>
           <div className="m-cta-row">
-            <Link href="#contact" className="m-btn primary">
-              Start a project
-            </Link>
+            <a href={CONTACT_HREF} className="m-btn primary">
+              {contactCta.label}
+            </a>
             <Link href="/portfolio" className="m-btn ghost">
               See recent work
             </Link>
@@ -136,7 +138,7 @@ export default function Services() {
         heading={CASE_STUDIES.title}
         items={CASE_STUDIES.items}
         more={{ href: "/portfolio", label: "All projects" }}
-        cta={{ href: "#contact", label: "Start a project" }}
+        cta={{ href: CONTACT_HREF, label: contactCta.label }}
       />
       <Faqs heading={FAQS.title} items={FAQS.items} />
       <ContactCta />

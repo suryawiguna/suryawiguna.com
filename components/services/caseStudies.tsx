@@ -98,9 +98,9 @@ export default function CaseStudies({
       {(more || cta) && (
         <div className="m-section-actions">
           {cta && (
-            <Link href={cta.href} className="m-btn primary">
+            <a href={cta.href} className="m-btn primary">
               {cta.label}
-            </Link>
+            </a>
           )}
           {more && (
             <Link href={more.href} className="m-btn ghost">

@@ -1,7 +1,7 @@
 // What I sell, in one place. Both the home page's short cards and the
 // /services page's detailed offers read from here, so they cannot drift apart.
 
-import { AVATAR } from "content/site";
+import { AVATAR, EMAIL } from "content/site";
 
 export type Offer = {
   // Also the value submitted by the contact form's project-type select, and
@@ -19,7 +19,11 @@ export type Offer = {
 
 export type Step = { title: string; line: string };
 export type Sector = { name: string; blurb: string };
-export type Faq = { q: string; a: string; link?: { href: string; label: string } };
+export type Faq = {
+  q: string;
+  a: string;
+  link?: { href: string; label: string };
+};
 
 // Looked up in `visibleProjects` by title, so these must match
 // content/projects.ts exactly (including the macron in "Vāyu").
@@ -96,8 +100,7 @@ export const PROCESS = {
 // budget actually is.
 export const SECTORS = {
   title: "Who I work with",
-  intro:
-    "I work remotely and with Bali businesses, especially these sectors.",
+  intro: "I work remotely and with Bali businesses, especially these sectors.",
   items: [
     {
       name: "Villas and accommodation",
@@ -197,6 +200,14 @@ export const contactCta = {
   subject: "Project enquiry",
   label: "Email me",
 };
+
+// Where every "start a project" button goes. A mailto opens the email straight
+// away instead of scrolling to a section that only holds another mailto. When
+// the contact form comes back, point this at "/services#contact" and every
+// button follows.
+export const CONTACT_HREF = `mailto:${EMAIL}?subject=${encodeURIComponent(
+  contactCta.subject
+)}`;
 
 // Rendered under every blog post. The audit for internal linking opportunities
 // is handled once here rather than by editing individual posts in Storyblok.

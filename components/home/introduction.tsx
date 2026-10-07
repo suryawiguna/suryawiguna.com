@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { hero } from "content/home";
+import { CONTACT_HREF, contactCta } from "content/services";
 
 export default function Introduction() {
   return (
@@ -32,9 +33,9 @@ export default function Introduction() {
           <Link href="/portfolio" className="m-btn primary">
             See my work
           </Link>
-          <Link href="/services#contact" className="m-btn ghost">
-            Start a project
-          </Link>
+          <a href={CONTACT_HREF} className="m-btn ghost">
+            {contactCta.label}
+          </a>
         </div>
       </div>
     </header>
