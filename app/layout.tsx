@@ -6,17 +6,12 @@ import Footer from "components/global/footer";
 import { SITE_URL } from "content/site";
 import { Metadata } from "next";
 import Script from "next/script";
-import { Archivo, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 
-const archivo = Archivo({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-display",
-});
+// One sans for everything: headings and body differ by size and weight, not
+// by family. Variable, so the 700 headline weight costs no extra file.
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
   display: "swap",
   variable: "--font-body",
 });
@@ -44,7 +39,7 @@ export default function RootLayout({
       lang="en"
       data-rounded="on"
       data-accent="on"
-      className={`${archivo.variable} ${inter.variable}`}
+      className={inter.variable}
     >
       <head>
         {/* Google Analytics */}

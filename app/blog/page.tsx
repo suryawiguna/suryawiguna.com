@@ -22,7 +22,8 @@ export default async function Home() {
   const posts = (await getAllPosts()) || [];
 
   return (
-    <>
+    // .m-page-wide widens <main> to the 1080px canvas, as on the home page.
+    <div className="m-page-wide">
       <header className="m-hero m-hero-left">
         <p className="m-eyebrow">Blog</p>
         <h1 className="m-h1 m-h1-wide">Work journey</h1>
@@ -32,6 +33,6 @@ export default async function Home() {
         </p>
       </header>
       <PostGrid posts={posts} />
-    </>
+    </div>
   );
 }

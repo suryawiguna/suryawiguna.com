@@ -33,7 +33,7 @@ This is a **Next.js 14 App Router** personal portfolio site (`suryawiguna.com`).
 
 Editing site copy means editing these files — there is no CMS entry for them. Images still point at the Storyblok CDN (`a.storyblok.com`), which stays an allowed `next/image` host.
 
-Two flags worth knowing: a project marked `hidden: true` stays in the file but renders nowhere; `featured: true` adds it to the home page's "Recent Works". A history entry marked `current: true` feeds `worksFor` in the home page JSON-LD.
+Two flags worth knowing: a project marked `hidden: true` stays in the file but renders nowhere; `featured: true` adds it to the home page's "Recent work" grid, which is laid out 2×2 — keep it to four. A history entry marked `current: true` feeds `worksFor` in the home page JSON-LD.
 
 `content/site.ts` `PAGE_UPDATED` supplies the sitemap `lastModified` for `/`, `/services`, `/portfolio`, and `/link` — Storyblok used to provide those dates, so bump the matching entry when you meaningfully edit a page.
 
@@ -91,14 +91,14 @@ Three hand-written stylesheets, no CSS framework in practice:
 | File | Scope | Loaded by |
 |------|-------|-----------|
 | `styles/v3.css` | Tokens + every shared primitive | `app/layout.tsx` — site-wide |
-| `styles/v3-blog-index.css` | Toolbar, post row, pagination | `app/blog/page.tsx`, `app/blog/tag/[tag]/page.tsx` |
+| `styles/v3-blog-index.css` | Toolbar, post card grid, pagination | `app/blog/page.tsx`, `app/blog/tag/[tag]/page.tsx` |
 | `styles/v3-blog-post.css` | Breadcrumb, cover, prose, share, related | `app/blog/[slug]/page.tsx` |
 
 Every token lives in `:root` in `styles/v3.css`: colour, type scale, a 4px space scale, radius, control metrics, motion, focus, elevation. **No stylesheet may use a raw px/rem for a font size, space, radius, colour, or duration** — add a token first. The site has exactly two breakpoints, 768px and 560px.
 
-A page layer may only add what that route introduces; it must not restyle a shared primitive. If a page needs `.m-h2` or `.m-btn` to look different, either the primitive is wrong for everyone or the page needs a modifier class (`.m-hero-left`, `.m-section-panel`). There is deliberately no `/services` layer any more.
+A page layer may only add what that route introduces; it must not restyle a shared primitive. If a page needs `.m-h2` or `.m-btn` to look different, either the primitive is wrong for everyone or the page needs a modifier class (`.m-hero-left`, `.m-split`). There is deliberately no `/services` layer any more.
 
-Fonts are Archivo (display) and Inter (body) via `next/font/google`. Tailwind is still compiled via `styles/global.css` but styles almost nothing — a spinner in the contact form is all that is left, and `@tailwindcss/typography` is no longer registered because it was layering a second type system over `.m-article`. Dark mode is class-based but not wired to a toggle.
+The only font is Inter via `next/font/google` — `--display` and `--body` both point at it. Every route except `/blog/[slug]` roots itself in `.m-page-wide`, which widens `<main>` to the 1080px canvas (`.m-main:has(> .m-page-wide)`); a blog post keeps the 720px reading column. Text sections on wide pages use `.m-split` (heading left, content right); separation is space, not rules. Tailwind is still compiled via `styles/global.css` but styles almost nothing — a spinner in the contact form is all that is left, and `@tailwindcss/typography` is no longer registered because it was layering a second type system over `.m-article`. Dark mode is class-based but not wired to a toggle.
 
 ### Environment variables
 

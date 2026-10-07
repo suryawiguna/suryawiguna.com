@@ -5,34 +5,36 @@
 
 :root {
   /* ── Colour ─────────────────────────────────────────────────────────── */
-  --bg: #ffffff;
-  --ink: #1f2937;
-  --ink-soft: #374151;      /* prose body, chip text — one step off --ink */
-  --muted: #6b7280;
-  --line: #e5e7eb;
-  --chip: #f3f4f6;
+  /* Pure neutrals — no blue (Tailwind gray) or brown undertone. The page is a
+     light grey so white panels and white-backed screenshots separate from it
+     without needing a border. */
+  --bg: #f8f8f8;
+  --ink: #111111;
+  --ink-soft: #3d3d3d;      /* reading copy, chip text — one step off --ink */
+  --muted: #666666;         /* meta only: dates, labels, captions. 5.4:1 on --bg */
+  --line: #e6e6e6;
+  --chip: #eeeeee;
   --chip-ink: var(--ink-soft);
-  /* A full panel needs less tint than a pill, so --surface sits between
-     --bg and --chip. */
-  --surface: color-mix(in oklab, var(--chip) 55%, var(--bg));
-  --accent: #C2410C;
+  --surface: #ffffff;       /* panels sit above the grey page, not below it */
+  --accent: #C2410C;        /* 4.9:1 on --bg, 5.2:1 under --on-accent */
   --on-accent: #ffffff;     /* accessible light text on the action orange */
   --success: #10b981;
   --danger: #b91c1c;
 
   /* ── Typeface ───────────────────────────────────────────────────────── */
-  --display: var(--font-display, "Archivo", -apple-system, BlinkMacSystemFont, sans-serif);
+  /* Display and body are the same family; the token stays so headings can be
+     re-pointed in one place. */
+  --display: var(--font-body, "Inter", -apple-system, BlinkMacSystemFont, sans-serif);
   --body: var(--font-body, "Inter", -apple-system, BlinkMacSystemFont, sans-serif);
   --mono: ui-monospace, "Geist Mono", Menlo, monospace;
 
   /* ── Layout ─────────────────────────────────────────────────────────── */
   --maxw: 720px;
-  --maxw-wide: 1080px;       /* image-led portfolio showcase */
+  --maxw-wide: 1080px;       /* home, portfolio showcase, nav and footer */
   --gutter: 1.5rem;
-  --thumb: 96px;            /* list thumbnails, desktop */
-  --thumb-sm: 72px;         /* list thumbnails, ≤560px */
   --avatar: 76px;           /* profile hero, phone and utility routes */
-  --avatar-compact: 64px;   /* compact home hero on wider screens */
+  --avatar-sm: 44px;        /* home masthead, beside the name */
+  --avatar-xs: 36px;        /* blog post byline */
   --nav-offset: 5rem;       /* scroll-margin under the sticky nav */
 
   /* ── Type scale — see DESIGN-SYSTEM.md. Base 16px = 1rem. ───────────── */
@@ -44,8 +46,10 @@
   --text-xl: 1.5rem;                     /* 24px — in-prose headings */
   --text-2xl: 1.875rem;                  /* 30px — section headings */
   --text-3xl: clamp(2rem, 4.4vw, 2.6rem);/* page titles */
+  --text-display: clamp(2.5rem, 5.6vw, 4rem); /* 40–64px — the home headline only */
 
   /* Line height */
+  --leading-display: 1.05;
   --leading-tight: 1.15;
   --leading-snug: 1.3;
   --leading-normal: 1.6;
@@ -58,7 +62,7 @@
   --font-bold: 700;
 
   /* Letter spacing */
-  --tracking-display: -0.025em;
+  --tracking-display: -0.035em;  /* Inter needs more pull-in at display sizes */
   --tracking-tight: -0.02em;
   --tracking-snug: -0.015em;
   --tracking-wide: 0.04em;
@@ -78,8 +82,8 @@
 
   /* ── Radius ─────────────────────────────────────────────────────────── */
   --radius-sm: 6px;     /* inline code, hover fills, menu items */
-  --radius-md: 10px;    /* fields, thumbnails, dropdowns, cover images */
-  --radius-lg: 14px;    /* cards and panels */
+  --radius-md: 10px;    /* fields, dropdowns, in-prose images */
+  --radius-lg: 14px;    /* card images, covers, panels */
   --radius-pill: 999px; /* buttons, chips, avatars */
   /* Alias the pill so [data-rounded="off"] can square the whole site off. */
   --radius: var(--radius-pill);
@@ -158,10 +162,11 @@ textarea:focus-visible { outline-offset: 1px; }
   background: color-mix(in oklab, var(--bg) 88%, transparent);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line);
 }
+/* Nav and footer span the wide canvas on every route, so the brand lines up
+   with the home page's left edge rather than jumping between pages. */
 .m-nav-inner {
-  max-width: var(--maxw);
+  max-width: var(--maxw-wide);
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -190,9 +195,10 @@ textarea:focus-visible { outline-offset: 1px; }
 .m-nav-items a {
   color: var(--muted);
   transition: color var(--transition);
-  padding-bottom: 2px;
 }
-.m-nav-items a:hover { color: var(--ink); }
+.m-nav-items a:hover,
+.m-nav-items a[aria-current="page"] { color: var(--ink); }
+.m-nav-items a[aria-current="page"] { font-weight: var(--font-medium); }
 
 /* Main */
 .m-main {
@@ -200,6 +206,9 @@ textarea:focus-visible { outline-offset: 1px; }
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
+/* A page whose root is .m-page-wide gets the 1080px canvas instead of the
+   reading column. Browsers without :has() keep the 720px column. */
+.m-main:has(> .m-page-wide) { max-width: var(--maxw-wide); }
 
 /* ── Page header ──────────────────────────────────────────────────────── */
 /* Every page opens on .m-hero: same top and bottom space on all five routes.
@@ -235,22 +244,42 @@ textarea:focus-visible { outline-offset: 1px; }
   height: 100%;
   object-fit: cover;
 }
+/* Home: a left-aligned masthead, not a centred profile card. The name sits
+   beside the avatar at body size; the headline carries the page. */
 .m-home-hero {
-  padding: var(--space-12) 0 var(--space-10);
+  padding: var(--space-16) 0 var(--space-12);
+  gap: var(--space-8);
+}
+.m-masthead {
+  display: flex;
+  align-items: center;
   gap: var(--space-3);
 }
-.m-home-hero .m-avatar {
-  width: var(--avatar-compact);
-  height: var(--avatar-compact);
-  margin-bottom: var(--space-1);
+.m-masthead .m-avatar {
+  width: var(--avatar-sm);
+  height: var(--avatar-sm);
+  margin: 0;
+  border: 0;
 }
-.m-home-hero .m-h1 { max-width: 28ch; }
+.m-masthead-name {
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-snug);
+}
+.m-masthead .m-status { margin-top: 0; }
+.m-hero-foot {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: var(--space-8);
+}
+.m-hero-foot .m-cta-row { margin-top: 0; }
 
 /* ── Headings ─────────────────────────────────────────────────────────── */
 /* One page title treatment. Every route's <h1> uses .m-h1. */
 .m-h1 {
   font-family: var(--display);
-  font-weight: var(--font-semibold);
+  font-weight: var(--font-bold);
   font-size: var(--text-3xl);
   line-height: var(--leading-tight);
   letter-spacing: var(--tracking-display);
@@ -261,6 +290,13 @@ textarea:focus-visible { outline-offset: 1px; }
 .m-h1-wide { max-width: 24ch; }
 /* Article titles, which have no useful upper bound. */
 .m-h1-full { max-width: none; }
+/* The home headline — the one place type goes past --text-3xl. */
+.m-h1-display {
+  font-size: var(--text-display);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-display);
+  max-width: 20ch;
+}
 
 /* One section-heading treatment, on every page. */
 .m-h2 {
@@ -289,7 +325,7 @@ textarea:focus-visible { outline-offset: 1px; }
 .m-hero .m-eyebrow { margin-bottom: 0; }
 
 .m-lede {
-  color: var(--muted);
+  color: var(--ink-soft);
   max-width: 52ch;
   font-size: var(--text-md);
   text-wrap: pretty;
@@ -300,7 +336,7 @@ textarea:focus-visible { outline-offset: 1px; }
 .m-lede-wide { max-width: 60ch; }
 
 .m-section-intro {
-  color: var(--muted);
+  color: var(--ink-soft);
   max-width: 60ch;
   margin: calc(var(--space-3) * -1) 0 var(--space-6);
 }
@@ -373,19 +409,28 @@ textarea:focus-visible { outline-offset: 1px; }
    content it introduces instead of floating between two blocks. */
 .m-section {
   padding: var(--space-12) 0 var(--space-10);
-  border-top: 1px solid var(--line);
 }
-/* First section on a page that has no hero above it. */
-.m-section-lead { border-top: 0; }
 
-/* Panelled section — a tinted, bordered block instead of a rule. */
-.m-section-panel {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  padding: var(--space-10) var(--space-8);
-  margin: var(--space-5) 0;
+/* Heading on the left, its "see all" link on the right. */
+.m-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
 }
+.m-section-head .m-h2 { margin-bottom: 0; }
+.m-section-head .m-more { margin-top: 0; }
+
+/* Wide-canvas section: heading in a narrow left column, content on the
+   right. Only used inside .m-page-wide, where the right column is still about
+   the width of the reading column. */
+.m-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: var(--space-8);
+}
+.m-split > .m-h2 { margin-bottom: 0; }
 
 /* Chips — every pill badge on the site is this one class at this one size. */
 .m-chip {
@@ -416,92 +461,26 @@ textarea:focus-visible { outline-offset: 1px; }
   vertical-align: -0.125em;
 }
 
-/* ── Thumbnail rows ───────────────────────────────────────────────────── */
-/* .m-work-item (portfolio) and .m-bp (blog index) are the same object: a
-   square thumbnail, a title, a blurb. They share thumbnail size, radius,
-   row padding and title size. */
-.m-work-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.m-work-item {
-  padding: var(--space-5) 0;
-  border-bottom: 1px solid var(--line);
-}
-.m-work-item:last-child { border-bottom: 0; }
-.m-work-row {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: var(--space-5);
-}
-
-.m-work-img {
-  flex: 0 0 var(--thumb);
-  width: var(--thumb);
-  height: var(--thumb);
-  position: relative;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  background: var(--line);
-}
-
-.m-work-body {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  min-width: 0;
-}
-.m-work-link {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--space-4);
-  flex-wrap: wrap;
-}
-/* Row title — the primary line of a thumbnail row. */
-.m-work-title {
-  font-family: var(--display);
-  font-weight: var(--font-semibold);
-  font-size: var(--text-lg);
-  line-height: var(--leading-snug);
-  letter-spacing: var(--tracking-snug);
-  transition: color var(--transition);
-}
-a.m-work-row:hover .m-work-title { color: var(--accent); }
-[data-accent="off"] a.m-work-row:hover .m-work-title { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
-
-.m-work-meta { display: inline-flex; align-items: center; gap: var(--space-3); }
-.m-work-arrow { color: var(--muted); font-size: var(--text-md); }
-.m-work-year { color: var(--muted); font-size: var(--text-sm); }
-.m-work-blurb { color: var(--muted); font-size: var(--text-base); max-width: 60ch; }
-.m-work-blurb p { margin: 0; }
-
 /* Trailing "see all" link. */
 .m-more {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
   margin-top: var(--space-6);
   color: var(--muted);
   font-size: var(--text-sm);
-  border-bottom: 1px solid transparent;
-  transition: color var(--transition), border-color var(--transition);
+  font-weight: var(--font-medium);
+  white-space: nowrap;
+  transition: color var(--transition);
 }
-.m-more:hover { color: var(--ink); border-color: var(--ink); }
+.m-more .m-icon { transition: transform var(--transition-fast); }
+.m-more:hover { color: var(--ink); }
+.m-more:hover .m-icon { transform: translateX(var(--space-1)); }
 
-/* Portfolio showcase. Reading routes stay on --maxw; only the image-led work
-   grid breaks out to a wider canvas. */
-.m-portfolio-showcase {
-  width: min(var(--maxw-wide), calc(100vw - var(--gutter) * 2));
-  margin-inline: 50%;
-  transform: translateX(-50%);
-}
+/* Portfolio project groups. The page roots in .m-page-wide, so the grid
+   already has the 1080px canvas — no breakout needed. */
 .m-project-group {
   padding: var(--space-12) 0 var(--space-10);
-  border-top: 1px solid var(--line);
   scroll-margin-top: var(--nav-offset);
 }
 .m-project-group-head {
@@ -513,14 +492,15 @@ a.m-work-row:hover .m-work-title { color: var(--accent); }
 }
 .m-project-group-head .m-h2 { margin-bottom: 0; }
 .m-project-group-intro {
-  color: var(--muted);
+  color: var(--ink-soft);
+  margin: 0;
   max-width: 52ch;
   justify-self: end;
 }
 .m-project-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-6);
+  gap: var(--space-12) var(--space-8);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -530,17 +510,7 @@ a.m-work-row:hover .m-work-title { color: var(--accent); }
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  transition: border-color var(--transition), transform var(--transition-fast),
-    box-shadow var(--transition);
-}
-a.m-project-link:hover {
-  border-color: var(--ink);
-  transform: translateY(calc(var(--space-1) * -1));
-  box-shadow: var(--shadow-drop);
+  gap: var(--space-4);
 }
 .m-project-media {
   position: relative;
@@ -548,7 +518,7 @@ a.m-project-link:hover {
   aspect-ratio: 16 / 10;
   overflow: hidden;
   background: var(--chip);
-  border-bottom: 1px solid var(--line);
+  border-radius: var(--radius-lg);
 }
 .m-project-media img {
   transition: transform var(--transition);
@@ -560,8 +530,7 @@ a.m-project-link:hover .m-project-media img {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  padding: var(--space-6);
+  gap: var(--space-1);
 }
 .m-project-heading {
   display: flex;
@@ -589,78 +558,71 @@ a.m-project-link:hover .m-project-arrow {
   transform: translate(var(--space-1), calc(var(--space-1) * -1));
 }
 .m-project-description {
-  flex: 1;
-  color: var(--muted);
+  color: var(--ink-soft);
   max-width: 58ch;
 }
-.m-project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-top: var(--space-1);
+/* Categories as a quiet text line rather than a row of chips. */
+.m-project-meta {
+  color: var(--muted);
+  font-size: var(--text-sm);
 }
 
-/* About */
-.m-cols {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* Home: background facts — a period column and a line of text, no rules. */
+.m-facts {
+  display: flex;
+  flex-direction: column;
   gap: var(--space-8);
 }
-
-.m-list {
+.m-facts-group .m-eyebrow { margin-bottom: var(--space-3); }
+.m-facts-list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.m-list li {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
-.m-li-top { font-size: var(--text-base); }
-.m-li-sub { font-size: var(--text-base); color: var(--muted); }
-
-.m-skills-block { margin-top: var(--space-8); }
-.m-skills {
-  display: flex;
-  flex-wrap: wrap;
   gap: var(--space-2);
+  margin: 0;
 }
+.m-fact {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  gap: var(--space-4);
+}
+.m-fact dt {
+  color: var(--muted);
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--leading-normal);
+}
+.m-fact dd { margin: 0; color: var(--ink-soft); }
+.m-facts-text { color: var(--ink-soft); margin: 0; }
 
 /* Posts strip (home) */
 .m-posts {
   display: flex;
   flex-direction: column;
+  gap: var(--space-1);
   list-style: none;
   margin: 0;
   padding: 0;
 }
 .m-post {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-1);
-  padding: var(--space-3) 0;
-  border-bottom: 1px solid var(--line);
-  transition: padding var(--transition);
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: baseline;
+  padding: var(--space-2) 0;
 }
-.m-posts li:last-child .m-post { border-bottom: 0; }
-.m-post:hover { padding-left: var(--space-2); padding-right: var(--space-2); }
 .m-post:hover .m-post-title { color: var(--accent); }
 [data-accent="off"] .m-post:hover .m-post-title { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
 
 .m-post-title {
-  font-size: var(--text-base);
+  font-size: var(--text-md);
   font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-snug);
   transition: color var(--transition);
-  flex: 1;
 }
 .m-post-date {
   font-size: var(--text-sm);
   color: var(--muted);
+  font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
@@ -670,15 +632,31 @@ a.m-project-link:hover .m-project-arrow {
   flex-wrap: wrap;
   gap: var(--space-2);
 }
-/* /link stacks its primary buttons full width instead of wrapping them. */
-.m-links-stack {
+/* /link: a plain list of rows, title left, arrow right. */
+.m-link-list {
+  display: flex;
   flex-direction: column;
-  align-items: stretch;
-  flex-wrap: nowrap;
-  margin-top: var(--space-6);
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
-/* ...unless it is the first thing in its section, with nothing to clear. */
-.m-links-stack-first { margin-top: 0; }
+.m-link-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  font-size: var(--text-md);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-snug);
+  transition: color var(--transition);
+}
+.m-link-row .m-icon {
+  color: var(--muted);
+  transition: color var(--transition), transform var(--transition-fast);
+}
+.m-link-row:hover { color: var(--accent); }
+.m-link-row:hover .m-icon { color: var(--accent); transform: translateX(var(--space-1)); }
 
 /* ── Block titles ─────────────────────────────────────────────────────── */
 /* Every h3-level title inside a section — offers, sectors, steps, cases,
@@ -700,7 +678,7 @@ a.m-project-link:hover .m-project-arrow {
 .m-offer-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-4);
+  gap: var(--space-8);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -709,63 +687,44 @@ a.m-project-link:hover .m-project-arrow {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  padding: var(--space-5);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
   height: 100%;
-  transition: border-color var(--transition), transform var(--transition-fast),
-    box-shadow var(--transition);
 }
-.m-offer:hover {
-  border-color: var(--ink);
-  transform: translateY(calc(var(--space-1) * -1));
-  box-shadow: var(--shadow-drop);
-}
-.m-offer-heading {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--space-3);
-}
-.m-offer-arrow {
+.m-offer-num {
   color: var(--muted);
-  font-size: var(--text-md);
-  transition: color var(--transition), transform var(--transition-fast);
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--space-2);
 }
-.m-offer:hover .m-offer-arrow {
-  color: var(--accent);
-  transform: translateX(var(--space-1));
-}
+.m-offer-title { transition: color var(--transition); }
+.m-offer:hover .m-offer-title { color: var(--accent); }
 .m-offer-more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
   margin-top: var(--space-2);
   color: var(--ink);
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
 }
-.m-offer-list {
+.m-offer-more .m-icon { transition: transform var(--transition-fast); }
+.m-offer:hover .m-offer-more .m-icon { transform: translateX(var(--space-1)); }
+/* /services: same columns as the home cards, with the long copy. The id is
+   the deep-link target from the home page. */
+.m-offer-full {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
-}
-.m-offer-full {
+  gap: var(--space-2);
   scroll-margin-top: var(--nav-offset);
 }
-/* Three long text blocks on one panel need a horizon line to scan against. */
-.m-offer-full + .m-offer-full {
-  border-top: 1px solid var(--line);
-  padding-top: var(--space-8);
-}
-.m-offer-head {
-  margin-bottom: var(--space-3);
-}
 .m-offer-body {
-  color: var(--muted);
+  color: var(--ink-soft);
   font-size: var(--text-base);
   max-width: 62ch;
   margin: 0 0 var(--space-3);
 }
 .m-offer-body:last-child { margin-bottom: 0; }
 .m-offer .m-offer-body { flex: 1; margin: 0; }
+.m-offer-full .m-offer-body { margin: 0; }
 
 /* Services: process */
 .m-steps {
@@ -784,14 +743,11 @@ a.m-project-link:hover .m-project-arrow {
 }
 .m-step-num {
   flex: 0 0 var(--space-8);
-  height: var(--space-8);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
   font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  font-variant-numeric: tabular-nums;
   color: var(--muted);
+  padding-top: var(--space-1);
 }
 .m-step-body {
   display: flex;
@@ -800,7 +756,7 @@ a.m-project-link:hover .m-project-arrow {
   min-width: 0;
 }
 .m-step-line {
-  color: var(--muted);
+  color: var(--ink-soft);
   font-size: var(--text-base);
   max-width: 60ch;
 }
@@ -814,8 +770,7 @@ a.m-project-link:hover .m-project-arrow {
 }
 [data-accent="off"] .m-timeline { border-left-color: var(--line); }
 
-/* Services: sectors. Name and blurb sit side by side — three columns inside a
-   720px box gave the blurb ~26 characters a line, under the 45-char floor. */
+/* Services: sectors — name over blurb, separated by space. */
 .m-sectors {
   display: flex;
   flex-direction: column;
@@ -825,19 +780,12 @@ a.m-project-link:hover .m-project-arrow {
   padding: 0;
 }
 .m-sector {
-  display: grid;
-  grid-template-columns: 13rem 1fr;
-  gap: var(--space-6);
-  align-items: start;
-  padding-bottom: var(--space-6);
-  border-bottom: 1px solid var(--line);
-}
-.m-sector:last-child {
-  padding-bottom: 0;
-  border-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
 }
 .m-sector-blurb {
-  color: var(--muted);
+  color: var(--ink-soft);
   font-size: var(--text-base);
   max-width: 56ch;
   margin: 0;
@@ -847,34 +795,29 @@ a.m-project-link:hover .m-project-arrow {
 .m-case-list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-12);
 }
 .m-case {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.35fr);
-  overflow: hidden;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-8);
+  align-items: start;
 }
 .m-case-media {
   position: relative;
   min-width: 0;
-  min-height: 100%;
+  aspect-ratio: 16 / 10;
   background: var(--chip);
+  border-radius: var(--radius-lg);
   overflow: hidden;
 }
 .m-case-media img { transition: transform var(--transition); }
 a.m-case-media:hover img { transform: scale(1.02); }
-.m-case-content {
-  padding: var(--space-6);
-}
 .m-case-head {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  margin-bottom: var(--space-3);
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-bottom: var(--space-5);
 }
 .m-case-body { margin: 0; }
 .m-case-label {
@@ -887,7 +830,7 @@ a.m-case-media:hover img { transform: scale(1.02); }
 .m-case-label:first-child { margin-top: 0; }
 .m-case-text {
   margin: var(--space-1) 0 0;
-  color: var(--muted);
+  color: var(--ink-soft);
   max-width: 62ch;
 }
 
@@ -955,7 +898,7 @@ a.m-case-media:hover img { transform: scale(1.02); }
 }
 .m-faq-a {
   padding: 0 0 var(--space-5);
-  color: var(--muted);
+  color: var(--ink-soft);
   max-width: 62ch;
 }
 .m-faq-a p { margin: 0; }
@@ -983,7 +926,7 @@ a.m-case-media:hover img { transform: scale(1.02); }
   font: inherit;
   font-size: var(--text-base);
   color: var(--ink);
-  background: var(--bg);
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   padding: var(--field-py) var(--field-px);
@@ -1026,8 +969,8 @@ a.m-case-media:hover img { transform: scale(1.02); }
 /* Services CTA card, used under blog posts */
 .m-cta-card {
   margin: var(--space-10) 0;
-  padding: var(--space-6);
-  border: 1px solid var(--line);
+  padding: var(--space-8);
+  background: var(--surface);
   border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
@@ -1035,7 +978,7 @@ a.m-case-media:hover img { transform: scale(1.02); }
   gap: var(--space-3);
 }
 .m-cta-card-body {
-  color: var(--muted);
+  color: var(--ink-soft);
   font-size: var(--text-base);
   margin: 0 0 var(--space-1);
   max-width: 58ch;
@@ -1047,37 +990,22 @@ a.m-case-media:hover img { transform: scale(1.02); }
   .m-project-group-head { grid-template-columns: 1fr; gap: var(--space-3); }
   .m-project-group-intro { justify-self: start; }
   .m-project-grid { grid-template-columns: 1fr; }
-  .m-case { grid-template-columns: 1fr; }
-  .m-case-media { min-height: auto; aspect-ratio: 16 / 9; }
-  .m-sector {
-    grid-template-columns: 1fr;
-    gap: var(--space-1);
-  }
+  .m-case { grid-template-columns: 1fr; gap: var(--space-5); }
+  .m-split { grid-template-columns: 1fr; gap: var(--space-6); }
+  .m-hero-foot { grid-template-columns: 1fr; gap: var(--space-6); }
 }
 @media (max-width: 560px) {
   .m-nav-items { gap: var(--space-4); }
   .m-brand span { display: none; }
   .m-hero { padding: var(--space-12) 0 var(--space-8); }
-  .m-home-hero { gap: var(--space-4); }
-  .m-home-hero .m-avatar {
-    width: var(--avatar);
-    height: var(--avatar);
-    margin-bottom: var(--space-2);
-  }
+  .m-home-hero { padding: var(--space-10) 0 var(--space-8); gap: var(--space-6); }
   .m-section { padding: var(--space-8) 0 var(--space-6); }
-  .m-cols { grid-template-columns: 1fr; gap: var(--space-6); }
   .m-form { grid-template-columns: 1fr; }
-  .m-work-img { flex: 0 0 var(--thumb-sm); width: var(--thumb-sm); height: var(--thumb-sm); }
+  /* Date above title instead of beside it. */
+  .m-post,
+  .m-fact { grid-template-columns: 1fr; gap: 0; }
+  .m-posts { gap: var(--space-3); }
 }
-/* Stated after the .m-section rules above: .m-section-panel has the same
-   specificity, so it only wins on source order. */
-@media (max-width: 768px) {
-  .m-section-panel { padding: var(--space-8) var(--space-6); }
-}
-@media (max-width: 560px) {
-  .m-section-panel { padding: var(--space-8) var(--space-5); }
-}
-
 /* ── Loading skeletons ────────────────────────────────────────────────── */
 /* Primitives for the five route loading.tsx files. See
    components/global/skeleton.tsx — placeholder sizes track the type scale,
@@ -1085,39 +1013,39 @@ a.m-case-media:hover img { transform: scale(1.02); }
 .m-skel { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
 .m-skel-bar { background: var(--line); border-radius: var(--radius-sm); }
 .m-skel-pill { background: var(--line); border-radius: var(--radius-pill); }
-.m-skel-thumb {
-  flex: 0 0 var(--thumb);
-  width: var(--thumb);
-  height: var(--thumb);
-  background: var(--line);
-  border-radius: var(--radius-md);
-}
-@media (max-width: 560px) {
-  .m-skel-thumb { flex: 0 0 var(--thumb-sm); width: var(--thumb-sm); height: var(--thumb-sm); }
-}
 .m-skel-stack { display: flex; flex-direction: column; }
-.m-skel-split {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-}
-.m-skel-line {
-  padding: var(--space-5) 0;
-  border-bottom: 1px solid var(--line);
-}
 
-/* Footer */
+/* Footer — wide like the nav, no rule. Carries the email and profiles so the
+   site never ends in a dead end. */
 .m-foot {
-  max-width: var(--maxw);
-  margin: var(--space-8) auto var(--space-12);
-  padding: var(--space-6) var(--gutter) 0;
-  border-top: 1px solid var(--line);
+  max-width: var(--maxw-wide);
+  margin: var(--space-12) auto 0;
+  padding: var(--space-10) var(--gutter) var(--space-12);
   display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
   justify-content: space-between;
+  gap: var(--space-4) var(--space-8);
   font-size: var(--text-sm);
   color: var(--muted);
 }
+.m-foot-email {
+  color: var(--ink);
+  font-weight: var(--font-medium);
+  transition: color var(--transition);
+}
+.m-foot-email:hover { color: var(--accent); }
+.m-foot-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.m-foot-links a { transition: color var(--transition); }
+.m-foot-links a:hover { color: var(--ink); }
+.m-foot-legal { flex-basis: 100%; }
 @media (max-width: 560px) {
-  .m-foot { flex-direction: column; gap: var(--space-1); }
+  .m-foot { flex-direction: column; }
 }

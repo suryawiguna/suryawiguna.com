@@ -1,5 +1,4 @@
 import Link from "next/link";
-import WorkCard from "./workCard";
 import ProjectCard from "./projectCard";
 import type { Project } from "content/projects";
 import { ArrowRight } from "lucide-react";
@@ -16,12 +15,16 @@ export default function Portfolios({
   showcase?: boolean;
 }) {
   if (showcase) {
-    const clientProjects = projects.filter((project) => project.kind === "client");
-    const conceptProjects = projects.filter((project) => project.kind === "concept");
+    const clientProjects = projects.filter(
+      (project) => project.kind === "client"
+    );
+    const conceptProjects = projects.filter(
+      (project) => project.kind === "concept"
+    );
 
     return (
-      <div className="m-portfolio-showcase">
-        <section id="client-work" className="m-project-group m-section-lead">
+      <>
+        <section id="client-work" className="m-project-group">
           <div className="m-project-group-head">
             <div>
               <p className="m-eyebrow">Selected work</p>
@@ -47,8 +50,8 @@ export default function Portfolios({
                 <h2 className="m-h2">Design concepts</h2>
               </div>
               <p className="m-project-group-intro">
-                Interface studies where I explore layout, visual direction,
-                and product ideas without a client brief.
+                Interface studies where I explore layout, visual direction, and
+                product ideas without a client brief.
               </p>
             </div>
             <ul className="m-project-grid">
@@ -58,23 +61,25 @@ export default function Portfolios({
             </ul>
           </section>
         )}
-      </div>
+      </>
     );
   }
 
   return (
     <section id="portfolio" className={heading ? "m-section" : ""}>
-      {heading && <h2 className="m-h2">{heading}</h2>}
-      <ul className="m-work-list">
+      {heading && (
+        <div className="m-section-head">
+          <h2 className="m-h2">{heading}</h2>
+          <Link href="/portfolio" className="m-more">
+            All projects <ArrowRight className="m-icon" aria-hidden="true" />
+          </Link>
+        </div>
+      )}
+      <ul className="m-project-grid">
         {projects.map((project) => (
-          <WorkCard key={project.title} work={project} />
+          <ProjectCard key={project.title} project={project} />
         ))}
       </ul>
-      {heading && (
-        <Link href="/portfolio" className="m-more">
-          All projects <ArrowRight className="m-icon" aria-hidden="true" />
-        </Link>
-      )}
     </section>
   );
 }

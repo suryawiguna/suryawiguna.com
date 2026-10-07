@@ -1,14 +1,12 @@
 import "styles/v3-blog-index.css";
 
 import Link from "next/link";
-import Image from "next/image";
-import moment from "moment";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 import { getAllPosts } from "lib/api";
 import JsonLd from "components/jsonLd";
-import { richTextToPlain } from "lib/helper";
+import PostCard from "components/blog/postCard";
 import { archivableTags, postsForTag, tagFromSlug } from "lib/tags";
 import { ArrowLeft } from "lucide-react";
 
@@ -67,7 +65,8 @@ export default async function TagArchive({
   );
 
   return (
-    <>
+    // .m-page-wide widens <main> to the 1080px canvas, as on /blog.
+    <div className="m-page-wide">
       <nav className="m-breadcrumb" aria-label="Breadcrumb">
         <Link href="/blog">Blog</Link>
         <span className="sep">/</span>
@@ -84,35 +83,9 @@ export default async function TagArchive({
       </header>
 
       <section className="m-blog-list">
-        {tagged.map((post: any) => {
-          const excerpt = richTextToPlain(post.content?.excerpt);
-          return (
-            <Link key={post.slug} href={`/${post.full_slug}`} className="m-bp">
-              {post.content?.featured_image?.filename && (
-                <div className="m-bp-img">
-                  <Image
-                    src={post.content.featured_image.filename}
-                    alt={post.content.featured_image.alt || post.name}
-                    fill
-                    sizes="96px"
-                    style={{ objectFit: "cover" }}
-                  />
-                </div>
-              )}
-              <div className="m-bp-right">
-                <h2 className="m-bp-title">{post.name}</h2>
-                <div className="m-bp-meta">
-                  <span>
-                    {moment(post.first_published_at).format("MMM DD, YYYY")}
-                  </span>
-                </div>
-              </div>
-              <div className="m-bp-body">
-                {excerpt && <p className="m-bp-excerpt">{excerpt}</p>}
-              </div>
-            </Link>
-          );
-        })}
+        {tagged.map((post: any) => (
+          <PostCard key={post.slug} post={post} />
+        ))}
       </section>
 
       {others.length > 0 && (
@@ -174,6 +147,6 @@ export default async function TagArchive({
           ],
         }}
       />
-    </>
+    </div>
   );
 }

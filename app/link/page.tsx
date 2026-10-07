@@ -19,9 +19,10 @@ export const metadata: Metadata = {
 
 export default function Link() {
   return (
-    <>
+    // .m-page-wide widens <main> to the 1080px canvas, as on the home page.
+    <div className="m-page-wide">
       <Introduction />
       <Links />
-    </>
+    </div>
   );
 }

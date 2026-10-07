@@ -12,7 +12,7 @@ export default function Faqs({
   items: Faq[];
 }) {
   return (
-    <section id="faq" className="m-section">
+    <section id="faq" className="m-section m-split">
       <h2 className="m-h2">{heading}</h2>
       <div className="m-faq">
         {items.map((item) => (

@@ -5,6 +5,7 @@ import Image from "next/image";
 import SubscribeForm from "./subscribe";
 import ServicesCta from "components/services/servicesCta";
 import { ArrowLeft } from "lucide-react";
+import { AVATAR } from "content/site";
 
 // Some posts repeat the title (as an <h1>) and the excerpt (as an intro
 // paragraph) at the top of the body — the header already renders both. Drop
@@ -77,12 +78,7 @@ export default function FullPost({
           )}
           <div className="m-article-byline">
             <div className="m-byline-avatar">
-              <Image
-                src="/images/favicon.png"
-                alt=""
-                width={72}
-                height={72}
-              />
+              <Image src={AVATAR.src} alt="" width={72} height={72} />
             </div>
             <div className="m-byline-meta">
               <strong>Surya Wiguna</strong>
@@ -136,17 +132,9 @@ export default function FullPost({
               >
                 <span className="m-rc-date">
                   {moment(p.first_published_at).format("MMM DD, YYYY")}
+                  {p.tag_list?.[0] && ` · ${p.tag_list[0]}`}
                 </span>
                 <span className="m-rc-title">{p.name}</span>
-                {p.tag_list?.length > 0 && (
-                  <div className="m-rc-meta">
-                    {p.tag_list.slice(0, 2).map((t: string) => (
-                      <span key={t} className="m-chip">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                )}
               </Link>
             ))}
           </div>

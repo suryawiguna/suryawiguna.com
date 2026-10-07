@@ -48,7 +48,7 @@ export default function Loading() {
         style={{
           width: "100%",
           aspectRatio: "16/9",
-          borderRadius: "var(--radius-md)",
+          borderRadius: "var(--radius-lg)",
           margin: "var(--space-8) 0",
         }}
       />
@@ -73,7 +73,11 @@ export default function Loading() {
           "100%",
           "65%",
         ].map((w, i) => (
-          <Bar key={i} w={w} h={i === 3 ? "heading" : i === 8 ? "rowTitle" : "text"} />
+          <Bar
+            key={i}
+            w={w}
+            h={i === 3 ? "heading" : i === 8 ? "rowTitle" : "text"}
+          />
         ))}
       </Stack>
     </Skeleton>

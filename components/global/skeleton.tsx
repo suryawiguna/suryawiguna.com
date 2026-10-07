@@ -21,7 +21,6 @@ export const CONTROL_H = 46;
 export const CONTROL_SM_H = 36;
 export const CHIP_H = 32;
 export const AVATAR = 76;
-export const AVATAR_COMPACT = 64;
 
 type Height = keyof typeof HEIGHT;
 
@@ -50,18 +49,8 @@ export function Bar({
   );
 }
 
-export function Pill({
-  w,
-  h = CHIP_H,
-}: {
-  w: number | string;
-  h?: number;
-}) {
+export function Pill({ w, h = CHIP_H }: { w: number | string; h?: number }) {
   return <div className="m-skel-pill" style={{ width: w, height: h }} />;
-}
-
-export function Thumb() {
-  return <div className="m-skel-thumb" />;
 }
 
 export function Stack({

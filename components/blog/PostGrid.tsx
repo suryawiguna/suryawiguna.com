@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import moment from "moment";
-import { ArrowLeft, ArrowRight, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronDown, X } from "lucide-react";
 import { richTextToPlain as excerptText } from "lib/helper";
+import PostCard from "./postCard";
 
-const PER_PAGE = 5;
+// Divides evenly into the 3-, 2- and 1-column grid, so no page ends on a
+// half-empty row.
+const PER_PAGE = 12;
 
 export default function PostGrid({ posts }: { posts: any[] }) {
   const [tag, setTag] = useState<string>("all");
@@ -40,7 +40,10 @@ export default function PostGrid({ posts }: { posts: any[] }) {
   }, [allTags, tagSearch]);
 
   const filtered = useMemo(() => {
-    let result = tag === "all" ? posts : posts.filter((p) => (p.tag_list || []).includes(tag));
+    let result =
+      tag === "all"
+        ? posts
+        : posts.filter((p) => (p.tag_list || []).includes(tag));
     if (search.trim()) {
       const q = search.trim().toLowerCase();
       result = result.filter((p) => {
@@ -61,7 +64,8 @@ export default function PostGrid({ posts }: { posts: any[] }) {
   // Every post is rendered; off-page ones are hidden rather than sliced away.
   // Pagination here is client-only state with no URL per page, so slicing left
   // all but the first five posts with no crawlable link anywhere on the site.
-  const onCurrentPage = (index: number) => index >= start && index < start + PER_PAGE;
+  const onCurrentPage = (index: number) =>
+    index >= start && index < start + PER_PAGE;
 
   const setTagAndReset = (t: string) => {
     setTag(t);
@@ -82,7 +86,10 @@ export default function PostGrid({ posts }: { posts: any[] }) {
             type="search"
             placeholder="Search posts…"
             value={search}
-            onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setPage(1);
+            }}
             aria-label="Search posts"
           />
           {search && (
@@ -105,10 +112,17 @@ export default function PostGrid({ posts }: { posts: any[] }) {
             aria-expanded={dropOpen}
           >
             {tag === "all" ? "Filter" : tag}
-            <span className="m-filter-chevron" aria-hidden="true">▾</span>
+            <ChevronDown
+              className="m-icon m-filter-chevron"
+              aria-hidden="true"
+            />
           </button>
           {dropOpen && (
-            <div className="m-filter-drop" role="listbox" aria-label="Filter by tag">
+            <div
+              className="m-filter-drop"
+              role="listbox"
+              aria-label="Filter by tag"
+            >
               <div className="m-filter-search-wrap">
                 <input
                   className="m-filter-search"
@@ -136,7 +150,10 @@ export default function PostGrid({ posts }: { posts: any[] }) {
                     role="option"
                     aria-selected={tag === "all"}
                     className={`m-filter-item${tag === "all" ? " is-active" : ""}`}
-                    onClick={() => { setTagAndReset("all"); setDropOpen(false); }}
+                    onClick={() => {
+                      setTagAndReset("all");
+                      setDropOpen(false);
+                    }}
                   >
                     All
                   </button>
@@ -151,7 +168,10 @@ export default function PostGrid({ posts }: { posts: any[] }) {
                       role="option"
                       aria-selected={tag === t}
                       className={`m-filter-item${tag === t ? " is-active" : ""}`}
-                      onClick={() => { setTagAndReset(t); setDropOpen(false); }}
+                      onClick={() => {
+                        setTagAndReset(t);
+                        setDropOpen(false);
+                      }}
                     >
                       {t}
                     </button>
@@ -166,55 +186,17 @@ export default function PostGrid({ posts }: { posts: any[] }) {
       <section className="m-blog-list" aria-live="polite">
         {filtered.length === 0 ? (
           <p className="m-empty">
-            No posts found{tag !== "all" ? ` in "${tag}"` : ""}{search.trim() ? ` for "${search.trim()}"` : ""}.
+            No posts found{tag !== "all" ? ` in "${tag}"` : ""}
+            {search.trim() ? ` for "${search.trim()}"` : ""}.
           </p>
         ) : (
-          filtered.map((post: any, index: number) => {
-            const excerpt = excerptText(post.content?.excerpt);
-            const visible = onCurrentPage(index);
-            return (
-              <Link
-                key={post.slug}
-                href={`/${post.full_slug}`}
-                className="m-bp"
-                hidden={!visible}
-                aria-hidden={!visible ? "true" : undefined}
-                tabIndex={!visible ? -1 : undefined}
-              >
-                {post.content?.featured_image?.filename && (
-                  <div className="m-bp-img">
-                    <Image
-                      src={post.content.featured_image.filename}
-                      alt={post.content.featured_image.alt || post.name}
-                      fill
-                      sizes="96px"
-                      style={{ objectFit: "cover" }}
-                    />
-                  </div>
-                )}
-                <div className="m-bp-right">
-                  <h2 className="m-bp-title">{post.name}</h2>
-                  <div className="m-bp-meta">
-                    <span>
-                      {moment(post.first_published_at).format("MMM DD, YYYY")}
-                    </span>
-                  </div>
-                </div>
-                <div className="m-bp-body">
-                  {excerpt && <p className="m-bp-excerpt">{excerpt}</p>}
-                  {post.tag_list?.length > 0 && (
-                    <div className="m-bp-tags">
-                      {post.tag_list.map((t: string) => (
-                        <span key={t} className="m-chip">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </Link>
-            );
-          })
+          filtered.map((post: any, index: number) => (
+            <PostCard
+              key={post.slug}
+              post={post}
+              hidden={!onCurrentPage(index)}
+            />
+          ))
         )}
       </section>
 

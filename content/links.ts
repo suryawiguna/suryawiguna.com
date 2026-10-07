@@ -15,10 +15,12 @@ export const linkSeo = {
 
 export const linkIntro = {
   image: AVATAR,
-  description: "Explore my other stuff here 😄",
+  name: "Surya Wiguna",
+  description: "Web developer in Bali. Posts, downloads, and where else to find me.",
 };
 
-export const socialHeading = "Explore my other stuff";
+export const socialHeading = "Profiles";
+export const primaryHeading = "Links";
 
 export const LINKS: LinkItem[] = [
   {

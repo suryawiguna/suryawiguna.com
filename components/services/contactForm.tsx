@@ -44,84 +44,83 @@ export default function ContactForm() {
       setMessage("Thanks. I will get back to you within a day or two.");
     } catch {
       setStatus("error");
-      setMessage(
-        `Could not send that. Please email me at ${EMAIL} instead.`
-      );
+      setMessage(`Could not send that. Please email me at ${EMAIL} instead.`);
     }
   }
 
   return (
-    <section id="contact" className="m-section">
+    // Same split as ContactCta, so swapping one for the other keeps the layout.
+    <section id="contact" className="m-section m-split">
       <h2 className="m-h2">{servicesPage.contactHeading}</h2>
-      <p className="m-section-intro">{servicesPage.contactIntro}</p>
+      <div>
+        <p className="m-section-intro">{servicesPage.contactIntro}</p>
 
-      <form className="m-form" onSubmit={handleSubmit}>
-        <div className="m-field">
-          <label htmlFor="contact-name">Name</label>
-          <input id="contact-name" name="name" type="text" required />
-        </div>
+        <form className="m-form" onSubmit={handleSubmit}>
+          <div className="m-field">
+            <label htmlFor="contact-name">Name</label>
+            <input id="contact-name" name="name" type="text" required />
+          </div>
 
-        <div className="m-field">
-          <label htmlFor="contact-email">Email</label>
-          <input id="contact-email" name="email" type="email" required />
-        </div>
+          <div className="m-field">
+            <label htmlFor="contact-email">Email</label>
+            <input id="contact-email" name="email" type="email" required />
+          </div>
 
-        <div className="m-field">
-          <label htmlFor="contact-project">What do you need?</label>
-          <select id="contact-project" name="projectType" defaultValue="">
-            <option value="" disabled>
-              Pick one
-            </option>
-            {OFFERS.map((offer) => (
-              <option key={offer.slug} value={offer.title}>
-                {offer.title}
+          <div className="m-field">
+            <label htmlFor="contact-project">What do you need?</label>
+            <select id="contact-project" name="projectType" defaultValue="">
+              <option value="" disabled>
+                Pick one
               </option>
-            ))}
-            <option value="Something else">Something else</option>
-          </select>
-        </div>
+              {OFFERS.map((offer) => (
+                <option key={offer.slug} value={offer.title}>
+                  {offer.title}
+                </option>
+              ))}
+              <option value="Something else">Something else</option>
+            </select>
+          </div>
 
-        <div className="m-field m-field-wide">
-          <label htmlFor="contact-message">
-            Tell me about the project
-          </label>
-          <textarea id="contact-message" name="message" rows={5} required />
-        </div>
+          <div className="m-field m-field-wide">
+            <label htmlFor="contact-message">Tell me about the project</label>
+            <textarea id="contact-message" name="message" rows={5} required />
+          </div>
 
-        {/* Honeypot. Hidden from people, irresistible to bots. */}
-        <div className="m-honeypot" aria-hidden="true">
-          <label htmlFor="contact-company">Company</label>
-          <input
-            id="contact-company"
-            name="company"
-            type="text"
-            tabIndex={-1}
-            autoComplete="off"
-          />
-        </div>
+          {/* Honeypot. Hidden from people, irresistible to bots. */}
+          <div className="m-honeypot" aria-hidden="true">
+            <label htmlFor="contact-company">Company</label>
+            <input
+              id="contact-company"
+              name="company"
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
 
-        <div className="m-form-actions">
-          <button
-            type="submit"
-            className="m-btn primary"
-            disabled={status === "sending"}
-          >
-            {status === "sending" ? "Sending…" : "Send it"}
-          </button>
-          <span className="m-form-alt">
-            Or email me at <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-          </span>
-        </div>
+          <div className="m-form-actions">
+            <button
+              type="submit"
+              className="m-btn primary"
+              disabled={status === "sending"}
+            >
+              {status === "sending" ? "Sending…" : "Send it"}
+            </button>
+            <span className="m-form-alt">
+              Or email me at <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            </span>
+          </div>
 
-        {message && (
-          <p
-            className={`m-form-msg${status === "error" ? " is-error" : ""}`}
-            role="status"
-          >
-            {message}
-          </p>
-        )}
-      </form>
+          {message && (
+            <p
+              className={`m-form-msg${status === "error" ? " is-error" : ""}`}
+              role="status"
+            >
+              {message}
+            </p>
+          )}
+        </form>
+      </div>
     </section>
   );
 }

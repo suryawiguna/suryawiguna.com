@@ -13,11 +13,10 @@
 .m-breadcrumb a:hover { color: var(--ink); }
 .m-breadcrumb .sep { color: var(--line); }
 
-/* Sits under the breadcrumb, so it opens on less space than .m-hero, but
-   closes on the same --space-10 every section does. */
+/* Sits under the breadcrumb, so it opens on less space than .m-hero. Space,
+   not a rule, separates it from the cover. */
 .m-article-head {
-  padding: var(--space-8) 0 var(--space-10);
-  border-bottom: 1px solid var(--line);
+  padding: var(--space-8) 0 var(--space-2);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -34,11 +33,10 @@
   margin-top: var(--space-1);
 }
 .m-byline-avatar {
-  width: 36px; height: 36px;
+  width: var(--avatar-xs); height: var(--avatar-xs);
   border-radius: var(--radius-pill);
   overflow: hidden;
   background: var(--chip);
-  border: 1px solid var(--line);
   display: grid;
   place-items: center;
   flex-shrink: 0;
@@ -59,8 +57,7 @@
   margin: var(--space-8) 0;
   aspect-ratio: 16 / 9;
   background: var(--chip);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   position: relative;
   overflow: hidden;
 }
@@ -75,8 +72,6 @@
     width: calc(100% + var(--gutter) * 2);
     margin: var(--space-8) calc(var(--gutter) * -1);
     border-radius: 0;
-    border-left: 0;
-    border-right: 0;
   }
 }
 
@@ -195,8 +190,7 @@
 
 /* ── Article footer ───────────────────────────────────────────────────── */
 .m-article-foot {
-  border-top: 1px solid var(--line);
-  padding: var(--space-8) 0;
+  padding: var(--space-4) 0 var(--space-8);
 }
 /* Block title, same size as every other h3 in the system. */
 .m-foot-block h3 {
@@ -208,45 +202,23 @@
   margin-bottom: var(--space-3);
   color: var(--ink);
 }
-.m-share {
-  display: flex;
-  gap: var(--space-2);
-  flex-wrap: wrap;
-}
-.m-share a {
-  display: inline-grid;
-  place-items: center;
-  width: var(--space-10); height: var(--space-10);
-  border-radius: var(--radius-pill);
-  background: var(--chip);
-  color: var(--chip-ink);
-  transition: background var(--transition), color var(--transition);
-  font-size: var(--text-sm);
-  font-weight: var(--font-semibold);
-}
-.m-share a:hover { background: var(--accent); color: var(--on-accent); }
 
 /* ── Related ──────────────────────────────────────────────────────────── */
 .m-related {
-  border-top: 1px solid var(--line);
   padding: var(--space-10) 0;
 }
 .m-related-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-5);
+  gap: var(--space-6) var(--space-8);
 }
 @media (max-width: 560px) { .m-related-list { grid-template-columns: 1fr; } }
+/* Date line over title — no box, like the home page's writing list. */
 .m-related-card {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  padding: var(--space-5);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  transition: border-color var(--transition), transform var(--transition);
+  gap: var(--space-1);
 }
-.m-related-card:hover { border-color: var(--ink); transform: translateY(-1px); }
 .m-related-card:hover .m-rc-title { color: var(--accent); }
 .m-rc-date {
   font-size: var(--text-sm);
@@ -256,12 +228,6 @@
 .m-rc-title {
   transition: color var(--transition);
   text-wrap: balance;
-}
-.m-rc-meta {
-  margin-top: var(--space-2);
-  display: flex;
-  gap: var(--space-2);
-  flex-wrap: wrap;
 }
 
 .m-back {
@@ -284,7 +250,7 @@
 }
 .m-subscribe-input {
   flex: 1;
-  background: var(--chip);
+  background: var(--surface);
   border: 1px solid var(--line);
   border-right: 0;
   border-radius: var(--radius-pill) 0 0 var(--radius-pill);
@@ -296,7 +262,7 @@
   min-width: 0;
 }
 .m-subscribe-input::placeholder { color: var(--muted); }
-.m-subscribe-input:focus { border-color: var(--accent); background: var(--bg); }
+.m-subscribe-input:focus { border-color: var(--accent); }
 .m-subscribe-btn {
   display: inline-flex;
   align-items: center;

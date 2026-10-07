@@ -44,7 +44,7 @@ export default function CaseStudies({
                       src={project.image.src}
                       alt={project.image.alt || project.title}
                       fill
-                      sizes="(max-width: 768px) 100vw, 320px"
+                      sizes="(max-width: 768px) 100vw, 520px"
                       style={{ objectFit: "cover" }}
                     />
                   </Link>
@@ -54,7 +54,7 @@ export default function CaseStudies({
                       src={project.image.src}
                       alt={project.image.alt || project.title}
                       fill
-                      sizes="(max-width: 768px) 100vw, 320px"
+                      sizes="(max-width: 768px) 100vw, 520px"
                       style={{ objectFit: "cover" }}
                     />
                   </div>
@@ -63,11 +63,11 @@ export default function CaseStudies({
               <div className="m-case-content">
                 <div className="m-case-head">
                   <h3 className="m-case-title">{study.projectTitle}</h3>
-                  {project?.categories.slice(0, 2).map((category) => (
-                    <span key={category} className="m-chip">
-                      {category}
-                    </span>
-                  ))}
+                  {project && (
+                    <p className="m-project-meta">
+                      {project.categories.join(" · ")}
+                    </p>
+                  )}
                 </div>
 
                 <dl className="m-case-body">
@@ -86,7 +86,8 @@ export default function CaseStudies({
                     rel="noreferrer"
                     className="m-case-link"
                   >
-                    Visit {study.projectTitle} <ArrowUpRight className="m-icon" aria-hidden="true" />
+                    Visit {study.projectTitle}{" "}
+                    <ArrowUpRight className="m-icon" aria-hidden="true" />
                   </Link>
                 )}
               </div>

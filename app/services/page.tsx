@@ -97,28 +97,31 @@ export const metadata: Metadata = {
 
 export default function Services() {
   return (
-    <>
+    // .m-page-wide widens <main> to the 1080px canvas, as on the home page.
+    <div className="m-page-wide">
       {/* Reads left, not centred: this hero is a two-paragraph pitch that
-          hands off to six hard-left sections, and centred body copy costs the
+          hands off to hard-left sections, and centred body copy costs the
           reader a return sweep on every line. */}
       <header className="m-hero m-hero-left">
         <h1 className="m-h1 m-h1-wide">{servicesPage.h1}</h1>
-        <div className="m-lede">
-          {servicesPage.intro.map((paragraph) => (
-            <p key={paragraph.slice(0, 32)}>{paragraph}</p>
-          ))}
-        </div>
-        <div className="m-cta-row">
-          <Link href="#contact" className="m-btn primary">
-            Start a project
-          </Link>
-          <Link href="/portfolio" className="m-btn ghost">
-            See recent work
-          </Link>
+        <div className="m-hero-foot">
+          <div className="m-lede">
+            {servicesPage.intro.map((paragraph) => (
+              <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+            ))}
+          </div>
+          <div className="m-cta-row">
+            <Link href="#contact" className="m-btn primary">
+              Start a project
+            </Link>
+            <Link href="/portfolio" className="m-btn ghost">
+              See recent work
+            </Link>
+          </div>
         </div>
       </header>
 
-      <Offers heading="What I build" offers={OFFERS} detailed panel />
+      <Offers heading="What I build" offers={OFFERS} detailed />
       <Sectors
         heading={SECTORS.title}
         intro={SECTORS.intro}
@@ -136,9 +139,9 @@ export default function Services() {
         cta={{ href: "#contact", label: "Start a project" }}
       />
       <Faqs heading={FAQS.title} items={FAQS.items} />
-      <ContactCta panel />
+      <ContactCta />
 
       <JsonLd data={generateServicesJsonLd()} />
-    </>
+    </div>
   );
 }

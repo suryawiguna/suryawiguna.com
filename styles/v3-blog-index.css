@@ -1,5 +1,5 @@
 /* Blog index — page layer over the v3 design system.
-   Only what /blog adds: the toolbar, the post row, pagination. Headers,
+   Only what /blog and /blog/tag add: the toolbar, the post grid, pagination. Headers,
    headings, chips, buttons and fields all come from styles/v3.css. */
 
 /* ── Toolbar: search + filter ─────────────────────────────────────────── */
@@ -10,8 +10,10 @@
   margin-bottom: var(--space-6);
 }
 
+/* Capped: on the 1080px canvas a full-width search box would be a long
+   empty bar. */
 .m-search-wrap {
-  flex: 1;
+  flex: 0 1 22rem;
   position: relative;
   display: flex;
   align-items: center;
@@ -22,7 +24,7 @@
   padding: var(--control-py-sm) var(--space-8) var(--control-py-sm) var(--control-px-sm);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: transparent;
+  background: var(--surface);
   color: var(--ink);
   font-family: var(--body);
   font-size: var(--text-sm);
@@ -57,7 +59,7 @@
   padding: var(--control-py-sm) var(--control-px-sm);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: transparent;
+  background: var(--surface);
   color: var(--muted);
   font-family: var(--body);
   font-size: var(--text-sm);
@@ -79,14 +81,14 @@
   color: var(--on-accent);
 }
 
-.m-filter-chevron { font-size: var(--text-xs); opacity: 0.7; }
+.m-filter-chevron { opacity: 0.7; }
 
 .m-filter-drop {
   position: absolute;
   top: calc(100% + var(--space-2));
   right: 0;
   min-width: 180px;
-  background: var(--bg);
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-drop);
@@ -153,99 +155,45 @@
   padding: var(--space-3) var(--space-2);
 }
 
-/* ── Post rows ────────────────────────────────────────────────────────── */
-/* Same object as .m-work-item on /portfolio: same thumbnail size, same
-   radius, same row padding, same title size, same breakpoint. */
+/* ── Post grid ────────────────────────────────────────────────────────── */
+/* The same image-over-text card as a portfolio project: no box, no rules. */
 .m-blog-list {
-  display: flex;
-  flex-direction: column;
-  padding: var(--space-2) 0 var(--space-6);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-12) var(--space-8);
+  padding: var(--space-4) 0 var(--space-12);
 }
+/* Off-page cards stay in the DOM so crawlers see every post link; `display`
+   on .m-bp would otherwise beat the UA stylesheet's [hidden] rule. */
+.m-bp[hidden] { display: none; }
 
 .m-bp {
-  display: grid;
-  grid-template-areas:
-    "img right"
-    "img body";
-  grid-template-columns: var(--thumb) 1fr;
-  grid-template-rows: auto 1fr;
-  column-gap: var(--space-5);
-  row-gap: var(--space-2);
-  align-items: start;
-  padding: var(--space-5) 0;
-  border-bottom: 1px solid var(--line);
-  transition: padding var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
 }
-.m-bp:last-child { border-bottom: 0; }
-/* Off-page rows stay in the DOM so crawlers see every post link; `display: grid`
-   above would otherwise beat the UA stylesheet's [hidden] rule. */
-.m-bp[hidden] { display: none; }
-/* ...which means the last *visible* row, not :last-child, is the one that
-   should drop its divider. */
-.m-bp:not([hidden]):not(:has(~ .m-bp:not([hidden]))) { border-bottom: 0; }
-.m-bp:hover { padding-left: var(--space-2); padding-right: var(--space-2); }
-.m-bp:hover .m-bp-title { color: var(--accent); }
-[data-accent="off"] .m-bp:hover .m-bp-title { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
-
-.m-bp-img {
-  grid-area: img;
-  width: var(--thumb);
-  height: var(--thumb);
+.m-bp-media {
   position: relative;
-  border-radius: var(--radius-md);
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  background: var(--line);
-  align-self: start;
+  background: var(--chip);
 }
+.m-bp-media img { transition: transform var(--transition); }
+.m-bp:hover .m-bp-media img { transform: scale(1.02); }
 
-.m-bp-right {
-  grid-area: right;
+.m-bp-body {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
-  align-self: end;
-  min-width: 0;
 }
-
-.m-bp-body {
-  grid-area: body;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  align-self: start;
-}
-
-/* ≤560px: the thumbnail can no longer span both rows, so title and date sit
-   beside it and the body drops underneath. Same breakpoint and same small
-   thumbnail as .m-work-img. */
-@media (max-width: 560px) {
-  .m-bp {
-    grid-template-areas:
-      "img right"
-      "body body";
-    grid-template-columns: var(--thumb-sm) 1fr;
-    grid-template-rows: auto auto;
-    column-gap: var(--space-4);
-    row-gap: var(--space-3);
-  }
-  .m-bp-img {
-    width: var(--thumb-sm);
-    height: var(--thumb-sm);
-    align-self: center;
-  }
-  .m-bp-right { align-self: center; }
-}
-
 .m-bp-meta {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
   color: var(--muted);
   font-size: var(--text-sm);
 }
-.m-bp-dot { opacity: 0.6; }
 
-/* Row title — matches .m-work-title. */
+/* Row title — the --text-lg tier. */
 .m-bp-title {
   font-family: var(--display);
   font-weight: var(--font-semibold);
@@ -255,23 +203,31 @@
   text-wrap: balance;
   transition: color var(--transition);
 }
+.m-bp:hover .m-bp-title { color: var(--accent); }
+[data-accent="off"] .m-bp:hover .m-bp-title { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
 
+/* Three lines keep the cards in a row roughly level. */
 .m-bp-excerpt {
-  color: var(--muted);
+  color: var(--ink-soft);
   font-size: var(--text-base);
   line-height: var(--leading-normal);
-  max-width: 62ch;
   text-wrap: pretty;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.m-bp-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-top: var(--space-1);
+@media (max-width: 768px) {
+  .m-blog-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .m-blog-list { grid-template-columns: 1fr; gap: var(--space-10); }
+  .m-search-wrap { flex: 1; }
 }
 
 .m-empty {
+  grid-column: 1 / -1;
   color: var(--muted);
   padding: var(--space-8) 0;
   text-align: center;
@@ -285,13 +241,12 @@
   justify-content: center;
   gap: var(--space-2);
   padding: var(--space-6) 0 var(--space-2);
-  border-top: 1px solid var(--line);
   flex-wrap: wrap;
 }
 
 /* Same metric as .m-btn-sm. */
 .m-page-btn {
-  background: transparent;
+  background: var(--surface);
   border: 1px solid var(--line);
   color: var(--ink);
   font-family: var(--body);

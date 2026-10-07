@@ -28,13 +28,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           )}
         </div>
         <p className="m-project-description">{project.description}</p>
-        <div className="m-project-tags" aria-hidden="true">
-          {project.categories.map((category) => (
-            <span key={category} className="m-chip">
-              {category}
-            </span>
-          ))}
-        </div>
+        <p className="m-project-meta">{project.categories.join(" · ")}</p>
       </div>
     </>
   );

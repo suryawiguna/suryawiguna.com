@@ -1,115 +1,88 @@
 import {
-  AVATAR_COMPACT,
   Bar,
   CONTROL_H,
   Pill,
   Skeleton,
   Stack,
-  Thumb,
 } from "components/global/skeleton";
+
+// Mirrors app/page.tsx: wide canvas, left masthead, 2×2 project grid, three
+// offer columns, then the split sections.
+const SPLIT = "m-section m-split";
 
 export default function Loading() {
   return (
-    <Skeleton>
-      {/* Hero */}
-      <div className="m-hero m-home-hero">
-        <Pill w={AVATAR_COMPACT} h={AVATAR_COMPACT} />
-        <Bar w="48%" h="meta" style={{ maxWidth: 280 }} />
-        <Bar w="72%" h="title" style={{ maxWidth: 420 }} />
-        <Bar w="58%" h="title" style={{ maxWidth: 340 }} />
-        <Bar w="82%" style={{ maxWidth: 440 }} />
-        <Bar w="68%" style={{ maxWidth: 360 }} />
-        <div style={{ display: "flex", gap: "var(--space-3)" }}>
-          <Pill w={125} h={CONTROL_H} />
-          <Pill w={145} h={CONTROL_H} />
-        </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "var(--space-2)",
-          }}
-        >
-          <Pill w={7} h={7} />
-          <Bar w={160} h="meta" />
-        </div>
-      </div>
-
-      {/* Recent works */}
-      <div className="m-section">
-        <Bar w={200} h="heading" style={{ marginBottom: "var(--space-6)" }} />
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="m-skel-line">
-            <div style={{ display: "flex", gap: "var(--space-5)" }}>
-              <Thumb />
-              <Stack gap="var(--space-2)" style={{ flex: 1, minWidth: 0 }}>
-                <div className="m-skel-split">
-                  <Bar w="45%" h="rowTitle" />
-                  <Pill w={64} />
-                </div>
-                <Bar w="75%" />
-              </Stack>
+    <div className="m-page-wide">
+      <Skeleton>
+        {/* Hero */}
+        <div className="m-hero m-hero-left m-home-hero">
+          <div className="m-masthead">
+            <Pill w={44} h={44} />
+            <Stack gap="var(--space-2)">
+              <Bar w={120} />
+              <Bar w={180} h="meta" />
+            </Stack>
+          </div>
+          <Stack gap="var(--space-3)" style={{ width: "100%" }}>
+            <Bar w="70%" h="title" style={{ maxWidth: 640 }} />
+            <Bar w="58%" h="title" style={{ maxWidth: 520 }} />
+          </Stack>
+          <div className="m-hero-foot">
+            <Bar w="80%" style={{ maxWidth: 440 }} />
+            <div style={{ display: "flex", gap: "var(--space-3)" }}>
+              <Pill w={125} h={CONTROL_H} />
+              <Pill w={145} h={CONTROL_H} />
             </div>
           </div>
-        ))}
-      </div>
-
-      {/* Experience + education */}
-      <div className="m-section">
-        <div className="m-cols">
-          {[0, 1].map((col) => (
-            <div key={col}>
-              <Bar
-                w={140}
-                h="heading"
-                style={{ marginBottom: "var(--space-6)" }}
-              />
-              <Stack gap="var(--space-4)">
-                {[1, 2, 3].map((i) => (
-                  <Stack key={i} gap="var(--space-1)">
-                    <Bar w="80%" />
-                    <Bar w="50%" h="meta" />
-                  </Stack>
-                ))}
-              </Stack>
-            </div>
-          ))}
         </div>
 
-        {/* Skills */}
-        <div style={{ marginTop: "var(--space-8)" }}>
-          <Bar w={100} h="heading" style={{ marginBottom: "var(--space-6)" }} />
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "var(--space-2)",
-            }}
-          >
-            {[80, 70, 90, 60, 75, 65, 85, 70].map((w, i) => (
-              <Pill key={i} w={w} />
+        {/* Recent work */}
+        <div className="m-section">
+          <Bar w={200} h="heading" style={{ marginBottom: "var(--space-8)" }} />
+          <div className="m-project-grid">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="m-project-link">
+                <div className="m-project-media m-skel-bar" />
+                <Stack gap="var(--space-2)">
+                  <Bar w="55%" h="rowTitle" />
+                  <Bar w="90%" />
+                  <Bar w={120} h="meta" />
+                </Stack>
+              </div>
             ))}
           </div>
         </div>
-      </div>
 
-      {/* Blog posts */}
-      <div className="m-section">
-        <Bar w={220} h="heading" style={{ marginBottom: "var(--space-6)" }} />
-        {[1, 2, 3, 4, 5].map((i) => (
-          <div
-            key={i}
-            className="m-skel-split"
-            style={{
-              padding: "var(--space-3) 0",
-              borderBottom: "1px solid var(--line)",
-            }}
-          >
-            <Bar w="60%" />
-            <Bar w={80} h="meta" />
+        {/* What I do */}
+        <div className="m-section">
+          <Bar w={160} h="heading" style={{ marginBottom: "var(--space-8)" }} />
+          <div className="m-offer-grid">
+            {[1, 2, 3].map((i) => (
+              <Stack key={i} gap="var(--space-2)">
+                <Bar w={24} h="meta" />
+                <Bar w="60%" h="blockTitle" />
+                <Bar w="95%" />
+                <Bar w="70%" />
+              </Stack>
+            ))}
+          </div>
+        </div>
+
+        {/* Background + latest writing */}
+        {[4, 3].map((rows, s) => (
+          <div key={s} className={SPLIT}>
+            <Bar w={180} h="heading" />
+            <Stack gap="var(--space-3)">
+              {Array.from({ length: rows }, (_, i) => (
+                <div key={i} style={{ display: "flex", gap: "var(--space-4)" }}>
+                  <Bar w={96} h="meta" />
+                  <Bar w="55%" />
+                </div>
+              ))}
+            </Stack>
           </div>
         ))}
-      </div>
-    </Skeleton>
+      </Skeleton>
+    </div>
   );
 }

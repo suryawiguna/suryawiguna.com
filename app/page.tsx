@@ -1,6 +1,5 @@
 import Introduction from "components/home/introduction";
-import Histories from "components/experience/histories";
-import Skills from "components/skill/skill";
+import Background from "components/home/background";
 import JsonLd from "components/jsonLd";
 import Portfolios from "components/portfolio/portfolios";
 import Offers from "components/services/offers";
@@ -86,7 +85,8 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <>
+    // .m-page-wide widens <main> to the 1080px canvas for this page only.
+    <div className="m-page-wide">
       <Introduction />
       <Portfolios projects={featuredProjects} heading={worksTitle} />
       <Offers
@@ -94,16 +94,10 @@ export default function Home() {
         offers={OFFERS}
         more={{ href: "/services", label: "View services" }}
       />
-      <section id="about" className="m-section">
-        <div className="m-cols">
-          <Histories title={experiences.title} items={experiences.items} />
-          <Histories title={education.title} items={education.items} />
-        </div>
-        <Skills title={skills.title} items={skills.items} />
-      </section>
+      <Background groups={[experiences, education]} tools={skills} />
       <BlogPosts />
       <ContactCta />
       <JsonLd data={generateHomeJsonLd()} />
-    </>
+    </div>
   );
 }

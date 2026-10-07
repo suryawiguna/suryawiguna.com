@@ -54,7 +54,6 @@ export const PROJECTS: Project[] = [
     description:
       "A dedicated swimming-class experience designed and built in WordPress for Tropical Entertainment Bali.",
     kind: "client",
-    featured: true,
   },
   {
     title: "Stryv - About us",
@@ -105,7 +104,6 @@ export const PROJECTS: Project[] = [
     description:
       "A conversion-focused website and local search foundation for a dental clinic with branches in Denpasar and Tabanan.",
     kind: "client",
-    featured: true,
   },
   {
     title: "I Carry Them Everywhere",
@@ -118,7 +116,6 @@ export const PROJECTS: Project[] = [
     description:
       "An editorial gallery created to showcase a fashion designer's work and visual process.",
     kind: "client",
-    featured: true,
   },
   {
     title: "Virtual Tour 360",
