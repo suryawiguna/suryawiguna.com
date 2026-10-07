@@ -462,8 +462,8 @@ textarea:focus-visible { outline-offset: 1px; }
   letter-spacing: var(--tracking-snug);
   transition: color var(--transition);
 }
-.m-work-row:hover .m-work-title { color: var(--accent); }
-[data-accent="off"] .m-work-row:hover .m-work-title { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+a.m-work-row:hover .m-work-title { color: var(--accent); }
+[data-accent="off"] a.m-work-row:hover .m-work-title { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
 
 .m-work-meta { display: inline-flex; align-items: center; gap: var(--space-3); }
 .m-work-arrow { color: var(--muted); font-size: var(--text-md); }
@@ -527,7 +527,7 @@ textarea:focus-visible { outline-offset: 1px; }
   transition: border-color var(--transition), transform var(--transition-fast),
     box-shadow var(--transition);
 }
-.m-project-link:hover {
+a.m-project-link:hover {
   border-color: var(--ink);
   transform: translateY(calc(var(--space-1) * -1));
   box-shadow: var(--shadow-drop);
@@ -543,7 +543,7 @@ textarea:focus-visible { outline-offset: 1px; }
 .m-project-media img {
   transition: transform var(--transition);
 }
-.m-project-link:hover .m-project-media img {
+a.m-project-link:hover .m-project-media img {
   transform: scale(1.02);
 }
 .m-project-body {
@@ -567,14 +567,14 @@ textarea:focus-visible { outline-offset: 1px; }
   letter-spacing: var(--tracking-snug);
   transition: color var(--transition);
 }
-.m-project-link:hover .m-project-title { color: var(--accent); }
+a.m-project-link:hover .m-project-title { color: var(--accent); }
 .m-project-arrow {
   color: var(--muted);
   font-size: var(--text-md);
   line-height: var(--leading-tight);
   transition: color var(--transition), transform var(--transition-fast);
 }
-.m-project-link:hover .m-project-arrow {
+a.m-project-link:hover .m-project-arrow {
   color: var(--accent);
   transform: translate(var(--space-1), calc(var(--space-1) * -1));
 }
@@ -855,7 +855,7 @@ textarea:focus-visible { outline-offset: 1px; }
   overflow: hidden;
 }
 .m-case-media img { transition: transform var(--transition); }
-.m-case-media:hover img { transform: scale(1.02); }
+a.m-case-media:hover img { transform: scale(1.02); }
 .m-case-content {
   padding: var(--space-6);
 }

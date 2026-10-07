@@ -30,23 +30,34 @@ export default function CaseStudies({
 
           return (
             <article key={study.projectTitle} className="m-case">
-              {project?.image && (
-                <Link
-                  href={project.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="m-case-media"
-                  aria-label={`View ${study.projectTitle} project (opens in a new tab)`}
-                >
-                  <Image
-                    src={project.image.src}
-                    alt={project.image.alt || project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 320px"
-                    style={{ objectFit: "cover" }}
-                  />
-                </Link>
-              )}
+              {project?.image &&
+                (project.href ? (
+                  <Link
+                    href={project.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="m-case-media"
+                    aria-label={`View ${study.projectTitle} project (opens in a new tab)`}
+                  >
+                    <Image
+                      src={project.image.src}
+                      alt={project.image.alt || project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 320px"
+                      style={{ objectFit: "cover" }}
+                    />
+                  </Link>
+                ) : (
+                  <div className="m-case-media">
+                    <Image
+                      src={project.image.src}
+                      alt={project.image.alt || project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 320px"
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
+                ))}
 
               <div className="m-case-content">
                 <div className="m-case-head">
@@ -67,7 +78,7 @@ export default function CaseStudies({
                   <dd className="m-case-text">{study.result}</dd>
                 </dl>
 
-                {project && (
+                {project?.href && (
                   <Link
                     href={project.href}
                     target="_blank"

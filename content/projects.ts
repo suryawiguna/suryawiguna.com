@@ -14,7 +14,9 @@ export const portfolioPage = {
 
 export type Project = {
   title: string;
-  href: string;
+  // Leave out when the live site shouldn't be linked; the card renders as
+  // plain content with no outbound arrow.
+  href?: string;
   image?: { src: string; alt: string };
   categories: string[];
   description: string;
@@ -39,6 +41,7 @@ export const PROJECTS: Project[] = [
     description:
       "A responsive entertainment-services website designed in Figma and implemented in WordPress with Elementor.",
     kind: "client",
+    featured: true,
   },
   {
     title: "Tropical Kids Bali",
@@ -51,6 +54,7 @@ export const PROJECTS: Project[] = [
     description:
       "A dedicated swimming-class experience designed and built in WordPress for Tropical Entertainment Bali.",
     kind: "client",
+    featured: true,
   },
   {
     title: "Stryv - About us",
@@ -63,6 +67,7 @@ export const PROJECTS: Project[] = [
     description:
       "A Shopify About page built in PageFly from an established Figma design system.",
     kind: "client",
+    featured: true,
   },
   {
     title: "One Line Solutions",
@@ -91,6 +96,18 @@ export const PROJECTS: Project[] = [
     featured: true,
   },
   {
+    title: "Kamandhani Dental",
+    image: {
+      src: "https://a.storyblok.com/f/169901/1404x752/c251c814a8/kamandhani-dental.png",
+      alt: "Kamandhani Dental",
+    },
+    categories: ["Wordpress", "SEO"],
+    description:
+      "A conversion-focused website and local search foundation for a dental clinic with branches in Denpasar and Tabanan.",
+    kind: "client",
+    featured: true,
+  },
+  {
     title: "I Carry Them Everywhere",
     href: "https://www.icarrythemeverywhere.com/gallery/",
     image: {
@@ -101,18 +118,7 @@ export const PROJECTS: Project[] = [
     description:
       "An editorial gallery created to showcase a fashion designer's work and visual process.",
     kind: "client",
-  },
-  {
-    title: "Kamandhani Dental",
-    href: "https://kamandhani.id/",
-    image: {
-      src: "https://a.storyblok.com/f/169901/1404x752/c251c814a8/kamandhani-dental.png",
-      alt: "Kamandhani Dental",
-    },
-    categories: ["Wordpress", "SEO"],
-    description:
-      "A conversion-focused website and local search foundation for a dental clinic with branches in Denpasar and Tabanan.",
-    kind: "client",
+    featured: true,
   },
   {
     title: "Virtual Tour 360",
