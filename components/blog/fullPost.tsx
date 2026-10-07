@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import SubscribeForm from "./subscribe";
 import ServicesCta from "components/services/servicesCta";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { AVATAR } from "content/site";
 
 // Some posts repeat the title (as an <h1>) and the excerpt (as an intro
@@ -47,99 +47,108 @@ export default function FullPost({
         <span>{post.name}</span>
       </nav>
 
-      <article>
-        <header className="m-article-head">
-          {post.tag_list?.length > 0 && (
-            <div className="m-article-tags">
-              {post.tag_list.map((tag: string) =>
-                // Only tags that cleared the archive threshold have a page to
-                // link to; the rest stay plain chips.
-                tagLinks[tag] ? (
-                  <Link
-                    key={tag}
-                    href={`/blog/tag/${tagLinks[tag]}`}
-                    className="m-chip m-chip-link"
-                  >
-                    {tag}
-                  </Link>
-                ) : (
-                  <span key={tag} className="m-chip">
-                    {tag}
-                  </span>
-                )
-              )}
-            </div>
-          )}
-          <h1 className="m-h1 m-h1-full">{post.name}</h1>
-          {post.content?.excerpt && (
-            <div className="m-lede m-lede-wide">
-              <RichText data={post.content.excerpt} />
-            </div>
-          )}
-          <div className="m-article-byline">
-            <div className="m-byline-avatar">
-              <Image src={AVATAR.src} alt="" width={72} height={72} />
-            </div>
-            <div className="m-byline-meta">
-              <strong>Surya Wiguna</strong>
-              <span>
-                Published{" "}
-                {moment(post.first_published_at).format("MMM DD, YYYY")}
-              </span>
-            </div>
-          </div>
-        </header>
-
-        {post.content?.featured_image?.filename && (
-          <figure className="m-cover">
-            <Image
-              // 36 of 37 featured images have no alt set in Storyblok; falling
-              // back to the title beats shipping an empty one. Remove the
-              // fallback once the field is filled in.
-              alt={post.content.featured_image.alt || post.name}
-              src={post.content.featured_image.filename}
-              width={1280}
-              height={720}
-              // The column caps at --maxw (720px); without this Next derives
-              // 1x/2x off width={1280} and the fallback src asks for w=3840.
-              sizes="(min-width: 720px) 720px, 100vw"
-              priority
-            />
-          </figure>
-        )}
-
-        <RichText data={bodyContent} className="m-article" />
-
-        <ServicesCta />
-
-        <footer className="m-article-foot">
-          <div className="m-foot-block">
-            <h3>Subscribe</h3>
-            <SubscribeForm />
-          </div>
-        </footer>
-      </article>
-
-      {related.length > 0 && (
-        <section className="m-related" aria-label="Related posts">
-          <h2 className="m-related-h">Read other posts</h2>
-          <div className="m-related-list">
-            {related.map((p: any) => (
-              <Link
-                key={p.slug}
-                href={`/${p.full_slug}`}
-                className="m-related-card"
-              >
-                <span className="m-rc-date">
-                  {moment(p.first_published_at).format("MMM DD, YYYY")}
-                  {p.tag_list?.[0] && ` · ${p.tag_list[0]}`}
+      {/* Article on the left, suggested posts in a sticky column on the
+          right. Below 768px the aside drops under the article. */}
+      <div className="m-post-layout">
+        <article>
+          <header className="m-article-head">
+            {post.tag_list?.length > 0 && (
+              <div className="m-article-tags">
+                {post.tag_list.map((tag: string) =>
+                  // Only tags that cleared the archive threshold have a page to
+                  // link to; the rest stay plain chips.
+                  tagLinks[tag] ? (
+                    <Link
+                      key={tag}
+                      href={`/blog/tag/${tagLinks[tag]}`}
+                      className="m-chip m-chip-link"
+                    >
+                      {tag}
+                    </Link>
+                  ) : (
+                    <span key={tag} className="m-chip">
+                      {tag}
+                    </span>
+                  )
+                )}
+              </div>
+            )}
+            <h1 className="m-h1 m-h1-full">{post.name}</h1>
+            {post.content?.excerpt && (
+              <div className="m-lede m-lede-wide">
+                <RichText data={post.content.excerpt} />
+              </div>
+            )}
+            <div className="m-article-byline">
+              <div className="m-byline-avatar">
+                <Image src={AVATAR.src} alt="" width={72} height={72} />
+              </div>
+              <div className="m-byline-meta">
+                <strong>Surya Wiguna</strong>
+                <span>
+                  Published{" "}
+                  {moment(post.first_published_at).format("MMM DD, YYYY")}
                 </span>
-                <span className="m-rc-title">{p.name}</span>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
+              </div>
+            </div>
+          </header>
+
+          {post.content?.featured_image?.filename && (
+            <figure className="m-cover">
+              <Image
+                // 36 of 37 featured images have no alt set in Storyblok; falling
+                // back to the title beats shipping an empty one. Remove the
+                // fallback once the field is filled in.
+                alt={post.content.featured_image.alt || post.name}
+                src={post.content.featured_image.filename}
+                width={1280}
+                height={720}
+                // The column caps at --maxw (720px); without this Next derives
+                // 1x/2x off width={1280} and the fallback src asks for w=3840.
+                sizes="(min-width: 720px) 720px, 100vw"
+                priority
+              />
+            </figure>
+          )}
+
+          <RichText data={bodyContent} className="m-article" />
+
+          <ServicesCta />
+
+          <footer className="m-article-foot">
+            <div className="m-foot-block">
+              <h3>Subscribe</h3>
+              <SubscribeForm />
+            </div>
+          </footer>
+        </article>
+
+        {related.length > 0 && (
+          <aside className="m-post-aside" aria-labelledby="read-next">
+            <h2 id="read-next" className="m-related-h">
+              Read next
+            </h2>
+            <div className="m-related-list">
+              {related.map((p: any) => (
+                <Link
+                  key={p.slug}
+                  href={`/${p.full_slug}`}
+                  className="m-related-card"
+                >
+                  <span className="m-rc-date">
+                    {moment(p.first_published_at).format("MMM DD, YYYY")}
+                    {p.tag_list?.[0] && ` · ${p.tag_list[0]}`}
+                  </span>
+                  <span className="m-rc-title">{p.name}</span>
+                </Link>
+              ))}
+            </div>
+            <Link href="/blog" className="m-more">
+              All posts <ArrowRight className="m-icon" aria-hidden="true" />
+            </Link>
+          </aside>
+        )}
+      </div>
 
       <Link href="/blog" className="m-back">
         <ArrowLeft className="m-icon" aria-hidden="true" /> Back to all posts

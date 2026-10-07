@@ -30,10 +30,12 @@ either promoted here or expressed as a modifier (`.m-hero-left`,
 
 ### Canvas
 
-Every route except a blog post roots itself in `.m-page-wide`, which widens
-`<main>` to `--maxw-wide` (1080px) via `.m-main:has(> .m-page-wide)`. The nav
-and footer are always 1080px, so the left edge never moves between pages. A
-blog post keeps the 720px `--maxw` reading column, centred.
+Every route roots itself in `.m-page-wide`, which widens `<main>` to
+`--maxw-wide` (1080px) via `.m-main:has(> .m-page-wide)`. The nav and footer
+are always 1080px, so the left edge never moves between pages. A blog post
+splits that canvas with `.m-post-layout`: the article in a `--measure`
+(42rem) column on the left, and a sticky "Read next" aside on the right that
+drops under the article at 768px.
 
 Tailwind is still compiled (`styles/global.css`) but styles almost nothing —
 a spinner in the contact form is all that is left. `@tailwindcss/typography`
@@ -195,8 +197,9 @@ instead of floating equidistant between two blocks.
 | Token | Value | Use |
 |-------|-------|-----|
 | `--maxw` | 720px | Content column |
-| `--maxw` | 720px | Blog post reading column |
-| `--maxw-wide` | 1080px | Every other route (`.m-page-wide`), nav, footer |
+| `--maxw` | 720px | Fallback `<main>` width for a page without `.m-page-wide` |
+| `--measure` | 42rem | Blog post article column (the old 720px column less its gutters) |
+| `--maxw-wide` | 1080px | Every route (`.m-page-wide`), nav, footer |
 | `--gutter` | 1.5rem | Horizontal page padding |
 | `--avatar` / `--avatar-sm` / `--avatar-xs` | 76px / 44px / 36px | Generic / masthead (home, `/link`) / blog byline |
 | `--nav-offset` | 5rem | `scroll-margin` under the sticky nav |

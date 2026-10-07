@@ -1,6 +1,27 @@
 /* Blog post — page layer over the v3 design system.
-   Only what /blog/[slug] adds: breadcrumb, cover, prose, share, related.
+   Only what /blog/[slug] adds: layout, breadcrumb, cover, prose, read next.
    Titles, deks, chips, buttons and fields come from styles/v3.css. */
+
+/* ── Layout ───────────────────────────────────────────────────────────── */
+/* Reading column at the old 720px-column measure, suggested posts in the
+   remaining width. */
+.m-post-layout {
+  display: grid;
+  grid-template-columns: minmax(0, var(--measure)) minmax(0, 1fr);
+  gap: var(--space-12);
+  align-items: start;
+}
+/* Sticky beside the article. align-self keeps the aside its own height, or
+   the grid would stretch it and there would be nothing to stick. */
+.m-post-aside {
+  position: sticky;
+  top: var(--nav-offset);
+  align-self: start;
+  max-height: calc(100vh - var(--nav-offset));
+  overflow-y: auto;
+  padding: var(--space-8) 0 var(--space-6);
+}
+.m-post-aside .m-more { margin-top: var(--space-8); }
 
 .m-breadcrumb {
   font-size: var(--text-sm);
@@ -68,6 +89,13 @@
   display: block;
 }
 @media (max-width: 768px) {
+  .m-post-layout { grid-template-columns: 1fr; gap: 0; }
+  .m-post-aside {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding: var(--space-6) 0 0;
+  }
   .m-cover {
     width: calc(100% + var(--gutter) * 2);
     margin: var(--space-8) calc(var(--gutter) * -1);
@@ -203,16 +231,12 @@
   color: var(--ink);
 }
 
-/* ── Related ──────────────────────────────────────────────────────────── */
-.m-related {
-  padding: var(--space-10) 0;
-}
+/* ── Read next ────────────────────────────────────────────────────────── */
 .m-related-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-6) var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
 }
-@media (max-width: 560px) { .m-related-list { grid-template-columns: 1fr; } }
 /* Date line over title — no box, like the home page's writing list. */
 .m-related-card {
   display: flex;

@@ -57,13 +57,15 @@ export default async function Page({ params }) {
   if (!post) notFound();
 
   const all = (await getAllPosts()) || [];
-  const related = findRelatedPosts(post, all);
+  // Five fill the sticky side column without it outgrowing a laptop screen.
+  const related = findRelatedPosts(post, all, 5);
   const tagLinks = Object.fromEntries(
     archivableTags(all).map((entry) => [entry.tag, entry.slug])
   );
 
   return (
-    <>
+    // .m-page-wide gives the article and its side column the 1080px canvas.
+    <div className="m-page-wide">
       <FullPost post={post} related={related} tagLinks={tagLinks} />
       <JsonLd
         data={{
@@ -119,7 +121,7 @@ export default async function Page({ params }) {
           ],
         }}
       />
-    </>
+    </div>
   );
 }
 

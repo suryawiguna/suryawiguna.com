@@ -30,6 +30,7 @@
 
   /* ── Layout ─────────────────────────────────────────────────────────── */
   --maxw: 720px;
+  --measure: 42rem;          /* blog post column: 720px less its two gutters */
   --maxw-wide: 1080px;       /* home, portfolio showcase, nav and footer */
   --gutter: 1.5rem;
   --avatar: 76px;           /* profile hero, phone and utility routes */
