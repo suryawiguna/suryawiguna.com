@@ -43,11 +43,11 @@ export const PERSON_DESCRIPTION =
 // list here meant the schema and the pages described different businesses.
 
 export const NAV_ITEMS = [
-  { href: "/", label: "home" },
-  { href: "/services", label: "services" },
-  { href: "/portfolio", label: "portfolio" },
-  { href: "/blog", label: "blog" },
-  { href: "/link", label: "link" },
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/portfolio", label: "Portfolio" },
+  { href: "/blog", label: "Blog" },
+  { href: "/link", label: "Link" },
 ];
 
 // Storyblok used to supply `published_at` for these routes' sitemap entries.
