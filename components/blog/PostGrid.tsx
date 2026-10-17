@@ -2,14 +2,14 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ChevronDown, X } from "lucide-react";
-import { richTextToPlain as excerptText } from "lib/helper";
+import type { PostSummary } from "lib/posts";
 import PostCard from "./postCard";
 
 // Divides evenly into the 3-, 2- and 1-column grid, so no page ends on a
 // half-empty row.
 const PER_PAGE = 12;
 
-export default function PostGrid({ posts }: { posts: any[] }) {
+export default function PostGrid({ posts }: { posts: PostSummary[] }) {
   const [tag, setTag] = useState<string>("all");
   const [page, setPage] = useState<number>(1);
   const [search, setSearch] = useState<string>("");
@@ -29,7 +29,7 @@ export default function PostGrid({ posts }: { posts: any[] }) {
 
   const allTags = useMemo(() => {
     const set = new Set<string>();
-    posts.forEach((p) => (p.tag_list || []).forEach((t: string) => set.add(t)));
+    posts.forEach((p) => p.tags.forEach((t) => set.add(t)));
     return Array.from(set).sort();
   }, [posts]);
 
@@ -43,12 +43,12 @@ export default function PostGrid({ posts }: { posts: any[] }) {
     let result =
       tag === "all"
         ? posts
-        : posts.filter((p) => (p.tag_list || []).includes(tag));
+        : posts.filter((p) => p.tags.includes(tag));
     if (search.trim()) {
       const q = search.trim().toLowerCase();
       result = result.filter((p) => {
-        const title = (p.name || "").toLowerCase();
-        const excerpt = excerptText(p.content?.excerpt).toLowerCase();
+        const title = p.title.toLowerCase();
+        const excerpt = p.excerpt.toLowerCase();
         return title.includes(q) || excerpt.includes(q);
       });
     }
@@ -190,7 +190,7 @@ export default function PostGrid({ posts }: { posts: any[] }) {
             {search.trim() ? ` for "${search.trim()}"` : ""}.
           </p>
         ) : (
-          filtered.map((post: any, index: number) => (
+          filtered.map((post, index) => (
             <PostCard
               key={post.slug}
               post={post}

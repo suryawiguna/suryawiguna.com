@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-import { getAllPosts } from "lib/api";
+import { getAllPosts } from "lib/posts";
 import JsonLd from "components/jsonLd";
 import PostCard from "components/blog/postCard";
 import { archivableTags, postsForTag, tagFromSlug } from "lib/tags";
@@ -12,15 +12,12 @@ import { ArrowLeft } from "lucide-react";
 
 const SITE_URL = "https://suryawiguna.com";
 
-export async function generateStaticParams() {
-  const posts = (await getAllPosts()) || [];
-  return archivableTags(posts).map((entry) => ({ tag: entry.slug }));
+export function generateStaticParams() {
+  return archivableTags(getAllPosts()).map((entry) => ({ tag: entry.slug }));
 }
 
 // The archive set is closed and known at build time. Without this, an unknown
-// tag renders the not-found page behind a 200 — a soft 404 — because the
-// notFound() below gets captured by the ISR cache. Trade-off: a tag that newly
-// crosses MIN_POSTS_PER_TAG needs a redeploy before its archive exists.
+// tag renders the not-found page behind a 200 — a soft 404.
 export const dynamicParams = false;
 
 export async function generateMetadata({
@@ -28,7 +25,7 @@ export async function generateMetadata({
 }: {
   params: { tag: string };
 }): Promise<Metadata> {
-  const posts = (await getAllPosts()) || [];
+  const posts = getAllPosts();
   const tag = tagFromSlug(posts, params.tag);
   if (!tag) return {};
 
@@ -52,7 +49,7 @@ export default async function TagArchive({
 }: {
   params: { tag: string };
 }) {
-  const posts = (await getAllPosts()) || [];
+  const posts = getAllPosts();
   const tag = tagFromSlug(posts, params.tag);
 
   // Tags below the threshold have no archive, so this is a genuine 404 rather
@@ -83,7 +80,7 @@ export default async function TagArchive({
       </header>
 
       <section className="m-blog-list">
-        {tagged.map((post: any) => (
+        {tagged.map((post) => (
           <PostCard key={post.slug} post={post} />
         ))}
       </section>
@@ -123,11 +120,11 @@ export default async function TagArchive({
               mainEntity: {
                 "@type": "ItemList",
                 numberOfItems: tagged.length,
-                itemListElement: tagged.map((post: any, index: number) => ({
+                itemListElement: tagged.map((post, index) => ({
                   "@type": "ListItem",
                   position: index + 1,
-                  url: `${SITE_URL}/${post.full_slug}`,
-                  name: post.name,
+                  url: `${SITE_URL}/blog/${post.slug}`,
+                  name: post.title,
                 })),
               },
             },

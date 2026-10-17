@@ -2,7 +2,7 @@ import "styles/v3-blog-post.css";
 
 import FullPost from "components/blog/fullPost";
 import JsonLd from "components/jsonLd";
-import { getAllPosts, getPost, isNoindex } from "lib/api";
+import { getAllPosts, getImageSizes, getPost } from "lib/posts";
 import { MetadataProps } from "lib/helper";
 import { findRelatedPosts } from "lib/related";
 import { archivableTags } from "lib/tags";
@@ -17,46 +17,46 @@ export async function generateMetadata(
   { params, searchParams }: MetadataProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const post = await getPost(params.slug);
+  const post = getPost(params.slug);
   if (!post) return {};
 
   return {
-    title: post.name,
-    description: post.content.excerpt,
+    title: post.title,
+    description: post.excerpt,
     // `follow` stays on so the post's own outbound links keep working while
     // the page itself drops out of the index.
-    ...(isNoindex(post) && { robots: { index: false, follow: true } }),
+    ...(post.noindex && { robots: { index: false, follow: true } }),
     alternates: {
       canonical: `/blog/${params.slug}`,
     },
     openGraph: {
-      title: post.name,
-      description: post.content.excerpt,
+      title: post.title,
+      description: post.excerpt,
       type: "article",
       url: "https://suryawiguna.com/blog/" + params.slug,
-      images: [`${post.content.featured_image.filename}`],
+      ...(post.cover && { images: [post.cover] }),
     },
     other: {
-      "article:published_time": post.first_published_at,
+      "article:published_time": post.date,
+      "article:modified_time": post.updated,
     },
   };
 }
 
-export async function generateStaticParams() {
-  const posts = (await getAllPosts()) || [];
-
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+export function generateStaticParams() {
+  return getAllPosts().map((post) => ({ slug: post.slug }));
 }
 
+// Every post is a file in content/posts, so the set is closed at build time
+// and an unknown slug is a real 404 rather than an on-demand render.
+export const dynamicParams = false;
+
 export default async function Page({ params }) {
-  const post = await getPost(params.slug);
-  // by_slugs returns an empty list for an unknown slug, so getPost yields
-  // undefined and every `post.*` read below used to throw a 500 at crawlers.
+  const post = getPost(params.slug);
   if (!post) notFound();
 
-  const all = (await getAllPosts()) || [];
+  const all = getAllPosts();
+  const images = await getImageSizes(post);
   // Five fill the sticky side column without it outgrowing a laptop screen.
   const related = findRelatedPosts(post, all, 5);
   const tagLinks = Object.fromEntries(
@@ -66,7 +66,12 @@ export default async function Page({ params }) {
   return (
     // .m-page-wide gives the article and its side column the 1080px canvas.
     <div className="m-page-wide">
-      <FullPost post={post} related={related} tagLinks={tagLinks} />
+      <FullPost
+        post={post}
+        images={images}
+        related={related}
+        tagLinks={tagLinks}
+      />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -75,13 +80,16 @@ export default async function Page({ params }) {
               "@type": "BlogPosting",
               "@id": `${POST_URL(params.slug)}#post`,
               url: POST_URL(params.slug),
-              image: [post.content.featured_image.filename],
-              headline: post.name,
-              description: post.content.excerpt,
-              keywords: post.tag_list?.join(", "),
-              articleSection: post.content.categories?.map((c: any) => c.name),
-              datePublished: post.first_published_at,
-              dateModified: post.first_published_at,
+              ...(post.cover && {
+                // Covers sit on the Storyblok CDN; a local one needs the origin.
+                image: [new URL(post.cover, SITE_URL).href],
+              }),
+              headline: post.title,
+              description: post.excerpt,
+              keywords: post.tags.join(", "),
+              articleSection: post.categories,
+              datePublished: post.date,
+              dateModified: post.updated,
               inLanguage: "en",
               mainEntityOfPage: {
                 "@type": "WebPage",
@@ -110,7 +118,7 @@ export default async function Page({ params }) {
               itemListElement: [
                 { name: "Home", item: SITE_URL },
                 { name: "Blog", item: `${SITE_URL}/blog` },
-                { name: post.name, item: POST_URL(params.slug) },
+                { name: post.title, item: POST_URL(params.slug) },
               ].map((crumb, index) => ({
                 "@type": "ListItem",
                 position: index + 1,
@@ -124,5 +132,3 @@ export default async function Page({ params }) {
     </div>
   );
 }
-
-export const revalidate = 60;

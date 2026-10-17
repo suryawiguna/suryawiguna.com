@@ -1,6 +1,6 @@
 import "styles/v3-blog-index.css";
 
-import { getAllPosts } from "lib/api";
+import { getAllPosts } from "lib/posts";
 import { Metadata } from "next";
 import PostGrid from "components/blog/PostGrid";
 
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Home() {
-  const posts = (await getAllPosts()) || [];
+export default function Home() {
+  const posts = getAllPosts();
 
   return (
     // .m-page-wide widens <main> to the 1080px canvas, as on the home page.

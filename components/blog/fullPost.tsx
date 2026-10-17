@@ -1,50 +1,32 @@
 import moment from "moment";
-import RichText from "../global/richText";
+import Markdown from "./markdown";
 import Link from "next/link";
 import Image from "next/image";
 import SubscribeForm from "./subscribe";
 import ServicesCta from "components/services/servicesCta";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { AVATAR } from "content/site";
-
-// Some posts repeat the title (as an <h1>) and the excerpt (as an intro
-// paragraph) at the top of the body — the header already renders both. Drop
-// that leading duplicate. Posts authored cleanly start with a paragraph, not
-// an h1, so this only triggers on the duplicated ones.
-function stripDuplicateLead(doc: any, title: string) {
-  const nodes = doc?.content;
-  if (!Array.isArray(nodes) || !nodes.length) return doc;
-
-  const first = nodes[0];
-  const firstText = first?.content?.[0]?.text?.trim();
-  const isTitleHeading =
-    first?.type === "heading" &&
-    first?.attrs?.level === 1 &&
-    firstText === title?.trim();
-  if (!isTitleHeading) return doc;
-
-  // Drop the title heading, plus an immediately-following intro paragraph.
-  const cut = nodes[1]?.type === "paragraph" ? 2 : 1;
-  return { ...doc, content: nodes.slice(cut) };
-}
+import type { ImageSizes, Post, PostSummary } from "lib/posts";
 
 export default function FullPost({
   post,
+  images = {},
   related = [],
   tagLinks = {},
 }: {
-  post: any;
-  related?: any[];
+  post: Post;
+  images?: ImageSizes;
+  related?: PostSummary[];
   tagLinks?: Record<string, string>;
 }) {
-  const bodyContent = stripDuplicateLead(post.content.content, post.name);
+  const cover = post.cover ? images[post.cover] : undefined;
 
   return (
     <>
       <nav className="m-breadcrumb" aria-label="Breadcrumb">
         <Link href="/blog">Blog</Link>
         <span className="sep">/</span>
-        <span>{post.name}</span>
+        <span>{post.title}</span>
       </nav>
 
       {/* Article on the left, suggested posts in a sticky column on the
@@ -52,9 +34,9 @@ export default function FullPost({
       <div className="m-post-layout">
         <article>
           <header className="m-article-head">
-            {post.tag_list?.length > 0 && (
+            {post.tags.length > 0 && (
               <div className="m-article-tags">
-                {post.tag_list.map((tag: string) =>
+                {post.tags.map((tag) =>
                   // Only tags that cleared the archive threshold have a page to
                   // link to; the rest stay plain chips.
                   tagLinks[tag] ? (
@@ -73,12 +55,8 @@ export default function FullPost({
                 )}
               </div>
             )}
-            <h1 className="m-h1 m-h1-full">{post.name}</h1>
-            {post.content?.excerpt && (
-              <div className="m-lede m-lede-wide">
-                <RichText data={post.content.excerpt} />
-              </div>
-            )}
+            <h1 className="m-h1 m-h1-full">{post.title}</h1>
+            <p className="m-lede m-lede-wide">{post.excerpt}</p>
             <div className="m-article-byline">
               <div className="m-byline-avatar">
                 <Image src={AVATAR.src} alt="" width={72} height={72} />
@@ -87,22 +65,21 @@ export default function FullPost({
                 <strong>Surya Wiguna</strong>
                 <span>
                   Published{" "}
-                  {moment(post.first_published_at).format("MMM DD, YYYY")}
+                  {moment(post.date).format("MMM DD, YYYY")}
                 </span>
               </div>
             </div>
           </header>
 
-          {post.content?.featured_image?.filename && (
+          {post.cover && (
             <figure className="m-cover">
               <Image
-                // 36 of 37 featured images have no alt set in Storyblok; falling
-                // back to the title beats shipping an empty one. Remove the
-                // fallback once the field is filled in.
-                alt={post.content.featured_image.alt || post.name}
-                src={post.content.featured_image.filename}
-                width={1280}
-                height={720}
+                // Only one post sets `coverAlt`; falling back to the title
+                // beats shipping an empty alt.
+                alt={post.coverAlt || post.title}
+                src={post.cover}
+                width={cover?.width ?? 1280}
+                height={cover?.height ?? 720}
                 // The column caps at --maxw (720px); without this Next derives
                 // 1x/2x off width={1280} and the fallback src asks for w=3840.
                 sizes="(min-width: 720px) 720px, 100vw"
@@ -111,7 +88,7 @@ export default function FullPost({
             </figure>
           )}
 
-          <RichText data={bodyContent} className="m-article" />
+          <Markdown source={post.body} images={images} className="m-article" />
 
           <ServicesCta />
 
@@ -129,17 +106,17 @@ export default function FullPost({
               Read next
             </h2>
             <div className="m-related-list">
-              {related.map((p: any) => (
+              {related.map((p) => (
                 <Link
                   key={p.slug}
-                  href={`/${p.full_slug}`}
+                  href={`/blog/${p.slug}`}
                   className="m-related-card"
                 >
                   <span className="m-rc-date">
-                    {moment(p.first_published_at).format("MMM DD, YYYY")}
-                    {p.tag_list?.[0] && ` · ${p.tag_list[0]}`}
+                    {moment(p.date).format("MMM DD, YYYY")}
+                    {p.tags[0] && ` · ${p.tags[0]}`}
                   </span>
-                  <span className="m-rc-title">{p.name}</span>
+                  <span className="m-rc-title">{p.title}</span>
                 </Link>
               ))}
             </div>

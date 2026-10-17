@@ -15,7 +15,7 @@ No test suite is configured.
 
 ## Architecture
 
-This is a **Next.js 14 App Router** personal portfolio site (`suryawiguna.com`). **Only blog posts come from Storyblok** — every other page is hardcoded in `content/`.
+This is a **Next.js 14 App Router** personal portfolio site (`suryawiguna.com`). **There is no CMS** — pages are hardcoded TypeScript in `content/`, and blog posts are Markdown files in `content/posts/`.
 
 ### Content flow
 
@@ -37,11 +37,25 @@ Two flags worth knowing: a project marked `hidden: true` stays in the file but r
 
 `content/site.ts` `PAGE_UPDATED` supplies the sitemap `lastModified` for `/`, `/services`, `/portfolio`, and `/link` — Storyblok used to provide those dates, so bump the matching entry when you meaningfully edit a page.
 
-**Blog.** Post content is fetched from Storyblok's GraphQL API (`https://gapi.storyblok.com/v1/api`) via `lib/api.js`: `getAllPosts`, `getFeaturedPosts`, `getPost`, and `getSitemapEntries`.
+**Blog.** Each post is `content/posts/<slug>.md` — YAML frontmatter plus a Markdown body — and the file name is the URL slug. `lib/posts.ts` reads them at build time and is the only way in: `getAllPosts(limit?)` (newest first, no body — safe to hand to a client component), `getPost(slug)`, and `getImageSizes(post)`, which sizes the cover and body images so they can go through `next/image`.
 
-Storyblok's GraphQL API defaults `PostItems` to 25 per page and caps `per_page` at 100, so any query that must return *every* post has to paginate — go through the `fetchAllPostItems` helper in `lib/api.js` rather than issuing a bare `PostItems` query. Skipping this silently truncates the blog index, `generateStaticParams`, and the sitemap.
+**Post images stay on the Storyblok CDN.** Covers and inline images keep their `a.storyblok.com` URLs, whose path carries the dimensions (`/f/<space>/<W>x<H>/…`) that `getImageSizes` reads. So the Storyblok space must not be deleted — it is now only an image host. A new post can either upload images to Storyblok's asset manager and paste the URL, or drop them in `public/blog/<slug>/` and reference `/blog/<slug>/…` (measured with `sharp`). Any other host renders as a plain lazy `<img>`.
 
-The Storyblok React SDK (`@storyblok/react`) is **not** a dependency — posts are fetched with plain `fetch` and rendered through `components/global/richText.tsx` (`storyblok-rich-text-react-renderer`). There is no visual editor wiring; don't reintroduce `storyblokInit`, `StoryblokComponent`, or `storyblokEditable`.
+Frontmatter fields, all validated on load so a typo fails the build instead of a page:
+
+| Field | |
+|-------|--|
+| `title`, `excerpt`, `date` | Required. `date` is first publication and sets the sort order. |
+| `updated` | Sitemap `lastModified` and JSON-LD `dateModified`; defaults to `date`. Bump it when you meaningfully edit a post. |
+| `tags`, `categories` | Lists. Tags drive the archives (see below); categories only weight "Read next". |
+| `cover`, `coverAlt` | A Storyblok asset URL or `/blog/<slug>/…`; alt falls back to the title. |
+| `noindex` | Renders, but drops out of the index, sitemap, tag archives and "Read next". |
+| `draft` | Only `next dev` sees it; production builds skip it entirely. |
+| `featured` | Carried over from Storyblok; nothing reads it yet. |
+
+Bodies render through `components/blog/markdown.tsx` (`react-markdown` + `remark-gfm`): internal links become `next/link`, external ones open in a new tab, fenced code goes through `react-syntax-highlighter`, and any image `getImageSizes` could not measure (remote, SVG) falls back to a lazy plain `<img>`. Plain Markdown, not MDX — there are no components inside posts.
+
+Publishing is a deploy: add or edit the file, commit, push. The posts were migrated out of Storyblok in October 2026 by a one-off script. Older posts imported from the old WordPress blog and dev.to pointed at dead hosts: the 11 images that could be recovered (dev.to's S3 originals, the Wayback Machine) now live in `public/blog/<slug>/`; 15 more across five 2020–2021 posts are gone everywhere and still show as broken images, exactly as they did on Storyblok.
 
 ### Pages
 
@@ -49,12 +63,12 @@ The Storyblok React SDK (`@storyblok/react`) is **not** a dependency — posts a
 |-------|-------------|
 | `/` | `content/home.ts` + `featuredProjects`; the recent-posts strip calls `getAllPosts(3)` |
 | `/blog` | `getAllPosts()` |
-| `/blog/[slug]` | `getPost(slug)`, static params generated at build |
+| `/blog/[slug]` | `getPost(slug)`, static params generated at build, `dynamicParams = false` |
 | `/blog/tag/[tag]` | `getAllPosts()` filtered through `lib/tags.ts`; static params generated at build, `dynamicParams = false` |
 | `/services` | `content/services.ts` |
 | `/portfolio` | `content/projects.ts` |
 | `/link` | `content/links.ts` |
-| `/sitemap.xml` | `app/sitemap.ts` — `getSitemapEntries()` + `PAGE_UPDATED` + tag archives, revalidates hourly |
+| `/sitemap.xml` | `app/sitemap.ts` — `getAllPosts()` minus `noindex` + `PAGE_UPDATED` + tag archives, built at deploy |
 | `/robots.txt` | `app/robots.ts` |
 
 `sitemap.xml` and `robots.txt` are generated routes, not files. Do not add either to `public/` — static files there shadow app routes and would silently freeze the sitemap again.
@@ -70,9 +84,9 @@ Moving a page into or out of a route group needs a dev-server restart; until the
 `/blog/tag/[tag]` lists every indexable post carrying a tag. The rules live in `lib/tags.ts`, not in the route:
 
 - A tag only gets a URL once it has `MIN_POSTS_PER_TAG` (3) posts — below that the page would be near-empty and compete with the posts it links to. `archivableTags` is the single source of which archives exist, and it is what the route, the post page's tag links, and the sitemap all read.
-- `tagSlug` derives the URL segment from the tag text (`&` becomes ` and `, everything non-alphanumeric collapses to `-`). Storyblok tags are free text, so never hand-write a slug — round-trip through `tagSlug` / `tagFromSlug`.
+- `tagSlug` derives the URL segment from the tag text (`&` becomes ` and `, everything non-alphanumeric collapses to `-`). Tags are free text in frontmatter, so never hand-write a slug — round-trip through `tagSlug` / `tagFromSlug`. Spell a tag exactly as the other posts do (`Web Development`, `B2B & Analytics`), or it becomes a separate tag.
 - Posts with `noindex` are excluded from both the counts and the listings.
-- The route sets `dynamicParams = false` on purpose. Without it an unknown tag renders the not-found page behind a 200 — a soft 404 — because `notFound()` gets captured by the ISR cache. The trade-off is that a tag newly crossing the threshold needs a redeploy before its archive exists.
+- The route sets `dynamicParams = false` on purpose. Without it an unknown tag renders the not-found page behind a 200 — a soft 404.
 
 ### Email subscriptions
 
@@ -109,7 +123,6 @@ The only font is Inter via `next/font/google` — `--display` and `--body` both 
 ### Environment variables
 
 ```
-STORYBLOK_ACCESS_TOKEN        # Storyblok GraphQL API token
 NEXT_PUBLIC_GOOGLE_ANALYTICS  # GA4 measurement ID
 NEXT_PUBLIC_HOTJAR_ID         # Hotjar site ID
 MAILCHIMP_API_KEY             # Mailchimp API key
@@ -121,4 +134,4 @@ BREVO_API_KEY                 # Brevo API key, server-only, sends the /services 
 
 ### Image domains
 
-Allowed in `next.config.js`: `blog.suryawiguna.com`, `a.storyblok.com`, `cdn.buymeacoffee.com`.
+Allowed in `next.config.js`: `blog.suryawiguna.com`, `a.storyblok.com`, `cdn.buymeacoffee.com`. `a.storyblok.com` serves the blog covers and post images as well as the hardcoded pages' avatar and portfolio images.

@@ -1,19 +1,18 @@
 import type { MetadataRoute } from "next";
-import { getAllPosts, getSitemapEntries } from "lib/api";
+import { getAllPosts } from "lib/posts";
 import { archivableTags } from "lib/tags";
 import { PAGE_UPDATED, SITE_URL } from "content/site";
 
-// Regenerated on the same cadence as the blog routes, so a post published in
-// Storyblok reaches the sitemap without a redeploy. The previous next-sitemap
-// postbuild step froze every entry at build time.
-export const revalidate = 3600;
-
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await getSitemapEntries();
+// Built with the site: posts are files, so a new or edited post ships with the
+// deploy that adds it. Each post's lastModified is its frontmatter `updated`.
+export default function sitemap(): MetadataRoute.Sitemap {
+  const all = getAllPosts();
+  // Google treats a noindexed URL in a sitemap as a contradictory signal, so
+  // these are dropped rather than listed.
+  const posts = all.filter((post) => !post.noindex);
 
   const newestPost = posts
-    .map((post: any) => post.published_at)
-    .filter(Boolean)
+    .map((post) => post.updated)
     .sort()
     .pop();
 
@@ -27,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Tag archives are derived from the posts, so they are only as fresh as the
   // newest post that carries the tag.
-  const tagArchives = archivableTags((await getAllPosts()) || []).map(
+  const tagArchives = archivableTags(all).map(
     (entry) => ({
       url: `${SITE_URL}/blog/tag/${entry.slug}`,
       lastModified: new Date(newestPost ?? Date.now()),
@@ -41,9 +40,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(route.lastModified ?? Date.now()),
       priority: route.priority,
     })),
-    ...posts.map((post: any) => ({
-      url: `${SITE_URL}/${post.full_slug}`,
-      lastModified: new Date(post.published_at),
+    ...posts.map((post) => ({
+      url: `${SITE_URL}/blog/${post.slug}`,
+      lastModified: new Date(post.updated),
       priority: 0.7,
     })),
     ...tagArchives,
