@@ -26,7 +26,7 @@ export default function Home() {
     <div className="m-page-wide">
       <header className="m-hero m-hero-left">
         <p className="m-eyebrow">Blog</p>
-        <h1 className="m-h1 m-h1-wide">Work journey</h1>
+        <h1 className="m-h1 m-h1-wide">Learning experiences</h1>
         <p className="m-lede m-lede-wide">
           Short reads on web development, SEO, B2B funnels, and what it&rsquo;s
           like freelancing from Bali.
