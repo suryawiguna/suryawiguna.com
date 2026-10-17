@@ -3,6 +3,7 @@ title: "Redesigning Your Website Without Losing Google Rankings: A Migration Che
 excerpt: "A new website can quietly undo years of search traffic. Here's the checklist I use to rebuild or migrate a site without losing its Google rankings."
 date: 2026-10-17T08:00:00.000Z
 tags: ["SEO", "Web Development"]
+cover: "https://a.storyblok.com/f/169901/1536x1024/559e1c7c8d/seo-migration-workspace-dashboard.png"
 ---
 
 A redesign is supposed to make things better. New look, faster pages, easier to update. But there's a quiet risk most business owners don't hear about until it's too late: the new site goes live, and a few weeks later, search traffic starts sliding.
