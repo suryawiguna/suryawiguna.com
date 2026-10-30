@@ -96,11 +96,16 @@ Two parallel subscription systems exist:
 
 ### Contact form
 
-`/services` ends with `components/services/contactForm.tsx`, and every "start a project" button on the site (home hero, `/services` hero and case studies, `/portfolio` hero, the closing contact sections) links to it through `CONTACT_HREF` (`/services#contact`) in `content/services.ts`. The home and portfolio pages close with `components/services/contactCta.tsx`, a short section whose button leads there.
+The form is `EnquiryForm` in `components/services/contactForm.tsx`, and it renders in two places:
+
+- **Inline**, as the closing section of `/services` (the file's default export, `#contact`).
+- **As a popup** on every other page: `components/services/contactDialog.tsx`, a native `<dialog>` mounted once in the root layout.
+
+Every "start a project" button (home hero, `/services` hero and case studies, `/portfolio` hero, the closing `contactCta.tsx` sections on home and portfolio) is a plain `<a href={CONTACT_HREF}>` to `/services#contact`, so it works without JavaScript. `ContactDialog` listens for clicks on links with exactly that `href` and, anywhere but `/services`, opens the popup instead; on `/services` the link just scrolls. Modified clicks (cmd/ctrl/shift, middle button) still navigate. So a new contact button needs nothing but that `href` — do not wire it to the dialog by hand. The popup's form stays mounted after it closes, so a stray backdrop click does not lose what was typed.
 
 The form (client) POSTs JSON to `app/api/contact/route.ts`, which sends the enquiry as a transactional email via Brevo, from and to `hi@suryawiguna.com` with the visitor as reply-to. It uses the server-only `BREVO_API_KEY`, **not** the `NEXT_PUBLIC_BREVO_API_KEY` the subscribe widget ships to the browser. Without the key set, or when Brevo refuses the send, the route returns 500 and the form tells the visitor to email instead. Never 502: Cloudflare fronts the site and replaces an origin 502 with its own HTML page, which hides the message. The `company` field is a honeypot: a filled one gets a silent 200 and no email.
 
-Each enquiry email ends with a `Ref: /page` line: the page the visitor was on before `/services`, else the outside referrer, else `Direct`. The form adds it as `ref` at submit time from `arrivedFrom()` in `components/global/pageTrail.tsx`. That component is mounted in the root layout and keeps the previous path in `sessionStorage`, because client-side navigation (the nav, `next/link`) never updates `document.referrer`.
+Each enquiry email ends with a `Ref: /page` line. From the popup it is the page the popup opened on. From the inline form it is the page the visitor was on before `/services`, else the outside referrer, else `Direct` — `arrivedFrom()` in `components/global/pageTrail.tsx`. The form sends it as `ref` at submit time. That component is mounted in the root layout and keeps the previous path in `sessionStorage`, because client-side navigation (the nav, `next/link`) never updates `document.referrer`.
 
 Delivery depends on `suryawiguna.com` staying authenticated in Brevo (its DKIM records in DNS). The domain's mail is hosted on Zoho, which can silently drop mail claiming to be from the domain when it comes from an unauthenticated sender — the likely reason early test sends got a 2xx from Brevo and never arrived. If enquiries stop showing up, check the Brevo transactional log (delivered / blocked / bounced) and Zoho's quarantine first. Brevo IP restriction must stay off, since serverless hosts rotate egress IPs.
 

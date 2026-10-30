@@ -56,6 +56,7 @@ top of `.m-article` in the blog renderer.
 | `--chip` | `#eeeeee` | Pill, avatar and image-placeholder fill |
 | `--chip-ink` | → `--ink-soft` | Text on `--chip` |
 | `--surface` | `#ffffff` | Panels — they sit above the grey page |
+| `--scrim` | `rgba(17,17,17,.45)` | Backdrop behind the popup contact form — `--ink`, dimmed |
 | `--accent` | `#C2410C` | Primary action, hover and markers; AA on `--bg` |
 
 Every neutral is pure grey — no blue (Tailwind gray) or warm undertone.
@@ -203,6 +204,7 @@ instead of floating equidistant between two blocks.
 | `--gutter` | 1.5rem | Horizontal page padding |
 | `--avatar` / `--avatar-sm` / `--avatar-xs` | 76px / 44px / 36px | `/link` profile (`.m-profile`) / home masthead / blog byline |
 | `--nav-offset` | 5rem | `scroll-margin` under the sticky nav |
+| `--dialog-w` | 40rem | Popup contact form (`.m-dialog`) — two fields a row |
 
 ---
 
@@ -271,7 +273,7 @@ The site has **two**:
 | Width | Meaning | What changes |
 |-------|---------|--------------|
 | `768px` | Tablet | `.m-split`, hero foot, offer, project and case grids go single-column; the blog grid goes to two; the article cover goes full-bleed |
-| `560px` | Phone | Nav condenses, hero and section padding drop, the blog grid goes to one, date columns stack above their text |
+| `560px` | Phone | Nav condenses, hero and section padding drop, the blog grid goes to one, date columns stack above their text, the contact dialog goes full-screen |
 
 There were five before (480, 560, 640, 720, 760), which is why the portfolio
 and blog thumbnails changed size at different widths and the article cover
@@ -296,6 +298,7 @@ picked up a border radius while still effectively full-width.
 | Pill | `.m-chip` (+ `.m-chip-link`) | The only badge in the system |
 | Icon | `.m-icon` on a `lucide-react` icon | 1em square, takes the text colour. `ArrowUpRight` for outbound links, `ArrowRight` / `ArrowLeft` for on-site ones; no text arrows (↗ → ←) |
 | Ruled text link | `.m-case-link`, `.m-faq-link`, `.m-form-alt a` | One shared rule |
+| Dialog | `.m-dialog` (`components/services/contactDialog.tsx`) | Native `<dialog>`, page grey, `--radius-lg`, `--shadow-drop` over a `--scrim` backdrop; `.m-dialog-close` is a round `X` in the corner. Opens with a `--transition` fade and a `--space-3` rise (`@starting-style`), and closes in reverse. Full-screen sheet under 560px. Only the contact form uses it |
 | Skeleton | `components/global/skeleton.tsx` | Heights track the type scale |
 
 ### Skeletons

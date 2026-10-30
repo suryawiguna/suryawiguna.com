@@ -16,6 +16,7 @@
   --chip: #eeeeee;
   --chip-ink: var(--ink-soft);
   --surface: #ffffff;       /* panels sit above the grey page, not below it */
+  --scrim: rgba(17, 17, 17, 0.45); /* --ink, dimming the page behind a dialog */
   --accent: #C2410C;        /* 4.9:1 on --bg, 5.2:1 under --on-accent */
   --on-accent: #ffffff;     /* accessible light text on the action orange */
   --success: #10b981;
@@ -37,6 +38,7 @@
   --avatar-sm: 44px;        /* home masthead, beside the name */
   --avatar-xs: 36px;        /* blog post byline */
   --nav-offset: 5rem;       /* scroll-margin under the sticky nav */
+  --dialog-w: 40rem;        /* popup contact form: room for two fields a row */
 
   /* ── Type scale — see DESIGN-SYSTEM.md. Base 16px = 1rem. ───────────── */
   --text-xs: 0.8125rem;                  /* 13px — uppercase micro-labels */
@@ -1059,6 +1061,80 @@ a.m-case-media:hover img { transform: scale(1.02); }
   color: var(--danger);
 }
 
+/* ── Dialog ───────────────────────────────────────────────────────────── */
+/* The popup contact form (components/services/contactDialog.tsx). The <dialog>
+   itself has no padding, so a click that lands on it rather than the panel is
+   a click on the backdrop. Page grey, so the white fields read as they do
+   inline on /services. */
+.m-dialog {
+  width: min(var(--dialog-w), 100% - var(--gutter) * 2);
+  max-width: none;
+  max-height: calc(100dvh - var(--gutter) * 2);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  color: var(--ink);
+  box-shadow: var(--shadow-drop);
+}
+/* Fades in while rising a few pixels; the backdrop fades with it. Closing
+   runs the same in reverse: `display` and `overlay` are held with
+   allow-discrete until the fade ends. Browsers without @starting-style just
+   open and close instantly, as before. */
+.m-dialog,
+.m-dialog::backdrop {
+  transition:
+    opacity var(--transition),
+    transform var(--transition),
+    display var(--transition) allow-discrete,
+    overlay var(--transition) allow-discrete;
+}
+.m-dialog {
+  opacity: 0;
+  transform: translateY(var(--space-3)) scale(0.98);
+}
+.m-dialog[open] {
+  opacity: 1;
+  transform: none;
+}
+.m-dialog::backdrop {
+  background: var(--scrim);
+  opacity: 0;
+}
+.m-dialog[open]::backdrop { opacity: 1; }
+@starting-style {
+  .m-dialog[open] {
+    opacity: 0;
+    transform: translateY(var(--space-3)) scale(0.98);
+  }
+  .m-dialog[open]::backdrop { opacity: 0; }
+}
+/* The page behind stays put while the dialog scrolls on its own. */
+html:has(.m-dialog[open]) { overflow: hidden; }
+.m-dialog-panel { padding: var(--space-8); }
+.m-dialog-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+.m-dialog-close {
+  display: inline-flex;
+  flex-shrink: 0;
+  padding: var(--space-2);
+  /* Pulled out by its own padding so the icon, not the hit area, lines up
+     with the panel's corner. */
+  margin: calc(var(--space-2) * -1) calc(var(--space-2) * -1) 0 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--muted);
+  font-size: var(--text-lg);
+  cursor: pointer;
+  transition: color var(--transition), background-color var(--transition);
+}
+.m-dialog-close:hover { color: var(--ink); background: var(--chip); }
+
 /* Services CTA card, used under blog posts */
 .m-cta-card {
   margin: var(--space-10) 0;
@@ -1103,6 +1179,16 @@ a.m-case-media:hover img { transform: scale(1.02); }
   .m-profile-name { align-self: center; }
   .m-section { padding: var(--space-8) 0 var(--space-6); }
   .m-form { grid-template-columns: 1fr; }
+  /* The popup becomes a full-screen sheet: a floating card leaves no room
+     for the keyboard. */
+  .m-dialog {
+    width: 100%;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    border-radius: 0;
+  }
+  .m-dialog-panel { padding: var(--space-6) var(--gutter); }
   /* Label over text on a phone; the pairs keep their spacing. */
   .m-case-body { grid-template-columns: 1fr; row-gap: var(--space-1); }
   .m-case-text + .m-case-label { margin-top: var(--space-4); }

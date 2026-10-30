@@ -4,6 +4,7 @@ import "styles/v3.css";
 import Navigation from "components/navigation";
 import Footer from "components/global/footer";
 import PageTrail from "components/global/pageTrail";
+import ContactDialog from "components/services/contactDialog";
 import { SITE_URL } from "content/site";
 import { Metadata } from "next";
 import Script from "next/script";
@@ -74,6 +75,7 @@ a.appendChild(r);
         <main className="m-main">{children}</main>
         <Footer />
         <PageTrail />
+        <ContactDialog />
       </body>
     </html>
   );
