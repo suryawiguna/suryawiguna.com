@@ -96,6 +96,9 @@
   --control-px-sm: 1rem;
   --field-py: 0.625rem;
   --field-px: 0.875rem;
+  /* Lucide ChevronDown in --muted. A data URI cannot read a custom property,
+     so the colour is spelled out here; change both together. */
+  --field-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
 
   /* ── Motion ─────────────────────────────────────────────────────────── */
   --transition-fast: 0.15s ease;
@@ -997,6 +1000,16 @@ a.m-case-media:hover img { transform: scale(1.02); }
   transition: border-color var(--transition);
 }
 .m-field textarea { resize: vertical; }
+/* Native arrows differ per browser and sit tight to the border. Draw one
+   chevron instead, inset by the same --field-px as the text. */
+.m-field select {
+  appearance: none;
+  background-image: var(--field-chevron);
+  background-repeat: no-repeat;
+  background-position: right var(--field-px) center;
+  background-size: 1em;
+  padding-right: calc(var(--field-px) * 2 + 1em);
+}
 .m-field input:focus,
 .m-field select:focus,
 .m-field textarea:focus {

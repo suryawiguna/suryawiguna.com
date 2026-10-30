@@ -233,6 +233,11 @@ filter and the subscribe button were all different.
 | `--control-py-sm` / `--control-px-sm` | 0.5rem / 1rem | `.m-btn-sm`, `.m-page-btn`, `.m-filter-btn`, `.m-search`, `.m-subscribe-btn` — at `--text-sm` |
 | `--field-py` / `--field-px` | 0.625rem / 0.875rem | `.m-field` inputs/selects/textareas, `.m-subscribe-input` |
 
+Selects drop the native arrow (`appearance: none`) for `--field-chevron`, a
+1em Lucide `ChevronDown` in `--muted`, inset `--field-px` from the right edge.
+It is a data URI, so its colour is a literal hex — keep it in step with
+`--muted`.
+
 `.m-btn` carries `.primary` / `.ghost` for fill, and `.m-btn-sm` for dense
 contexts. A control that needs a different size is a bug in the metric, not a
 reason for a new value.
