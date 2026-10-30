@@ -5,6 +5,10 @@ import { EMAIL, SITE_NAME } from "content/site";
 // on the server.
 const BREVO_ENDPOINT = "https://api.brevo.com/v3/smtp/email";
 
+// Not 502: Cloudflare sits in front of Vercel and swaps an origin 502 for its
+// own HTML error page, so the form never sees the JSON message below.
+const SEND_FAILED = 500;
+
 type ContactPayload = {
   name?: string;
   email?: string;
@@ -67,7 +71,7 @@ export async function POST(request: Request) {
     console.error("BREVO_API_KEY is not set, contact form cannot send mail.");
     return Response.json(
       { error: "The form is not available right now. Please email me instead." },
-      { status: 502 }
+      { status: SEND_FAILED }
     );
   }
 
@@ -116,7 +120,7 @@ export async function POST(request: Request) {
       console.error("Brevo rejected the contact email:", response.status, detail);
       return Response.json(
         { error: "Could not send the message. Please email me instead." },
-        { status: 502 }
+        { status: SEND_FAILED }
       );
     }
 
@@ -125,7 +129,7 @@ export async function POST(request: Request) {
     console.error("Contact form failed:", error);
     return Response.json(
       { error: "Could not send the message. Please email me instead." },
-      { status: 502 }
+      { status: SEND_FAILED }
     );
   }
 }
