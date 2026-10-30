@@ -4,6 +4,8 @@ export type HistoryItem = {
   title: string;
   place: string;
   period: string;
+  // Makes `place` an outbound link, and goes into the JSON-LD organisation.
+  url?: string;
   // Feeds `worksFor` in the home page JSON-LD.
   current?: boolean;
 };
@@ -34,11 +36,17 @@ export const experiences = {
   items: [
     {
       title: "Web Developer",
-      place: "igloocompany",
+      place: "igloo",
+      url: "https://www.igloohome.co/",
       period: "2021 - now",
       current: true,
     },
-    { title: "Software QA", place: "igloocompany", period: "2020 - 2021" },
+    {
+      title: "Software QA",
+      place: "igloo",
+      url: "https://www.igloohome.co/",
+      period: "2020 - 2021",
+    },
     { title: "Backend Developer", place: "BTW Edutech", period: "2020 - 2021" },
   ] satisfies HistoryItem[],
 };

@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "lucide-react";
 import type { HistoryItem } from "content/home";
 
 type Group = { title: string; items: HistoryItem[] };
@@ -23,7 +24,19 @@ export default function Background({
                 <div key={`${item.title}-${item.period}`} className="m-fact">
                   <dt>{item.period}</dt>
                   <dd>
-                    {item.title}, {item.place}
+                    {item.title},{" "}
+                    {item.url ? (
+                      <a
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {item.place}{" "}
+                        <ArrowUpRight className="m-icon" aria-hidden="true" />
+                      </a>
+                    ) : (
+                      item.place
+                    )}
                   </dd>
                 </div>
               ))}

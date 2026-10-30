@@ -634,6 +634,13 @@ a.m-project-link:hover .m-project-arrow {
   line-height: var(--leading-normal);
 }
 .m-fact dd { margin: 0; color: var(--ink-soft); }
+/* An employer that links out: ruled like the other text links, but at the
+   line's own size and colour, since it sits mid-sentence. */
+.m-fact dd a {
+  border-bottom: 1px solid var(--line);
+  transition: color var(--transition), border-color var(--transition);
+}
+.m-fact dd a:hover { color: var(--ink); border-color: var(--ink); }
 .m-facts-text { color: var(--ink-soft); margin: 0; }
 
 /* Posts strip (home) */

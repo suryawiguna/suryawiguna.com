@@ -49,7 +49,11 @@ export function personNode() {
     })),
     worksFor: experiences.items
       .filter((item) => item.current)
-      .map((item) => ({ "@type": "Organization", name: item.place })),
+      .map((item) => ({
+        "@type": "Organization",
+        name: item.place,
+        ...(item.url && { url: item.url }),
+      })),
     sameAs: SOCIAL_PROFILES,
   };
 }
