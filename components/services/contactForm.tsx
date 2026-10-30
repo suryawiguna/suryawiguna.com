@@ -46,7 +46,8 @@ export default function ContactForm() {
       setMessage("Thanks. I will get back to you within a day or two.");
     } catch {
       setStatus("error");
-      setMessage(`Could not send that. Please email me at ${EMAIL} instead.`);
+      // The address already sits beside the button, so no need to repeat it.
+      setMessage("Could not send that. Please try again, or email me instead.");
     }
   }
 
@@ -68,7 +69,7 @@ export default function ContactForm() {
             <input id="contact-email" name="email" type="email" required />
           </div>
 
-          <div className="m-field">
+          <div className="m-field m-field-wide">
             <label htmlFor="contact-project">What do you need?</label>
             <select id="contact-project" name="projectType" defaultValue="">
               <option value="" disabled>
@@ -108,16 +109,24 @@ export default function ContactForm() {
             >
               {status === "sending" ? "Sending…" : "Send it"}
             </button>
-            <span className="m-form-alt">
-              Or email me at <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-            </span>
-          </div>
-
-          {message && (
+            {/* Always rendered so screen readers announce the swap: the
+                email fallback, then the thanks once it has gone. */}
             <p
-              className={`m-form-msg${status === "error" ? " is-error" : ""}`}
+              className={`m-form-alt${status === "sent" ? " is-sent" : ""}`}
               role="status"
             >
+              {status === "sent" ? (
+                message
+              ) : (
+                <>
+                  Or email me at <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+                </>
+              )}
+            </p>
+          </div>
+
+          {status === "error" && (
+            <p className="m-form-msg" role="alert">
               {message}
             </p>
           )}

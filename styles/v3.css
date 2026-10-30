@@ -974,7 +974,9 @@ a.m-case-media:hover img { transform: scale(1.02); }
 .m-form {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-4);
+  /* Rows further apart than the label sits from its field, so each label
+     reads as belonging to the box under it, not the one above. */
+  gap: var(--space-6) var(--space-4);
 }
 .m-field {
   display: flex;
@@ -1010,6 +1012,10 @@ a.m-case-media:hover img { transform: scale(1.02); }
   background-size: 1em;
   padding-right: calc(var(--field-px) * 2 + 1em);
 }
+/* The disabled "Pick one" option is a prompt, not an answer, so it reads in
+   label grey until something is chosen. Options keep ink in the open list. */
+.m-field select:has(option[value=""]:checked) { color: var(--muted); }
+.m-field select option { color: var(--ink); }
 .m-field input:focus,
 .m-field select:focus,
 .m-field textarea:focus {
@@ -1031,16 +1037,20 @@ a.m-case-media:hover img { transform: scale(1.02); }
   flex-wrap: wrap;
 }
 .m-form-alt {
-  font-size: var(--text-sm);
-  color: var(--muted);
-}
-.m-form-msg {
-  grid-column: 1 / -1;
   margin: 0;
   font-size: var(--text-sm);
   color: var(--muted);
 }
-.m-form-msg.is-error { color: var(--danger); }
+/* After a send the fallback line becomes the thanks, in ink so it reads as
+   the answer to the click. */
+.m-form-alt.is-sent { color: var(--ink); }
+/* Errors only: a line under the button, which keeps the email fallback. */
+.m-form-msg {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--danger);
+}
 
 /* Services CTA card, used under blog posts */
 .m-cta-card {
