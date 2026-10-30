@@ -1,7 +1,7 @@
 // What I sell, in one place. Both the home page's short cards and the
 // /services page's detailed offers read from here, so they cannot drift apart.
 
-import { AVATAR, EMAIL } from "content/site";
+import { AVATAR } from "content/site";
 
 export type Offer = {
   // Also the value submitted by the contact form's project-type select, and
@@ -182,32 +182,25 @@ export const servicesPage = {
   intro: [
     "I build fast marketing sites and Shopify stores for businesses in Bali and founders working remotely, from strategy and design through launch.",
   ],
-  // Used by the parked contact form, see contactCta below.
+  // The contact form at the foot of /services.
   contactHeading: "Tell me about your project",
   contactIntro:
     "Fill this in and I will come back to you with a price and a timeline. No obligation, and I will tell you if I am not the right fit.",
 };
 
-// Soft CTA at the foot of /services. This is a mailto rather than the form in
-// components/services/contactForm.tsx: Brevo accepted the test sends but the
-// mail never arrived, so the form is parked until delivery is sorted out
-// rather than shipped as a lead sink that silently loses enquiries.
+// Closing section on the home and portfolio pages, and the label on every
+// "start a project" button. All of them lead to the form on /services.
 export const contactCta = {
   heading: "Tell me about your project",
   body: [
-    "Email me what you are building and when you need it. I will reply with a price, a timeline, and an honest view of whether I am the right fit.",
+    "Tell me what you are building and when you need it. I will reply with a price, a timeline, and an honest view of whether I am the right fit.",
   ],
-  subject: "Project enquiry",
-  label: "Email me",
+  label: "Start a project",
 };
 
-// Where every "start a project" button goes. A mailto opens the email straight
-// away instead of scrolling to a section that only holds another mailto. When
-// the contact form comes back, point this at "/services#contact" and every
-// button follows.
-export const CONTACT_HREF = `mailto:${EMAIL}?subject=${encodeURIComponent(
-  contactCta.subject
-)}`;
+// Where every "start a project" button goes: the contact form at the foot of
+// /services.
+export const CONTACT_HREF = "/services#contact";
 
 // Rendered under every blog post. The audit for internal linking opportunities
 // is handled once here rather than by editing individual posts in Storyblok.

@@ -1,11 +1,8 @@
 "use client";
 
-// PARKED, not rendered anywhere. /services shows components/services/
-// contactCta.tsx instead. The form and app/api/contact both work (validated
-// end to end in a browser: correct body, honeypot, reset, success state) but
-// Brevo accepted the test sends and the mail never arrived, so shipping this
-// would mean silently losing enquiries. Re-import it in app/services/page.tsx
-// once delivery is confirmed in the Brevo transactional log.
+// The closing section of /services, and where CONTACT_HREF sends every
+// "start a project" button. POSTs to app/api/contact, which emails the
+// enquiry through Brevo.
 
 import { useState } from "react";
 import { OFFERS, servicesPage } from "content/services";

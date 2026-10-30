@@ -1,8 +1,7 @@
 import { CONTACT_HREF, contactCta } from "content/services";
 
-// Stands in for components/services/contactForm.tsx while that is parked.
-// A mailto is higher friction than a form, but it cannot lose an enquiry,
-// which the form could until its delivery problem is understood.
+// Closing section on the home and portfolio pages, pointing at the contact
+// form on /services. /services renders the form itself in this spot.
 // Heading in the left column, like every other closing section.
 export default function ContactCta() {
   return (

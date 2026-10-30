@@ -4,11 +4,7 @@ import Sectors from "components/services/sectors";
 import Process from "components/services/process";
 import CaseStudies from "components/services/caseStudies";
 import Faqs from "components/services/faq";
-// The contact form (components/services/contactForm.tsx, POSTing to
-// app/api/contact) is built and tested but parked: Brevo accepted the sends
-// and the mail never arrived. Swap ContactCta back for ContactForm once
-// delivery is confirmed.
-import ContactCta from "components/services/contactCta";
+import ContactForm from "components/services/contactForm";
 import Link from "next/link";
 
 import {
@@ -141,7 +137,7 @@ export default function Services() {
         cta={{ href: CONTACT_HREF, label: contactCta.label }}
       />
       <Faqs heading={FAQS.title} items={FAQS.items} />
-      <ContactCta />
+      <ContactForm />
 
       <JsonLd data={generateServicesJsonLd()} />
     </div>

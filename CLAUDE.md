@@ -94,13 +94,13 @@ Two parallel subscription systems exist:
 - `app/api/subscribe/route.ts` — server-side Mailchimp integration (POST with email header)
 - `components/blog/subscribe.tsx` — client-side Brevo API call using `NEXT_PUBLIC_BREVO_API_KEY`
 
-### Contact form (parked)
+### Contact form
 
-`/services` currently ends with `components/services/contactCta.tsx`, a plain mailto, and every "start a project" button on the site (home hero, `/services` hero and case studies, `/portfolio` hero, the closing contact sections) links to the same mailto through `CONTACT_HREF` in `content/services.ts`. The real form is built but **not wired up**:
+`/services` ends with `components/services/contactForm.tsx`, and every "start a project" button on the site (home hero, `/services` hero and case studies, `/portfolio` hero, the closing contact sections) links to it through `CONTACT_HREF` (`/services#contact`) in `content/services.ts`. The home and portfolio pages close with `components/services/contactCta.tsx`, a short section whose button leads there.
 
-`components/services/contactForm.tsx` (client) POSTs JSON to `app/api/contact/route.ts`, which sends the enquiry as a transactional email via Brevo. It uses the server-only `BREVO_API_KEY`, **not** the `NEXT_PUBLIC_BREVO_API_KEY` the subscribe widget ships to the browser. Without the key set the route returns 502 and the form tells the visitor to email instead. The `company` field is a honeypot: a filled one gets a silent 200 and no email.
+The form (client) POSTs JSON to `app/api/contact/route.ts`, which sends the enquiry as a transactional email via Brevo, from and to `hi@suryawiguna.com` with the visitor as reply-to. It uses the server-only `BREVO_API_KEY`, **not** the `NEXT_PUBLIC_BREVO_API_KEY` the subscribe widget ships to the browser. Without the key set the route returns 502 and the form tells the visitor to email instead. The `company` field is a honeypot: a filled one gets a silent 200 and no email.
 
-Both were validated end to end in a browser, and Brevo returned 2xx, but the mail never arrived. Check the Brevo transactional log (delivered / blocked / bounced) and that `hi@suryawiguna.com` is a verified sender before swapping `ContactCta` back for `ContactForm` in `app/services/page.tsx` and pointing `CONTACT_HREF` at `/services#contact`. Note Brevo IP restriction must stay off, since serverless hosts rotate egress IPs.
+Delivery depends on `suryawiguna.com` staying authenticated in Brevo (its DKIM records in DNS). The domain's mail is hosted on Zoho, which can silently drop mail claiming to be from the domain when it comes from an unauthenticated sender — the likely reason early test sends got a 2xx from Brevo and never arrived. If enquiries stop showing up, check the Brevo transactional log (delivered / blocked / bounced) and Zoho's quarantine first. Brevo IP restriction must stay off, since serverless hosts rotate egress IPs.
 
 ### Styling
 
