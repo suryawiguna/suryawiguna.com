@@ -10,6 +10,8 @@ type ContactPayload = {
   email?: string;
   projectType?: string;
   message?: string;
+  // The page the visitor came from, set by the form, not typed by them.
+  ref?: string;
   // Honeypot. Real people leave it empty because they never see it.
   company?: string;
 };
@@ -42,6 +44,8 @@ export async function POST(request: Request) {
   const email = payload.email?.trim() ?? "";
   const message = payload.message?.trim() ?? "";
   const projectType = payload.projectType?.trim() || "Not specified";
+  // Capped because it arrives from the browser like everything else here.
+  const ref = payload.ref?.trim().slice(0, 300) || "Unknown";
 
   if (!name || !email || !message) {
     return Response.json(
@@ -73,6 +77,8 @@ export async function POST(request: Request) {
     ["Project type", projectType],
     ["Message", message],
   ];
+  // Not a row: one plain line at the foot, "Ref: /blog/some-post".
+  const refLine = `Ref: ${ref}`;
 
   try {
     const response = await fetch(BREVO_ENDPOINT, {
@@ -97,8 +103,11 @@ export async function POST(request: Request) {
                 "<br />"
               )}</p>`
           )
-          .join("")}</body></html>`,
-        textContent: rows.map(([label, value]) => `${label}: ${value}`).join("\n\n"),
+          .join("")}<p>${escapeHtml(refLine)}</p></body></html>`,
+        textContent: [
+          ...rows.map(([label, value]) => `${label}: ${value}`),
+          refLine,
+        ].join("\n\n"),
       }),
     });
 

@@ -100,6 +100,8 @@ Two parallel subscription systems exist:
 
 The form (client) POSTs JSON to `app/api/contact/route.ts`, which sends the enquiry as a transactional email via Brevo, from and to `hi@suryawiguna.com` with the visitor as reply-to. It uses the server-only `BREVO_API_KEY`, **not** the `NEXT_PUBLIC_BREVO_API_KEY` the subscribe widget ships to the browser. Without the key set the route returns 502 and the form tells the visitor to email instead. The `company` field is a honeypot: a filled one gets a silent 200 and no email.
 
+Each enquiry email ends with a `Ref: /page` line: the page the visitor was on before `/services`, else the outside referrer, else `Direct`. The form adds it as `ref` at submit time from `arrivedFrom()` in `components/global/pageTrail.tsx`. That component is mounted in the root layout and keeps the previous path in `sessionStorage`, because client-side navigation (the nav, `next/link`) never updates `document.referrer`.
+
 Delivery depends on `suryawiguna.com` staying authenticated in Brevo (its DKIM records in DNS). The domain's mail is hosted on Zoho, which can silently drop mail claiming to be from the domain when it comes from an unauthenticated sender — the likely reason early test sends got a 2xx from Brevo and never arrived. If enquiries stop showing up, check the Brevo transactional log (delivered / blocked / bounced) and Zoho's quarantine first. Brevo IP restriction must stay off, since serverless hosts rotate egress IPs.
 
 ### Styling

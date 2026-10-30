@@ -5,6 +5,7 @@
 // enquiry through Brevo.
 
 import { useState } from "react";
+import { arrivedFrom } from "components/global/pageTrail";
 import { OFFERS, servicesPage } from "content/services";
 import { EMAIL } from "content/site";
 
@@ -20,7 +21,11 @@ export default function ContactForm() {
     setMessage("");
 
     const form = event.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
+    const data = {
+      ...Object.fromEntries(new FormData(form).entries()),
+      // Not a field: which page sent them here, so the email can say.
+      ref: arrivedFrom(),
+    };
 
     try {
       const response = await fetch("/api/contact", {
