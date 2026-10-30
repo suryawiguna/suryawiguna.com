@@ -13,7 +13,7 @@ import { EMAIL } from "content/site";
 type Status = "idle" | "sending" | "sent" | "error";
 
 type EnquiryFormProps = {
-  // The page the email's Ref line names. The popup passes the page it opened
+  // The URL the email's From line names. The popup passes the page it opened
   // on; the /services section leaves it to arrivedFrom().
   source?: string;
 };

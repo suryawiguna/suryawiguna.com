@@ -1,4 +1,4 @@
-import { EMAIL, SITE_NAME } from "content/site";
+import { EMAIL, NAV_ITEMS, SITE_NAME, SITE_URL } from "content/site";
 
 // Server-only, and deliberately not the NEXT_PUBLIC_BREVO_API_KEY the blog
 // subscribe widget ships to the browser. This one can send mail, so it stays
@@ -14,11 +14,43 @@ type ContactPayload = {
   email?: string;
   projectType?: string;
   message?: string;
-  // The page the visitor came from, set by the form, not typed by them.
+  // The full URL of the page the visitor came from, or "Direct". Set by the
+  // form, not typed by them.
   ref?: string;
   // Honeypot. Real people leave it empty because they never see it.
   company?: string;
 };
+
+// Named from the path alone. Looking a post's title up would mean reading
+// content/posts from inside this function, and an enquiry is not worth
+// risking on whether those files were bundled with it. The URL beside the
+// name says which post.
+function pageName(pathname: string) {
+  if (pathname === "/") return "Homepage";
+  if (pathname.startsWith("/blog/tag/")) return "Blog tag";
+  if (pathname.startsWith("/blog/")) return "Blog post";
+  return NAV_ITEMS.find((item) => item.href === pathname)?.label ?? "Page";
+}
+
+const bareHost = (host: string) => host.replace(/^www\./, "");
+
+// "Homepage - https://suryawiguna.com/", "External - https://www.google.com/",
+// or the ref as sent when it is not a URL ("Direct").
+function describeSource(ref: string, requestUrl: string) {
+  let url: URL;
+  try {
+    url = new URL(ref);
+  } catch {
+    return ref;
+  }
+
+  // The request's own host covers preview deployments and localhost.
+  const ownHosts = [new URL(requestUrl).host, new URL(SITE_URL).host].map(
+    bareHost
+  );
+  if (!ownHosts.includes(bareHost(url.host))) return `External - ${url.href}`;
+  return `${pageName(url.pathname)} - ${url.href}`;
+}
 
 const isEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
@@ -81,8 +113,8 @@ export async function POST(request: Request) {
     ["Project type", projectType],
     ["Message", message],
   ];
-  // Not a row: one plain line at the foot, "Ref: /blog/some-post".
-  const refLine = `Ref: ${ref}`;
+  // Not a row: one plain line at the foot, "From: Homepage - https://…".
+  const fromLine = `From: ${describeSource(ref, request.url)}`;
 
   try {
     const response = await fetch(BREVO_ENDPOINT, {
@@ -107,10 +139,10 @@ export async function POST(request: Request) {
                 "<br />"
               )}</p>`
           )
-          .join("")}<p>${escapeHtml(refLine)}</p></body></html>`,
+          .join("")}<p>${escapeHtml(fromLine)}</p></body></html>`,
         textContent: [
           ...rows.map(([label, value]) => `${label}: ${value}`),
-          refLine,
+          fromLine,
         ].join("\n\n"),
       }),
     });

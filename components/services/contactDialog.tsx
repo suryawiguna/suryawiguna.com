@@ -3,7 +3,7 @@
 // The enquiry form as a popup. Every "start a project" button is a plain link
 // to CONTACT_HREF, so it works before JavaScript loads. After that, a click on
 // one anywhere but /services opens the form here, over the page the visitor
-// was reading, and that page becomes the email's Ref line. On /services the
+// was reading, and that page becomes the email's From line. On /services the
 // link just scrolls to the inline form. Mounted once, in the root layout.
 //
 // Native <dialog>: showModal() traps focus, closes on Esc and makes the page
@@ -21,7 +21,7 @@ export default function ContactDialog() {
   const pathname = usePathname();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleId = useId();
-  // The page it last opened on. Null until the first open, so pages that
+  // The URL it last opened on. Null until the first open, so pages that
   // never open it never render the form. It stays mounted after closing, so
   // a stray click on the backdrop does not throw away what was typed.
   const [source, setSource] = useState<string | null>(null);
@@ -46,7 +46,7 @@ export default function ContactDialog() {
       if (!link) return;
 
       event.preventDefault();
-      setSource(pathname);
+      setSource(window.location.origin + pathname);
       dialogRef.current?.showModal();
     }
 

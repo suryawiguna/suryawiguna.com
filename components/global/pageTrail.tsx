@@ -20,19 +20,18 @@ const isOwnSite = (url: string) => {
   }
 };
 
-// The page before this one on the site, else the outside page that linked
-// here, else "Direct" (typed, bookmarked, or the referrer was stripped).
+// The full URL of the page before this one on the site, else the outside
+// page that linked here, else "Direct" (typed, bookmarked, or the referrer
+// was stripped). The contact route turns it into the email's From line.
 export function arrivedFrom(): string {
   try {
     const previous = sessionStorage.getItem(PREVIOUS);
-    if (previous) return previous;
+    if (previous) return window.location.origin + previous;
   } catch {
     // Storage blocked, fall through to the referrer.
   }
 
-  const referrer = document.referrer;
-  if (!referrer) return "Direct";
-  return isOwnSite(referrer) ? new URL(referrer).pathname : referrer;
+  return document.referrer || "Direct";
 }
 
 export default function PageTrail() {
