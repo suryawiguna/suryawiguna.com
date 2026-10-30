@@ -21,6 +21,9 @@ export default function Footer() {
             </Link>
           </li>
         ))}
+        <li>
+          <a href="/feed.xml">RSS</a>
+        </li>
       </ul>
       <span className="m-foot-legal">
         © {year} Surya Wiguna · Bali, Indonesia

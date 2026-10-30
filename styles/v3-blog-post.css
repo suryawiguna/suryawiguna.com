@@ -230,6 +230,13 @@
   margin-bottom: var(--space-3);
   color: var(--ink);
 }
+.m-foot-block p { margin: 0; color: var(--ink-soft); }
+/* Ruled like the site's other text links, at the sentence's own size. */
+.m-foot-block a {
+  border-bottom: 1px solid var(--line);
+  transition: color var(--transition), border-color var(--transition);
+}
+.m-foot-block a:hover { color: var(--ink); border-color: var(--ink); }
 
 /* ── Read next ────────────────────────────────────────────────────────── */
 .m-related-list {
@@ -263,50 +270,3 @@
   font-size: var(--text-sm);
 }
 .m-back:hover { color: var(--ink); }
-
-/* ── Subscribe form ───────────────────────────────────────────────────── */
-/* A joined pill: the input carries the field metric, the button the small
-   control metric, so the two halves are the same height. */
-.m-subscribe-wrap {
-  display: flex;
-  position: relative;
-  max-width: 360px;
-}
-.m-subscribe-input {
-  flex: 1;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-right: 0;
-  border-radius: var(--radius-pill) 0 0 var(--radius-pill);
-  padding: var(--field-py) var(--field-px);
-  font-size: var(--text-sm);
-  font-family: var(--body);
-  color: var(--ink);
-  transition: border-color var(--transition);
-  min-width: 0;
-}
-.m-subscribe-input::placeholder { color: var(--muted); }
-.m-subscribe-input:focus { border-color: var(--accent); }
-.m-subscribe-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--control-py-sm) var(--control-px-sm);
-  background: var(--accent);
-  color: var(--on-accent);
-  border: 1px solid var(--accent);
-  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
-  font-size: var(--text-sm);
-  font-weight: var(--font-medium);
-  font-family: var(--body);
-  cursor: pointer;
-  white-space: nowrap;
-  transition: filter var(--transition);
-}
-.m-subscribe-btn:hover { filter: brightness(1.08); }
-.m-subscribe-msg {
-  display: block;
-  margin-top: var(--space-2);
-  font-size: var(--text-sm);
-  color: var(--muted);
-}

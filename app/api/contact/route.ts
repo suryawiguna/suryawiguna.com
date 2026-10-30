@@ -1,8 +1,7 @@
 import { EMAIL, NAV_ITEMS, SITE_NAME, SITE_URL } from "content/site";
 
-// Server-only, and deliberately not the NEXT_PUBLIC_BREVO_API_KEY the blog
-// subscribe widget ships to the browser. This one can send mail, so it stays
-// on the server.
+// Server-only BREVO_API_KEY. A Brevo key can send mail as hi@suryawiguna.com
+// and read the contact lists, so it must never get a NEXT_PUBLIC_ prefix.
 const BREVO_ENDPOINT = "https://api.brevo.com/v3/smtp/email";
 
 // Not 502: Cloudflare sits in front of Vercel and swaps an origin 502 for its

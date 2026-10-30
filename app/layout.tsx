@@ -5,7 +5,7 @@ import Navigation from "components/navigation";
 import Footer from "components/global/footer";
 import PageTrail from "components/global/pageTrail";
 import ContactDialog from "components/services/contactDialog";
-import { SITE_URL } from "content/site";
+import { SITE_NAME, SITE_URL } from "content/site";
 import { Metadata } from "next";
 import Script from "next/script";
 import { Inter } from "next/font/google";
@@ -44,6 +44,16 @@ export default function RootLayout({
       className={inter.variable}
     >
       <head>
+        {/* In the <head> rather than metadata.alternates, which a page's own
+            alternates (every canonical) would replace. Lets feed readers find
+            the feed from any page. */}
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title={`${SITE_NAME} blog`}
+          href="/feed.xml"
+        />
+
         {/* Google Analytics */}
         <Script
           id="gtag"

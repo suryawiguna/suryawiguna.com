@@ -70,8 +70,9 @@ Publishing is a deploy: add or edit the file, commit, push. The posts were migra
 | `/link` | `content/links.ts` |
 | `/sitemap.xml` | `app/sitemap.ts` — `getAllPosts()` minus `noindex` + `PAGE_UPDATED` + tag archives, built at deploy |
 | `/robots.txt` | `app/robots.ts` |
+| `/feed.xml` | `app/feed.xml/route.ts` — RSS 2.0 of `getAllPosts()` minus `noindex`, built at deploy |
 
-`sitemap.xml` and `robots.txt` are generated routes, not files. Do not add either to `public/` — static files there shadow app routes and would silently freeze the sitemap again.
+`sitemap.xml`, `robots.txt` and `feed.xml` are generated routes, not files. Do not add any of them to `public/` — static files there shadow app routes and would silently freeze the sitemap again.
 
 ### Loading skeletons
 
@@ -88,11 +89,9 @@ Moving a page into or out of a route group needs a dev-server restart; until the
 - Posts with `noindex` are excluded from both the counts and the listings.
 - The route sets `dynamicParams = false` on purpose. Without it an unknown tag renders the not-found page behind a 200 — a soft 404.
 
-### Email subscriptions
+### RSS, no mailing list
 
-Two parallel subscription systems exist:
-- `app/api/subscribe/route.ts` — server-side Mailchimp integration (POST with email header)
-- `components/blog/subscribe.tsx` — client-side Brevo API call using `NEXT_PUBLIC_BREVO_API_KEY`
+There is no newsletter. The old subscribe form at the foot of each post called Brevo straight from the browser with a `NEXT_PUBLIC_` key, which shipped a Brevo API key to every visitor, and nothing was ever sent to the list. It was removed in October 2026 along with an unused Mailchimp route. Posts are followed through `/feed.xml` instead: linked from the `<head>` of every page (for feed readers), the site footer, and the "Follow new posts" block at the foot of each post. If a newsletter comes back, subscribing must go through a server route, never a browser-side key.
 
 ### Contact form
 
@@ -103,7 +102,7 @@ The form is `EnquiryForm` in `components/services/contactForm.tsx`, and it rende
 
 Every "start a project" button (home hero, `/services` hero and case studies, `/portfolio` hero, the closing `contactCta.tsx` sections on home and portfolio) is a plain `<a href={CONTACT_HREF}>` to `/services#contact`, so it works without JavaScript. `ContactDialog` listens for clicks on links with exactly that `href` and, anywhere but `/services`, opens the popup instead; on `/services` the link just scrolls. Modified clicks (cmd/ctrl/shift, middle button) still navigate. So a new contact button needs nothing but that `href` — do not wire it to the dialog by hand. The popup's form stays mounted after it closes, so a stray backdrop click does not lose what was typed.
 
-The form (client) POSTs JSON to `app/api/contact/route.ts`, which sends the enquiry as a transactional email via Brevo, from and to `hi@suryawiguna.com` with the visitor as reply-to. It uses the server-only `BREVO_API_KEY`, **not** the `NEXT_PUBLIC_BREVO_API_KEY` the subscribe widget ships to the browser. Without the key set, or when Brevo refuses the send, the route returns 500 and the form tells the visitor to email instead. Never 502: Cloudflare fronts the site and replaces an origin 502 with its own HTML page, which hides the message. The `company` field is a honeypot: a filled one gets a silent 200 and no email.
+The form (client) POSTs JSON to `app/api/contact/route.ts`, which sends the enquiry as a transactional email via Brevo, from and to `hi@suryawiguna.com` with the visitor as reply-to. It uses the server-only `BREVO_API_KEY`; a Brevo key can send mail and read contacts, so it must never be `NEXT_PUBLIC_`. Without the key set, or when Brevo refuses the send, the route returns 500 and the form tells the visitor to email instead. Never 502: Cloudflare fronts the site and replaces an origin 502 with its own HTML page, which hides the message. The `company` field is a honeypot: a filled one gets a silent 200 and no email.
 
 Each enquiry email ends with a `From:` line, such as `From: Homepage - https://suryawiguna.com/`. The form sends a full URL as `ref` at submit time: from the popup, the page the popup opened on; from the inline form, the page the visitor was on before `/services`, else the outside referrer, else `Direct` (`arrivedFrom()` in `components/global/pageTrail.tsx`). The route names it from the path alone — `Homepage`, the nav label, `Blog post`, `Blog tag`, or `External` for another site — and never reads `content/posts`, so a missing file in the function bundle cannot break enquiries. That component is mounted in the root layout and keeps the previous path in `sessionStorage`, because client-side navigation (the nav, `next/link`) never updates `document.referrer`.
 
@@ -125,17 +124,13 @@ Every token lives in `:root` in `styles/v3.css`: colour, type scale, a 4px space
 
 A page layer may only add what that route introduces; it must not restyle a shared primitive. If a page needs `.m-h2` or `.m-btn` to look different, either the primitive is wrong for everyone or the page needs a modifier class (`.m-hero-left`, `.m-split`). There is deliberately no `/services` layer any more.
 
-The only font is Inter via `next/font/google` — `--display` and `--body` both point at it. Every route roots itself in `.m-page-wide`, which widens `<main>` to the 1080px canvas (`.m-main:has(> .m-page-wide)`). A blog post splits it with `.m-post-layout`: the article in a 42rem column and a sticky "Read next" aside (`findRelatedPosts(post, all, 5)`) that drops under the article at 768px. Text sections on wide pages use `.m-split` (heading left, content right); separation is space, not rules. Tailwind is still compiled via `styles/global.css` but styles almost nothing — a spinner in the contact form is all that is left, and `@tailwindcss/typography` is no longer registered because it was layering a second type system over `.m-article`. Dark mode is class-based but not wired to a toggle.
+The only font is Inter via `next/font/google` — `--display` and `--body` both point at it. Every route roots itself in `.m-page-wide`, which widens `<main>` to the 1080px canvas (`.m-main:has(> .m-page-wide)`). A blog post splits it with `.m-post-layout`: the article in a 42rem column and a sticky "Read next" aside (`findRelatedPosts(post, all, 5)`) that drops under the article at 768px. Text sections on wide pages use `.m-split` (heading left, content right); separation is space, not rules. Tailwind is still compiled via `styles/global.css` but styles nothing — the subscribe form's spinner was its last use, and `@tailwindcss/typography` is no longer registered because it was layering a second type system over `.m-article`. Dark mode is class-based but not wired to a toggle.
 
 ### Environment variables
 
 ```
 NEXT_PUBLIC_GOOGLE_ANALYTICS  # GA4 measurement ID
 NEXT_PUBLIC_HOTJAR_ID         # Hotjar site ID
-MAILCHIMP_API_KEY             # Mailchimp API key
-MAILCHIMP_API_SERVER          # Mailchimp server prefix (e.g. us14)
-MAILCHIMP_AUDIENCE_ID         # Mailchimp list/audience ID
-NEXT_PUBLIC_BREVO_API_KEY     # Brevo (Sendinblue) API key, client-side, blog subscribe only
 BREVO_API_KEY                 # Brevo API key, server-only, sends the /services contact form
 ```
 

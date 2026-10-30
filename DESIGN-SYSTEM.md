@@ -232,8 +232,8 @@ filter and the subscribe button were all different.
 | Token | Value | Applies to |
 |-------|-------|------------|
 | `--control-py` / `--control-px` | 0.75rem / 1.5rem | `.m-btn` — at `--text-base` |
-| `--control-py-sm` / `--control-px-sm` | 0.5rem / 1rem | `.m-btn-sm`, `.m-page-btn`, `.m-filter-btn`, `.m-search`, `.m-subscribe-btn` — at `--text-sm` |
-| `--field-py` / `--field-px` | 0.625rem / 0.875rem | `.m-field` inputs/selects/textareas, `.m-subscribe-input` |
+| `--control-py-sm` / `--control-px-sm` | 0.5rem / 1rem | `.m-btn-sm`, `.m-page-btn`, `.m-filter-btn`, `.m-search` — at `--text-sm` |
+| `--field-py` / `--field-px` | 0.625rem / 0.875rem | `.m-field` inputs/selects/textareas |
 
 Selects drop the native arrow (`appearance: none`) for `--field-chevron`, a
 1em Lucide `ChevronDown` in `--muted`, inset `--field-px` from the right edge.

@@ -2,7 +2,6 @@ import moment from "moment";
 import Markdown from "./markdown";
 import Link from "next/link";
 import Image from "next/image";
-import SubscribeForm from "./subscribe";
 import ServicesCta from "components/services/servicesCta";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { AVATAR } from "content/site";
@@ -94,8 +93,11 @@ export default function FullPost({
 
           <footer className="m-article-foot">
             <div className="m-foot-block">
-              <h3>Subscribe</h3>
-              <SubscribeForm />
+              <h3>Follow new posts</h3>
+              <p>
+                Add the <a href="/feed.xml">RSS feed</a> to any feed reader and
+                new posts show up there.
+              </p>
             </div>
           </footer>
         </article>
