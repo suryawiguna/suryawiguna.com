@@ -24,15 +24,18 @@ export default function Home() {
   return (
     // .m-page-wide widens <main> to the 1080px canvas, as on the home page.
     <div className="m-page-wide">
-      <header className="m-hero m-hero-left">
-        <p className="m-eyebrow">Blog</p>
-        <h1 className="m-h1 m-h1-wide">Learning experiences</h1>
-        <p className="m-lede m-lede-wide">
-          Short reads on web development, SEO, B2B funnels, and what it&rsquo;s
-          like freelancing from Bali.
-        </p>
-      </header>
-      <PostGrid posts={posts} />
+      <PostGrid
+        posts={posts}
+        intro={
+          <>
+            <h1 className="m-h1">Blog</h1>
+            <p className="m-lede">
+              Short reads on web development, SEO, B2B funnels, and what
+              it&rsquo;s like freelancing from Bali.
+            </p>
+          </>
+        }
+      />
     </div>
   );
 }

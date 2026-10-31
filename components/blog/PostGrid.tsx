@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ChevronDown, X } from "lucide-react";
 import type { PostSummary } from "lib/posts";
 import PostCard from "./postCard";
@@ -9,7 +9,15 @@ import PostCard from "./postCard";
 // half-empty row.
 const PER_PAGE = 12;
 
-export default function PostGrid({ posts }: { posts: PostSummary[] }) {
+// The page header lives here so the search and filter can sit beside the
+// title: `intro` is the server-rendered title and lede for the left column.
+export default function PostGrid({
+  posts,
+  intro,
+}: {
+  posts: PostSummary[];
+  intro: ReactNode;
+}) {
   const [tag, setTag] = useState<string>("all");
   const [page, setPage] = useState<number>(1);
   const [search, setSearch] = useState<string>("");
@@ -41,9 +49,7 @@ export default function PostGrid({ posts }: { posts: PostSummary[] }) {
 
   const filtered = useMemo(() => {
     let result =
-      tag === "all"
-        ? posts
-        : posts.filter((p) => p.tags.includes(tag));
+      tag === "all" ? posts : posts.filter((p) => p.tags.includes(tag));
     if (search.trim()) {
       const q = search.trim().toLowerCase();
       result = result.filter((p) => {
@@ -79,109 +85,114 @@ export default function PostGrid({ posts }: { posts: PostSummary[] }) {
 
   return (
     <>
-      <div className="m-toolbar">
-        <div className="m-search-wrap">
-          <input
-            className="m-search"
-            type="search"
-            placeholder="Search posts…"
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setPage(1);
-            }}
-            aria-label="Search posts"
-          />
-          {search && (
-            <button
-              type="button"
-              className="m-search-clear"
-              onClick={clearSearch}
-              aria-label="Clear search"
-            >
-              <X size={14} strokeWidth={2.5} />
-            </button>
-          )}
-        </div>
-        <div className="m-filter-wrap" ref={dropRef}>
-          <button
-            type="button"
-            className={`m-filter-btn${tag !== "all" ? " is-active" : ""}`}
-            onClick={() => setDropOpen((o) => !o)}
-            aria-haspopup="listbox"
-            aria-expanded={dropOpen}
-          >
-            {tag === "all" ? "Filter" : tag}
-            <ChevronDown
-              className="m-icon m-filter-chevron"
-              aria-hidden="true"
-            />
-          </button>
-          {dropOpen && (
-            <div
-              className="m-filter-drop"
-              role="listbox"
-              aria-label="Filter by tag"
-            >
-              <div className="m-filter-search-wrap">
-                <input
-                  className="m-filter-search"
-                  type="search"
-                  placeholder="Search tags…"
-                  value={tagSearch}
-                  onChange={(e) => setTagSearch(e.target.value)}
-                  aria-label="Search tags"
-                />
-                {tagSearch && (
-                  <button
-                    type="button"
-                    className="m-search-clear"
-                    onClick={() => setTagSearch("")}
-                    aria-label="Clear tag search"
-                  >
-                    <X size={12} strokeWidth={2.5} />
-                  </button>
-                )}
-              </div>
-              <div className="m-filter-list">
-                {!tagSearch.trim() && (
-                  <button
-                    type="button"
-                    role="option"
-                    aria-selected={tag === "all"}
-                    className={`m-filter-item${tag === "all" ? " is-active" : ""}`}
-                    onClick={() => {
-                      setTagAndReset("all");
-                      setDropOpen(false);
-                    }}
-                  >
-                    All
-                  </button>
-                )}
-                {visibleTags.length === 0 ? (
-                  <p className="m-filter-empty">No tags found.</p>
-                ) : (
-                  visibleTags.map((t) => (
-                    <button
-                      key={t}
-                      type="button"
-                      role="option"
-                      aria-selected={tag === t}
-                      className={`m-filter-item${tag === t ? " is-active" : ""}`}
-                      onClick={() => {
-                        setTagAndReset(t);
-                        setDropOpen(false);
-                      }}
-                    >
-                      {t}
-                    </button>
-                  ))
-                )}
-              </div>
+      <header className="m-hero m-hero-left">
+        <div className="m-hero-foot">
+          <div className="m-blog-intro">{intro}</div>
+          <div className="m-toolbar">
+            <div className="m-search-wrap">
+              <input
+                className="m-search"
+                type="search"
+                placeholder="Search posts…"
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setPage(1);
+                }}
+                aria-label="Search posts"
+              />
+              {search && (
+                <button
+                  type="button"
+                  className="m-search-clear"
+                  onClick={clearSearch}
+                  aria-label="Clear search"
+                >
+                  <X size={14} strokeWidth={2.5} />
+                </button>
+              )}
             </div>
-          )}
+            <div className="m-filter-wrap" ref={dropRef}>
+              <button
+                type="button"
+                className={`m-filter-btn${tag !== "all" ? " is-active" : ""}`}
+                onClick={() => setDropOpen((o) => !o)}
+                aria-haspopup="listbox"
+                aria-expanded={dropOpen}
+              >
+                {tag === "all" ? "Filter" : tag}
+                <ChevronDown
+                  className="m-icon m-filter-chevron"
+                  aria-hidden="true"
+                />
+              </button>
+              {dropOpen && (
+                <div
+                  className="m-filter-drop"
+                  role="listbox"
+                  aria-label="Filter by tag"
+                >
+                  <div className="m-filter-search-wrap">
+                    <input
+                      className="m-filter-search"
+                      type="search"
+                      placeholder="Search tags…"
+                      value={tagSearch}
+                      onChange={(e) => setTagSearch(e.target.value)}
+                      aria-label="Search tags"
+                    />
+                    {tagSearch && (
+                      <button
+                        type="button"
+                        className="m-search-clear"
+                        onClick={() => setTagSearch("")}
+                        aria-label="Clear tag search"
+                      >
+                        <X size={12} strokeWidth={2.5} />
+                      </button>
+                    )}
+                  </div>
+                  <div className="m-filter-list">
+                    {!tagSearch.trim() && (
+                      <button
+                        type="button"
+                        role="option"
+                        aria-selected={tag === "all"}
+                        className={`m-filter-item${tag === "all" ? " is-active" : ""}`}
+                        onClick={() => {
+                          setTagAndReset("all");
+                          setDropOpen(false);
+                        }}
+                      >
+                        All
+                      </button>
+                    )}
+                    {visibleTags.length === 0 ? (
+                      <p className="m-filter-empty">No tags found.</p>
+                    ) : (
+                      visibleTags.map((t) => (
+                        <button
+                          key={t}
+                          type="button"
+                          role="option"
+                          aria-selected={tag === t}
+                          className={`m-filter-item${tag === t ? " is-active" : ""}`}
+                          onClick={() => {
+                            setTagAndReset(t);
+                            setDropOpen(false);
+                          }}
+                        >
+                          {t}
+                        </button>
+                      ))
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
+      </header>
 
       <section className="m-blog-list" aria-live="polite">
         {filtered.length === 0 ? (

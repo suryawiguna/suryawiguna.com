@@ -6,20 +6,23 @@ import {
   Stack,
 } from "components/global/skeleton";
 
-// Mirrors app/blog/(index)/page.tsx: wide canvas, hero, toolbar, 3-column card grid.
+// Mirrors app/blog/(index)/page.tsx: wide canvas, hero with the toolbar beside
+// the title, 3-column card grid.
 export default function Loading() {
   return (
     <div className="m-page-wide">
       <Skeleton>
         <div className="m-hero m-hero-left">
-          <Bar w={40} h="meta" />
-          <Bar w="40%" h="title" />
-          <Bar w="55%" h="blockTitle" />
-        </div>
-
-        <div className="m-toolbar">
-          <Pill w={352} h={CONTROL_SM_H} />
-          <Pill w={110} h={CONTROL_SM_H} />
+          <div className="m-hero-foot">
+            <div className="m-blog-intro">
+              <Bar w={120} h="title" />
+              <Bar w="80%" h="blockTitle" />
+            </div>
+            <div className="m-toolbar">
+              <Pill w={352} h={CONTROL_SM_H} />
+              <Pill w={110} h={CONTROL_SM_H} />
+            </div>
+          </div>
         </div>
 
         <div className="m-blog-list">
