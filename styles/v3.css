@@ -888,21 +888,25 @@ a.m-case-media:hover img { transform: scale(1.02); }
   gap: var(--space-1);
   margin-bottom: var(--space-5);
 }
-/* Problem / built / result as a label column and a text column, with space
-   between the pairs — stacked uppercase labels read as one long paragraph. */
+/* Problem / built / result: each label sits above its text, in muted
+   sentence case, so the pairs don't compete with the title. A label column
+   squeezed the text to a few words a line. The space between pairs is what
+   keeps them from reading as one long paragraph. */
 .m-case-body {
   display: grid;
-  grid-template-columns: 8rem minmax(0, 1fr);
-  gap: var(--space-5) var(--space-5);
-  align-items: baseline;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: var(--space-1);
   margin: 0;
 }
+.m-case-text + .m-case-label { margin-top: var(--space-5); }
 .m-case-label {
   font-size: var(--text-sm);
-  font-weight: var(--font-semibold);
-  color: var(--ink);
+  font-weight: var(--font-medium);
+  color: var(--muted);
   line-height: var(--leading-normal);
 }
+/* Orange like the eyebrow when the accent is on. */
+[data-accent="on"] .m-case-label { color: var(--accent); }
 .m-case-text {
   margin: 0;
   color: var(--ink-soft);
@@ -1189,9 +1193,6 @@ html:has(.m-dialog[open]) { overflow: hidden; }
     border-radius: 0;
   }
   .m-dialog-panel { padding: var(--space-6) var(--gutter); }
-  /* Label over text on a phone; the pairs keep their spacing. */
-  .m-case-body { grid-template-columns: 1fr; row-gap: var(--space-1); }
-  .m-case-text + .m-case-label { margin-top: var(--space-4); }
   /* Date above title instead of beside it. */
   .m-post,
   .m-fact { grid-template-columns: 1fr; gap: 0; }

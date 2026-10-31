@@ -292,7 +292,7 @@ picked up a border radius while still effectively full-width.
 | Project card | `.m-project-link` | Image + text, no box. Home and `/portfolio` |
 | Offer column | `.m-offer` | Number, title, blurb, "View service" — no box |
 | Post card | `.m-bp` (`components/blog/postCard.tsx`) | The project card for posts: image, date · topic, title, 3-line excerpt. `/blog` and tag archives |
-| Case study | `.m-case` | Image and text side by side, no box. Problem / built / result is a `<dl>` grid: `.m-case-label` (`--text-sm`, semibold, ink) in an 8rem column beside its text; stacks under 560px |
+| Case study | `.m-case` | Image and text side by side, no box. Problem / built / result is a `<dl>`: each `.m-case-label` (`--text-sm`, medium, `--accent`, muted when the accent is off) sits above its text, `--space-5` between pairs |
 | Link row | `.m-link-row` | `/link` — title left, arrow right |
 | CTA card | `.m-cta-card` | White `--surface` block, `--radius-lg`, no border. Under blog posts |
 | Pill | `.m-chip` (+ `.m-chip-link`) | The only badge in the system |
