@@ -183,11 +183,11 @@ measured against anything.
 
 | Element | Padding |
 |---------|---------|
-| `.m-hero` (page header) | `--space-16` top, `--space-12` bottom |
-| `.m-home-hero` (left masthead home header) | `--space-16` top, `--space-12` bottom |
+| `.m-hero` (page header) | `--space-10` top, `--space-12` bottom |
+| `.m-home-hero` (left masthead home header) | `--space-10` top, `--space-12` bottom |
 | `.m-hero-tight` (under a breadcrumb) | `--space-8` top |
 | `.m-section` | `--space-12` top, `--space-10` bottom |
-| ≤560px | `--space-12`/`--space-8` and `--space-8`/`--space-6` |
+| ≤560px | `--space-8`/`--space-8` and `--space-8`/`--space-6` |
 
 Section padding is **asymmetric on purpose**: more space above a heading than
 below the block it closes, so the heading binds to the content it introduces

@@ -222,7 +222,7 @@ textarea:focus-visible { outline-offset: 1px; }
    page reads left, which is what the sections below it do. */
 .m-hero {
   text-align: center;
-  padding: var(--space-16) 0 var(--space-12);
+  padding: var(--space-10) 0 var(--space-12);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -253,7 +253,7 @@ textarea:focus-visible { outline-offset: 1px; }
 /* Home: a left-aligned masthead, not a centred profile card. The name sits
    beside the avatar at body size; the headline carries the page. */
 .m-home-hero {
-  padding: var(--space-16) 0 var(--space-12);
+  padding: var(--space-10) 0 var(--space-12);
   gap: var(--space-8);
 }
 .m-masthead {
@@ -1166,8 +1166,8 @@ html:has(.m-dialog[open]) { overflow: hidden; }
 @media (max-width: 560px) {
   .m-nav-items { gap: var(--space-4); }
   .m-brand span { display: none; }
-  .m-hero { padding: var(--space-12) 0 var(--space-8); }
-  .m-home-hero { padding: var(--space-10) 0 var(--space-8); gap: var(--space-6); }
+  .m-hero { padding: var(--space-8) 0 var(--space-8); }
+  .m-home-hero { padding: var(--space-8) 0 var(--space-8); gap: var(--space-6); }
   /* The bio wraps to three lines beside a photo at this width, so it drops
      under it; the photo and name stay paired, centred on each other. */
   .m-profile {
